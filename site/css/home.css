@@ -1,0 +1,97 @@
+@font-face {
+   font-family: 'Taviraj-regular';
+   src: url("fonts/Taviraj/Taviraj-Regular.ttf");
+}
+
+@font-face {
+   font-family: 'Taviraj-medium';
+   src: url("fonts/Taviraj/Taviraj-Medium.ttf");
+}
+
+html {
+   scroll-behavior: smooth;
+   margin: 0
+}
+
+p, a, a:visited {
+   text-decoration: none;
+   font-size: 1em;
+   color: rgb(255, 249, 235);
+}
+
+body {
+   margin: 0;
+   padding: 0;
+   font-family: "Taviraj-regular";
+   background-color: rgb(255, 249, 235);
+}
+
+
+
+/*HEADER*/
+header {
+   background-color: rgb(40, 35, 35);
+   height: 70vh;
+   width: 100%;
+   background-color: rgb(13, 50, 65);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   transition: all 1s;
+}
+
+header.position {
+   height: 50vh;
+}
+
+.utilisateur {
+   display: inline-flex;
+   position: absolute;
+   top: 30vh;
+   right: 0;
+}
+
+.utilisateur img {
+   width: 20px;
+   margin-right: 10px;
+}
+
+.utilisateur a {
+   margin: 10px;
+   display: flex;
+   align-items: center;
+   padding: 10px;
+   border: solid 2px rgba(0, 0, 0, 0);
+   transition: all 0.5s;
+}
+
+.utilisateur a:hover {
+   border: solid 2px rgb(255, 249, 235);
+}
+
+h1 {
+   font-family: "Taviraj-medium";
+   color: rgb(255, 249, 235);
+   font-size: 7em;
+   border: solid 5px rgb(255, 249, 235);
+   padding: 20px;
+   animation-name: h1;
+   animation-duration: 3s;
+   position: relative;
+   top: 0;
+   width: 500px;
+   text-align: center;
+}
+
+@keyframes h1 {
+   0% {
+      opacity: 0;
+      position: relative;
+      top: -50px;
+      border: solid 5px rgba(255, 249, 235, 0);
+   }
+}
+
+.test {
+   height: 1000px;
+}

@@ -1,9 +1,9 @@
 let buttonCreateCompte = document.querySelector('.buttonCreateCompte');
-let compte = document.querySelector('.compte');
+let connexion = document.querySelector('.connexion');
 let createCompte = document.querySelector('.createCompte');
 
 
 buttonCreateCompte.onclick = function(){
    createCompte.classList.add('open');
-   compte.classList.remove('open');
+   connexion.classList.remove('open');
 }

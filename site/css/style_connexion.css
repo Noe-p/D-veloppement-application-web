@@ -27,10 +27,10 @@ body {
    color: rgb(255, 249, 235);
 }
 
-.compte {
+.connexion {
    display: none;
 }
-.compte.open {
+.connexion.open {
    height: 72vh;
    width: 100%;
    background-color: rgb(13, 50, 65);
@@ -96,13 +96,13 @@ form div{
    transform: translateY(-10px);
 }
 
-.compte a{
+.connexion a{
    margin-top: 5px;
    transform: translateX(-150px);
    transition: all 0.5s;
 }
 
-.compte a:hover{
+.connexion a:hover{
    text-decoration:underline;
 }
 

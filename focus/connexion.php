@@ -11,29 +11,10 @@
 
 <body>
 
-   <aside>
-      <div class="navBar">
-         <a class="navHome" href="index.html">Home</a>
-         <a class="navPhotos" href="#">Photos</a>
-         <a class="navSelections">Selections
-            <div class="menu">
-               <p href="#">Paysage</p>
-               <p href="#">Portrait</p>
-            </div>
-         </a>
-         <a class="navTop" href="#">Top</a>
-         <a class="navCompte">Compte
-            <div class="menu">
-               <p href="#">Informations</p>
-               <p href="#">Votre Page</p>
-               <p href="#">Déconnexion</p>
-            </div>
-         </a>
-      </div>
-   </aside>
+   <?php include("navBar.php"); ?>
 
    <div class="utilisateur">
-      <a href="connexion.html"><img src="assets/logos/padlock.png"></img>Connexion</a>
+      <a href="connexion.php"><img src="assets/logos/padlock.png"></img>Connexion</a>
       <a href="#"><img src="assets/logos/information.png"></img>Contact</a>
    </div>
 
@@ -67,8 +48,8 @@
             <input type="text" id="prenom" name="prenom">
          </div>
          <div>
-            <label or="date">Date de naissance</label>
-            <input type="date" id="dateNaissance" name="date">
+            <label for="pseudo">Pseudo :</label>
+            <input type="text" id="pseudo" name="pseudo">
          </div>
          <div>
             <label for="mail">Mail :</label>

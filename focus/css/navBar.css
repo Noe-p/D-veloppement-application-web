@@ -1,3 +1,29 @@
+/*UTILISATEUR*/
+.utilisateur {
+   display: inline-flex;
+   position: absolute;
+   top: 30vh;
+   right: 0;
+}
+
+.utilisateur img {
+   width: 20px;
+   margin-right: 10px;
+
+}
+
+.utilisateur a {
+   margin: 10px;
+   display: flex;
+   align-items: center;
+   padding: 10px;
+   border: solid 2px rgba(0, 0, 0, 0);
+   transition: all 0.5s;
+}
+
+.utilisateur a:hover {
+   border: solid 2px rgb(255, 249, 235);
+}
 
 /*NAVBAR*/
 aside {
@@ -66,7 +92,7 @@ aside {
 
 .navBar .navCompte{
    position: absolute;
-   transform: translateX(420px);
+   transform: translateX(29vw);
    border-bottom: none;
    border: solid 1px rgb(255, 249, 235);
    border-radius: 10px;
@@ -144,8 +170,8 @@ aside {
    width: 45px;
 }
 
-.navPhotos::before {
-   width: 53px;
+.navActu::before {
+   width: 77px;
 }
 
 .navSelections::before {

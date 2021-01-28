@@ -16,7 +16,7 @@ html {
 p, a, a:visited {
    text-decoration: none;
    font-size: 1em;
-   color: rgb(255, 249, 235);
+   color: black;
 }
 
 body {
@@ -47,8 +47,12 @@ body {
    padding: 10px;
    border: solid 2px rgba(0, 0, 0, 0);
    transition: all 0.5s;
+   color : rgb(255, 249, 235);
 }
 
+.utilisateur a:visited {
+   color : rgb(255, 249, 235);
+}
 .utilisateur a:hover {
    border: solid 2px rgb(255, 249, 235);
 }
@@ -63,6 +67,7 @@ header {
    align-items: center;
    justify-content: center;
    transition: all 1s;
+   color : rgb(255, 249, 235);
 }
 
 header.position {

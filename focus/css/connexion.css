@@ -20,6 +20,7 @@ body {
    font-family: "Taviraj-regular";
    background-color: rgb(255, 249, 235);
    color: rgb(255, 249, 235);
+
 }
 
 /*UTILISATEUR*/
@@ -43,10 +44,12 @@ body {
    padding: 10px;
    border: solid 2px rgba(0, 0, 0, 0);
    transition: all 0.5s;
+   color: rgb(255, 249, 235);
 }
 
 .utilisateur a:hover {
    border: solid 2px rgb(255, 249, 235);
+
 }
 
 .connexion {
@@ -61,6 +64,12 @@ body {
    flex-direction: column;
    align-items: center;
    justify-content: center;
+
+}
+
+.connexion.open a:visited {
+   color : rgb(255, 249, 235);
+
 }
 
 /*CONNEXION*/

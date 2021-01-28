@@ -8,11 +8,12 @@ html {
    margin: 0
 }
 
-p, a, a:visited, h3 {
+p, a, a:visited, h3{
    text-decoration: none;
    font-size: 1em;
    color: rgb(255, 249, 235);
 }
+
 
 body {
    margin: 0;

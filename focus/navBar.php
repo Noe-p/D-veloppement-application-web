@@ -1,20 +1,14 @@
 <aside>
    <div class="navBar">
-      <a class="navHome" href="index.php">Home</a>
-      <a class="navActu" href="#">Actualités</a>
-      <a class="navSelections">Sélections
+      <a href="index.php">Home</a>
+      <a href="actualite.php">Actualités</a>
+      <a class="navMenu">Sélections
          <div class="menu">
             <p href="#">Paysage</p>
             <p href="#">Portrait</p>
          </div>
       </a>
-      <a class="navTop" href="#">Top</a>
-      <a class="navCompte">Compte
-         <div class="menu">
-            <p href="#">Informations</p>
-            <p href="#">Votre Page</p>
-            <p href="#">Déconnexion</p>
-         </div>
-      </a>
+      <a href="presentation.php">Présentation</a>
+      <a class="navCompte" href="compte.php">Compte</a>
    </div>
 </aside>

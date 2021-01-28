@@ -3,7 +3,7 @@
 
 <head>
    <meta charset="utf-8">
-   <link rel="stylesheet" href="css/style_connexion.css" />
+   <link rel="stylesheet" href="css/connexion.css" />
    <link rel="stylesheet" href="css/navBar.css" />
 
    <title>Focus</title>

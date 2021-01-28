@@ -1,0 +1,105 @@
+@font-face {
+   font-family: 'Taviraj-regular';
+   src: url("fonts/Taviraj/Taviraj-Regular.ttf");
+}
+
+html {
+   scroll-behavior: smooth;
+   margin: 0
+}
+
+p, a, a:visited {
+   text-decoration: none;
+   font-size: 1em;
+   color: black;
+
+}
+
+
+body {
+   margin: 0;
+   padding: 0;
+   font-family: "Taviraj-regular";
+   background-color: rgb(255, 249, 235);
+   color: black;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+header{
+   height: auto;
+   width: 100%;
+   padding: 30px;
+   background-color: rgb(13, 50, 65);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: rgb(255, 249, 235);
+
+}
+
+ul {
+   list-style-type: none;
+   margin-left: 0;
+   padding: 10px 10vw 10px 10vw;
+   border: solid 1px rgb(255, 249, 235);
+}
+
+li{
+   margin: 10px;
+}
+
+
+h2{
+   margin: 30px;
+}
+
+section{
+   margin-top: 40px;
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-gap: 20px;
+}
+
+.imgUser{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 10px;
+   width: 35vw;
+}
+
+.headerPublic{
+   position: relative;
+   width: 35vw;
+   top:-10px;
+   border-bottom: solid 1px black;
+   height: 60px;
+   display: flex;
+   align-items: center;
+   justify-content:space-between;
+   border-bottom: solid 1px black;
+}
+
+.headerPublic a{
+   margin-left: 10px;
+   padding:5px 15px 5px 15px;
+   border-radius:20px;
+   color: black;
+   border: solid 1px black;
+}
+
+.headerPublic h3{
+   color: black;
+   margin-right: 20px;
+}
+
+section p{
+   color: black;
+}
+
+.imgUser img{
+   margin-top: 10px;
+   width: 35vw;
+}

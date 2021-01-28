@@ -12,21 +12,36 @@
       <?php include("navBar.php"); ?>
 
 
-   <header id="information">
-      <h2>Nono : </h2>
-      <article class="infosUser">
-         <ul>
-            <li>Nom : Philippe</li>
-            <li>Pénom : Noé</li>
-            <li>Mail : noefrgv@gmail.com</li>
-            <li>Nombre publication : 3</li>
-         </ul>
-      </article>
+   <header class="test">
+      <section class="information">
+         <h3>Nono : </h2>
+         <article class="infosUser">
+            <ul>
+               <li>Nom : Philippe</li>
+               <li>Pénom : Noé</li>
+               <li>Mail : noefrgv@gmail.com</li>
+               <li>Nombre publication : 3</li>
+            </ul>
+         </article>
+      </section>
+
+      <section class="information">
+         <h3>PhotographyByBrest : </h2>
+         <article class="infosUser">
+            <ul>
+               <li>Adresse : </li>
+               <li>Mail : </li>
+               <li>Téléphone : </li>
+               <li>Horaire ouverture : </li>
+               <li>Decription : PhotographyByBrest est une organisation spécialisée dans la photo à Brest.</li>
+            </ul>
+         </article>
+      </section>
    </header>
 
    <h2>Publications : </h2>
 
-   <section>
+   <section class="publication">
       <article class="imgUser">
          <div class="headerPublic">
             <a href="#">Nono</a>

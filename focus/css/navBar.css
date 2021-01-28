@@ -103,3 +103,7 @@ aside li {
 .sous li a {
    color: rgb(255, 249, 235);
 }
+
+.navBar .compte{
+   border:solid 1px black;
+}

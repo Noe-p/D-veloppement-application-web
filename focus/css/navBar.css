@@ -3,9 +3,10 @@
    src: url("fonts/Taviraj/Taviraj-Regular.ttf");
 }
 
-aside a, aside a:visited{
+aside a, aside a:visited {
    color: black;
 }
+
 aside {
    height: 30vh;
    width: 100%;
@@ -14,12 +15,9 @@ aside {
    justify-content: center;
 }
 
-aside ul {
-   list-style-type: none;
+.navBar {
    margin-left: 0;
-   padding: 0;
    display: inline-flex;
-   height: 100px;
    width: 60%;
    justify-content: center;
    align-items: center;
@@ -27,7 +25,7 @@ aside ul {
    border-top: solid 1px black;
    z-index: 10;
    background-color: rgb(255, 249, 235);
-   transition: width 0.5s;
+   list-style-type: none;
 }
 
 .navBar.position {
@@ -42,68 +40,94 @@ aside ul {
    height: 50px;
 }
 
-aside li {
-   margin: 15px;
+.navBar li {
    width: 100px;
    text-align: center;
    height: 30px;
+   margin: 30px;
 }
 
-.sous, .menu {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-}
 
-.navBar li .sous {
-   opacity: 0;
-   height: 0;
-   width: auto;
-   margin-top: 38px;
-   transition-property: height;
-   transition-duration: 1s;
-}
-
-.navBar li:hover .sous {
-   display: flex;
-   width: auto;
-   border:none;
+.sous {
+   display: none;
+   grid-template-columns: repeat(3, 1fr);
+   grid-gap: 8px;
+   width: 346px;
+   overflow: hidden;
    background-color: rgba(28, 98, 129, 0.9);
-   border-bottom-left-radius: 5px;
-   border-bottom-right-radius: 5px;
-   padding: 5px;
-   margin-top: 38px;
-   opacity: 1;
-   height: 150px;
+   list-style-type: none;
+   height: auto;
+   padding: 8px;
+   margin-top: 37px;
+   margin-left: -130px;
 }
 
-.menu li{
-   opacity :0;
-   transition: all 0.5s;
-}
-
-.menu:hover li{
-   margin-bottom:5px;
-   opacity:1;
-}
-
-.navBar.position li:hover .sous {
+.navBar.position .sous{
    margin-top: 13px;
 }
 
-.menu:hover::before {
-   content: '';
+.menu:hover .sous {
+   display: grid;
+   opacity: 1;
+   animation: menu 0.5s;
+}
+
+@keyframes menu {
+   from{
+      opacity: 0;
+   }
+}
+.sous::before {
    display: block;
+   content: '';
    position: absolute;
-   width: 110px;
-   height: 37px;
-   transform: translateY(28px);
+   width: 141px;
+   height: 34px;
+   transform: translate(100px, -41px);
 }
 
-.sous li a {
-   color: rgb(255, 249, 235);
+.sous li {
+   text-align: center;
+   padding: 5px;
+   margin: 0px;
+   transition: all 0.5s;
 }
 
-.navBar .compte{
-   border:solid 1px black;
+.sous li a{
+   color:rgb(255, 249, 235);
+}
+
+.sous li:hover{
+   background-color: rgb(255, 249, 235);
+}
+
+.sous li:hover a{
+   color:black;
+}
+
+.compte {
+   border: solid 1px rgb(255, 249, 235);
+   border-radius: 20px;
+   position: relative;
+   left: 15%;
+   transition: all 0.5s;
+   padding: 3px;
+}
+
+.compte:hover {
+   border: solid 1px black;
+}
+
+
+.compte:hover .sous {
+   width: 111px;
+   grid-template-columns: repeat(1, 1fr);
+   grid-gap: 8px;
+   margin-left: -14px;
+}
+
+.compte .sous::before {
+   width: 127px;
+   height: 34px;
+   transform: translate(-8px, -41px);
 }

@@ -15,7 +15,7 @@
 
    <div class="utilisateur">
       <a href="connexion.php"><img src="assets/logos/padlock.png"></img>Connexion</a>
-      <a href="#"><img src="assets/logos/information.png"></img>Contact</a>
+      <a href="https://noe-philippe.com/"><img src="assets/logos/information.png"></img>Contact</a>
    </div>
 
    <header>

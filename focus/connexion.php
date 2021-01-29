@@ -15,19 +15,19 @@
 
    <div class="utilisateur">
       <a href="connexion.php"><img src="assets/logos/padlock.png"></img>Connexion</a>
-      <a href="#"><img src="assets/logos/information.png"></img>Contact</a>
+      <a href="https://noe-philippe.com/"><img src="assets/logos/information.png"></img>Contact</a>
    </div>
 
    <section class="connexion open">
       <form action="/my-handling-form-page" method="post">
          <h2>Connexion</h2>
          <div>
-            <label for="mail">Mail :</label>
-            <input type="email" id="Adresse email" name="user_mail">
+            <label for="adresseMail">Mail :</label>
+            <input type="email" id="adresseMail" name="email">
          </div>
          <div>
             <label for="pass">Mot de passe :</label>
-            <input type="password" id="pass" name="password" minlength="8" required>
+            <input type="current-password" id="pass" name="password" minlength="8" required>
          </div>
          <div>
             <input class="buttonConnexion" type="submit" value="Connexion">
@@ -52,16 +52,12 @@
             <input type="text" id="pseudo" name="pseudo">
          </div>
          <div>
-            <label for="mail">Mail :</label>
-            <input type="email" id="Adresse email" name="user_mail">
+            <label for="createAdresseMail">Mail :</label>
+            <input type="email" id="createAdresseMail" name="email">
          </div>
          <div>
-            <label for="pass">Mot de passe :</label>
-            <input type="password" id="pass" name="password" minlength="8" required>
-         </div>
-         <div>
-            <label for="confirmPass">Confirmer :</label>
-            <input type="password" id="confirmPass" name="confirmPass">
+            <label for="createPass">Mot de passe :</label>
+            <input type="current-password" id="ceatePass" name="password" minlength="8" required>
          </div>
          <div>
             <input class="buttonConnexion" type="submit" value="Créer un compte">

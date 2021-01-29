@@ -11,14 +11,20 @@
             <li><a href="#">Mer</a></li>
             <li><a href="#">Brest</a></li>
             <li><a href="#">Rennes</a></li>
+            <li><a href="#">Rennes</a></li>
+            <li><a href="#">Rennes</a></li>
+            <li><a href="#">Rennes</a></li>
+            <li><a href="#">Rennes</a></li>
+            <li><a href="#">Rennes</a></li>
+            <li><a href="#">Rennesardssss</a></li>
          </ul>
       </li>
       <li><a href="actualite.php">Actualités</a></li>
-      <li class="menu compte"><a href="compte.php">Compte</a>
+      <li class="menu compte"><a>Compte</a>
          <ul class="sous">
             <li><a href="connexion.php">Connexion</a></li>
             <li><a href="ajout.php">Ajouter</a></li>
-            <li><a href="#">Modération</a></li>
+            <li><a href="compte.php">Profil</a></li>
          </ul>
       </li>
    </ul>

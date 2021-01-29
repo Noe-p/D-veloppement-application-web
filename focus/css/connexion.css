@@ -124,3 +124,56 @@ form div{
    align-items: center;
    justify-content: center;
 }
+
+@media all and (max-device-width:480px) {
+
+   p, a, a:visited, label{
+      font-size: 1.5em;
+   }
+
+   form h2{
+      font-size: 4em;
+   }
+
+   body{
+      background-color: rgb(13, 50, 65);
+   }
+
+   .utilisateur {
+      display: none;
+   }
+
+   .connexion.open {
+      position: absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+   }
+
+   form{
+      width: 90%;
+      height: 700px;
+   }
+
+   form div{
+      margin: 30px;
+   }
+
+   .buttonConnexion{
+      width: 150px;
+      height: 30px;
+   }
+
+   .createCompte.open {
+      position: absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+   }
+
+   .createCompte.open form{
+      height: auto;
+   }
+
+
+}

@@ -173,3 +173,38 @@ section p{
    margin-top: 10px;
    width: 50vw;
 }
+
+@media all and (max-device-width:480px) {
+   
+   p, a, a:visited {
+      font-style: 1.5em;
+   }
+
+   .utilisateur {
+      display: none;
+   }
+
+   header {
+      height: 100vh;
+      background-color: red;
+   }
+
+   header.position {
+      height: 70vh;
+   }
+
+
+   h1 {
+      font-family: "Taviraj-medium";
+      color: rgb(255, 249, 235);
+      font-size: 7em;
+      border: solid 5px rgb(255, 249, 235);
+      padding: 20px;
+      animation-name: h1;
+      animation-duration: 3s;
+      position: relative;
+      top: 0;
+      width: 90%;
+      text-align: center;
+   }
+}

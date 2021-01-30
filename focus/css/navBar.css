@@ -5,6 +5,7 @@
 
 aside a, aside a:visited {
    color: black;
+   text-decoration: none;
 }
 
 aside {
@@ -25,7 +26,8 @@ aside {
    z-index: 10;
    background-color: rgb(255, 249, 235);
    list-style-type: none;
-   padding: 30px;
+   padding: 4vh;
+   transition: width 0.5s;
 }
 
 .navBar.position {
@@ -37,23 +39,31 @@ aside {
    border-bottom: none;
    border-top: none;
    box-shadow: 3px 3px 10px black;
-   padding: 10px;
+   padding: 15px;
 }
 
 .navBar li {
    text-align: center;
-   height: 30px;
-   width: 100px;
+   margin-right: 6vw;
 }
 
-.menu a{
+.bouton, .bouton:visited {
+   border-radius: 20px;
+   padding: 5px 15px 5px 15px;
+   border: solid 1px rgb(13, 50, 65);
+   background-color: rgb(13, 50, 65);
+   color: rgb(255, 249, 235);
+}
+
+
+li a{
    border: solid 1px rgb(255, 249, 235);
    border-radius: 20px;
    transition: all 0.5s;
-   padding: 4px 8px 4px 8px;
+   padding: 5px 15px 5px 15px;
 }
 
-.menu:hover a{
+li:hover a{
    border: solid 1px black;
 }
 .sous {
@@ -99,10 +109,16 @@ aside {
    transform: translateY(-29px);
 }
 
+.navBar.position .sous::before{
+   height: 24px;
+   transform: translateY(-17px);
+}
+
 .sous li{
    text-align: center;
    height: auto;
    width: auto;
+   margin-right: 0px;
 }
 
 .menu:hover .sous a{
@@ -155,17 +171,20 @@ aside {
    .navBar.position{
       padding:23px;
    }
+
+   .navBar.position .sous{
+      margin-top: 45px;
+   }
    .navBar a{
-      font-size: 1.5em;
+      font-size: 1.8em;
    }
 
    .navBar li{
-      width: 150px;
-      margin: 20px;
+
    }
 
    .menu a{
-      padding: 5px 14px 5px 14px;
+      padding: 8px 17px 8px 17px;
       border-radius: 25px;
    }
 
@@ -175,7 +194,7 @@ aside {
    }
 
    .compte{
-      left:7%;
+      left:14%;
    }
 
    .compte .sous li{

@@ -37,12 +37,14 @@ header{
    display: flex;
    align-items: center;
    justify-content: space-around;
+   flex-wrap: wrap;
 }
 
 .information {
    display: flex;
    flex-direction: column;
    align-items: center;
+
 }
 
 .infosUser {
@@ -106,4 +108,42 @@ h2{
 .imgUser img{
    margin-top: 10px;
    width: 35vw;
+}
+
+@media all and (max-device-width:480px) {
+
+   header{
+      margin-top: 100px;
+      flex-direction: column;
+   }
+
+   .information{
+      margin-bottom: 50px;
+   }
+
+   .publication {
+      margin-top: 20px;
+      grid-gap: 120px;
+      grid-template-rows: 42% 87px auto;
+      margin-left: 25px;
+   }
+
+   h2{
+      margin: 30px 0 30px 0;
+   }
+   h3{
+      font-size: 2em;
+   }
+   .headerPublic {
+      width: 43vw;
+      height: 90px;
+   }
+
+   .headerPublic a{
+      font-size: 2em;
+   }
+
+   .imgUser img{
+      width: 47vw;
+   }
 }

@@ -175,9 +175,13 @@ section p{
 }
 
 @media all and (max-device-width:480px) {
-   
-   p, a, a:visited {
-      font-style: 1.5em;
+
+   a, a:visited {
+      font-style: 1.8em;
+   }
+
+   p{
+      font-size: 1.8em;
    }
 
    .utilisateur {
@@ -185,8 +189,8 @@ section p{
    }
 
    header {
-      height: 100vh;
-      background-color: red;
+      height: 90vh;
+      background-color: rgb(13, 50, 65);
    }
 
    header.position {
@@ -195,16 +199,30 @@ section p{
 
 
    h1 {
-      font-family: "Taviraj-medium";
-      color: rgb(255, 249, 235);
-      font-size: 7em;
-      border: solid 5px rgb(255, 249, 235);
-      padding: 20px;
-      animation-name: h1;
-      animation-duration: 3s;
-      position: relative;
-      top: 0;
       width: 90%;
-      text-align: center;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+   }
+
+   /*PUBLICATION*/
+
+   h3{
+      font-size: 2em;
+   }
+   .headerPublic {
+      width: 80vw;
+      height: 90px;
+   }
+
+   .headerPublic a{
+      font-size: 2em;
+   }
+
+
+   .imgUser img {
+      margin-top: 30px;
+      width: 90vw;
    }
 }

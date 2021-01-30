@@ -128,7 +128,7 @@ form div{
 @media all and (max-device-width:480px) {
 
    p, a, a:visited, label{
-      font-size: 1.5em;
+      font-size: 1.8em;
    }
 
    form h2{

@@ -53,3 +53,41 @@ form div{
    margin: 5px;
    padding: 10px;
 }
+
+@media all and (max-device-width:480px) {
+   body{
+      background-color: rgb(13, 50, 65);
+   }
+
+   h2{
+      font-size: 4em;
+   }
+
+   p, a, a:visited, label{
+      font-size: 1.8em;
+   }
+
+   .ajout{
+      position: absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+   }
+
+   form{
+      width: 70%;
+      height: 800px;
+   }
+   input{
+      margin: 10px;
+   }
+   form div{
+      margin: 10px;
+      transform: translateY(-30%);
+   }
+
+   #img{
+      width:100px;
+      height: 30px;
+   }
+}

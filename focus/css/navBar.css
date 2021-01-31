@@ -48,7 +48,7 @@ aside {
 }
 
 .bouton, .bouton:visited {
-   border-radius: 20px;
+   border-radius: 25px;
    padding: 5px 15px 5px 15px;
    border: solid 1px rgb(13, 50, 65);
    background-color: rgb(13, 50, 65);
@@ -58,7 +58,7 @@ aside {
 
 li a{
    border: solid 1px rgb(255, 249, 235);
-   border-radius: 20px;
+   border-radius: 25px;
    transition: all 0.5s;
    padding: 5px 15px 5px 15px;
 }
@@ -164,12 +164,13 @@ li:hover a{
       background-color: rgb(255, 249, 235);
       border-bottom: none;
       border-top: none;
-      box-shadow: 3px 3px 10px black;
       padding: 23px;
+      box-shadow: 8px 8px 20px black;
    }
 
    .navBar.position{
       padding:23px;
+      box-shadow: 8px 8px 20px black;
    }
 
    .navBar.position .sous{
@@ -179,25 +180,16 @@ li:hover a{
       font-size: 1.8em;
    }
 
-   .navBar li{
-
-   }
-
-   .menu a{
-      padding: 8px 17px 8px 17px;
-      border-radius: 25px;
-   }
-
    .sous li{
       margin: 5px;
       width: 300px;
    }
 
    .compte{
-      left:14%;
+      left:6%;
    }
 
    .compte .sous li{
-      width: 200px;
+      width: auto;
    }
 }

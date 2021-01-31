@@ -133,6 +133,9 @@ section{
    color: black;
 }
 
+section p{
+   text-align: center;
+}
 .imgUser{
    display: flex;
    flex-direction: column;
@@ -154,8 +157,8 @@ section{
 
 .headerPublic a{
    margin-left: 10px;
-   padding:5px 15px 5px 15px;
-   border-radius:20px;
+   padding:5px 20px 5px 20px;
+   border-radius:50px;
    color: black;
    border: solid 1px black;
 }

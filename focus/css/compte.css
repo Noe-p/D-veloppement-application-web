@@ -8,14 +8,15 @@ html {
    margin: 0
 }
 
-p, a, a:visited, h3 {
+ a, a:visited, h3 {
    text-decoration: none;
    font-size: 1em;
    color: black;
 }
 
-h2{
-   color: rgb(255, 249, 235);
+p{
+   text-align: center;
+   font-size: 1em;
 }
 body {
    margin: 0;
@@ -27,24 +28,58 @@ body {
    align-items: center;
 }
 
+.buttonInfos {
+   display: inline-flex;
+   position: absolute;
+   top: 32%;
+}
+
+.buttonInfos a {
+   margin: 10px;
+   border: solid 2px rgba(0, 0, 0, 0);
+   transition: all 0.5s;
+   color: rgb(255, 249, 235);
+   border-radius: 50px;
+   padding: 6px 15px 6px 15px;
+   width: 110px;
+   text-align: center;
+}
+
+.buttonProfil.open, .buttonAdmin.open {
+   background-color: rgb(255, 249, 235);
+   color: rgb(13, 50, 65);
+   border-radius: 50px;
+}
+
 /*HEADER*/
-header{
-   height: auto;
+header {
+   height:auto;
+   min-height: 300px;
    width: 100%;
-   padding: 30px;
+   padding: 100px;
    background-color: rgb(13, 50, 65);
    color: rgb(255, 249, 235);
    display: flex;
    align-items: center;
    justify-content: space-around;
-   flex-wrap: wrap;
 }
 
 .information {
+   display: none;
+}
+
+.information.open {
+   display: flex;
+   align-items: center;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+.information.open section {
    display: flex;
    flex-direction: column;
    align-items: center;
-
+   margin: 0 60px 0 60px;
 }
 
 .infosUser {
@@ -52,28 +87,81 @@ header{
    border: solid 1px rgb(255, 249, 235);
    width: 500px;
 }
+
 .infosUser ul {
    list-style-type: none;
    margin-left: 0;
 }
 
-.infosUser li{
+.infosUser li {
    margin: 10px;
 }
 
+/*Administration*/
+.buttonInfos a:hover {
+   border: solid 2px rgb(255, 249, 235);
+}
+
+.administration {
+   display: none;
+}
+
+.administration.open {
+   display: flex;
+   margin-top: 60px;
+}
+
+form {
+   border: solid 2px rgb(255, 249, 235);
+   border-radius: 20px;
+   width: 500px;
+   height: auto;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+form h2 {
+   font-size: 2em;
+   position: relative;
+   transform: translateY(-30%);
+}
+
+form div {
+   width: 240px;
+   position: relative;
+   transform: translateY(-70%);
+   margin: 5px;
+}
+
+.buttonConnexion {
+   transform: translateY(-10px);
+}
+
+.connexion a {
+   margin-top: 5px;
+   transform: translateX(-150px);
+   transition: all 0.5s;
+}
+
+.connexion a:hover {
+   text-decoration: underline;
+}
+
 /*PUBLICATION*/
-h2{
+h2 {
    margin: 30px;
 }
 
-.publication{
+.publication {
    margin-top: 40px;
    display: grid;
    grid-template-columns: repeat(2, 1fr);
    grid-gap: 20px;
 }
 
-.imgUser{
+.imgUser {
    display: flex;
    flex-direction: column;
    align-items: center;
@@ -81,69 +169,88 @@ h2{
    width: 35vw;
 }
 
-.headerPublic{
+.headerPublic {
    position: relative;
    width: 35vw;
-   top:-10px;
+   top: -10px;
    border-bottom: solid 1px black;
    height: 60px;
    display: flex;
    align-items: center;
-   justify-content:space-between;
+   justify-content: space-between;
    border-bottom: solid 1px black;
 }
 
-.headerPublic a{
+.headerPublic a {
    margin-left: 10px;
-   padding:5px 15px 5px 15px;
-   border-radius:20px;
+   padding: 5px 20px 5px 20px;
+   border-radius: 50px;
    border: solid 1px black;
 }
 
-.headerPublic h3{
+.headerPublic h3 {
    margin-right: 20px;
 }
 
-
-.imgUser img{
+.imgUser img {
    margin-top: 10px;
    width: 35vw;
 }
 
 @media all and (max-device-width:480px) {
-
-   header{
-      margin-top: 100px;
+   body{
+      margin-left: 8%;
+   }
+   header {
+      margin-top: 108px;
       flex-direction: column;
    }
 
-   .information{
+   h2{
+      font-size: 2em;
+   }
+
+   h3{
+      font-size: 1.7em;
+   }
+   a{
+      font-size: 1.5em;
+   }
+
+   p{
+      font-size:1.5em;
+   }
+
+   .buttonInfos{
+      top:8%;
+   }
+
+   .buttonInfos a{
+      width: auto;
+      margin:5;
+   }
+
+   section {
       margin-bottom: 50px;
    }
 
    .publication {
       margin-top: 20px;
       grid-gap: 120px;
-      grid-template-rows: 42% 87px auto;
+      grid-template-rows: 50% 87px auto;
       margin-left: 25px;
    }
 
-   h2{
-      margin: 30px 0 30px 0;
-   }
-   h3{
-      font-size: 2em;
-   }
    .headerPublic {
       width: 43vw;
       height: 90px;
    }
 
-   .headerPublic a{
+   .headerPublic a {
       font-size: 2em;
    }
 
-   .imgUser img{
+   .imgUser img {
       width: 47vw;
    }
 }

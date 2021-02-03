@@ -45,6 +45,7 @@ aside {
 .navBar li {
    text-align: center;
    margin-right: 6vw;
+   cursor: default;
 }
 
 .bouton, .bouton:visited {

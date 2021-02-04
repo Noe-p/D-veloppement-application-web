@@ -78,10 +78,13 @@ create table t_lien_lie(
    primary key (lie_numero)
 );
 
+
+
 Alter table t_lien_lie modify lie_numero int AUTO_INCREMENT;
 Alter table t_presentation_pre modify pre_numero int AUTO_INCREMENT;
 Alter table t_actualite_actu modify actu_numero int AUTO_INCREMENT;
 Alter table t_selection_sel modify sel_numero int AUTO_INCREMENT;
+Alter table t_element_ele modify ele_numero int AUTO_INCREMENT;
 
 Alter table t_lien_lie
 add foreign key (ele_numero) references t_element_ele (ele_numero);

@@ -6,7 +6,7 @@
    <link rel="stylesheet" href="css/connexion.css" />
    <link rel="stylesheet" href="css/navBar.css" />
 
-   <title>Focus</title>
+   <title>Focus-Connexion</title>
 </head>
 
 <body>
@@ -55,8 +55,8 @@
             <input type="email" id="adresseMail" name="email">
          </div>
          <div>
-            <label for="pass">Mot de passe :</label>
-            <input type="current-password" id="pass" name="password" minlength="8" required>
+            <label for="mdp">Mot de passe :</label>
+            <input type="password" id="pass" name="mdp" minlength="8" required>
          </div>
          <div>
             <input class="buttonConnexion" type="submit" value="Connexion">
@@ -66,8 +66,12 @@
    </section>
 
    <section class="createCompte">
-      <form action="/my-handling-form-page" method="post">
+      <form action="connexion.php" method="post">
          <h2>Créer un compte</h2>
+         <div>
+            <label for="pseudo">Pseudo :</label>
+            <input type="text" id="pseudo" name="pseudo">
+         </div>
          <div>
             <label for="nom">Nom :</label>
             <input type="text" id="nom" name="nom">
@@ -77,19 +81,20 @@
             <input type="text" id="prenom" name="prenom">
          </div>
          <div>
-            <label for="pseudo">Pseudo :</label>
-            <input type="text" id="pseudo" name="pseudo">
-         </div>
-         <div>
             <label for="createAdresseMail">Mail :</label>
             <input type="email" id="createAdresseMail" name="email">
          </div>
          <div>
-            <label for="createPass">Mot de passe :</label>
-            <input type="current-password" id="ceatePass" name="password" minlength="8" required>
+            <label for="mdp">Mot de passe : </label>
+            <input type="password" id="create_mdp" name="mdp" minlength="8" placeholder="8 caractères minimum" onkeyup='check_pass();' required >
          </div>
          <div>
-            <input class="buttonConnexion" type="submit" value="Créer un compte">
+            <label for="confirm_mdp">Confirmer le mot de passe :</label>
+            <input type="password" id="confirm_mdp" name="confirm_mdp" minlength="8" onkeyup='check_pass();' required>
+            <span id='message'></span>
+         </div>
+         <div>
+            <input class="buttonConnexion" type="submit" value="Créer un compte" id="submit" disabled/>
          </div>
       </form>
    </section>

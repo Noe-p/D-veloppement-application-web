@@ -47,7 +47,7 @@
       <a href="https://noe-philippe.com/"><img src="assets/logos/information.png"></img>Contact</a>
    </div>
 
-   <section class="connexion open">
+   <section class="connexion">
       <form action="/my-handling-form-page" method="post">
          <h2>Connexion</h2>
          <div>
@@ -65,12 +65,14 @@
       <a class="buttonCreate" href="#">Créer un compte...</a>
    </section>
 
-   <section class="createCompte">
+
+   <section class="createCompte open">
       <form action="createUser.php" method="post">
          <h2>Créer un compte</h2>
          <div>
             <label for="pseudo">Pseudo :</label>
             <input type="text" id="pseudo" name="pseudo">
+            <span id="message2">Pseudo déjà utilisé</span>
          </div>
          <div>
             <label for="nom">Nom :</label>

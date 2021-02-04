@@ -95,9 +95,14 @@ form div{
    margin-bottom: 10px;
 }
 
-#message{
+#message, #message2{
    position: absolute;
    transform: translateX(10px);
+}
+
+#message2{
+   color: rgb(210, 28, 28);
+   font-size: 0.8em;
 }
 .buttonConnexion{
    margin-top: 30px;

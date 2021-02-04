@@ -46,31 +46,34 @@
    </div>
 
    <section class="connexion open">
+
       <?php
-      $con = new mysqli("localhost", "root", "", "showRoom");
-      if (!$con) {
-          die("connexion a échoué: " . $con->connect_error);
-      }
+         require('php/config.php');
 
-      $sqlCompte="INSERT INTO `t_compte_com` (`com_pseudo`, `com_mdp`) VALUES ('$_POST[pseudo]', MD5('$_POST[mdp]'));";
-      $sqlProfil="INSERT INTO `t_profil_pro` (`pro_nom`, `pro_prenom`, `pro_mail`, `pro_validite`, `pro_statut`, `pro_date`, `com_pseudo`) VALUES ('$_POST[nom]', '$_POST[prenom]', '$_POST[email]', 'A', 'R', CURDATE(), '$_POST[pseudo]');";
+         $nbUser = mysqli_num_rows(mysqli_query($con, "SELECT com_pseudo FROM t_compte_com WHERE com_pseudo = 'Clem'"));
 
-
-      if (mysqli_query($con, $sqlCompte) and mysqli_query($con, $sqlProfil)) {
-            echo "Nouveau compte créé avec succès.";
-      }
-      else {
-            echo "Erreur Compte: " . $sqlCompte . "<br>" . mysqli_error($con);
-            echo "Erreur Profil: " . $sqlProfil . "<br>" . mysqli_error($con);
-      }
+         if($nbUser == 1){
+            header('Location: erreurConnexion.php');
+            exit();
+         }
+         else{
+            $sqlCompte="INSERT INTO `t_compte_com` (`com_pseudo`, `com_mdp`) VALUES ('$_POST[pseudo]', MD5('$_POST[mdp]'));";
+            $sqlProfil="INSERT INTO `t_profil_pro` (`pro_nom`, `pro_prenom`, `pro_mail`, `pro_validite`, `pro_statut`, `pro_date`, `com_pseudo`) VALUES ('$_POST[nom]', '$_POST[prenom]', '$_POST[email]', 'A', 'R', CURDATE(), '$_POST[pseudo]');";
 
 
-      mysqli_close($con);
+            if (mysqli_query($con, $sqlCompte) and mysqli_query($con, $sqlProfil)) {
+               echo "Nouveau compte créé avec succès.";
+            }
+            else {
+               echo "Erreur Compte: " . $sqlCompte . "<br>" . mysqli_error($con);
+               echo "Erreur Profil: " . $sqlProfil . "<br>" . mysqli_error($con);
+               mysqli_close($con);
+            }
+         }
 
       ?>
-      <a href="connexion.html">Vous pouvez maintenant vous connecter.</a>
+      <a href="connexion.html">Vous pouvez maintenant vous connecter</a>
    </section>
-
 
 </body>
 

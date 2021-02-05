@@ -9,36 +9,7 @@
    </head>
    <body>
 
-      <aside>
-         <ul class="navBar" >
-            <li><a href="index.html">Home</a></li>
-            <li class="menu"><a>Sélections</a>
-               <ul class="sous">
-                  <li><a href="selections.html">Paysage</a></li>
-                  <li><a href="#">Portrait</a></li>
-                  <li><a href="#">Monochrome</a></li>
-                  <li><a href="#">Foret</a></li>
-                  <li><a href="#">Mer</a></li>
-                  <li><a href="#">Brest</a></li>
-                  <li><a href="#">Rennes</a></li>
-                  <li><a href="#">Rennes</a></li>
-                  <li><a href="#">Rennes</a></li>
-                  <li><a href="#">Rennes</a></li>
-                  <li><a href="#">Rennes</a></li>
-                  <li><a href="#">Rennes</a></li>
-                  <li><a href="#">Rennesardssss</a></li>
-               </ul>
-            </li>
-            <li><a href="actualite.html">Actualités</a></li>
-            <li class="menu compte"><a class="bouton">Compte</a>
-               <ul class="sous">
-                  <li><a href="profil.html">Profil</a></li>
-                  <li><a href="connexion.html">Connexion</a></li>
-                  <li><a href="ajout.html">Ajouter</a></li>
-               </ul>
-            </li>
-         </ul>
-      </aside>
+      <?php require('php/navBar.php'); ?>
 
       <section class="ajout">
          <h2>Publier une photo : </h2>

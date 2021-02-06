@@ -84,7 +84,8 @@ header {
 
 .infosUser {
    padding: 10px;
-   border: solid 1px rgb(255, 249, 235);
+   border: solid 2px rgb(255, 249, 235);
+   border-radius: 20px;
    width: 500px;
 }
 
@@ -94,6 +95,13 @@ header {
 }
 
 .infosUser li {
+   margin: 10px;
+   padding: 10px;
+}
+
+.infosOrga div{
+   transform: none;
+   width: 100%;
    margin: 10px;
 }
 
@@ -150,6 +158,25 @@ form div {
 }
 
 /*PUBLICATION*/
+.buttonsSelection{
+   display:inline-flex;
+}
+
+.buttonsSelection a{
+   border: solid 1px black;
+   border-radius: 25px;
+   transition: all 0.5s;
+   padding: 5px 15px 5px 15px;
+   margin: 15px;
+}
+
+.buttonsSelection a:hover{
+   border: solid 1px rgb(28, 98, 129);
+   background-color: rgb(28, 98, 129);
+   color: rgb(255, 249, 235);
+}
+
+
 h2 {
    margin: 30px;
 }

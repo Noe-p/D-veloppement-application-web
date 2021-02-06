@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 
@@ -14,7 +18,10 @@
    <?php require('php/navBar.php'); ?>
 
    <div class="utilisateur">
-      <a href="connexion.php"><img src="assets/logos/padlock.png"></img>Connexion</a>
+      <?php if(isset($_SESSION['pseudo'])==false){
+         echo "<a href=\"connexion.php\"><img src=\"assets/logos/padlock.png\"></img>Connexion</a>";
+      }
+      ?>
       <a href="https://noe-philippe.com/"><img src="assets/logos/information.png"></img>Contact</a>
    </div>
 
@@ -27,7 +34,7 @@
    <section>
       <article class="imgUser">
          <div class="headerPublic">
-            <a href="#">Nono</a>
+            <?php echo "<a href=\"autreUser.php?pseudo=".$_SESSION['pseudo']."&amp;selection=Photos\">".$_SESSION['pseudo']."</a>" ?>
             <h3>Rue de Brest</h3>
          </div>
          <img src="assets/img/img1.jpg" alt="img1">

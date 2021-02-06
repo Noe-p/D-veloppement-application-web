@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 
@@ -12,7 +16,7 @@
 <body>
 
    <?php require('php/navBar.php'); ?>
-   
+
    <header>
       <h1>Paysage :</h1>
    </header>

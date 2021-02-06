@@ -1,3 +1,6 @@
+<?php
+   session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 
@@ -60,7 +63,9 @@
                      </script>";
                }
                else {
-                  echo 'Vous êtes Connecté !';
+                  echo 'Bonjour, ' . $_POST['pseudo'] . ' vous êtes connecté !';
+                  $_SESSION['pseudo'] = $_POST['pseudo'];
+                  header("Refresh: 1; url=index.php");
                }
             }
          }
@@ -69,7 +74,7 @@
 
          $con->close();
       ?>
-</section>
+   </section>
 
 <script type="text/javascript" src="js/createElement.js"></script>
 

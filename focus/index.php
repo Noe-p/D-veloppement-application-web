@@ -1,5 +1,11 @@
 <?php
 session_start();
+require("php/config.php");
+
+
+//Element
+$resAllEle = mysqli_query($con, "SELECT * FROM t_element_ele NATURAL JOIN tj_relie_rel NATURAL JOIN t_selection_sel ORDER BY ele_numero DESC");
+
 ?>
 
 <!DOCTYPE html>
@@ -32,32 +38,19 @@ session_start();
    <h2>Dernière Photos :</h2>
 
    <section>
-      <article class="imgUser">
-         <div class="headerPublic">
-            <?php echo "<a href=\"autreUser.php?pseudo=".$_SESSION['pseudo']."&amp;selection=Photos\">".$_SESSION['pseudo']."</a>" ?>
-            <h3>Rue de Brest</h3>
-         </div>
-         <img src="assets/img/img1.jpg" alt="img1">
-         <p>Lors d'une petite ballade dans les rue de brest</p>
-      </article>
+      <?php
+      while($ele = $resAllEle->fetch_array(MYSQLI_ASSOC)){
+         echo "<article class=\"imgUser\">
+                  <div class=\"headerPublic\">
+                     <a href=\"autreUser.php?pseudo=".$ele['com_pseudo']."&amp;selection=Photos\">".$ele['com_pseudo']; echo " </a>
+                     <h3>"; echo $ele['ele_intitule']; echo "</h3>
+                  </div>
+                  <img src=\"assets/img/".$ele['ele_fichierImage']."\">
+                  <p>"; echo $ele['ele_descriptif']; echo "</p>
+               </article>";
+      }
 
-      <article class="imgUser">
-         <div class="headerPublic">
-            <a href="#">Tata</a>
-            <h3>Pluie sur les grues</h3>
-         </div>
-         <img src="assets/img/img2.jpg" alt="img2">
-         <p>Quand la tempête fait rage à brest</p>
-      </article>
-
-      <article class="imgUser">
-         <div class="headerPublic">
-            <a href="#">Zozo</a>
-            <h3>Rue de Brest</h3>
-         </div>
-         <img src="assets/img/img3.jpg" alt="img3">
-         <p></p>
-      </article>
+      ?>
 
    </section>
 

@@ -54,9 +54,8 @@ body {
 /*HEADER*/
 header {
    height:auto;
-   min-height: 300px;
    width: 100%;
-   padding: 100px;
+   padding: 100px 0 100px 0;
    background-color: rgb(13, 50, 65);
    color: rgb(255, 249, 235);
    display: flex;
@@ -160,6 +159,9 @@ form div {
 /*PUBLICATION*/
 .buttonsSelection{
    display:inline-flex;
+   width: 70%;
+   flex-wrap: wrap;
+   justify-content: center;
 }
 
 .buttonsSelection a{

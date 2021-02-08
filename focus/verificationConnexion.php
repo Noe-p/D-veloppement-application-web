@@ -77,7 +77,7 @@
    </section>
 
 <script type="text/javascript" src="js/createElement.js"></script>
-
+<script type="text/javascript" src="js/checkPass.js"></script>
 </body>
 
 </html>

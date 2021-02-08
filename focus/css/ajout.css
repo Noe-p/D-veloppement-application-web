@@ -48,8 +48,6 @@ form{
 
 form div{
    width: 240px;
-   position: relative;
-   transform: translateY(-70%);
    margin: 5px;
    padding: 10px;
 }

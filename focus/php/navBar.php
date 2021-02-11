@@ -25,7 +25,7 @@
             if(isset($_SESSION['pseudo'])){
                echo "<li><a href=\"profil.php?selection=Photos\">Profil</a></li>
                <li><a href=\"ajout.php\">Ajouter</a></li>
-               <li><a href=\"deconnexion.php\">Déconnexion</a></li>";
+               <li><a href=\"verification.php?verif=deconnexion\">Déconnexion</a></li>";
             } else{
                echo "<li><a href=\"connexion.php\">Connexion</a></li>";
             }

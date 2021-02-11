@@ -1,5 +1,10 @@
 <?php
 session_start();
+require("php/config.php");
+
+//Selection utilisateur
+$resSel = mysqli_query($con, "SELECT * FROM t_selection_sel WHERE com_pseudo = '$_SESSION[pseudo]'");
+
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -12,39 +17,64 @@ session_start();
    </head>
    <body>
 
-      <?php require('php/navBar.php'); ?>
+   <?php require('php/navBar.php'); ?>
 
-      <section class="ajout">
+   <header>
+      <div class="buttonsHeader">
+         <a class="button1 open" href="#">Photo</a>
+         <a class="button2" href="#">Selection</a>
+      </div>
+
+      <section class="photo create open">
          <h2>Publier une photo : </h2>
-         <form action="/my-handling-form-page" method="post">
+         <form action="verification.php?verif=publiPhoto" method="post">
             <div>
-               <label for="titre">Titre:</label>
+               <label for="titre">Titre :<br/></label>
                <input type="text" id="titre" name="titre">
             </div>
             <div>
-               <label for="description">Description :</label>
-               <input type="text" id="description" name="password" maxlength="500">
+               <label for="description">Description :<br/></label>
+               <textarea rows="6" cols="32" id="description" name="description" maxlength="500"></textarea>
             </div>
             <div>
-               <label for="img">Choisir une image :</label>
+               <label for="img">Choisir une image :<br/></label>
                <input type="file" id="img" name="img" accept="image/png, image/jpeg">
             </div>
-            <div>
-               <label for="selectionImg">Choisir une selection :</label>
-               <select name="selectionImg" id="selectionImg">
-                  <option value="Paysage">Paysage</option>
-                  <option value="Portrait">Portrait</option>
-                  <option value="Monochrome">Monochrome</option>
-                  <option value="Foret">Foret</option>
-                  <option value="Mer">Mer</option>
-                  <option value="Brest">Brest</option>
-               </select>
+            <div class="checkbox">
+               <label for="selectionImg">Selection(s) :<br/></label>
+               <?php
+               while($sel = $resSel->fetch_array(MYSQLI_ASSOC)){
+                  echo "<input id=\"checkbox\" type=\"checkbox\" name=\"check[]\" value=\"".$sel['sel_intitule']."\"/>".$sel['sel_intitule']."";
+               }
+               ?>
+               <br/>
             </div>
-
             <div>
-               <input class="buttonConnexion" type="submit" value="Publier">
+               <input class="buttonPub" name="publier" type="submit" value="Publier">
             </div>
          </form>
       </section>
+
+      <section class="selection create">
+         <h2>Ajouter une selection : </h2>
+         <form action="verification.php?verif=publiSel" method="post">
+            <div>
+               <label for="nom">Nom :<br/></label>
+               <input type="text" id="nom" name="nom">
+            </div>
+            <div>
+               <label for="descriptionSel">Description :<br/></label>
+               <textarea rows="6" cols="32" id="descriptionSel" name="descriptionSel" maxlength="500"></textarea>
+            </div>
+            <div>
+               <input class="buttonSel" name="ajouterSel" type="submit" value="Publier">
+            </div>
+         </form>
+      </section>
+
+   </header>
+
+   <script type="text/javascript" src="js/createElement.js"></script>
+
    </body>
 </html>

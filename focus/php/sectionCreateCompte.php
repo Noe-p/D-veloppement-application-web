@@ -1,4 +1,4 @@
-<form action="verificationUser.php" method="post">
+<form action="verification.php?verif=createCpt" method="post">
    <h2>Créer un compte</h2>
    <div>
       <label for="pseudo">Pseudo :</label>

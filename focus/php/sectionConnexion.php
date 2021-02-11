@@ -1,4 +1,4 @@
-<form action="verificationConnexion.php" method="post">
+<form action="verification.php?verif=verifUser" method="post">
    <h2>Connexion</h2>
    <span id='message3'></span>
    <div>

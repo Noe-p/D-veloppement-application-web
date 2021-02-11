@@ -27,11 +27,51 @@ if($nbPre==0 and empty($_POST['nomOrga'])==false){
 
 //Selection utilisateur
 $resSel = mysqli_query($con, "SELECT * FROM t_selection_sel WHERE com_pseudo = '$_SESSION[pseudo]'");
+$nbSel=0;
+while($reqSel = $resSel->fetch_array(MYSQLI_ASSOC)){
+   $sel['sel_intitule'][$nbSel]=$reqSel['sel_intitule'];
+   $nbSel++;
+}
+
+$resTexteSel = mysqli_query($con,"SELECT sel_texteIntro FROM t_selection_sel WHERE com_pseudo = '$_SESSION[pseudo]' AND sel_intitule = '$_GET[selection]'");
+$texteSel = mysqli_fetch_assoc($resTexteSel);
 
 //Element
 $resEle = mysqli_query($con, "SELECT * FROM t_element_ele NATURAL JOIN tj_relie_rel NATURAL JOIN t_selection_sel WHERE com_pseudo = '$_SESSION[pseudo]' and sel_intitule='$_GET[selection]'");
-$resAllEle = mysqli_query($con, "SELECT * FROM t_element_ele NATURAL JOIN tj_relie_rel NATURAL JOIN t_selection_sel WHERE com_pseudo = '$_SESSION[pseudo]' ORDER BY ele_numero DESC");
+$nbEle=0;
+while($reqEle = $resEle->fetch_array(MYSQLI_ASSOC)){
+   $ele['ele_intitule'][$nbEle]=$reqEle['ele_intitule'];
+   $ele['ele_fichierImage'][$nbEle]=$reqEle['ele_fichierImage'];
+   $ele['ele_descriptif'][$nbEle]=$reqEle['ele_descriptif'];
+   $nbEle++;
+}
 
+$resAllEle = mysqli_query($con, "SELECT DISTINCT ele_intitule, ele_fichierImage, ele_descriptif, ele_etat FROM t_element_ele NATURAL JOIN tj_relie_rel NATURAL JOIN t_selection_sel WHERE com_pseudo = '$_SESSION[pseudo]' ORDER BY ele_numero DESC");
+$nbAllEle=0;
+while($reqAllEle = $resAllEle->fetch_array(MYSQLI_ASSOC)){
+   $allEle['ele_intitule'][$nbAllEle]=$reqAllEle['ele_intitule'];
+   $allEle['ele_fichierImage'][$nbAllEle]=$reqAllEle['ele_fichierImage'];
+   $allEle['ele_descriptif'][$nbAllEle]=$reqAllEle['ele_descriptif'];
+   $allEle['ele_etat'][$nbAllEle]=$reqAllEle['ele_etat'];
+   $nbAllEle++;
+}
+
+
+//Element activé
+$resEleAct= mysqli_query($con, "SELECT ele_intitule FROM t_element_ele JOIN tj_relie_rel USING(ele_numero) JOIN t_selection_sel USING(sel_numero) WHERE ele_etat='A' AND com_pseudo='$_SESSION[pseudo]'");
+$nbEleAct=0;
+while($reqEleAct = $resEleAct->fetch_array(MYSQLI_ASSOC)){
+   $eleAct['ele_intitule'][$nbEleAct]=$reqEleAct['ele_intitule'];
+   $nbEleAct++;
+}
+
+//Element désativé
+$resEleDes= mysqli_query($con, "SELECT ele_intitule FROM t_element_ele JOIN tj_relie_rel USING(ele_numero) JOIN t_selection_sel USING(sel_numero) WHERE ele_etat='D' AND com_pseudo='$_SESSION[pseudo]'");
+$nbEleDes=0;
+while($reqEleDes = $resEleDes->fetch_array(MYSQLI_ASSOC)){
+   $eleDes['ele_intitule'][$nbEleDes]=$reqEleDes['ele_intitule'];
+   $nbEleDes++;
+}
 
 $con->close();
 ?>
@@ -50,145 +90,80 @@ $con->close();
 
       <?php require('php/navBar.php'); ?>
 
+      <!-- HEADER -->
+
       <header>
          <?php
             if($profil['pro_statut']=='R'){
-               echo "<style type=\"text/css\"> .buttonAdmin {display: none;} </style>";
+               echo "<style type=\"text/css\"> .button2{display: none;} </style>";
             }
          ?>
-         <div class="buttonInfos">
-            <a class="buttonProfil open" href="#">Profil</a>
-            <a class="buttonAdmin" href="#">Administration</a>
+         <div class="buttonsHeader">
+            <a class="button1 open" href="#">Profil</a>
+            <a class="button2" href="#">Administration</a>
+            <a class="button3" href="#">Modifier</a>
          </div>
 
-         <div class="administration">
-            <form action="/my-handling-form-page" method="post">
-               <h2>Connexion administrateur :</h2>
-               <div>
-                  <label for="adresseMail">Mail :</label>
-                  <input type="email" id="adresseMail" name="email">
-               </div>
-               <div>
-                  <label for="pass">Mot de passe :</label>
-                  <input type="current-password" id="pass" name="password" minlength="8" required>
-               </div>
-               <div>
-                  <input class="buttonConnexion" type="submit" value="Connexion">
-               </div>
-            </form>
+         <div class="administration create">
+            <?php require('php/administration.php'); ?>
          </div>
 
-         <?php
-            if($nbPre==0){
-               echo "<style type=\"text/css\">.information.open .organisation {display: none;} </style>";
-               echo "<style type=\"text/css\">.information.open .organisationNew {display: flex;} </style>";
-            }
-            else{
-               echo "<style type=\"text/css\">.information.open .organisation {display: flex;} </style>";
-               echo "<style type=\"text/css\">.information.open .organisationNew {display: none;} </style>";
-            }
-         ?>
-         <div class="information open">
-            <section>
-               <h2>
-                  <?php echo $_SESSION['pseudo'] . ' :'; ?>
-               </h2>
-                  <article class="infosUser">
-                     <ul>
-                        <li><B>Nom :</B> <?php echo $profil['pro_nom'] ?> </li>
-                        <li><B>Pénom :</B> <?php echo $profil['pro_prenom'] ?></li>
-                        <li><B>Mail :</B> <?php echo $profil['pro_mail'] ?></li>
-                        <li><B>Membre depuis le :</B> <?php echo $profil['pro_date'] ?></li>
-                     </ul>
-                  </article>
-            </section>
+         <div class="information create open">
+            <?php require('php/information.php'); ?>
+         </div>
 
-            <section class="organisationNew">
-               <h2>Vous faites partie d'une organisation ? </h2>
-               <form action="profil.php" method="post">
-                  <article class="infosOrga">
-                     <div>
-                        <label for="nomOrga"><B>Nom :</B></label>
-                        <input type="text" id="nomOrga" name="nomOrga" >
-                     </div>
-                     <div>
-                        <label for="adresseOrga"><B>Adresse :</B></label>
-                        <input type="text" id="adresseOrga" name="adresseOrga" >
-                     </div>
-                     <div>
-                        <label for="mailOrga"><B>Mail :</B></label>
-                        <input type="email" id="mailOrga" name="mailOrga" >
-                     </div>
-                     <div>
-                        <label for="telOrga"><B>Téléphone :</B></label>
-                        <input type="text" id="telOrga" name="telOrga" >
-                     </div>
-                     <div>
-                        <label for="horaireOrga"><B>Horaire d'ouverture :</B></label>
-                        <input type="text" id="horaireOrga" name="horaireOrga" >
-                     </div>
-                     <div>
-                        <label for="descriptionOrga"><B>Description :</B></label>
-                        <input type="text" id="descriptionOrga" name="descriptionOrga" >
-                     </div>
-                     <div>
-                        <input class="buttonConnexionOrga" type="submit" value="Ajouter une organisation" id="submit"/>
-                     </div>
-                  </article>
-               </form>
-            </section>
-
-            <section class="organisation">
-               <h2>Où nous trouver : </h2>
-                  <article class="infosUser">
-                     <ul>
-                        <li><B>Nom :</B> <?php echo $pres['pre_nomStruct'] ?> </li>
-                        <li><B>Adresse :</B> <?php echo $pres['pre_adresse'] ?> </li>
-                        <li><B>Mail :</B> <?php echo $pres['pre_adresseMail'] ?> </li>
-                        <li><B>Téléphone :</B> <?php echo $pres['pre_numeroTel'] ?> </li>
-                        <li><B>Horaire d'ouverture :</B> <?php echo $pres['pre_horaireOuverture'] ?> </li>
-                        <li><B>Decription :</B> <?php echo $pres['pre_texte'] ?></li>
-                     </ul>
-                  </article>
-            </section>
+         <div class="modifier create">
+            <?php require('php/modifier.php'); ?>
          </div>
 
       </header>
 
+      <!-- PUBLICATION -->
+
       <div id="selProfil" class="buttonsSelection">
          <a href="profil.php?selection=Photos#selProfil">Photos</a>
          <?php
-         while($sel = $resSel->fetch_array(MYSQLI_ASSOC)){
-            echo "<a href=\"profil.php?selection=".$sel['sel_intitule']."#selProfil\">".$sel['sel_intitule']."</a>";
+         for ($j=0; $j <$nbSel ; $j++) {
+            echo "<a href=\"profil.php?selection=".$sel['sel_intitule'][$j]."#selProfil\">".$sel['sel_intitule'][$j]."</a>";
          }
          ?>
       </div>
 
       <h2><?php echo $_GET['selection']; ?> :</h2>
+      <p>
+         <?php
+         if($_GET['selection'] != 'Photos'){
+            echo $texteSel['sel_texteIntro']." :";
+         }
+         else{
+            echo "Dernière photos publiées : ";
+         }
+         ?>
+      </p>
 
       <section class="publication">
          <?php
          if($_GET['selection']!='Photos'){
-            while($ele = $resEle->fetch_array(MYSQLI_ASSOC)){
+            for ($j=0; $j <$nbEle ; $j++) {
                echo "<article class=\"imgUser\">
                         <div class=\"headerPublic\">
                            <a href=\"#\">"; echo $_SESSION['pseudo']; echo " </a>
-                           <h3>"; echo $ele['ele_intitule']; echo "</h3>
+                           <h3>"; echo $ele['ele_intitule'][$j]; echo "</h3>
                         </div>
-                        <img src=\"assets/img/".$ele['ele_fichierImage']."\">
-                        <p>"; echo $ele['ele_descriptif']; echo "</p>
+                        <img src=\"assets/img/".$ele['ele_fichierImage'][$j]."\">
+                        <p>"; echo $ele['ele_descriptif'][$j]; echo "</p>
                      </article>";
             }
          }
          else{
-            while($ele = $resAllEle->fetch_array(MYSQLI_ASSOC)){
+            for ($j=0; $j <$nbAllEle ; $j++) {
                echo "<article class=\"imgUser\">
                         <div class=\"headerPublic\">
                            <a href=\"#\">"; echo $_SESSION['pseudo']; echo " </a>
-                           <h3>"; echo $ele['ele_intitule']; echo "</h3>
+                           <h3>"; echo $allEle['ele_intitule'][$j]; echo "</h3>
                         </div>
-                        <img src=\"assets/img/".$ele['ele_fichierImage']."\">
-                        <p>"; echo $ele['ele_descriptif']; echo "</p>
+                        <img src=\"assets/img/".$allEle['ele_fichierImage'][$j]."\">
+                        <p>"; echo $allEle['ele_descriptif'][$j]; echo "</p>
                      </article>";
             }
          }
@@ -197,5 +172,7 @@ $con->close();
 
       <script type="text/javascript" src="js/createElement.js"></script>
       <script type="text/javascript" src="js/navBar.js"></script>
+      <script type="text/javascript" src="js/checkPass.js"></script>
+
    </body>
 </html>

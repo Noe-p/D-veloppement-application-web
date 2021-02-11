@@ -134,6 +134,12 @@ form div{
       font-size: 1.8em;
    }
 
+   section p{
+      margin-top: 50%;
+      font-size: 2.5em;
+
+   }
+
    form h2{
       font-size: 4em;
    }
@@ -153,10 +159,6 @@ form div{
       transform: translate(-50%,-50%);
    }
 
-   form{
-      width: 90%;
-      height: 700px;
-   }
 
    form div{
       margin: 15px;

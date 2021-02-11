@@ -8,7 +8,7 @@ html {
    margin: 0
 }
 
- a, a:visited, h3 {
+a, a:visited, h3 {
    text-decoration: none;
    font-size: 1em;
    color: black;
@@ -17,6 +17,7 @@ html {
 p{
    text-align: center;
    font-size: 1em;
+   margin: 0;
 }
 body {
    margin: 0;
@@ -28,13 +29,14 @@ body {
    align-items: center;
 }
 
-.buttonInfos {
-   display: inline-flex;
+/*Boutons*/
+.buttonsHeader {
+   display:flex;
    position: absolute;
-   top: 32%;
+   top:32vh;
 }
 
-.buttonInfos a {
+.buttonsHeader a {
    margin: 10px;
    border: solid 2px rgba(0, 0, 0, 0);
    transition: all 0.5s;
@@ -45,7 +47,11 @@ body {
    text-align: center;
 }
 
-.buttonProfil.open, .buttonAdmin.open {
+.buttonsHeader a:hover {
+   border: solid 2px rgb(255, 249, 235);
+}
+
+.button1.open, .button2.open, .button3.open {
    background-color: rgb(255, 249, 235);
    color: rgb(13, 50, 65);
    border-radius: 50px;
@@ -105,10 +111,6 @@ header {
 }
 
 /*Administration*/
-.buttonInfos a:hover {
-   border: solid 2px rgb(255, 249, 235);
-}
-
 .administration {
    display: none;
 }
@@ -122,28 +124,21 @@ form {
    border: solid 2px rgb(255, 249, 235);
    border-radius: 20px;
    width: 500px;
-   height: auto;
    display: flex;
    flex-direction: column;
    align-items: center;
-   justify-content: center;
 }
 
 form h2 {
    font-size: 2em;
-   position: relative;
-   transform: translateY(-30%);
+   margin: 5px;
 }
 
 form div {
-   width: 240px;
-   position: relative;
-   transform: translateY(-70%);
    margin: 5px;
 }
 
 .buttonConnexion {
-   transform: translateY(-10px);
 }
 
 .connexion a {
@@ -155,6 +150,54 @@ form div {
 .connexion a:hover {
    text-decoration: underline;
 }
+
+/*Modification*/
+.modifier.open{
+   display:flex;
+}
+
+.modifier{
+   display: none;
+   align-items:flex-start;
+   justify-content: center;
+   flex-wrap: wrap;
+}
+
+.modifier h3{
+   color :rgb(255, 249, 235);
+   font-size: 1.3em;}
+
+.attention{
+   color: rgb(210, 138, 28);
+}
+
+.modifier form{
+   margin: 20px;
+}
+
+.activer{
+   border: solid 2px rgb(128, 205, 79);
+}
+
+.risque{
+   width: 100%;
+   text-align: center;
+   margin: 10px;
+   color: rgb(210, 28, 28);
+}
+
+.desactiver{
+   border: solid 2px rgb(210, 138, 28);
+}
+.danger{
+   border: solid 2px rgb(210, 28, 28);
+}
+
+#checkbox{
+   margin-left: 10px;
+}
+
+
 
 /*PUBLICATION*/
 .buttonsSelection{
@@ -172,15 +215,18 @@ form div {
    margin: 15px;
 }
 
+.buttonsSelection a img{
+   width: 100%;
+   position: relative;
+   top:50%;
+   left: 50%;
+   transform: translate(-50%,-75%);
+}
+
 .buttonsSelection a:hover{
    border: solid 1px rgb(28, 98, 129);
    background-color: rgb(28, 98, 129);
    color: rgb(255, 249, 235);
-}
-
-
-h2 {
-   margin: 30px;
 }
 
 .publication {
@@ -227,38 +273,55 @@ h2 {
 }
 
 @media all and (max-device-width:480px) {
-   body{
-      margin-left: 8%;
-   }
    header {
       margin-top: 108px;
       flex-direction: column;
    }
 
    h2{
-      font-size: 2em;
+      font-size: 3.5em;
+      text-align: center;
    }
 
    h3{
       font-size: 1.7em;
    }
    a{
-      font-size: 1.5em;
+      font-size: 2em;
    }
 
    p{
-      font-size:1.5em;
+      font-size:2em;
    }
 
-   .buttonInfos{
+   .buttonsHeader{
       top:8%;
    }
 
-   .buttonInfos a{
+   .buttonsHeader a{
       width: auto;
       margin:5;
    }
 
+   .infosUser{
+      padding : 80px;;
+   }
+
+   .infosUser li{
+      font-size: 1.7em;
+   }
+
+   .infosOrga{
+      padding: 80px;;
+   }
+   .infosOrga div{
+      font-size: 1.7em;
+      margin: 20px;
+   }
+
+   .buttonConnexionOrga{
+      font-size: 1em;
+   }
    section {
       margin-bottom: 50px;
    }

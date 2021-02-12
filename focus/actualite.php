@@ -12,7 +12,7 @@ session_start();
    </head>
    <body>
 
-      <?php require('php/navBar.php'); ?>
+      <?php require('src/navBar.php'); ?>
 
       <section>
          <article class="actuUser">

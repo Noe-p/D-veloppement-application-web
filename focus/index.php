@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("php/config.php");
+require("src/sql/reqIndex.php");
 
 
 //Element
@@ -21,7 +21,7 @@ $resAllEle = mysqli_query($con, "SELECT * FROM t_element_ele NATURAL JOIN tj_rel
 
 <body>
 
-   <?php require('php/navBar.php'); ?>
+   <?php require('src/navBar.php'); ?>
 
    <div class="utilisateur">
       <?php if(isset($_SESSION['pseudo'])==false){

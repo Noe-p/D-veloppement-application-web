@@ -15,7 +15,7 @@ session_start();
 
 <body>
 
-   <?php require('php/navBar.php'); ?>
+   <?php require('src/navBar.php'); ?>
 
    <div class="utilisateur">
       <a href="connexion.php"><img src="assets/logos/padlock.png"></img>Connexion</a>
@@ -23,11 +23,11 @@ session_start();
    </div>
 
    <section class="connexion open">
-      <?php require('php/sectionConnexion.php'); ?>
+      <?php require('src/sectionConnexion.php'); ?>
    </section>
 
    <section class="createCompte">
-      <?php require('php/sectionCreateCompte.php'); ?>
+      <?php require('src/sectionCreateCompte.php'); ?>
    </section>
 
    <script type="text/javascript" src="js/createElement.js"></script>

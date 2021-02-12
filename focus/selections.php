@@ -15,7 +15,7 @@ session_start();
 
 <body>
 
-   <?php require('php/navBar.php'); ?>
+   <?php require('src/navBar.php'); ?>
 
    <header>
       <h1>Paysage :</h1>

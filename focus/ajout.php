@@ -1,10 +1,6 @@
 <?php
 session_start();
-require("php/config.php");
-
-//Selection utilisateur
-$resSel = mysqli_query($con, "SELECT * FROM t_selection_sel WHERE com_pseudo = '$_SESSION[pseudo]'");
-
+require('src/sql/reqAjout.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
@@ -17,7 +13,7 @@ $resSel = mysqli_query($con, "SELECT * FROM t_selection_sel WHERE com_pseudo = '
    </head>
    <body>
 
-   <?php require('php/navBar.php'); ?>
+   <?php require('src/navBar.php'); ?>
 
    <header>
       <div class="buttonsHeader">
@@ -43,8 +39,8 @@ $resSel = mysqli_query($con, "SELECT * FROM t_selection_sel WHERE com_pseudo = '
             <div class="checkbox">
                <label for="selectionImg">Selection(s) :<br/></label>
                <?php
-               while($sel = $resSel->fetch_array(MYSQLI_ASSOC)){
-                  echo "<input id=\"checkbox\" type=\"checkbox\" name=\"check[]\" value=\"".$sel['sel_intitule']."\"/>".$sel['sel_intitule']."";
+               for ($i=0; $i < $nbSel; $i++) {
+                  echo "<input id=\"checkbox\" type=\"checkbox\" name=\"check[]\" value=\"".$sel['sel_intitule'][$i]."\"/>".$sel['sel_intitule'][$i]."";
                }
                ?>
                <br/>

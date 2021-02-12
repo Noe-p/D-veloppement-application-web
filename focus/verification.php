@@ -15,11 +15,11 @@ session_start();
 
 <body>
 
-   <?php require('php/navBar.php'); ?>
+   <?php require('src/navBar.php'); ?>
 
    <section class="verificationConnexion open">
       <?php
-         require('php/config.php');
+         require('src/sql/config.php');
 
          //Vérification Déconnexion :
          if($_GET['verif']=='deconnexion'){
@@ -28,12 +28,13 @@ session_start();
 
             echo "<p>Vous êtes déconnecté.</p>";
          }
+
          //Vérification creation de compte et profil :
          elseif ($_GET['verif']=='createCpt') {
             $nbUser = mysqli_num_rows(mysqli_query($con, "SELECT com_pseudo FROM t_compte_com WHERE com_pseudo = '$_POST[pseudo]'"));
 
             if($nbUser == 1){
-               include('php/sectionCreateCompte.php');
+               include('src/sectionCreateCompte.php');
                echo "<script>
                   document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
                   document.getElementById('message2').innerHTML = 'Pseudo déjà utilisé';
@@ -58,6 +59,7 @@ session_start();
             }
 
          }
+
          //Vérification si utilisateur existe
          elseif ($_GET['verif']=='verifUser') {
             $reqCom = "SELECT com_pseudo, com_mdp, pro_validite FROM t_compte_com JOIN t_profil_pro USING(com_pseudo) WHERE com_pseudo = '$_POST[pseudo]'";
@@ -65,7 +67,7 @@ session_start();
             $Com = mysqli_fetch_assoc($resCom);
 
             if (($Com['com_pseudo'] != $_POST['pseudo']) and ($Com['com_mdp'] != md5($_POST['mdp']))) {
-               include('php/sectionConnexion.php');
+               include('src/sectionConnexion.php');
                echo "<script>
                   document.getElementById('message3').style.color = 'rgb(210, 28, 28)';
                   document.getElementById('message3').innerHTML = 'Mauvais pseudo ou mot de passe';
@@ -81,6 +83,7 @@ session_start();
                $con->close();
             }
          }
+
          //Vérification publication photo :
          elseif ($_GET['verif']=='publiPhoto') {
             $sqlEle="INSERT INTO `t_element_ele` (`ele_intitule`, `ele_descriptif`, `ele_date`, `ele_fichierImage`, `ele_etat`) VALUES ('$_POST[titre]', '$_POST[description]', CURDATE(), '$_POST[img]', 'A')";
@@ -123,6 +126,7 @@ session_start();
                mysqli_close($con);
             }
          }
+         
          //Vérification Ajout selection :
          elseif ($_GET['verif']=='publiSel') {
             $sqlSel="INSERT INTO `t_selection_sel` (`sel_intitule`, `sel_texteIntro`, `sel_date`, `com_pseudo`) VALUES ('$_POST[nom]', '$_POST[descriptionSel]', CURDATE(), '$_SESSION[pseudo]')";

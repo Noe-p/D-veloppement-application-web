@@ -32,7 +32,7 @@ require('src/sql/reqPro.php');
          </div>
 
          <div class="administration create">
-            <?php require('src/administration.php'); ?>
+            <?php require('src/formulaire/administration.php'); ?>
          </div>
 
          <div class="information create open">
@@ -40,8 +40,9 @@ require('src/sql/reqPro.php');
          </div>
 
          <div class="modifier create">
-            <?php require('src/modifier.php'); ?>
+            <?php require('src/modifier.php');?>
          </div>
+
 
       </header>
 
@@ -100,6 +101,8 @@ require('src/sql/reqPro.php');
       <script type="text/javascript" src="js/createElement.js"></script>
       <script type="text/javascript" src="js/navBar.js"></script>
       <script type="text/javascript" src="js/checkPass.js"></script>
+      <script type="text/javascript" src="js/checkEmpty.js"></script>
+
 
    </body>
 </html>

@@ -23,11 +23,11 @@ session_start();
    </div>
 
    <section class="connexion open">
-      <?php require('src/sectionConnexion.php'); ?>
+      <?php require('src/formulaire/connexion.php'); ?>
    </section>
 
    <section class="createCompte">
-      <?php require('src/sectionCreateCompte.php'); ?>
+      <?php require('src//formulaire/createCompte.php'); ?>
    </section>
 
    <script type="text/javascript" src="js/createElement.js"></script>

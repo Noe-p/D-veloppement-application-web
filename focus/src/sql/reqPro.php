@@ -11,18 +11,6 @@ $nbPre = mysqli_num_rows($resPre);
 
 $pres = $resPre->fetch_array(MYSQLI_ASSOC);
 
-//Creation d'une organisation
-if($nbPre==0 and empty($_POST['nomOrga'])==false){
-   $sqlOrga="INSERT INTO `t_presentation_pre` (`pre_nomStruct`, `pre_adresse`, `pre_adresseMail`, `pre_numeroTel`, `pre_horaireOuverture`, `pre_texte`, `com_pseudo`) VALUES ('$_POST[nomOrga]', '$_POST[adresseOrga]', '$_POST[mailOrga]', '$_POST[telOrga]', '$_POST[horaireOrga]', '$_POST[descriptionOrga]', '$_SESSION[pseudo]');";
-
-   if (mysqli_query($con, $sqlOrga)) {
-      header("Refresh: 0;");
-   }
-   else {
-      echo "Erreur Compte: " . $sqlOrga . "<br>" . mysqli_error($con);
-      mysqli_close($con);
-   }
-}
 
 //Selection utilisateur
 $resSel = mysqli_query($con, "SELECT sel_intitule FROM t_selection_sel WHERE com_pseudo = '$_SESSION[pseudo]'");

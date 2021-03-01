@@ -136,6 +136,7 @@ form h2 {
 
 form div {
    margin: 5px;
+   width: 260px;
 }
 
 .buttonConnexion {
@@ -149,6 +150,19 @@ form div {
 
 .connexion a:hover {
    text-decoration: underline;
+}
+
+/*Vérification modif*/
+.verification.open{
+   display:flex;
+}
+
+.verification{
+   display: none;
+}
+
+.verification.open h2{
+   text-align: center;
 }
 
 /*Modification*/
@@ -173,6 +187,10 @@ form div {
 
 .modifier form{
    margin: 20px;
+}
+
+.section_confirm_mdp{
+   margin-top: 30px;
 }
 
 .activer{

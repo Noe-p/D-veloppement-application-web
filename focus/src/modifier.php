@@ -47,4 +47,8 @@
 <!--SUPPRIMER ELEMENTS -->
    <?php include('formulaire/suppEle.php') ?>
 
+<!--SUPPRIMMER ORGANISATION -->
+   <?php include('formulaire/suppOrga.php') ?>
+
+
 </section>

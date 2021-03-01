@@ -2,10 +2,10 @@
    <h3>Désactiver élément(s) : </h3>
    <div>
       <?php
-      if($nbEleAct==0 && $nbEle!=0){
+      if($nbEleAct==0){
          echo "<p class=\"attention\">Toutes les éléments sont désactivés</p>";
       }
-      else{
+      if($nbAllEle==0){
          echo "<p class=\"attention\">Vous avez aucun élément</p>";
       }
       for ($j=0; $j <$nbEleAct ; $j++) {

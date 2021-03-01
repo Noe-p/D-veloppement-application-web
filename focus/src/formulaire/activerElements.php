@@ -2,10 +2,10 @@
    <h3>Activer éléments(s): </h3>
    <div>
       <?php
-      if($nbEleDes==0 && $nbEle!=0){
+      if($nbEleDes==0){
          echo "<p class=\"attention\">Toutes les éléments sont activés</p>";
       }
-      else{
+      if($nbAllEle==0){
          echo "<p class=\"attention\">Vous avez aucun élément</p>";
       }
 

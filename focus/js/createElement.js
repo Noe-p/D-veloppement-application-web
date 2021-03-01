@@ -32,6 +32,5 @@ else if(document.querySelector('.connexion')){
    buttonCreate.onclick = function() {
       document.querySelector('.connexion').classList.remove('open');
       document.querySelector('.createCompte').classList.add('open');
-
    }
 }

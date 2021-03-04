@@ -1,4 +1,4 @@
-<form class="danger" action="profil.php" method="post">
+<form class="danger" action="verification.php?verif=suppSel" method="post">
    <h3>Supprimer sélection(s) : </h3>
    <?php
    if($nbAllEle!=0){
@@ -18,8 +18,8 @@
          $nbTj = mysqli_num_rows($resTj);
 
          if($nbTj==0){
-            echo "<input type=\"checkbox\" id=\"checkbox\" name=\"".$sel_intitule."\">
-               <label for=\"checkbox\">".$sel_intitule."</label>";
+            echo "<input type='checkbox' name='checkbox[]' value='".$sel_intitule."'>
+               <label for='checkbox'>".$sel_intitule."</label>";
          }
       }
       $con->close();

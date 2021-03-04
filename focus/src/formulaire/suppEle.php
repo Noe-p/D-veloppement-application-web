@@ -1,4 +1,4 @@
-<form class="danger" action="profil.php" method="post">
+<form class="danger" action="verification.php?verif=suppEle" method="post">
    <h3>Supprimer élément(s) : </h3>
    <div>
       <?php
@@ -6,8 +6,8 @@
          echo "<p class=\"attention\">Vous avez aucun éléments à supprimer";
       }
       for ($j=0; $j <$nbAllEle ; $j++) {
-         echo "<input type=\"checkbox\" id=\"checkbox\" name=\"".$allEle['ele_intitule'][$j]."\">
-            <label for=\"checkbox\">".$allEle['ele_intitule'][$j]."</label>";
+         echo "<input type='checkbox' name='checkbox[]' value='".$allEle['ele_intitule'][$j]."'>
+            <label for='checkbox'>".$allEle['ele_intitule'][$j]."</label>";
       }
       ?>
    </div>

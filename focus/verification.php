@@ -261,8 +261,47 @@ session_start();
 
          //Supprimer Orga
          elseif ($_GET['verif']=='suppOrga') {
-            $resSuppOrga = mysqli_query($con, "DELETE FROM t_presentation_pre WHERE com_pseudo = '$_SESSION[pseudo]' AND pre_nomStruct = '$_POST[checkbox]'");
-            $suppOrga = $resSuppOrga->fetch_array(MYSQLI_ASSOC);
+            foreach ($_POST['checkbox'] as $check) {
+               $sqlSuppOrga = "DELETE FROM t_presentation_pre WHERE com_pseudo = '$_SESSION[pseudo]' AND pre_nomStruct = '$check'";
+
+               if (mysqli_query($con, $sqlSuppOrga)) {
+                  header("Location: profil.php?selection=Photos");
+               }
+               else {
+                  echo "Erreur Compte: " . $sqlSuppOrga . "<br>" . mysqli_error($con);
+                  mysqli_close($con);
+               }
+            }
+         }
+
+         //Supprimer Selection
+         elseif ($_GET['verif']=='suppSel') {
+            foreach ($_POST['checkbox'] as $check) {
+               $sqlSuppSel = "DELETE FROM t_selection_sel WHERE com_pseudo = '$_SESSION[pseudo]' AND sel_intitule = '$check'";
+
+               if (mysqli_query($con, $sqlSuppSel)) {
+                  header("Location: profil.php?selection=Photos");
+               }
+               else {
+                  echo "Erreur Compte: " . $sqlSuppSel . "<br>" . mysqli_error($con);
+                  mysqli_close($con);
+               }
+            }
+         }
+
+         //Supprimer Element
+         elseif ($_GET['verif']=='suppEle') {
+            foreach ($_POST['checkbox'] as $check) {
+               $sqlSuppEle = "DELETE FROM t_element_ele WHERE ele_intitule = '$check'";
+
+               if (mysqli_query($con, $sqlSuppEle)) {
+                  header("Location: profil.php?selection=Photos");
+               }
+               else {
+                  echo "Erreur Compte: " . $sqlSuppEle . "<br>" . mysqli_error($con);
+                  mysqli_close($con);
+               }
+            }
          }
       ?>
 

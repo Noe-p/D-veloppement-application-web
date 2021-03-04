@@ -23,6 +23,11 @@ Valérie MARC
 
 **bdd :** Création de la base de données
 
+**Focus :** Test personnel de PHP
+
+**gabarit :** Site sans PHP
+
+**v1 :** Version 1 du site
 
 ## Langages
 

@@ -16,7 +16,7 @@ if (!$mysqli->set_charset("utf8")) {
 }
 
 //INSCRIPTION
-if ($_GET['verif']=='inscription') {
+if ($_GET['action']=='inscription') {
    $reqUser = "SELECT com_pseudo FROM t_compte_com WHERE com_pseudo = '$_POST[pseudo]'";
    $resUser = $mysqli->query($reqUser);
 
@@ -49,7 +49,7 @@ if ($_GET['verif']=='inscription') {
 
 
 //CONNEXION
-}elseif ($_GET['verif']=='connexion') {
+}elseif ($_GET['action']=='connexion') {
    $reqCom = "SELECT com_pseudo, com_mdp, pro_validite FROM t_compte_com JOIN t_profil_pro USING(com_pseudo) WHERE com_pseudo = '$_POST[pseudo]'";
    $resCom = $mysqli->query($reqCom);
    $Com = $resCom->fetch_array(MYSQLI_ASSOC);

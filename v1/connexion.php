@@ -24,7 +24,7 @@ session_start();
 
    <section class="connexion">
 
-      <form action="action.php?verif=connexion" method="post">
+      <form action="action.php?action=connexion" method="post">
          <h2>Connexion</h2>
          <span id='message3'></span>
          <div>

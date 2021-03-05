@@ -19,7 +19,7 @@
    </div>
 
    <section class="createCompte">
-      <form action="action.php?verif=inscription" method="post">
+      <form action="action.php?action=inscription" method="post">
          <h2>Créer un compte</h2>
          <div>
             <label for="pseudo">Pseudo :</label>

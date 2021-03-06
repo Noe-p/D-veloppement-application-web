@@ -11,7 +11,7 @@
 
 <body>
 
-   <?php require('php/navBar.php'); ?>
+   <?php require('php/navBarConnexion.php'); ?>
 
 
    <div class="utilisateur">

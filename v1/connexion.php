@@ -15,8 +15,7 @@ session_start();
 
 <body>
 
-   <?php require('php/navBar.php'); ?>
-
+   <?php require('php/navBarConnexion.php'); ?>
 
    <div class="utilisateur">
       <a href="connexion.php"><img src="assets/logos/padlock.png"></img>Connexion</a>

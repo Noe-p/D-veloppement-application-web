@@ -9,9 +9,8 @@
    </head>
    <body>
 
-      <?php require('php/navBar.php'); ?>
-
-
+      <?php require('php/navBarConnexion.php'); ?>
+      
       <section class="ajout">
          <h2>Publier une photo : </h2>
          <form action="/my-handling-form-page" method="post">

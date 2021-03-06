@@ -1,6 +1,6 @@
 <footer id="contact">
    <h2>Où nous trouver : </h2>
-   <article class="infosUser">
+   <article class="infosOrga">
       <ul>
          <li><B>Nom : </B><?php echo $struc['pre_nomStruct'] ?></li>
          <li><B>Adresse : </B><?php echo $struc['pre_adresse'] ?></li>

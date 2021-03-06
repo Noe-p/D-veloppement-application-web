@@ -85,10 +85,19 @@ if ($_GET['action']=='inscription') {
       $_SESSION['pseudo'] = $_POST['pseudo'];
       include('connexion.php');
 
-      header("Location: index.php");
+      header("Location: profil.php");
 
    }
+
+//DECONNEXION
+}elseif($_GET['action']=='deconnexion'){
+   session_start();
+   $_SESSION = array();
+   session_destroy();
+
+   header("Location: index.php");
 }
+
 
 $mysqli->close();
 ?>

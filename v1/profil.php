@@ -18,7 +18,7 @@ session_start();
 <body>
 
 
-   <?php require('php/navBar.php'); ?>
+   <?php require('php/navBarConnexion.php'); ?>
 
 
    <header>
@@ -33,6 +33,8 @@ session_start();
          </ul>
       </article>
    </header>
+
+   <h2>Publications : </h2>
 
    <div class="buttons">
       <a class="button1 open">Photos</a>
@@ -51,7 +53,32 @@ session_start();
    </section>
 
    <section class="actualite create">
-      <h3>Ca marche</h3>
+      <article class="actuUser">
+         <div class="headerPublic">
+            <a href="#">Nono</a>
+            <h3>Sortie Photos</h3>
+         </div>
+         <p>J'organise un une sortie phots dans les rue de Brest pour ce week-end.</p>
+         <p>date : 28/01/2021</p>
+      </article>
+
+      <article class="actuUser">
+         <div class="headerPublic">
+            <a href="#">Nono</a>
+            <h3>Sortie Photos</h3>
+         </div>
+         <p>J'organise un une sortie phots dans les rue de Brest pour ce week-end.</p>
+         <p>date : 28/01/2021</p>
+      </article>
+
+      <article class="actuUser">
+         <div class="headerPublic">
+            <a href="#">Nono</a>
+            <h3>Sortie Photos</h3>
+         </div>
+         <p>J'organise un une sortie phots dans les rue de Brest pour ce week-end.</p>
+         <p>date : 28/01/2021</p>
+      </article>
    </section>
 
    <?php require('php/footer.php'); ?>

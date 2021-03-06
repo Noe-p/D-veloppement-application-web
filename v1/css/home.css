@@ -167,15 +167,6 @@ section{
 
 @media all and (max-device-width:480px) {
 
-   h2{
-      font-size: 3em;
-   }
-
-
-   a, a:visited {
-      font-style: 1.8em;
-   }
-
    .utilisateur {
       display: none;
    }
@@ -198,25 +189,10 @@ section{
       justify-content: center;
    }
 
-   /*ACTU*/
-
-   .imgUser img {
-      margin-top: 30px;
-      width: 90vw;
+   h2{
+      font-size: 3em;
    }
 
-   h3{
-      font-size: 2em;
-   }
-
-   p{
-      font-size: 1.8em;
-      width: 80%;
-   }
-
-   .actuUser{
-      width: 90vw;
-   }
    .headerPublic {
       width: 80vw;
       height: 90px;
@@ -224,5 +200,20 @@ section{
 
    .headerPublic a{
       font-size: 2em;
+   }
+
+   /*ACTU*/
+
+   .actuUser h3{
+      font-size: 2em;
+   }
+
+   .actuUser p{
+      font-size: 1.8em;
+      width: 80%;
+   }
+
+   .actuUser{
+      width: 90vw;
    }
 }

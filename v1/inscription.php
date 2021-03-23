@@ -23,21 +23,21 @@
          <h2>Créer un compte</h2>
          <div>
             <label for="pseudo">Pseudo :</label>
-            <input type="text" id="pseudo" name="pseudo" >
+            <input type="text" id="pseudo" name="pseudo" required>
             <span id='message2'></span>
          </div>
          <div>
             <label for="nom">Nom :</label>
-            <input type="text" id="nom" name="nom">
+            <input type="text" id="nom" name="nom" required>
             <span id="message2"></span>
          </div>
          <div>
             <label for="prenom">Prénom :</label>
-            <input type="text" id="prenom" name="prenom">
+            <input type="text" id="prenom" name="prenom" required>
          </div>
          <div>
             <label for="createAdresseMail">Mail :</label>
-            <input type="email" id="createAdresseMail" name="email">
+            <input type="email" id="createAdresseMail" name="email" required>
          </div>
          <div>
             <label for="mdp">Mot de passe : </label>

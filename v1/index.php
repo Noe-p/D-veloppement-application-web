@@ -1,7 +1,6 @@
 
 <?php
 require('php/requetes.php');
-session_start();
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +68,7 @@ session_start();
       <h1>Focus</h1>
    </header>
 
-   <h2>Dernière Actualités :</h2>
+   <h2>Dernières Actualité :</h2>
 
    <section>
       <?php

@@ -17,20 +17,10 @@ if (!$mysqli->set_charset("utf8")) {
 
 //INSCRIPTION
 if ($_GET['action']=='inscription') {
-   //verification si le compte existe déjà
-   $reqUser = "SELECT com_pseudo FROM t_compte_com WHERE com_pseudo = '$_POST[pseudo]'";
-   $resUser = $mysqli->query($reqUser);
+   $probleme=0;
 
-
-   if($resUser->num_rows == 1){
-      include('inscription.php');
-      echo "<script>
-         document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
-         document.getElementById('message2').innerHTML = 'Pseudo déjà utilisé';
-         document.getElementById('message2').style.fontSize = '0.8em';
-         </script>";
-      }
-   else{
+   //vérification si formulaire vide
+   if(!empty($_POST['pseudo']) || !empty($_POST['mdp']) || !empty($_POST['confirm_mdp']) || !empty($_POST['email']) || !empty($_POST['nom']) || !empty($_POST['prenom'])){
       $pseudo=htmlspecialchars(addslashes($_POST['pseudo']));
       $mdp=htmlspecialchars(addslashes($_POST['mdp']));
       $confirm_mdp=htmlspecialchars(addslashes($_POST['confirm_mdp']));
@@ -38,49 +28,152 @@ if ($_GET['action']=='inscription') {
       $nom=htmlspecialchars(addslashes($_POST['nom']));
       $prenom=htmlspecialchars(addslashes($_POST['prenom']));
 
-      //verification mdp
-      if(strcmp($mdp,$confirm_mdp)!==0){
-         include('inscription.php');
-         echo "<script>
-            document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
-            document.getElementById('message2').innerHTML = 'Pseudo déjà utilisé';
-            document.getElementById('message2').style.fontSize = '0.8em';
-            </script>";
+      //verification si le compte existe déjà
+      $reqUser = "SELECT com_pseudo FROM t_compte_com WHERE com_pseudo = '$pseudo'";
+      $resUser = $mysqli->query($reqUser);
+
+      if($resUser->num_rows == 1){
+         $probleme=1;
       }
-      //création compte
       else{
-         $reqCom="INSERT INTO t_compte_com (com_pseudo, com_mdp) VALUES ('$pseudo', MD5('$mdp'))";
-         $resCom= $mysqli->query($reqCom);
-
-         if(!$resCom){
-            echo "Error: La requête a échoué \n";
-            echo "Query: " . $sql . "\n";
-            echo "Errno: " . $mysqli->errno . "\n";
-            echo "Error: " . $mysqli->error . "\n";
-
-            $reqSuppCmp="DELETE FROM t_compte_com WHERE com_pseudo='$pseudo'";
-            $resSuppCmp=$mysqli->query($reqSuppCmp);
-            exit;
+         //verification mdp
+         if(strcmp($mdp,$confirm_mdp)!==0){
+            $probleme=2;
          }
-         //création profil
+         //création compte
          else{
-            $reqPro="INSERT INTO t_profil_pro (pro_nom, pro_prenom, pro_mail, pro_validite, pro_statut, pro_date, com_pseudo) VALUES ('$nom', '$prenom', '$email', 'A', 'R', CURDATE(), '$pseudo');";
-            $resPro=$mysqli->query($reqPro);
+            $reqCom="INSERT INTO t_compte_com (com_pseudo, com_mdp) VALUES ('$pseudo', MD5('$mdp'))";
+            $resCom= $mysqli->query($reqCom);
 
-            if (!$resPro) {
+            if(!$resCom){
                echo "Error: La requête a échoué \n";
                echo "Query: " . $sql . "\n";
                echo "Errno: " . $mysqli->errno . "\n";
                echo "Error: " . $mysqli->error . "\n";
+
+               $reqSuppCmp="DELETE FROM t_compte_com WHERE com_pseudo='$pseudo'";
+               $resSuppCmp=$mysqli->query($reqSuppCmp);
                exit;
             }
+            //création profil
             else{
-               header("Location: connexion.php");
+               $reqPro="INSERT INTO t_profil_pro (pro_nom, pro_prenom, pro_mail, pro_validite, pro_statut, pro_date, com_pseudo) VALUES ('$nom', '$prenom', '$email', 'A', 'R', CURDATE(), '$pseudo');";
+               $resPro=$mysqli->query($reqPro);
+
+               if (!$resPro) {
+                  echo "Error: La requête a échoué \n";
+                  echo "Query: " . $sql . "\n";
+                  echo "Errno: " . $mysqli->errno . "\n";
+                  echo "Error: " . $mysqli->error . "\n";
+                  exit;
+               }
+               //Si tout marche :
+               else{
+                  header("Location: connexion.php");
+               }
             }
          }
       }
    }
-}
+   else{
+      $probleme=3;
+   }
 
+   //Réécriture du fomulaire s'il y a des erreurs
+   if($probleme==1 || $probleme==2 || $probleme==3){
+      echo "
+      <!DOCTYPE html>
+      <html lang='fr' dir='ltr'>
+
+      <head>
+         <meta charset='utf-8'>
+         <link rel='stylesheet' href='css/connexion.css' />
+         <link rel='stylesheet' href='css/navBar.css' />
+
+         <title>Focus</title>
+      </head>
+
+      <body>
+
+      ";
+       require('php/navBarConnexion.php');
+      echo"
+         <div class='utilisateur'>
+            <a href='connexion.php'><img src='assets/logos/padlock.png'></img>Connexion</a>
+         </div>
+
+         <section class='createCompte'>
+         <form action='action.php?action=inscription' method='post'>
+            <h2>Créer un compte</h2>
+            <div>
+               <label for='pseudo'>Pseudo :</label>
+               <input type='text' id='pseudo' name='pseudo' value='".$pseudo."' required>
+               <span id='message2'></span>
+            </div>
+            <div>
+               <label for='nom'>Nom :</label>
+               <input type='text' id='nom' name='nom' value='".$nom."' required>
+               <span id='message2'></span>
+            </div>
+            <div>
+               <label for='prenom'>Prénom :</label>
+               <input type='text' id='prenom' name='prenom' value='".$prenom."' required>
+            </div>
+            <div>
+               <label for='createAdresseMail'>Mail :</label>
+               <input type='email' id='createAdresseMail' name='email' value='".$email."' required>
+            </div>
+            <div>
+               <label for='mdp'>Mot de passe : </label>
+               <input type='password' id='create_mdp' name='mdp' minlength='8' placeholder='8 caractères minimum' onkeyup='check_pass();' required >
+            </div>
+            <div>
+               <label for='confirm_mdp'>Confirmer le mot de passe :</label>
+               <input type='password' id='confirm_mdp' name='confirm_mdp' minlength='8' onkeyup='check_pass();' required>
+               <span id='message'></span>
+            </div>
+            <div>
+               <input class='buttonConnexion' type='submit' value='Créer un compte' id='submit' disabled/>
+            </div>
+         </form>
+
+         </section>
+      ";
+      if($probleme==1){
+         echo "
+            <script>
+               document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
+               document.getElementById('message2').innerHTML = 'Pseudo déja existant';
+               document.getElementById('message2').style.fontSize = '0.8em';
+            </script>";
+      }
+      else if($probleme==2){
+         echo "
+            <script>
+               document.getElementById('message').style.color = 'rgb(210, 28, 28)';
+               document.getElementById('message').innerHTML = '✗';
+               document.getElementById('message').style.fontSize = '0.8em';
+            </script>";
+      }
+      else if($probleme==3){
+         echo "
+            <script>
+               document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
+               document.getElementById('message2').innerHTML = 'Veuiller remplir tous les champs';
+               document.getElementById('message2').style.fontSize = '0.8em';
+            </script>";
+      }
+
+      echo "
+         <script type='text/javascript' src='js/checkPass.js'></script>
+         <script type='text/javascript' src='js/functionCreate.js'></script>
+      </body>
+
+      </html>
+
+      ";
+   }
+
+}
 $mysqli->close();
 ?>

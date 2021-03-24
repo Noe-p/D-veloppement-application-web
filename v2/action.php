@@ -17,6 +17,8 @@ if (!$mysqli->set_charset("utf8")) {
 
 //INSCRIPTION
 if ($_GET['action']=='inscription') {
+   $probleme=0;
+
    //vérification si formulaire vide
    if(!empty($_POST['pseudo']) || !empty($_POST['mdp']) || !empty($_POST['confirm_mdp']) || !empty($_POST['email']) || !empty($_POST['nom']) || !empty($_POST['prenom'])){
       $pseudo=htmlspecialchars(addslashes($_POST['pseudo']));
@@ -27,27 +29,16 @@ if ($_GET['action']=='inscription') {
       $prenom=htmlspecialchars(addslashes($_POST['prenom']));
 
       //verification si le compte existe déjà
-      $reqUser = "SELECT com_pseudo FROM t_compte_com WHERE com_pseudo = '$_POST[pseudo]'";
+      $reqUser = "SELECT com_pseudo FROM t_compte_com WHERE com_pseudo = '$pseudo'";
       $resUser = $mysqli->query($reqUser);
 
-
       if($resUser->num_rows == 1){
-         include('inscription.php');
-         echo "<script>
-            document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
-            document.getElementById('message2').innerHTML = 'Pseudo déjà utilisé';
-            document.getElementById('message2').style.fontSize = '0.8em';
-            </script>";
-         }
+         $probleme=1;
+      }
       else{
          //verification mdp
          if(strcmp($mdp,$confirm_mdp)!==0){
-            include('inscription.php');
-            echo "<script>
-               document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
-               document.getElementById('message2').innerHTML = 'Les mots de passes ne sont pas identiques';
-               document.getElementById('message2').style.fontSize = '0.8em';
-               </script>";
+            $probleme=2;
          }
          //création compte
          else{
@@ -85,18 +76,107 @@ if ($_GET['action']=='inscription') {
       }
    }
    else{
-      include('inscription.php');
-      echo "<script>
-         document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
-         document.getElementById('message2').innerHTML = 'Veuiller remplir tous les champs';
-         document.getElementById('message2').style.fontSize = '0.8em';
-         </script>";
+      $probleme=3;
    }
 
+   //Réécriture du fomulaire s'il y a des erreurs
+   if($probleme==1 || $probleme==2 || $probleme==3){
+      echo "
+      <!DOCTYPE html>
+      <html lang='fr' dir='ltr'>
 
+      <head>
+         <meta charset='utf-8'>
+         <link rel='stylesheet' href='css/connexion.css' />
+         <link rel='stylesheet' href='css/navBar.css' />
+
+         <title>Focus</title>
+      </head>
+
+      <body>
+
+      ";
+       require('php/navBarConnexion.php');
+      echo"
+         <div class='utilisateur'>
+            <a href='connexion.php'><img src='assets/logos/padlock.png'></img>Connexion</a>
+         </div>
+
+         <section class='createCompte'>
+         <form action='action.php?action=inscription' method='post'>
+            <h2>Créer un compte</h2>
+            <div>
+               <label for='pseudo'>Pseudo :</label>
+               <input type='text' id='pseudo' name='pseudo' value='".$pseudo."' required>
+               <span id='message2'></span>
+            </div>
+            <div>
+               <label for='nom'>Nom :</label>
+               <input type='text' id='nom' name='nom' value='".$nom."' required>
+               <span id='message2'></span>
+            </div>
+            <div>
+               <label for='prenom'>Prénom :</label>
+               <input type='text' id='prenom' name='prenom' value='".$prenom."' required>
+            </div>
+            <div>
+               <label for='createAdresseMail'>Mail :</label>
+               <input type='email' id='createAdresseMail' name='email' value='".$email."' required>
+            </div>
+            <div>
+               <label for='mdp'>Mot de passe : </label>
+               <input type='password' id='create_mdp' name='mdp' minlength='8' placeholder='8 caractères minimum' onkeyup='check_pass();' required >
+            </div>
+            <div>
+               <label for='confirm_mdp'>Confirmer le mot de passe :</label>
+               <input type='password' id='confirm_mdp' name='confirm_mdp' minlength='8' onkeyup='check_pass();' required>
+               <span id='message'></span>
+            </div>
+            <div>
+               <input class='buttonConnexion' type='submit' value='Créer un compte' id='submit' disabled/>
+            </div>
+         </form>
+
+         </section>
+      ";
+      if($probleme==1){
+         echo "
+            <script>
+               document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
+               document.getElementById('message2').innerHTML = 'Pseudo déja existant';
+               document.getElementById('message2').style.fontSize = '0.8em';
+            </script>";
+      }
+      else if($probleme==2){
+         echo "
+            <script>
+               document.getElementById('message').style.color = 'rgb(210, 28, 28)';
+               document.getElementById('message').innerHTML = '✗';
+               document.getElementById('message').style.fontSize = '0.8em';
+            </script>";
+      }
+      else if($probleme==3){
+         echo "
+            <script>
+               document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
+               document.getElementById('message2').innerHTML = 'Veuiller remplir tous les champs';
+               document.getElementById('message2').style.fontSize = '0.8em';
+            </script>";
+      }
+
+      echo "
+         <script type='text/javascript' src='js/checkPass.js'></script>
+         <script type='text/javascript' src='js/functionCreate.js'></script>
+      </body>
+
+      </html>
+
+      ";
+   }
+}
 
 //CONNEXION
-}elseif ($_GET['action']=='connexion') {
+elseif ($_GET['action']=='connexion') {
    $reqCom = "SELECT com_pseudo, com_mdp, pro_validite FROM t_compte_com JOIN t_profil_pro USING(com_pseudo) WHERE com_pseudo = '$_POST[pseudo]'";
    $resCom = $mysqli->query($reqCom);
    $Com = $resCom->fetch_array(MYSQLI_ASSOC);
@@ -135,9 +215,10 @@ if ($_GET['action']=='inscription') {
       header("Location: profil.php");
 
    }
+}
 
 //DECONNEXION
-}elseif($_GET['action']=='deconnexion'){
+elseif($_GET['action']=='deconnexion'){
    session_start();
    $_SESSION = array();
    session_destroy();

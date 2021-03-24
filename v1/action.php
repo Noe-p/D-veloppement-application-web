@@ -173,7 +173,7 @@ if ($_GET['action']=='inscription') {
 
       ";
    }
-
 }
+
 $mysqli->close();
 ?>

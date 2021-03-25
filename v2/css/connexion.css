@@ -88,7 +88,7 @@ form h2{
 }
 
 form div{
-   width: 240px;
+   width: 200px;
    margin-bottom: 10px;
 }
 
@@ -130,6 +130,12 @@ form div{
       font-size: 1.8em;
    }
 
+   section p{
+      margin-top: 50%;
+      font-size: 2.5em;
+
+   }
+
    form h2{
       font-size: 4em;
    }
@@ -148,12 +154,9 @@ form div{
       top:50%;
       transform: translate(-50%,-50%);
    }
-
    form{
-      width: 90%;
-      height: 700px;
+      margin-top:20vh;
    }
-
    form div{
       margin: 30px;
    }

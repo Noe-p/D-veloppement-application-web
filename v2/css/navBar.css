@@ -66,6 +66,12 @@ li a{
 li:hover a{
    border: solid 1px black;
 }
+.lock{
+   width: 15px;
+   margin-left: 5px;
+   position: relative;
+   top:2px;
+}
 .sous {
    display: none;
    grid-template-columns: repeat(3, 1fr);

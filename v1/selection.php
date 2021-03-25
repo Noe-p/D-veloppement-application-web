@@ -20,7 +20,13 @@ require('php/requetes.php');
       <ul class="navBar" >
          <li><a href="index.php">Home</a></li>
          <li><a href="selection.php" class="bouton">Sélections</a></li>
-         <li class="menu compte"><a>Compte</a>
+         <?php
+         if(isset($_SESSION['pseudo'])){
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bc.png'></img></a>";
+         }else{
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bo.png'></img></a>";
+         }
+         ?>
             <ul class="sous">
                <?php
                if(isset($_SESSION['pseudo'])){
@@ -28,7 +34,8 @@ require('php/requetes.php');
                   <li><a href='ajout.php'>Ajouter</a></li>
                   <li><a href='action.php?action=deconnexion'>Déconnexion</a></li>";
                } else{
-                  echo "<li><a href='inscription.php'>Inscription</a></li>";
+                  echo "<li><a href='inscription.php'>Inscription</a></li>
+                  <li><a href='connexion.php'>Connexion</a></li>";
                }
                ?>
 

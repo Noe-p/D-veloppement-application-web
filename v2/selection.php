@@ -47,14 +47,27 @@ require('php/requetes.php');
    <table>
       <thead>
          <tr>
-            <th>Test</th>
-            <th>Titre 2</th>
+            <th>Titre</th>
+            <th>Résumé</th>
+            <th>Date</th>
+            <th>Pseudo</th>
+            <th></th>
          </tr>
       </thead>
       <tbody>
          <tr>
-            <td>Contenu 1</td>
-            <td>Contenu 2</td>
+            <td>Portait</td>
+            <td class="resume">Toutes les photos de portait</td>
+            <td>25/07/2021</td>
+            <td>Nono</td>
+            <td><a href=""><img class="oeil" src="assets/logos/oeil.png"></img></a></td>
+         </tr>
+         <tr class="lignePaire">
+            <td>Paysage</td>
+            <td class="resume">Toutes les photos de paysages</td>
+            <td>30/02/2021</td>
+            <td>Clem</td>
+            <td><a href=""><img class="oeil" src="assets/logos/oeil.png"></img></a></td>
          </tr>
       </tbody>
    </table>

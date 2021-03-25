@@ -3,8 +3,12 @@ footer p, footer ul{
    color: rgb(255, 249, 235);
 }
 
+footer li{
+   font-size: 0.7em;
+}
 footer h2{
    color: rgb(255, 249, 235);
+   font-size: 1em;
 }
 
 footer ul {
@@ -13,11 +17,20 @@ footer ul {
 }
 
 footer{
-   padding-top: 30px;
-   padding-bottom: 30px;
+   padding-top: 5px;
+   padding-bottom: 5px;
    margin-top: 50px;
    width: 100%;
    background-color: rgb(13, 50, 65);
+   display: flex;
+   justify-content: center;
+   position: absolute;
+   bottom:0;
+}
+
+.infosOrga{
+   margin-left: 50px;
+   margin-right: 50px;
    display: flex;
    flex-direction: column;
    align-items: center;

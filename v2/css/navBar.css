@@ -4,7 +4,7 @@
 }
 
 aside a, aside a:visited {
-   color: black;
+   color: rgb(51, 51, 51);
    text-decoration: none;
 }
 
@@ -64,7 +64,7 @@ li a{
 }
 
 li:hover a{
-   border: solid 1px black;
+   border: solid 1px rgb(51, 51, 51);
 }
 .lock{
    width: 15px;
@@ -139,7 +139,7 @@ li:hover a{
 
 .menu:hover .sous a:hover{
    background-color: rgba(255, 249, 235, 0.9);
-   color:black;
+   color:rgb(51, 51, 51);
    border: solid 1px rgba(0, 0, 0, 0.9);
 }
 .compte {

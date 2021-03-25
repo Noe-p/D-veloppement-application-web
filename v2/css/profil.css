@@ -11,7 +11,7 @@ html {
  a, a:visited, h3 {
    text-decoration: none;
    font-size: 1em;
-   color: black;
+   color: rgb(51, 51, 51);
 }
 
 p{
@@ -115,19 +115,19 @@ header h2{
    position: relative;
    width: 35vw;
    top: -10px;
-   border-bottom: solid 1px black;
+   border-bottom: solid 1px rgb(51, 51, 51);
    height: 60px;
    display: flex;
    align-items: center;
    justify-content: space-between;
-   border-bottom: solid 1px black;
+   border-bottom: solid 1px rgb(51, 51, 51);
 }
 
 .headerPublic a {
    margin-left: 10px;
    padding: 5px 20px 5px 20px;
    border-radius: 50px;
-   border: solid 1px black;
+   border: solid 1px rgb(51, 51, 51);
 }
 
 .headerPublic h3 {

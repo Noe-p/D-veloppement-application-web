@@ -82,7 +82,7 @@ session_start();
 
    <?php require('php/footer.php'); ?>
 
-   <script type="text/javascript" src="js/home.js"></script>
+   <script type="text/javascript" src="js/navBar.js"></script>
 </body>
 
 </html>

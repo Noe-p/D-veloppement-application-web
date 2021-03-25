@@ -20,13 +20,7 @@ require('php/requetes.php');
       <ul class="navBar" >
          <li><a href="index.php">Home</a></li>
          <li><a href="selection.php" class="bouton">Sélections</a></li>
-         <?php
-         if(isset($_SESSION['pseudo'])){
-            echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bc.png'></img></a>";
-         }else{
-            echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bo.png'></img></a>";
-         }
-         ?>
+         <li class='menu compte'><a>Compte</a>
             <ul class="sous">
                <?php
                if(isset($_SESSION['pseudo'])){

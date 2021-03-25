@@ -41,5 +41,16 @@ if(!$resStruc){
    exit();
 }
 
+//Sélections
+$reqSel = "SELECT sel_intitule, sel_texteIntro, sel_date, com_pseudo FROM t_selection_sel;";
+$resSel = $mysqli->query($reqSel);
+
+if(!$resActu){
+   echo "Error: La requête a echoué \n";
+   echo "Errno: " . $mysqli->errno . "\n";
+   echo "Error: " . $mysqli->error . "\n";
+   exit();
+}
+
 $mysqli->close();
 ?>

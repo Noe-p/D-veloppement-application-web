@@ -19,7 +19,7 @@ require('php/requetes.php');
    <aside>
       <ul class="navBar" >
          <li><a href="index.php">Home</a></li>
-         <li><a href="selection.php">Sélections</a></li>
+         <li><a href="selection.php" class="bouton">Sélections</a></li>
          <?php
          if(isset($_SESSION['pseudo'])){
             echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bc.png'></img></a>";
@@ -55,20 +55,27 @@ require('php/requetes.php');
          </tr>
       </thead>
       <tbody>
-         <tr>
-            <td>Portait</td>
-            <td class="resume">Toutes les photos de portait</td>
-            <td>25/07/2021</td>
-            <td>Nono</td>
-            <td><a href=""><img class="oeil" src="assets/logos/oeil.png"></img></a></td>
-         </tr>
-         <tr class="lignePaire">
-            <td>Paysage</td>
-            <td class="resume">Toutes les photos de paysages</td>
-            <td>30/02/2021</td>
-            <td>Clem</td>
-            <td><a href=""><img class="oeil" src="assets/logos/oeil.png"></img></a></td>
-         </tr>
+         <?php
+            $i=0;
+            while ($sel = $resSel->fetch_assoc()) {
+               if(fmod($i,2)==0){
+                  echo "<tr>";
+                  $i=$i+1;
+               }
+               else{
+                  echo "<tr class='lignePaire'>";
+                  $i=$i+1;
+               }
+               echo "
+                     <td>".$sel['sel_intitule']."</td>
+                     <td class='resume'>".$sel['sel_texteIntro']."</td>
+                     <td>".$sel['sel_date']."</td>
+                     <td>".$sel['com_pseudo']."</td>
+                     <td><a href=''><img class='oeil' src='assets/logos/oeil.png'></img></a></td>
+                  </tr>
+               ";
+            }
+         ?>
       </tbody>
    </table>
 

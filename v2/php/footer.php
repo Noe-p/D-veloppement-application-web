@@ -12,7 +12,7 @@
    <article class="infosOrga">
       <h2>Description :</h2>
       <ul>
-         <li><?php echo $struc['pre_texte'] ?></li>
+         <li class="description"><?php echo $struc['pre_texte'] ?></li>
       </ul>
    </article>
 </footer>

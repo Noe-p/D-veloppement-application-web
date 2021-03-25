@@ -19,7 +19,7 @@ session_start();
 
    <aside>
       <ul class="navBar" >
-         <li><a href="index.php">Home</a></li>
+         <li><a href="index.php" class="bouton">Home</a></li>
          <li><a href="selection.php">Sélections</a></li>
          <?php
          if(isset($_SESSION['pseudo'])){
@@ -49,10 +49,10 @@ session_start();
    <div class="utilisateur">
       <?php
       if(isset($_SESSION['pseudo'])==false){
-         echo "<a href='inscription.php'><img src='assets/logos/padlock.png'></img>Inscription</a>";
+         echo "<a href='inscription.php'><img src='assets/logos/padlock_wo.png'></img>Inscription</a>";
       }
       else{
-         echo "<a href='connexion.php'><img src='assets/logos/padlock.png'></img>Connexion</a>";
+         echo "<a href='connexion.php'><img src='assets/logos/padlock_wo.png'></img>Connexion</a>";
       }
       ?>
       <a href="#contact"><img src="assets/logos/information.png"></img>Contact</a>
@@ -76,7 +76,6 @@ session_start();
                      <p>date : ".$actu['actu_date']."</p>
                   </article>";
          }
-
       ?>
    </section>
 

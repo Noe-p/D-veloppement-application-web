@@ -58,6 +58,29 @@ require('php/requetes.php');
          <?php
             $i=0;
             while ($sel = $resSel->fetch_assoc()) {
+               //CONNEXION A LA BASE
+               require('php/connexionBDD.php');
+
+               //premier élément d'une sélection particliere
+               $reqFirstEleSel = "SELECT ele_numero FROM t_element_ele
+                                  JOIN tj_relie_rel USING(ele_numero)
+                                  WHERE sel_numero = '$sel[sel_numero]'
+                                  ORDER BY ele_numero ASC
+                                  LIMIT 1;";
+               $resFirstEleSel = $mysqli->query($reqFirstEleSel);
+
+               if(!$resFirstEleSel){
+                  echo "Error: La requête a echoué \n";
+                  echo "Errno: " . $mysqli->errno . "\n";
+                  echo "Error: " . $mysqli->error . "\n";
+                  exit();
+               }
+               else{
+                  $firstEleSel = $resFirstEleSel->fetch_array(MYSQLI_ASSOC);
+               }
+               $mysqli->close();
+
+               //Test de parité pour l'aternance de couleurs des lignes du tableau
                if(fmod($i,2)==0){
                   echo "<tr>";
                   $i=$i+1;
@@ -71,7 +94,7 @@ require('php/requetes.php');
                      <td class='resume'>".$sel['sel_texteIntro']."</td>
                      <td>".$sel['sel_date']."</td>
                      <td>".$sel['com_pseudo']."</td>
-                     <td><a href=''><img class='oeil' src='assets/logos/oeil.png'></img></a></td>
+                     <td><a href='affichageSelection.php?sel_id=".$sel['sel_numero']."&elt_id=".$firstEleSel['ele_numero']."'><img class='oeil' src='assets/logos/oeil.png'></img></a></td>
                   </tr>
                ";
             }

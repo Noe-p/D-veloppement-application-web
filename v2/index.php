@@ -73,7 +73,7 @@ session_start();
                         <h3>".$actu['actu_titre']."</h3>
                      </div>
                      <p>".$actu['actu_texte']."</p>
-                     <p>date : ".$actu['actu_date']."</p>
+                     <p>".$actu['actu_date']."</p>
                   </article>";
          }
       ?>

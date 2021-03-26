@@ -20,6 +20,7 @@ body {
    font-family: "Taviraj-regular";
    background-color: rgb(255, 249, 235);
    color: rgb(255, 249, 235);
+   position: relative;
 
 }
 
@@ -61,7 +62,6 @@ body {
    flex-direction: column;
    align-items: center;
    justify-content: center;
-
 }
 
 .connexion a:visited {
@@ -77,20 +77,24 @@ form{
    height: auto;
    display: flex;
    flex-direction: column;
-   align-items: center;
    padding: 20px;
+
 }
 
 form h2{
    font-size: 2em;
    margin:0;
    margin-bottom:5px;
+   text-align: center;
+   width: 100%;
 }
 
 form div{
-   width: 200px;
    margin-bottom: 10px;
+   width: 100%;
+   text-align: center;
 }
+
 
 #message, #message2{
    position: absolute;
@@ -121,6 +125,7 @@ form div{
    display: flex;
    align-items: center;
    justify-content: center;
+   height: 500px;
 }
 
 

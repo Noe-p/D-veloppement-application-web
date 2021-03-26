@@ -66,6 +66,7 @@ li a{
 li:hover a{
    border: solid 1px rgb(51, 51, 51);
 }
+
 .lock{
    width: 15px;
    margin-left: 5px;

@@ -18,7 +18,7 @@ session_start();
    <?php require('php/navBarConnexion.php'); ?>
 
    <div class="utilisateur">
-      <a href="connexion.php"><img src="assets/logos/padlock.png"></img>Connexion</a>
+      <a href="connexion.php"><img src="assets/logos/padlock_wo.png"></img>Connexion</a>
    </div>
 
    <section class="connexion">
@@ -27,11 +27,11 @@ session_start();
          <h2>Connexion</h2>
          <span id='message3'></span>
          <div>
-            <label for="pseudo">Pseudo :</label>
+            <label for="pseudo"><B>Pseudo :</B><br/></label>
             <input type="text" id="pseudo" name="pseudo" >
          </div>
          <div>
-            <label for="mdp">Mot de passe :</label>
+            <label for="mdp"><B>Mot de passe :</B><br/></label>
             <input type="password" id="pass" name="mdp" minlength="8" required>
          </div>
          <div>

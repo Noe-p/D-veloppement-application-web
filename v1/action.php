@@ -106,29 +106,29 @@ if ($_GET['action']=='inscription') {
          <form action='action.php?action=inscription' method='post'>
             <h2>Créer un compte</h2>
             <div>
-               <label for='pseudo'>Pseudo :</label>
+               <label for='pseudo'><B>Pseudo :</B><br/></label>
                <input type='text' id='pseudo' name='pseudo' value='".$pseudo."' required>
                <span id='message2'></span>
             </div>
             <div>
-               <label for='nom'>Nom :</label>
+               <label for='nom'><B>Nom :</B><br/></label>
                <input type='text' id='nom' name='nom' value='".$nom."' required>
                <span id='message2'></span>
             </div>
             <div>
-               <label for='prenom'>Prénom :</label>
+               <label for='prenom'><B>Prénom :</B><br/></label>
                <input type='text' id='prenom' name='prenom' value='".$prenom."' required>
             </div>
             <div>
-               <label for='createAdresseMail'>Mail :</label>
+               <label for='createAdresseMail'><B>Mail :</B><br/></label>
                <input type='email' id='createAdresseMail' name='email' value='".$email."' required>
             </div>
             <div>
-               <label for='mdp'>Mot de passe : </label>
+               <label for='mdp'><B>Mot de passe :</B><br/></label>
                <input type='password' id='create_mdp' name='mdp' minlength='8' placeholder='8 caractères minimum' onkeyup='check_pass();' required >
             </div>
             <div>
-               <label for='confirm_mdp'>Confirmer le mot de passe :</label>
+               <label for='confirm_mdp'><B>Confirmer le mot de passe :</B><br/></label>
                <input type='password' id='confirm_mdp' name='confirm_mdp' minlength='8' onkeyup='check_pass();' required>
                <span id='message'></span>
             </div>

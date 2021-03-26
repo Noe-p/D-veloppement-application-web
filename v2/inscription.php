@@ -1,3 +1,7 @@
+<?php
+require('php/requetes.php');
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 
@@ -5,6 +9,8 @@
    <meta charset="utf-8">
    <link rel="stylesheet" href="css/connexion.css" />
    <link rel="stylesheet" href="css/navBar.css" />
+   <link rel="stylesheet" href="css/footer.css" />
+
 
    <title>Focus</title>
 </head>
@@ -13,38 +19,38 @@
 
    <?php require('php/navBarConnexion.php'); ?>
 
-
    <div class="utilisateur">
-      <a href="connexion.php"><img src="assets/logos/padlock.png"></img>Connexion</a>
+      <a href="connexion.php"><img src="assets/logos/padlock_wo.png"></img>Connexion</a>
    </div>
+
 
    <section class="createCompte">
       <form action="action.php?action=inscription" method="post">
          <h2>Créer un compte</h2>
          <div>
-            <label for="pseudo">Pseudo :</label>
+            <label for="pseudo"><B>Pseudo :</B><br/></label>
             <input type="text" id="pseudo" name="pseudo" required>
             <span id='message2'></span>
          </div>
          <div>
-            <label for="nom">Nom :</label>
+            <label for="nom"><B>Nom :</B><br/></label>
             <input type="text" id="nom" name="nom" required>
             <span id="message2"></span>
          </div>
          <div>
-            <label for="prenom">Prénom :</label>
+            <label for="prenom"><B>Prénom :</B><br/></label>
             <input type="text" id="prenom" name="prenom" required>
          </div>
          <div>
-            <label for="createAdresseMail">Mail :</label>
+            <label for="createAdresseMail"><B>Mail :</B><br/></label>
             <input type="email" id="createAdresseMail" name="email" required>
          </div>
          <div>
-            <label for="mdp">Mot de passe : </label>
+            <label for="mdp"><B>Mot de passe :</B><br/></label>
             <input type="password" id="create_mdp" name="mdp" minlength="8" placeholder="8 caractères minimum" onkeyup='check_pass();' required >
          </div>
          <div>
-            <label for="confirm_mdp">Confirmer le mot de passe :</label>
+            <label for="confirm_mdp"><B>Confirmer le mot de passe :</B><br/></label>
             <input type="password" id="confirm_mdp" name="confirm_mdp" minlength="8" onkeyup='check_pass();' required>
             <span id='message'></span>
          </div>
@@ -52,10 +58,12 @@
             <input class="buttonConnexion" type="submit" value="Créer un compte" id="submit" disabled/>
          </div>
       </form>
-
    </section>
 
+
+
    <script type="text/javascript" src="js/checkPass.js"></script>
+   <script type="text/javascript" src="js/navBar.js"></script>
    <script type="text/javascript" src="js/functionCreate.js"></script>
 </body>
 

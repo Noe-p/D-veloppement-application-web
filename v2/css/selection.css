@@ -124,6 +124,28 @@ section{
    margin-top: 30px;
    width: 45vw;
 }
+
+/*Fleche*/
+.flecheDroite, .flecheGauche{
+   width:100px;
+   position: absolute;
+   top:50%;
+   transform: translate(-50%,-50%);
+   transition: all 0.2s;
+}
+.flecheGauche{
+   left: 12%;
+}
+.flecheDroite{
+   right: 5%;
+}
+
+.flecheDroite:hover, .flecheGauche:hover{
+   width: 107px;
+}
+.flecheDroite:hover{
+   right: 4.5%;
+}
 @media all and (max-device-width:480px) {
 
 table{

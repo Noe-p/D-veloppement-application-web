@@ -44,9 +44,10 @@ if(!$resSel){
    exit();
 }
 
-//Elements
+//Element
 if(isset($_GET['sel_id'])){
-   $reqEle = "SELECT sel_intitule, ele_intitule, ele_descriptif, ele_date, ele_fichierImage, com_pseudo FROM t_element_ele
+   $reqEle = "SELECT sel_intitule, ele_intitule, ele_descriptif, ele_date, ele_fichierImage, com_pseudo, ele_etat 
+              FROM t_element_ele
               JOIN tj_relie_rel USING(ele_numero)
               JOIN t_selection_sel USING(sel_numero)
               WHERE ele_numero='$_GET[elt_id]'

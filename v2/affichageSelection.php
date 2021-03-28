@@ -57,6 +57,9 @@ require('php/requetes.php');
       </article>
    </section>
 
+   <a href="#"><img class="flecheDroite" src="assets/logos/flecheDroite.png" alt="flecheDroite"></a>
+   <a href="#"><img class="flecheGauche" src="assets/logos/flecheGauche.png" alt="flecheGauche"></a>
+
    <?php require('php/footer.php'); ?>
 
    <script type="text/javascript" src="js/navBar.js"></script>

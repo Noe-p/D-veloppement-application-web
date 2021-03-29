@@ -2,7 +2,13 @@
    <ul class="navBar" >
       <li><a href="index.php">Home</a></li>
       <li><a href="selection.php">Sélections</a></li>
-      <li class='menu compte'><a>Compte</a>
+      <?php
+      if(isset($_SESSION['pseudo'])){
+         echo "<li class='menu compte'><a class='bouton'>Compte<img class='lock' src='assets/logos/padlock_wc.png'></img></a>";
+      }else{
+         echo "<li class='menu compte'><a class='bouton'>Compte<img class='lock' src='assets/logos/padlock_wo.png'></img></a>";
+      }
+      ?>
          <ul class="sous">
             <?php
             if(isset($_SESSION['pseudo'])){

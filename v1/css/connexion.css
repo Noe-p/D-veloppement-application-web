@@ -20,6 +20,7 @@ body {
    font-family: "Taviraj-regular";
    background-color: rgb(255, 249, 235);
    color: rgb(255, 249, 235);
+   position: relative;
 
 }
 
@@ -61,7 +62,6 @@ body {
    flex-direction: column;
    align-items: center;
    justify-content: center;
-
 }
 
 .connexion a:visited {
@@ -78,6 +78,7 @@ form{
    display: flex;
    flex-direction: column;
    padding: 20px;
+
 }
 
 form h2{
@@ -124,6 +125,7 @@ form div{
    display: flex;
    align-items: center;
    justify-content: center;
+   height: 500px;
 }
 
 
@@ -158,7 +160,7 @@ form div{
       transform: translate(-50%,-50%);
    }
    form{
-      margin-top:20vh;
+      margin-top:60vh;
    }
    form div{
       margin: 30px;

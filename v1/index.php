@@ -1,6 +1,7 @@
 
 <?php
 require('php/requetes.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +21,13 @@ require('php/requetes.php');
       <ul class="navBar" >
          <li><a href="index.php" class="bouton">Home</a></li>
          <li><a href="selection.php">Sélections</a></li>
-         <li class='menu compte'><a>Compte</a>
+         <?php
+         if(isset($_SESSION['pseudo'])){
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bc.png'></img></a>";
+         }else{
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bo.png'></img></a>";
+         }
+         ?>
             <ul class="sous">
                <?php
                if(isset($_SESSION['pseudo'])){
@@ -42,10 +49,10 @@ require('php/requetes.php');
    <div class="utilisateur">
       <?php
       if(isset($_SESSION['pseudo'])==false){
-         echo "<a href='inscription.php'><img src='assets/logos/padlock.png'></img>Inscription</a>";
+         echo "<a href='inscription.php'><img src='assets/logos/padlock_wo.png'></img>Inscription</a>";
       }
       else{
-         echo "<a href='connexion.php'><img src='assets/logos/padlock.png'></img>Connexion</a>";
+         echo "<a href='connexion.php'><img src='assets/logos/padlock_wo.png'></img>Connexion</a>";
       }
       ?>
       <a href="#contact"><img src="assets/logos/information.png"></img>Contact</a>
@@ -66,16 +73,15 @@ require('php/requetes.php');
                         <h3>".$actu['actu_titre']."</h3>
                      </div>
                      <p>".$actu['actu_texte']."</p>
-                     <p>date : ".$actu['actu_date']."</p>
+                     <p>".$actu['actu_date']."</p>
                   </article>";
          }
-
       ?>
    </section>
 
    <?php require('php/footer.php'); ?>
 
-   <script type="text/javascript" src="js/home.js"></script>
+   <script type="text/javascript" src="js/navBar.js"></script>
 </body>
 
 </html>

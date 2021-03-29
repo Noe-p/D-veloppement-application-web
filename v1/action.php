@@ -22,8 +22,8 @@ if ($_GET['action']=='inscription') {
    //vérification si formulaire vide
    if(!empty($_POST['pseudo']) || !empty($_POST['mdp']) || !empty($_POST['confirm_mdp']) || !empty($_POST['email']) || !empty($_POST['nom']) || !empty($_POST['prenom'])){
       $pseudo=htmlspecialchars(addslashes($_POST['pseudo']));
-      $mdp=htmlspecialchars(addslashes($_POST['mdp']));
-      $confirm_mdp=htmlspecialchars(addslashes($_POST['confirm_mdp']));
+      $mdp=htmlspecialchars($_POST['mdp']);
+      $confirm_mdp=htmlspecialchars($_POST['confirm_mdp']);
       $email=htmlspecialchars(addslashes($_POST['email']));
       $nom=htmlspecialchars(addslashes($_POST['nom']));
       $prenom=htmlspecialchars(addslashes($_POST['prenom']));
@@ -50,10 +50,7 @@ if ($_GET['action']=='inscription') {
                echo "Query: " . $sql . "\n";
                echo "Errno: " . $mysqli->errno . "\n";
                echo "Error: " . $mysqli->error . "\n";
-
-               $reqSuppCmp="DELETE FROM t_compte_com WHERE com_pseudo='$pseudo'";
-               $resSuppCmp=$mysqli->query($reqSuppCmp);
-               exit;
+               exit();
             }
             //création profil
             else{
@@ -65,7 +62,11 @@ if ($_GET['action']=='inscription') {
                   echo "Query: " . $sql . "\n";
                   echo "Errno: " . $mysqli->errno . "\n";
                   echo "Error: " . $mysqli->error . "\n";
-                  exit;
+
+                  //Suppression du compte si la requete profil a échoué
+                  $reqSuppCmp="DELETE FROM t_compte_com WHERE com_pseudo='$pseudo'";
+                  $resSuppCmp=$mysqli->query($reqSuppCmp);
+                  exit();
                }
                //Si tout marche :
                else{
@@ -174,6 +175,58 @@ if ($_GET['action']=='inscription') {
       ";
    }
 }
+
+//CONNEXION
+elseif ($_GET['action']=='connexion') {
+   $reqCom = "SELECT com_pseudo, com_mdp, pro_validite FROM t_compte_com JOIN t_profil_pro USING(com_pseudo) WHERE com_pseudo = '$_POST[pseudo]'";
+   $resCom = $mysqli->query($reqCom);
+   $Com = $resCom->fetch_array(MYSQLI_ASSOC);
+
+   if (!$resCom) {
+      echo "Error: La requête a échoué \n";
+      echo "Query: " . $sql . "\n";
+      echo "Errno: " . $mysqli->errno . "\n";
+      echo "Error: " . $mysqli->error . "\n";
+      exit;
+   }
+
+   if (($Com['com_pseudo'] != $_POST['pseudo']) and ($Com['com_mdp'] != md5($_POST['mdp']))) {
+      include('connexion.php');
+
+      echo "<script>
+         document.getElementById('message3').style.color = 'rgb(210, 28, 28)';
+         document.getElementById('message3').innerHTML = 'Mauvais pseudo ou mot de passe';
+         document.getElementById('message3').style.fontSize = '0.8em';
+         </script>";
+   }
+   else if ($Com['pro_validite']=='D') {
+      include('connexion.php');
+
+      echo "<script>
+         document.getElementById('message3').style.color = 'rgb(210, 28, 28)';
+         document.getElementById('message3').innerHTML = 'La connexion a échoué, compte désactivé';
+         document.getElementById('message3').style.fontSize = '0.8em';
+         </script>";
+   }
+   else {
+      session_start();
+      $_SESSION['pseudo'] = $_POST['pseudo'];
+      include('connexion.php');
+
+      header("Location: profil.php");
+
+   }
+}
+
+//DECONNEXION
+elseif($_GET['action']=='deconnexion'){
+   session_start();
+   $_SESSION = array();
+   session_destroy();
+
+   header("Location: index.php");
+}
+
 
 $mysqli->close();
 ?>

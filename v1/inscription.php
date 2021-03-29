@@ -1,3 +1,7 @@
+<?php
+require('php/requetes.php');
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr" dir="ltr">
 
@@ -5,6 +9,8 @@
    <meta charset="utf-8">
    <link rel="stylesheet" href="css/connexion.css" />
    <link rel="stylesheet" href="css/navBar.css" />
+   <link rel="stylesheet" href="css/footer.css" />
+
 
    <title>Focus</title>
 </head>
@@ -13,10 +19,10 @@
 
    <?php require('php/navBarConnexion.php'); ?>
 
-
    <div class="utilisateur">
-      <a href="connexion.php"><img src="assets/logos/padlock.png"></img>Connexion</a>
+      <a href="connexion.php"><img src="assets/logos/padlock_wo.png"></img>Connexion</a>
    </div>
+
 
    <section class="createCompte">
       <form action="action.php?action=inscription" method="post">
@@ -52,10 +58,12 @@
             <input class="buttonConnexion" type="submit" value="Créer un compte" id="submit" disabled/>
          </div>
       </form>
-
    </section>
 
+
+
    <script type="text/javascript" src="js/checkPass.js"></script>
+   <script type="text/javascript" src="js/navBar.js"></script>
    <script type="text/javascript" src="js/functionCreate.js"></script>
 </body>
 

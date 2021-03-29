@@ -20,7 +20,13 @@ require('php/requetes.php');
       <ul class="navBar" >
          <li><a href="index.php">Home</a></li>
          <li><a href="selection.php" class="bouton">Sélections</a></li>
-         <li class='menu compte'><a>Compte</a>
+         <?php
+         if(isset($_SESSION['pseudo'])){
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bc.png'></img></a>";
+         }else{
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bo.png'></img></a>";
+         }
+         ?>
             <ul class="sous">
                <?php
                if(isset($_SESSION['pseudo'])){
@@ -37,6 +43,64 @@ require('php/requetes.php');
          </li>
       </ul>
    </aside>
+
+   <table>
+      <thead>
+         <tr>
+            <th>Titre</th>
+            <th>Résumé</th>
+            <th>Date</th>
+            <th>Pseudo</th>
+            <th></th>
+         </tr>
+      </thead>
+      <tbody>
+         <?php
+            $i=0;
+            while ($sel = $resSel->fetch_assoc()) {
+               //CONNEXION A LA BASE
+               require('php/connexionBDD.php');
+
+               //premier élément d'une sélection particliere
+               $reqFirstEleSel = "SELECT ele_numero FROM t_element_ele
+                                  JOIN tj_relie_rel USING(ele_numero)
+                                  WHERE sel_numero = '$sel[sel_numero]'
+                                  ORDER BY ele_numero ASC
+                                  LIMIT 1;";
+               $resFirstEleSel = $mysqli->query($reqFirstEleSel);
+
+               if(!$resFirstEleSel){
+                  echo "Error: La requête a echoué \n";
+                  echo "Errno: " . $mysqli->errno . "\n";
+                  echo "Error: " . $mysqli->error . "\n";
+                  exit();
+               }
+               else{
+                  $firstEleSel = $resFirstEleSel->fetch_array(MYSQLI_ASSOC);
+               }
+               $mysqli->close();
+
+               //Test de parité pour l'aternance de couleurs des lignes du tableau
+               if(fmod($i,2)==0){
+                  echo "<tr>";
+                  $i=$i+1;
+               }
+               else{
+                  echo "<tr class='lignePaire'>";
+                  $i=$i+1;
+               }
+               echo "
+                     <td>".$sel['sel_intitule']."</td>
+                     <td class='resume'>".$sel['sel_texteIntro']."</td>
+                     <td>".$sel['sel_date']."</td>
+                     <td>".$sel['com_pseudo']."</td>
+                     <td><a href='affichageSelection.php?sel_id=".$sel['sel_numero']."&elt_id=".$firstEleSel['ele_numero']."'><img class='oeil' src='assets/logos/oeil.png'></img></a></td>
+                  </tr>
+               ";
+            }
+         ?>
+      </tbody>
+   </table>
 
    <?php require('php/footer.php'); ?>
 

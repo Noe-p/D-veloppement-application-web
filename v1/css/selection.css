@@ -16,7 +16,7 @@ html {
 p, a, a:visited {
    text-decoration: none;
    font-size: 1em;
-   color: black;
+   color: rgb(51, 51, 51);
 }
 
 body {
@@ -27,4 +27,162 @@ body {
    display: flex;
    flex-direction: column;
    align-items: center;
+   position: relative;
+}
+
+/*Sélection*/
+table {
+   border-collapse: collapse;
+   text-align: left;
+   box-shadow: 2px 2px 10px rgb(51, 51, 51);
+   margin-bottom: 300px;
+}
+
+thead{
+   background-color: rgb(51, 51, 51);
+   color: rgb(255, 249, 235);
+}
+
+th,td{
+   max-width:100px;
+   padding-top:16px;
+   padding-bottom: 16px;
+   padding-left: 40px;
+   padding-right: 40px;
+   position: relative;
+}
+
+.lignePaire{
+   background-color: rgba(51, 51, 51, 0.1);
+}
+
+.resume{
+   max-width:500px;
+}
+
+.oeil{
+   width: 30px;
+   position: relative;
+   top: 14px;
+   right: 40px;
+   transition: all 0.2s;
+   position: absolute;
+}
+
+.oeil:hover{
+   width:35px;
+   top:12px;
+   right:37px;
+}
+
+/*Affichage Elements*/
+h1{
+   margin-top: 0px;
+}
+section{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-bottom: 300px;
+}
+
+.imgUser{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 20px;
+   width: 50vw;
+   box-shadow: 2px 2px 10px rgb(51, 51, 51);
+   border-radius: 10px;
+}
+
+.headerPublic{
+   width: 50vw;
+   display: flex;
+   align-items: center;
+   justify-content:space-between;
+   background-color: rgb(51, 51, 51);
+   border-top-left-radius: 10px;
+   border-top-right-radius:10px;
+   color: rgb(255, 249, 235);
+}
+
+.headerPublic a{
+   margin-left: 10px;
+   padding: 5px 20px 5px 20px;
+   border-radius:50px;
+   background-color: rgb(255, 249, 235);
+   color:rgb(51, 51, 51);
+
+}
+
+.headerPublic h3{
+   margin-right: 20px;
+}
+
+.imgUser img {
+   margin-top: 30px;
+   width: 45vw;
+}
+
+/*Fleche*/
+.flecheDroite, .flecheGauche{
+   width:100px;
+   position: absolute;
+   top:50%;
+   transform: translate(-50%,-50%);
+   transition: all 0.2s;
+}
+.flecheGauche{
+   left: 12%;
+}
+.flecheDroite{
+   right: 5%;
+}
+
+.flecheDroite:hover, .flecheGauche:hover{
+   width: 107px;
+}
+.flecheDroite:hover{
+   right: 4.5%;
+}
+
+.emptySel{
+   margin-top: 15vh;
+   margin-bottom:300px;
+}
+@media all and (max-device-width:480px) {
+
+table{
+   margin-top: 30vh;
+   margin-bottom: 500px;
+}
+
+body{
+   position: inherit;
+}
+
+.imgUser{
+   margin-top: 10vh;
+   width: 90vw;
+}
+
+.headerPublic{
+   width: 90vw;
+}
+.imgUser img{
+   width: 85vw;
+}
+
+.flecheDroite,.flecheGauche{
+   top:67%;
+   width: 70px;
+}
+
+.flecheDroite{
+   right: 33%;
+}
+.flecheGauche{
+   left: 40%;
+}
 }

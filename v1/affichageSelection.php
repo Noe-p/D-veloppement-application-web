@@ -102,9 +102,9 @@ require('php/requetes.php');
    ?>
 
    <?php
-      if(!empty($elt_id) and $nbRowsSuiv==1){
+      if(!empty($elt_id) and $nbEle){
          echo "
-            <h1>".$ele['sel_intitule']."</h1>
+            <h1 id='ancre'>".$ele['sel_intitule']."</h1>
             <section>
                <article class='imgUser'>
                   <div class='headerPublic'>
@@ -121,10 +121,10 @@ require('php/requetes.php');
       //Affichage des fleches si les éléments suiv/prec existent
       if($nbEle){
          if($nbRowsSuiv){
-            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$eleSuiv['ele_numero']."'><img class='flecheDroite' src='assets/logos/flecheDroite.png' alt='flecheDroite'></a>";
+            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$eleSuiv['ele_numero']."#ancre'><img class='flecheDroite' src='assets/logos/flecheDroite.png' alt='flecheDroite'></a>";
          }
          if($nbRowsPrec){
-            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$elePrec['ele_numero']."'><img class='flecheGauche' src='assets/logos/flecheGauche.png' alt='flecheGauche'></a>";
+            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$elePrec['ele_numero']."#ancre'><img class='flecheGauche' src='assets/logos/flecheGauche.png' alt='flecheGauche'></a>";
          }
       }
       elseif(empty($elt_id)){

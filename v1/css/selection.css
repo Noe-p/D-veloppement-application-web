@@ -133,7 +133,7 @@ section{
 
 .imgUser img {
    margin-top: 30px;
-   width: 45vw;
+   max-width: 45vw;
 }
 
 /*Fleche*/
@@ -164,9 +164,25 @@ section{
 }
 @media all and (max-device-width:480px) {
 
+a,p,h3,td,th{
+   font-size: 1.5em;
+}
+
 table{
-   margin-top: 30vh;
+   margin-top: 20vh;
    margin-bottom: 500px;
+   max-width: 95%;
+}
+
+.oeil{
+   width: 35px;
+   top:39px;
+   right:21px;
+}
+.oeil:hover{
+   width:35px;
+   top:39px;
+   right:21px;
 }
 
 body{
@@ -182,11 +198,12 @@ body{
    width: 90vw;
 }
 .imgUser img{
-   width: 85vw;
+   max-height: 32vh;
+   max-width: 85vw;
 }
 
 .flecheDroite,.flecheGauche{
-   top:67%;
+   top:70%;
    width: 70px;
 }
 

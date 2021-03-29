@@ -94,7 +94,7 @@ require('php/requetes.php');
                      <td class='resume'>".$sel['sel_texteIntro']."</td>
                      <td>".$sel['sel_date']."</td>
                      <td>".$sel['com_pseudo']."</td>
-                     <td><a href='affichageSelection.php?sel_id=".$sel['sel_numero']."&elt_id=".$firstEleSel['ele_numero']."'><img class='oeil' src='assets/logos/oeil.png'></img></a></td>
+                     <td><a href='affichageSelection.php?sel_id=".$sel['sel_numero']."&elt_id=".$firstEleSel['ele_numero']."#ancre'><img class='oeil' src='assets/logos/oeil.png'></img></a></td>
                   </tr>
                ";
             }

@@ -74,7 +74,6 @@ form{
    border: solid 2px rgb(255, 249, 235);
    border-radius: 20px;
    width: 500px;
-   height: auto;
    display: flex;
    flex-direction: column;
    padding: 20px;
@@ -145,6 +144,21 @@ form div{
       font-size: 4em;
    }
 
+   form div{
+      margin-bottom: 50px;
+   }
+
+   input{
+      width: 350px;
+      height: 40px;
+      font-size: 1.8em;
+      border-radius: 10px;
+   }
+
+   .buttonConnexion{
+      width: 300px;
+      height: 50px;
+   }
    body{
       background-color: rgb(13, 50, 65);
    }
@@ -161,15 +175,9 @@ form div{
    }
    form{
       margin-top:60vh;
-   }
-   form div{
-      margin: 30px;
+      width:80%;
    }
 
-   .buttonConnexion{
-      width: 150px;
-      height: 30px;
-   }
 
    .createCompte.open {
       position: absolute;

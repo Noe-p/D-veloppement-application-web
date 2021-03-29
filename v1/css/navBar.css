@@ -199,4 +199,10 @@ li:hover a{
    .compte .sous li{
       width: auto;
    }
+
+   .lock{
+      width: 20px;
+      margin-left: 10px;
+      top:2px;
+   }
 }

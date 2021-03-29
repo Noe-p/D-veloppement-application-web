@@ -102,7 +102,7 @@ require('php/requetes.php');
    ?>
 
    <?php
-      if(!empty($elt_id)){
+      if(!empty($elt_id) and $nbRowsSuiv==1){
          echo "
             <h1>".$ele['sel_intitule']."</h1>
             <section>
@@ -119,20 +119,28 @@ require('php/requetes.php');
       }
 
       //Affichage des fleches si les éléments suiv/prec existent
-      if($nbRowsSuiv==1){
-         echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$eleSuiv['ele_numero']."'><img class='flecheDroite' src='assets/logos/flecheDroite.png' alt='flecheDroite'></a>";
+      if($nbEle){
+         if($nbRowsSuiv){
+            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$eleSuiv['ele_numero']."'><img class='flecheDroite' src='assets/logos/flecheDroite.png' alt='flecheDroite'></a>";
+         }
+         if($nbRowsPrec){
+            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$elePrec['ele_numero']."'><img class='flecheGauche' src='assets/logos/flecheGauche.png' alt='flecheGauche'></a>";
+         }
       }
-      if($nbRowsPrec==1){
-         echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$elePrec['ele_numero']."'><img class='flecheGauche' src='assets/logos/flecheGauche.png' alt='flecheGauche'></a>";
-      }
-      if(empty($elt_id)){
+      elseif(empty($elt_id)){
          echo "<h1 class='emptySel'>La sélection est vide</h1>";
       }
+      else{
+         echo "<h1 class='emptySel'>Element inconnu</h1>";
+      }
+
    ?>
 
    <?php require('php/footer.php'); ?>
 
    <script type="text/javascript" src="js/navBar.js"></script>
+   <script type="text/javascript" src="js/animCarousel.js"></script>
+
 </body>
 
 </html>

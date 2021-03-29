@@ -53,6 +53,7 @@ if(isset($_GET['sel_id'])){
               WHERE ele_numero='$_GET[elt_id]'
               AND sel_numero='$_GET[sel_id]'";
    $resEle = $mysqli->query($reqEle);
+   $nbEle = $resEle->num_rows;
 
    if(!$resActu){
       echo "Error: La requête a echoué \n";

@@ -52,8 +52,30 @@ require('php/requetes.php');
    $elt_id=htmlspecialchars(addslashes($_GET['elt_id']));
    $nbRowsPrec=0;
    $nbRowsSuiv=0;
+   $nbEle=0;
+   $cptEle=0;
 
    if(!empty($elt_id)){
+      //Element
+      $reqEle = "SELECT sel_intitule, ele_intitule, ele_descriptif, ele_date, ele_fichierImage, com_pseudo, ele_etat
+                 FROM t_element_ele
+                 JOIN tj_relie_rel USING(ele_numero)
+                 JOIN t_selection_sel USING(sel_numero)
+                 WHERE ele_numero=$elt_id
+                 AND sel_numero=$sel_id";
+      $resEle = $mysqli->query($reqEle);
+      $nbEle = $resEle->num_rows;
+
+      if(!$resActu){
+         echo "Error: La requête a echoué \n";
+         echo "Errno: " . $mysqli->errno . "\n";
+         echo "Error: " . $mysqli->error . "\n";
+         exit();
+      }
+      else{
+         $ele = $resEle->fetch_array(MYSQLI_ASSOC);
+      }
+
       //Element suivant :
       $reqEleSuiv = "SELECT ele_numero FROM t_element_ele
                      JOIN tj_relie_rel USING(ele_numero)
@@ -96,6 +118,20 @@ require('php/requetes.php');
          $elePrec = $resElePrec->fetch_array(MYSQLI_ASSOC);
       }
 
+      //Compte tous les elements d'une selection
+      $reqCptEle = "SELECT ele_numero
+                    FROM t_element_ele
+                    JOIN tj_relie_rel USING(ele_numero)
+                    WHERE sel_numero='$_GET[sel_id]'";
+      $resCptEle = $mysqli->query($reqCptEle);
+
+      if(!$resCptEle){
+         echo "Error: La requête a echoué \n";
+         echo "Errno: " . $mysqli->errno . "\n";
+         echo "Error: " . $mysqli->error . "\n";
+         exit();
+      }
+
    }
 
    $mysqli->close();
@@ -104,7 +140,7 @@ require('php/requetes.php');
    <?php
       if(!empty($elt_id) and $nbEle){
          echo "
-            <h1 id='ancre'>".$ele['sel_intitule']."</h1>
+            <h2 id='ancre'>".$ele['sel_intitule']." :</h2>
             <section>
                <article class='imgUser'>
                   <div class='headerPublic'>
@@ -126,6 +162,18 @@ require('php/requetes.php');
          if($nbRowsPrec){
             echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$elePrec['ele_numero']."#ancre'><img class='flecheGauche' src='assets/logos/flecheGauche.png' alt='flecheGauche'></a>";
          }
+
+         //test indice element
+         echo "<section class='indice'>";
+         while ($cptEle = $resCptEle->fetch_assoc()) {
+            if($cptEle['ele_numero']==$elt_id){
+               echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$cptEle['ele_numero']."#ancre'><img src='assets/logos/indiceB.png' alt='indice'></a>";
+            }
+            else{
+               echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$cptEle['ele_numero']."#ancre'><img src='assets/logos/indiceG.png' alt='indice'></a>";
+            }
+         }
+         echo "</section>";
       }
       elseif(empty($elt_id)){
          echo "<h1 class='emptySel'>La sélection est vide</h1>";
@@ -133,6 +181,7 @@ require('php/requetes.php');
       else{
          echo "<h1 class='emptySel'>Element inconnu</h1>";
       }
+
 
    ?>
 

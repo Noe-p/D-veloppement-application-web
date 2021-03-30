@@ -44,28 +44,5 @@ if(!$resSel){
    exit();
 }
 
-//Element
-if(isset($_GET['sel_id'])){
-   $reqEle = "SELECT sel_intitule, ele_intitule, ele_descriptif, ele_date, ele_fichierImage, com_pseudo, ele_etat
-              FROM t_element_ele
-              JOIN tj_relie_rel USING(ele_numero)
-              JOIN t_selection_sel USING(sel_numero)
-              WHERE ele_numero='$_GET[elt_id]'
-              AND sel_numero='$_GET[sel_id]'";
-   $resEle = $mysqli->query($reqEle);
-   $nbEle = $resEle->num_rows;
-
-   if(!$resActu){
-      echo "Error: La requête a echoué \n";
-      echo "Errno: " . $mysqli->errno . "\n";
-      echo "Error: " . $mysqli->error . "\n";
-      exit();
-   }
-   else{
-      $ele = $resEle->fetch_array(MYSQLI_ASSOC);
-   }
-}
-
-
 $mysqli->close();
 ?>

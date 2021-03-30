@@ -17,9 +17,8 @@ footer ul {
 }
 
 footer{
-   padding-top: 5px;
+   padding-top: 30px;
    padding-bottom: 5px;
-   margin-top: 50px;
    width: 100%;
    background-color: rgb(13, 50, 65);
    display: flex;

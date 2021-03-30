@@ -22,8 +22,8 @@ if ($_GET['action']=='inscription') {
    //vérification si formulaire vide
    if(!empty($_POST['pseudo']) || !empty($_POST['mdp']) || !empty($_POST['confirm_mdp']) || !empty($_POST['email']) || !empty($_POST['nom']) || !empty($_POST['prenom'])){
       $pseudo=htmlspecialchars(addslashes($_POST['pseudo']));
-      $mdp=htmlspecialchars($_POST['mdp']);
-      $confirm_mdp=htmlspecialchars($_POST['confirm_mdp']);
+      $mdp=htmlspecialchars(addslashes($_POST['mdp']));
+      $confirm_mdp=htmlspecialchars(addslashes($_POST['confirm_mdp']));
       $email=htmlspecialchars(addslashes($_POST['email']));
       $nom=htmlspecialchars(addslashes($_POST['nom']));
       $prenom=htmlspecialchars(addslashes($_POST['prenom']));

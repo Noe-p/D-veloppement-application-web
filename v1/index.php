@@ -48,11 +48,8 @@ session_start();
 
    <div class="utilisateur">
       <?php
-      if(isset($_SESSION['pseudo'])==false){
+      if(!isset($_SESSION['pseudo'])){
          echo "<a href='inscription.php'><img src='assets/logos/padlock_wo.png'></img>Inscription</a>";
-      }
-      else{
-         echo "<a href='connexion.php'><img src='assets/logos/padlock_wo.png'></img>Connexion</a>";
       }
       ?>
       <a href="#contact"><img src="assets/logos/information.png"></img>Contact</a>

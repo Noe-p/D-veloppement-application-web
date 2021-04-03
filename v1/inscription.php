@@ -35,7 +35,6 @@ session_start();
          <div>
             <label for="nom"><B>Nom :</B><br/></label>
             <input type="text" id="nom" name="nom" required>
-            <span id="message2"></span>
          </div>
          <div>
             <label for="prenom"><B>Prénom :</B><br/></label>
@@ -55,7 +54,7 @@ session_start();
             <span id='message'></span>
          </div>
          <div>
-            <input class="buttonConnexion" type="submit" value="Créer un compte" id="submit" disabled/>
+            <input class="buttonConnexion" type="submit" value="Créer un compte" id="submit" disabled='false'/>
          </div>
       </form>
    </section>

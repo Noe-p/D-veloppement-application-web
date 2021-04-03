@@ -9,7 +9,7 @@ Le sujet choisi est la photographie.
 
 **date de début :** 25/01/2021
 
-## Auteurs
+## Développeur
 
 Noé PHILIPPE
 

@@ -18,15 +18,15 @@ if (!$mysqli->set_charset("utf8")) {
 //INSCRIPTION
 if ($_GET['action']=='inscription') {
    $probleme=0;
+   $pseudo=htmlspecialchars(addslashes($_POST['pseudo']));
+   $mdp=htmlspecialchars(addslashes($_POST['mdp']));
+   $confirm_mdp=htmlspecialchars(addslashes($_POST['confirm_mdp']));
+   $email=htmlspecialchars(addslashes($_POST['email']));
+   $nom=htmlspecialchars(addslashes($_POST['nom']));
+   $prenom=htmlspecialchars(addslashes($_POST['prenom']));
 
    //vérification si formulaire vide
-   if(!empty($_POST['pseudo']) || !empty($_POST['mdp']) || !empty($_POST['confirm_mdp']) || !empty($_POST['email']) || !empty($_POST['nom']) || !empty($_POST['prenom'])){
-      $pseudo=htmlspecialchars(addslashes($_POST['pseudo']));
-      $mdp=htmlspecialchars(addslashes($_POST['mdp']));
-      $confirm_mdp=htmlspecialchars(addslashes($_POST['confirm_mdp']));
-      $email=htmlspecialchars(addslashes($_POST['email']));
-      $nom=htmlspecialchars(addslashes($_POST['nom']));
-      $prenom=htmlspecialchars(addslashes($_POST['prenom']));
+   if(!empty($pseudo) and !empty($mdp) and !empty($confirm_mdp) and !empty($email) and !empty($prenom) and !empty($nom)){
 
       //verification si le compte existe déjà
       $reqUser = "SELECT com_pseudo FROM t_compte_com WHERE com_pseudo = '$pseudo'";
@@ -46,27 +46,19 @@ if ($_GET['action']=='inscription') {
             $resCom= $mysqli->query($reqCom);
 
             if(!$resCom){
-               echo "Error: La requête a échoué \n";
-               echo "Query: " . $sql . "\n";
-               echo "Errno: " . $mysqli->errno . "\n";
-               echo "Error: " . $mysqli->error . "\n";
-               exit();
+               $probleme=4;
             }
             //création profil
             else{
-               $reqPro="INSERT INTO t_profil_pro (pro_nom, pro_prenom, pro_mail, pro_validite, pro_statut, pro_date, com_pseudo) VALUES ('$nom', '$prenom', '$email', 'A', 'R', CURDATE(), '$pseudo');";
+               $reqPro="INSERT INTO t_profil_pro (pro_nom, pro_prenom, pro_mail, pro_validite, pro_statut, pro_date, com_pseudo) VALUES ('$nom', '$prenom', '$email', 'D', 'R', CURDATE(), '$pseudo');";
                $resPro=$mysqli->query($reqPro);
 
                if (!$resPro) {
-                  echo "Error: La requête a échoué \n";
-                  echo "Query: " . $sql . "\n";
-                  echo "Errno: " . $mysqli->errno . "\n";
-                  echo "Error: " . $mysqli->error . "\n";
+                  $probleme=4;
 
                   //Suppression du compte si la requete profil a échoué
                   $reqSuppCmp="DELETE FROM t_compte_com WHERE com_pseudo='$pseudo'";
                   $resSuppCmp=$mysqli->query($reqSuppCmp);
-                  exit();
                }
                //Si tout marche :
                else{
@@ -81,7 +73,7 @@ if ($_GET['action']=='inscription') {
    }
 
    //Réécriture du fomulaire s'il y a des erreurs
-   if($probleme==1 || $probleme==2 || $probleme==3){
+   if($probleme!=0){
       echo "
       <!DOCTYPE html>
       <html lang='fr' dir='ltr'>
@@ -100,7 +92,7 @@ if ($_GET['action']=='inscription') {
        require('php/navBarConnexion.php');
       echo"
          <div class='utilisateur'>
-            <a href='connexion.php'><img src='assets/logos/padlock.png'></img>Connexion</a>
+            <a href='connexion.php'><img src='assets/logos/padlock_wo.png'></img>Connexion</a>
          </div>
 
          <section class='createCompte'>
@@ -114,7 +106,6 @@ if ($_GET['action']=='inscription') {
             <div>
                <label for='nom'><B>Nom :</B><br/></label>
                <input type='text' id='nom' name='nom' value='".$nom."' required>
-               <span id='message2'></span>
             </div>
             <div>
                <label for='prenom'><B>Prénom :</B><br/></label>
@@ -134,7 +125,7 @@ if ($_GET['action']=='inscription') {
                <span id='message'></span>
             </div>
             <div>
-               <input class='buttonConnexion' type='submit' value='Créer un compte' id='submit' disabled/>
+               <input class='buttonConnexion' type='submit' value='Créer un compte' id='submit' disabled='false'/>
             </div>
          </form>
 
@@ -161,6 +152,14 @@ if ($_GET['action']=='inscription') {
             <script>
                document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
                document.getElementById('message2').innerHTML = 'Veuiller remplir tous les champs';
+               document.getElementById('message2').style.fontSize = '0.8em';
+            </script>";
+      }
+      else if($probleme==4){
+         echo "
+            <script>
+               document.getElementById('message2').style.color = 'rgb(210, 28, 28)';
+               document.getElementById('message2').innerHTML = 'Erreur lors de la création du compte';
                document.getElementById('message2').style.fontSize = '0.8em';
             </script>";
       }

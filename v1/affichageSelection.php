@@ -47,15 +47,14 @@ require('php/requetes.php');
    <?php
    //CONNEXION A LA BASE
    require('php/connexionBDD.php');
-
-   $sel_id=htmlspecialchars(addslashes($_GET['sel_id']));
-   $elt_id=htmlspecialchars(addslashes($_GET['elt_id']));
    $nbRowsPrec=0;
    $nbRowsSuiv=0;
    $nbEle=0;
-   $cptEle=0;
 
-   if(!empty($elt_id)){
+   if(!empty($_GET['elt_id']) and is_int((int)$_GET['elt_id']) and is_int((int)$_GET['sel_id']) and isset($_GET['sel_id']) and isset($_GET['elt_id'])){
+      $sel_id=(int)htmlspecialchars($_GET['sel_id']);
+      $elt_id=(int)htmlspecialchars($_GET['elt_id']);
+
       //Element
       $reqEle = "SELECT sel_intitule, ele_intitule, ele_descriptif, ele_date, ele_fichierImage, com_pseudo, ele_etat
                  FROM t_element_ele
@@ -85,7 +84,6 @@ require('php/requetes.php');
                      LIMIT 1";
       $resEleSuiv = $mysqli->query($reqEleSuiv);
       $nbRowsSuiv = $resEleSuiv->num_rows;
-
 
       if(!$resEleSuiv){
          echo "Error: La requête a echoué \n";
@@ -133,11 +131,11 @@ require('php/requetes.php');
       }
 
    }
-
    $mysqli->close();
    ?>
 
    <?php
+      //Affichage de l'élément
       if(!empty($elt_id) and $nbEle){
          echo "
             <h2 id='ancre'>".$ele['sel_intitule']." :</h2>
@@ -163,32 +161,38 @@ require('php/requetes.php');
             echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$elePrec['ele_numero']."#ancre'><img class='flecheGauche' src='assets/logos/flecheGauche.png' alt='flecheGauche'></a>";
          }
 
-         //test indice element
+         //Indice elements
          echo "<section class='indice'>";
          while ($cptEle = $resCptEle->fetch_assoc()) {
             if($cptEle['ele_numero']==$elt_id){
-               echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$cptEle['ele_numero']."#ancre'><img src='assets/logos/indiceB.png' alt='indice'></a>";
+               echo "<a class='indiceB' href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$cptEle['ele_numero']."#ancre'></a>";
             }
             else{
-               echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$cptEle['ele_numero']."#ancre'><img src='assets/logos/indiceG.png' alt='indice'></a>";
+               echo "<a class='indiceG' href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$cptEle['ele_numero']."#ancre'></a>";
             }
          }
          echo "</section>";
       }
-      elseif(empty($elt_id)){
+      elseif(!isset($_GET['elt_id']) or !isset($_GET['sel_id'])){
+         echo "<h1 class='emptySel'>Vous devez mentionner une sélection et un élément</h1>";
+      }
+      elseif (empty($_GET['sel_id'])) {
+         echo "<h1 class='emptySel'>La sélection n'existe pas</h1>";
+      }
+      elseif(empty($_GET['elt_id'])){
          echo "<h1 class='emptySel'>La sélection est vide</h1>";
+      }
+      elseif(!is_int($_GET['elt_id']) or !is_int($_GET['sel_id'])){
+         echo "<h1 class='emptySel'>Le numéro de l'élément/sélection est invalide</h1>";
       }
       else{
          echo "<h1 class='emptySel'>Element inconnu</h1>";
       }
-
-
    ?>
 
    <?php require('php/footer.php'); ?>
 
    <script type="text/javascript" src="js/navBar.js"></script>
-   <script type="text/javascript" src="js/animCarousel.js"></script>
 
 </body>
 

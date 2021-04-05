@@ -46,6 +46,7 @@ th,td{
    padding-left: 40px;
    padding-right: 40px;
    position: relative;
+   transition: all 0.5s;
 }
 
 
@@ -78,6 +79,7 @@ th,td{
    position: absolute;
    display: block;
    background-size: contain;
+   opacity: 1;
 }
 
 .oeil:hover{
@@ -89,7 +91,14 @@ th,td{
 }
 
 .contenu:hover .oeil{
+   animation-name: oeil;
+   animation-duration: 1.2s;
    background-image: url("../assets/logos/oeil_w.png");
+}
+
+@keyframes oeil {
+   0%{opacity: 0;}
+   100%{opacity: 1;}
 }
 
 /*Affichage Elements*/

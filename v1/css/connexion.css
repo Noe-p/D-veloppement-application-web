@@ -124,7 +124,11 @@ input:hover{
 
 #message, #message2{
    position: absolute;
-   transform: translateX(10px);
+   transform: translate(10px,5px);
+}
+
+#message3{
+   transform: translateX(24%);
 }
 
 .buttonConnexion{

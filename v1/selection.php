@@ -82,11 +82,11 @@ require('php/requetes.php');
 
                //Test de parité pour l'aternance de couleurs des lignes du tableau
                if(fmod($i,2)==0){
-                  echo "<tr>";
+                  echo "<tr onclick=\"document.location='affichageSelection.php?sel_id=".$sel['sel_numero']."&elt_id=".$firstEleSel['ele_numero']."#ancre'\" class='contenu'>";
                   $i=$i+1;
                }
                else{
-                  echo "<tr class='lignePaire'>";
+                  echo "<tr onclick=\"document.location='affichageSelection.php?sel_id=".$sel['sel_numero']."&elt_id=".$firstEleSel['ele_numero']."#ancre'\" class='lignePaire contenu'>";
                   $i=$i+1;
                }
                echo "
@@ -94,14 +94,13 @@ require('php/requetes.php');
                      <td class='resume'>".$sel['sel_texteIntro']."</td>
                      <td>".$sel['sel_date']."</td>
                      <td>".$sel['com_pseudo']."</td>
-                     <td><a href='affichageSelection.php?sel_id=".$sel['sel_numero']."&elt_id=".$firstEleSel['ele_numero']."#ancre'><img class='oeil' src='assets/logos/oeil.png'></img></a></td>
+                     <td><a href='affichageSelection.php?sel_id=".$sel['sel_numero']."&elt_id=".$firstEleSel['ele_numero']."#ancre'><div class='oeil'></div></a></td>
                   </tr>
                ";
             }
          ?>
       </tbody>
    </table>
-
    <?php require('php/footer.php'); ?>
 
    <script type="text/javascript" src="js/navBar.js"></script>

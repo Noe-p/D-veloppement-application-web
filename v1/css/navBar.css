@@ -125,12 +125,12 @@ li:hover a{
 }
 
 .menu:hover .sous a{
-   background-color: rgba(28, 98, 129, 0.9);
+   background-color: rgb(51, 51, 51);
    color:rgb(255, 249, 235);
    border-radius: 0;
    border:none;
    display: block;
-   border: solid 1px rgba(28, 98, 129, 0.9);
+   border: solid 1px rgb(51, 51, 51);
 
 }
 
@@ -167,20 +167,24 @@ li:hover a{
       background-color: rgb(255, 249, 235);
       border-bottom: none;
       border-top: none;
-      padding: 23px;
+      padding: 40px;
       box-shadow: 8px 8px 20px black;
    }
 
    .navBar.position{
-      padding:23px;
+      padding:40px;
       box-shadow: 8px 8px 20px black;
    }
 
+   .bouton, .bouton:visited{
+      border-radius: 50px;
+      padding: 15px 30px 19px 30px;
+   }
    .navBar.position .sous{
       margin-top: 45px;
    }
    .navBar a{
-      font-size: 1.8em;
+      font-size: 2.2em;
    }
 
    .sous li{
@@ -196,9 +200,13 @@ li:hover a{
       width: auto;
    }
 
+   li:hover a{
+      border: solid 1px rgb(255, 249, 235);
+   }
+
    .lock{
-      width: 20px;
-      margin-left: 10px;
-      top:2px;
+      width: 30px;
+      margin-left: 13px;
+      top: 3px;
    }
 }

@@ -204,8 +204,14 @@ input:hover{
       top:50%;
       transform: translate(-50%,-50%);
    }
-   form{
-      margin-top:60vh;
+
+   .createCompte form{
+      margin-top: 60vh;
+      width:80%;
+   }
+
+   .connexion form{
+      margin-top:28vh;
       width:80%;
    }
 

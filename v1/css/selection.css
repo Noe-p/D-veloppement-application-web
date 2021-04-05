@@ -46,7 +46,6 @@ th,td{
    padding-left: 40px;
    padding-right: 40px;
    position: relative;
-   transition: all 0.5s;
 }
 
 
@@ -228,6 +227,8 @@ section{
    height: 90%;
    background-color: rgb(51, 51, 51);
 }
+
+
 @media all and (max-width:1100px) {
    .flecheDroite,.flecheGauche{
       opacity: 0;
@@ -238,24 +239,23 @@ section{
 @media all and (max-device-width:480px) {
 
 a,p,h3,td,th{
-   font-size: 1.5em;
+   font-size: 2em;
 }
 
 table{
    margin-top: 20vh;
-   margin-bottom: 500px;
+   margin-bottom: 50px;
    max-width: 95%;
 }
 
-.oeil{
-   width: 35px;
-   top:39px;
-   right:21px;
+td{
+   overflow: scroll;
+   padding-left: 20px;
+   padding-right: 20px;
 }
-.oeil:hover{
-   width:35px;
-   top:39px;
-   right:21px;
+
+.oeil{
+   display: none;
 }
 
 body{
@@ -264,7 +264,7 @@ body{
 
 .imgUser{
    position: relative;
-   top: 50%;
+   margin-top: 120px;
    transform: translateY(10%);
    width: 90vw;
 }
@@ -272,16 +272,30 @@ body{
 .headerPublic{
    width: 90vw;
 }
+
+.headerPublic a{
+   margin-left: 15px;
+   padding: 10px 25px 15px 25px;
+}
 .imgUser img{
    max-height: 32vh;
    max-width: 85vw;
 }
 
 .indice{
-   position: absolute;
-   top: 65%;
-   transform: translateY(100%);
+   position: relative;
+   top:100px;
+   margin-bottom: 150px;
 }
 
-
+.indiceB, .indiceG{
+   width: 50px;
+   height: 50px;
+}
+.flecheGauche{
+   display: none;
+}
+.flecheDroite{
+   display: none;
+}
 }

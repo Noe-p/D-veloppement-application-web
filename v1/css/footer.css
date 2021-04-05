@@ -51,7 +51,26 @@ footer{
    }
 
    .infosOrga{
-      font-size: 1.8em;
+      font-size: 2em;
+      margin-left: 0;
+      margin-right: 0;
+   }
+
+   footer{
+      position:inherit;
+      margin-top: 50px;
+   }
+
+   footer a{
+      color:rgb(255, 249, 235);
+      border: none;
+      font-size: 1em;
+   }
+
+   footer a:visited{
+      color:rgb(255, 249, 235);
+      border: none;
+      font-size: 1em;
    }
 
 }

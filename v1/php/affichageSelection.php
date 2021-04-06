@@ -1,6 +1,6 @@
 
 <?php
-require('php/requetes.php');
+require('requetes.php');
 ?>
 
 <!DOCTYPE html>
@@ -8,9 +8,9 @@ require('php/requetes.php');
 
 <head>
    <meta charset="utf-8">
-   <link rel="stylesheet" href="css/selection.css" />
-   <link rel="stylesheet" href="css/navBar.css" />
-   <link rel="stylesheet" href="css/footer.css" />
+   <link rel="stylesheet" href="../css/selection.css" />
+   <link rel="stylesheet" href="../css/navBar.css" />
+   <link rel="stylesheet" href="../css/footer.css" />
    <title>Focus</title>
 </head>
 
@@ -18,13 +18,13 @@ require('php/requetes.php');
 
    <aside>
       <ul class="navBar" >
-         <li><a href="index.php">Home</a></li>
+         <li><a href="../index.php">Home</a></li>
          <li><a href="selection.php" class="bouton">Sélections</a></li>
          <?php
          if(isset($_SESSION['pseudo'])){
-            echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bc.png'></img></a>";
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='../assets/logos/padlock_bc.png'></img></a>";
          }else{
-            echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bo.png'></img></a>";
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='../assets/logos/padlock_bo.png'></img></a>";
          }
          ?>
             <ul class="sous">
@@ -46,7 +46,7 @@ require('php/requetes.php');
 
    <?php
    //CONNEXION A LA BASE
-   require('php/connexionBDD.php');
+   require('connexionBDD.php');
    $nbRowsPrec=0;
    $nbRowsSuiv=0;
    $nbEle=0;
@@ -145,7 +145,7 @@ require('php/requetes.php');
                      <a href='#'>".$ele['com_pseudo']."</a>
                      <h3>".$ele['ele_intitule']."</h3>
                   </div>
-                  <img src='assets/img/".$ele['ele_fichierImage']."' alt='img1'>
+                  <img src='../assets/img/".$ele['ele_fichierImage']."' alt='img1'>
                   <p>".$ele['ele_descriptif']."</p>
                   <p>".$ele['ele_date']."</p>
                </article>
@@ -155,10 +155,10 @@ require('php/requetes.php');
       //Affichage des fleches si les éléments suiv/prec existent
       if($nbEle){
          if($nbRowsSuiv){
-            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$eleSuiv['ele_numero']."#ancre'><img class='flecheDroite' src='assets/logos/flecheDroite.png' alt='flecheDroite'></a>";
+            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$eleSuiv['ele_numero']."#ancre'><img class='flecheDroite' src='../assets/logos/flecheDroite.png' alt='flecheDroite'></a>";
          }
          if($nbRowsPrec){
-            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$elePrec['ele_numero']."#ancre'><img class='flecheGauche' src='assets/logos/flecheGauche.png' alt='flecheGauche'></a>";
+            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$elePrec['ele_numero']."#ancre'><img class='flecheGauche' src='../assets/logos/flecheGauche.png' alt='flecheGauche'></a>";
          }
 
          //Indice elements
@@ -190,9 +190,9 @@ require('php/requetes.php');
       }
    ?>
 
-   <?php require('php/footer.php'); ?>
+   <?php require('footer.php'); ?>
 
-   <script type="text/javascript" src="js/navBar.js"></script>
+   <script type="text/javascript" src="../js/navBar.js"></script>
 
 </body>
 

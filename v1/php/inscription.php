@@ -1,5 +1,5 @@
 <?php
-require('php/requetes.php');
+require('requetes.php');
 session_start();
 ?>
 <!DOCTYPE html>
@@ -7,9 +7,9 @@ session_start();
 
 <head>
    <meta charset="utf-8">
-   <link rel="stylesheet" href="css/connexion.css" />
-   <link rel="stylesheet" href="css/navBar.css" />
-   <link rel="stylesheet" href="css/footer.css" />
+   <link rel="stylesheet" href="../css/connexion.css" />
+   <link rel="stylesheet" href="../css/navBar.css" />
+   <link rel="stylesheet" href="../css/footer.css" />
 
 
    <title>Focus</title>
@@ -17,10 +17,10 @@ session_start();
 
 <body>
 
-   <?php require('php/navBarConnexion.php'); ?>
+   <?php require('navBarConnexion.php'); ?>
 
    <div class="utilisateur">
-      <a href="connexion.php"><img src="assets/logos/padlock_wo.png"></img>Connexion</a>
+      <a href="connexion.php"><img src="../assets/logos/padlock_wo.png"></img>Connexion</a>
    </div>
 
 
@@ -61,9 +61,9 @@ session_start();
 
 
 
-   <script type="text/javascript" src="js/checkPass.js"></script>
-   <script type="text/javascript" src="js/navBar.js"></script>
-   <script type="text/javascript" src="js/functionCreate.js"></script>
+   <script type="text/javascript" src="../js/checkPass.js"></script>
+   <script type="text/javascript" src="../js/navBar.js"></script>
+   <script type="text/javascript" src="../js/functionCreate.js"></script>
 </body>
 
 </html>

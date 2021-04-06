@@ -1,12 +1,12 @@
 <aside>
    <ul class="navBar" >
-      <li><a href="index.php">Home</a></li>
+      <li><a href="../index.php">Home</a></li>
       <li><a href="selection.php">Sélections</a></li>
       <?php
       if(isset($_SESSION['pseudo'])){
-         echo "<li class='menu compte'><a class='bouton'>Compte<img class='lock' src='assets/logos/padlock_wc.png'></img></a>";
+         echo "<li class='menu compte'><a class='bouton'>Compte<img class='lock' src='../assets/logos/padlock_wc.png'></img></a>";
       }else{
-         echo "<li class='menu compte'><a class='bouton'>Compte<img class='lock' src='assets/logos/padlock_wo.png'></img></a>";
+         echo "<li class='menu compte'><a class='bouton'>Compte<img class='lock' src='../assets/logos/padlock_wo.png'></img></a>";
       }
       ?>
          <ul class="sous">

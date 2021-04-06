@@ -80,8 +80,8 @@ if ($_GET['action']=='inscription') {
 
       <head>
          <meta charset='utf-8'>
-         <link rel='stylesheet' href='css/connexion.css' />
-         <link rel='stylesheet' href='css/navBar.css' />
+         <link rel='stylesheet' href='../css/connexion.css' />
+         <link rel='stylesheet' href='../css/navBar.css' />
 
          <title>Focus</title>
       </head>
@@ -89,10 +89,10 @@ if ($_GET['action']=='inscription') {
       <body>
 
       ";
-       require('php/navBarConnexion.php');
+       require('navBarConnexion.php');
       echo"
          <div class='utilisateur'>
-            <a href='connexion.php'><img src='assets/logos/padlock_wo.png'></img>Connexion</a>
+            <a href='connexion.php'><img src='../assets/logos/padlock_wo.png'></img>Connexion</a>
          </div>
 
          <section class='createCompte'>
@@ -223,7 +223,7 @@ elseif($_GET['action']=='deconnexion'){
    $_SESSION = array();
    session_destroy();
 
-   header("Location: index.php");
+   header("Location: ../index.php");
 }
 
 

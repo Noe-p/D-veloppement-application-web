@@ -29,6 +29,8 @@ Valérie MARC
 
 ![](images/5.png)
 
+![](bdd/modelEA.png)
+
 ## Contenu
 
 **documents :** Contient les documents du projet

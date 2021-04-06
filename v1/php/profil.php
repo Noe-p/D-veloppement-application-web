@@ -1,6 +1,6 @@
 
 <?php
-require('php/requetes.php');
+require('requetes.php');
 session_start();
 ?>
 
@@ -10,15 +10,15 @@ session_start();
    <meta charset="utf-8">
    <title>Profil</title>
 
-   <link rel="stylesheet" href="css/profil.css" />
-   <link rel="stylesheet" href="css/navBar.css" />
-   <link rel="stylesheet" href="css/footer.css" />
+   <link rel="stylesheet" href="../css/profil.css" />
+   <link rel="stylesheet" href="../css/navBar.css" />
+   <link rel="stylesheet" href="../css/footer.css" />
 
 </head>
 <body>
 
 
-   <?php require('php/navBarConnexion.php'); ?>
+   <?php require('navBarConnexion.php'); ?>
 
 
    <header>
@@ -47,7 +47,7 @@ session_start();
             <a href="#">Nono</a>
             <h3>Rue de Brest</h3>
          </div>
-         <img src="assets/img/img1.jpg" alt="img1">
+         <img src="../assets/img/img1.jpg" alt="img1">
          <p>Lors d'une petite ballade dans les rue de brest, du text sk,hjfklebzas:kfhbleajrqskhfcbdlqjdqkhvcb</p>
       </article>
    </section>
@@ -81,11 +81,11 @@ session_start();
       </article>
    </section>
 
-   <?php require('php/footer.php'); ?>
+   <?php require('footer.php'); ?>
 
 
-   <script type="text/javascript" src="js/navBar.js"></script>
-   <script type="text/javascript" src="js/createElement.js"></script>
+   <script type="text/javascript" src="../js/navBar.js"></script>
+   <script type="text/javascript" src="../js/createElement.js"></script>
 
 </body>
 </html>

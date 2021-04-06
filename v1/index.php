@@ -20,7 +20,7 @@ session_start();
    <aside>
       <ul class="navBar" >
          <li><a href="index.php" class="bouton">Home</a></li>
-         <li><a href="selection.php">Sélections</a></li>
+         <li><a href="php/selection.php">Sélections</a></li>
          <?php
          if(isset($_SESSION['pseudo'])){
             echo "<li class='menu compte'><a>Compte<img class='lock' src='assets/logos/padlock_bc.png'></img></a>";
@@ -31,12 +31,12 @@ session_start();
             <ul class="sous">
                <?php
                if(isset($_SESSION['pseudo'])){
-                  echo "<li><a href='profil.php'>Profil</a></li>
-                  <li><a href='ajout.php'>Ajouter</a></li>
-                  <li><a href='action.php?action=deconnexion'>Déconnexion</a></li>";
+                  echo "<li><a href='php/profil.php'>Profil</a></li>
+                  <li><a href='php/ajout.php'>Ajouter</a></li>
+                  <li><a href='php/action.php?action=deconnexion'>Déconnexion</a></li>";
                } else{
-                  echo "<li><a href='inscription.php'>Inscription</a></li>
-                  <li><a href='connexion.php'>Connexion</a></li>";
+                  echo "<li><a href='php/inscription.php'>Inscription</a></li>
+                  <li><a href='php/connexion.php'>Connexion</a></li>";
                }
                ?>
 
@@ -49,7 +49,7 @@ session_start();
    <div class="utilisateur">
       <?php
       if(!isset($_SESSION['pseudo'])){
-         echo "<a href='inscription.php'><img src='assets/logos/padlock_wo.png'></img>Inscription</a>";
+         echo "<a href='php/inscription.php'><img src='assets/logos/padlock_wo.png'></img>Inscription</a>";
       }
       ?>
       <a href="#contact"><img src="assets/logos/information.png"></img>Contact</a>

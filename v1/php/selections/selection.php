@@ -1,6 +1,22 @@
 
 <?php
-require('requetes.php');
+session_start();
+
+//CONNEXION A LA BASE
+require('../connexionBDD.php');
+
+//Sélections
+$reqSel = "SELECT DISTINCT sel_numero, sel_intitule, sel_texteIntro, sel_date, com_pseudo
+           FROM t_selection_sel";
+$resSel = $mysqli->query($reqSel);
+
+if(!$resSel){
+   echo "Error: La requête a echoué \n";
+   echo "Errno: " . $mysqli->errno . "\n";
+   echo "Error: " . $mysqli->error . "\n";
+   exit();
+}
+$mysqli->close();
 ?>
 
 <!DOCTYPE html>
@@ -8,9 +24,9 @@ require('requetes.php');
 
 <head>
    <meta charset="utf-8">
-   <link rel="stylesheet" href="../css/selection.css" />
-   <link rel="stylesheet" href="../css/navBar.css" />
-   <link rel="stylesheet" href="../css/footer.css" />
+   <link rel="stylesheet" href="../../css/selection.css" />
+   <link rel="stylesheet" href="../../css/navBar.css" />
+   <link rel="stylesheet" href="../../css/footer.css" />
    <title>Focus</title>
 </head>
 
@@ -18,24 +34,24 @@ require('requetes.php');
 
    <aside>
       <ul class="navBar" >
-         <li><a href="../index.php">Home</a></li>
+         <li><a href="../../index.php">Home</a></li>
          <li><a href="selection.php" class="bouton">Sélections</a></li>
          <?php
-         if(isset($_SESSION['pseudo'])){
-            echo "<li class='menu compte'><a>Compte<img class='lock' src='../assets/logos/padlock_bc.png'></img></a>";
+         if(isset($_SESSION['login'])){
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='../../assets/logos/padlock_bc.png'></img></a>";
          }else{
-            echo "<li class='menu compte'><a>Compte<img class='lock' src='../assets/logos/padlock_bo.png'></img></a>";
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='../../assets/logos/padlock_bo.png'></img></a>";
          }
          ?>
             <ul class="sous">
                <?php
-               if(isset($_SESSION['pseudo'])){
-                  echo "<li><a href='profil.php'>Profil</a></li>
-                  <li><a href='ajout.php'>Ajouter</a></li>
-                  <li><a href='action.php?action=deconnexion'>Déconnexion</a></li>";
+               if(isset($_SESSION['login'])){
+                  echo "<li><a href='../compte/admin_accueil.php'>Profil</a></li>
+                  <li><a href='../ajout.php'>Ajouter</a></li>
+                  <li><a href='../connexion/deconnexion.php'>Déconnexion</a></li>";
                } else{
-                  echo "<li><a href='inscription.php'>Inscription</a></li>
-                  <li><a href='connexion.php'>Connexion</a></li>";
+                  echo "<li><a href='../connexion/inscription.php'>Inscription</a></li>
+                  <li><a href='../connexion/session.php'>Connexion</a></li>";
                }
                ?>
 
@@ -59,7 +75,7 @@ require('requetes.php');
             $i=0;
             while ($sel = $resSel->fetch_assoc()) {
                //CONNEXION A LA BASE
-               require('connexionBDD.php');
+               require('../connexionBDD.php');
 
                //premier élément d'une sélection particliere
                $reqFirstEleSel = "SELECT ele_numero FROM t_element_ele
@@ -101,9 +117,9 @@ require('requetes.php');
          ?>
       </tbody>
    </table>
-   <?php require('footer.php'); ?>
+   <?php require('../footer.php'); ?>
 
-   <script type="text/javascript" src="../js/navBar.js"></script>
+   <script type="text/javascript" src="../../js/navBar.js"></script>
 </body>
 
 </html>

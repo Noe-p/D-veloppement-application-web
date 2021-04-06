@@ -20,4 +20,5 @@ function create(var1, var2) {
 if (document.querySelector('.infosUser')) {
    create('.button1', '.publication');
    create('.button2', '.actualite');
+   create('.button3', '.admin');
 }

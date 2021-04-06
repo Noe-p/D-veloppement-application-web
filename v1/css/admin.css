@@ -1,0 +1,257 @@
+@font-face {
+   font-family: 'Kiwi_Maru';
+   src: url("fonts/Kiwi_Maru/KiwiMaru-Regular.ttf");
+}
+
+html {
+   scroll-behavior: smooth;
+   margin: 0
+}
+
+ a, a:visited, h3{
+   text-decoration: none;
+   font-size: 1em;
+   color: rgb(51, 51, 51);
+}
+
+p{
+   text-align: center;
+   font-size: 1em;
+}
+body {
+   margin: 0;
+   padding: 0;
+   font-family: "Kiwi_Maru";
+   background-color: rgb(255, 249, 235);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+/*HEADER*/
+header {
+   width: 100%;
+   background-color: rgb(13, 50, 65);
+   color: rgb(255, 249, 235);
+   display: flex;
+   justify-content: center;
+   padding: 50px 0 50px 0;
+   flex-direction: column;
+   align-items: center;
+   margin-bottom: 30px;
+   height: 50vh;
+}
+
+header h2{
+   margin-top: 0px;
+   margin-bottom: 30px;
+   color: rgb(255, 249, 235);
+}
+
+.infosUser {
+   padding: 10px;
+   border: solid 1px rgb(255, 249, 235);
+   width: 500px;
+}
+
+.infosUser ul {
+   list-style-type: none;
+   margin-left: 0;
+}
+
+.infosUser li {
+   margin: 10px;
+}
+
+/*BOUTON*/
+.buttons{
+   margin-bottom: 30px;
+}
+
+.buttons a {
+   font-size: 1em;
+   margin: 10px;
+   border: solid 1px rgba(0, 0, 0, 0);
+   transition: all 0.5s;
+   color: rgb(51, 51, 51);
+   border-radius: 50px;
+   padding: 7px 13px 9px 13px;
+   width: 110px;
+   text-align: center;
+}
+
+.buttons a:hover {
+   border: solid 1px rgb(51, 51, 51);
+   cursor: pointer;
+}
+
+.button1.open, .button2.open, .button3.open  {
+   background-color: rgb(13, 50, 65);
+   color: rgb(255, 249, 235);
+   border-radius: 50px;
+}
+
+/*PUBLICATION*/
+.publication{
+   display: none;
+}
+.publication.open{
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-gap: 30px;
+   margin-bottom: 50px;
+}
+
+.imgUser{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 20px;
+   width: auto;
+   border-top-left-radius: 10px;
+   border-top-right-radius:10px;
+   box-shadow: 2px 2px 10px rgb(51, 51, 51);
+}
+
+.publication.open .headerPublic{
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content:space-between;
+   background-color: rgb(51, 51, 51);
+   border-top-left-radius: 10px;
+   border-top-right-radius:10px;
+   color: rgb(255, 249, 235);
+}
+
+.publication.open .headerPublic a{
+   margin-left: 10px;
+   padding: 5px 20px 8px 20px;
+   border-radius:50px;
+   background-color: rgb(255, 249, 235);
+   color:rgb(51, 51, 51);
+
+}
+
+.publication.open .headerPublic h3{
+   margin-right: 20px;
+   color: rgb(255, 249, 235);
+}
+
+.publication.open .imgUser img {
+   margin-top: 30px;
+   max-width: 40vw;
+   min-width: 580px;
+   padding: 10px;
+}
+
+/*Actualités*/
+.actualite{
+   display: none;
+}
+.actualite.open{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-bottom: 50px;
+}
+
+.actuUser{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 50px;
+   width: 50vw;
+   min-width: 600px;
+   box-shadow: 2px 2px 10px rgb(51, 51, 51);
+   border-radius: 10px;
+   transition: all 0.2s;
+   text-align: center;
+}
+
+.actuUser:hover{
+   width: 51vw;
+}
+.actualite.open .headerPublic{
+   width: 100%;
+   min-width: 600px;
+   display: flex;
+   align-items: center;
+   justify-content:space-between;
+   background-color: rgb(51, 51, 51);
+   border-top-left-radius: 10px;
+   border-top-right-radius:10px;
+   color: rgb(255, 249, 235);
+}
+
+.actualite.open .headerPublic a{
+   margin-left: 10px;
+   padding: 5px 20px 8px 20px;
+   border-radius:50px;
+   background-color: rgb(255, 249, 235);
+   color:rgb(51, 51, 51);
+
+}
+
+.actualite.open .headerPublic h3{
+   margin-right: 20px;
+}
+
+
+/*ADMINISTRATION*/
+.admin{
+   display: none;
+}
+.admin.open{
+   display: block;
+}
+table {
+   border-collapse: collapse;
+   text-align: left;
+   box-shadow: 2px 2px 10px rgb(51, 51, 51);
+   margin-bottom: 50px;
+   margin-top: 30px;
+}
+
+thead{
+   background-color: rgb(51, 51, 51);
+   color: rgb(255, 249, 235);
+}
+
+th,td{
+   padding:15px;
+   width: auto;
+   text-align: left;
+   position: relative;
+}
+
+
+.lignePaire{
+   background-color: rgba(51, 51, 51, 0.1);
+}
+
+#checkbox{
+   margin-left: 50%;
+   transform: translateX(-50%);
+}
+
+input{
+   color:rgb(255, 249, 235);
+   border: None;
+   background-color: rgb(13, 50, 65);
+   border-radius: 8px;
+   padding: 5px 10px 5px 10px;
+   transition: all 0.3s;
+}
+
+input:hover{
+   cursor: pointer;
+   background-color: rgb(210, 28, 28);
+   box-shadow: 1px 1px 1px rgb(51, 51, 51);
+}
+
+
+
+@media all and (max-device-width:480px) {
+
+}

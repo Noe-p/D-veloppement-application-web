@@ -1,6 +1,6 @@
 
 <?php
-require('requetes.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -8,9 +8,9 @@ require('requetes.php');
 
 <head>
    <meta charset="utf-8">
-   <link rel="stylesheet" href="../css/selection.css" />
-   <link rel="stylesheet" href="../css/navBar.css" />
-   <link rel="stylesheet" href="../css/footer.css" />
+   <link rel="stylesheet" href="../../css/selection.css" />
+   <link rel="stylesheet" href="../../css/navBar.css" />
+   <link rel="stylesheet" href="../../css/footer.css" />
    <title>Focus</title>
 </head>
 
@@ -18,24 +18,24 @@ require('requetes.php');
 
    <aside>
       <ul class="navBar" >
-         <li><a href="../index.php">Home</a></li>
+         <li><a href="../../index.php">Home</a></li>
          <li><a href="selection.php" class="bouton">Sélections</a></li>
          <?php
-         if(isset($_SESSION['pseudo'])){
-            echo "<li class='menu compte'><a>Compte<img class='lock' src='../assets/logos/padlock_bc.png'></img></a>";
+         if(isset($_SESSION['login'])){
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='../../assets/logos/padlock_bc.png'></img></a>";
          }else{
-            echo "<li class='menu compte'><a>Compte<img class='lock' src='../assets/logos/padlock_bo.png'></img></a>";
+            echo "<li class='menu compte'><a>Compte<img class='lock' src='../../assets/logos/padlock_bo.png'></img></a>";
          }
          ?>
             <ul class="sous">
                <?php
-               if(isset($_SESSION['pseudo'])){
-                  echo "<li><a href='profil.php'>Profil</a></li>
-                  <li><a href='ajout.php'>Ajouter</a></li>
-                  <li><a href='action.php?action=deconnexion'>Déconnexion</a></li>";
+               if(isset($_SESSION['login'])){
+                  echo "<li><a href='../compte/admin_accueil.php'>Profil</a></li>
+                  <li><a href='../ajout.php'>Ajouter</a></li>
+                  <li><a href='../connexion/deconnexion.php'>Déconnexion</a></li>";
                } else{
-                  echo "<li><a href='inscription.php'>Inscription</a></li>
-                  <li><a href='connexion.php'>Connexion</a></li>";
+                  echo "<li><a href='../connexion/inscription.php'>Inscription</a></li>
+                  <li><a href='../connexion/session.php'>Connexion</a></li>";
                }
                ?>
 
@@ -46,7 +46,7 @@ require('requetes.php');
 
    <?php
    //CONNEXION A LA BASE
-   require('connexionBDD.php');
+   require('../connexionBDD.php');
    $nbRowsPrec=0;
    $nbRowsSuiv=0;
    $nbEle=0;
@@ -65,7 +65,7 @@ require('requetes.php');
       $resEle = $mysqli->query($reqEle);
       $nbEle = $resEle->num_rows;
 
-      if(!$resActu){
+      if(!$resEle){
          echo "Error: La requête a echoué \n";
          echo "Errno: " . $mysqli->errno . "\n";
          echo "Error: " . $mysqli->error . "\n";
@@ -145,7 +145,7 @@ require('requetes.php');
                      <a href='#'>".$ele['com_pseudo']."</a>
                      <h3>".$ele['ele_intitule']."</h3>
                   </div>
-                  <img src='../assets/img/".$ele['ele_fichierImage']."' alt='img1'>
+                  <img src='../../assets/img/".$ele['ele_fichierImage']."' alt='img1'>
                   <p>".$ele['ele_descriptif']."</p>
                   <p>".$ele['ele_date']."</p>
                </article>
@@ -155,10 +155,10 @@ require('requetes.php');
       //Affichage des fleches si les éléments suiv/prec existent
       if($nbEle){
          if($nbRowsSuiv){
-            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$eleSuiv['ele_numero']."#ancre'><img class='flecheDroite' src='../assets/logos/flecheDroite.png' alt='flecheDroite'></a>";
+            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$eleSuiv['ele_numero']."#ancre'><img class='flecheDroite' src='../../assets/logos/flecheDroite.png' alt='flecheDroite'></a>";
          }
          if($nbRowsPrec){
-            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$elePrec['ele_numero']."#ancre'><img class='flecheGauche' src='../assets/logos/flecheGauche.png' alt='flecheGauche'></a>";
+            echo "<a href='affichageSelection.php?sel_id=".$sel_id."&elt_id=".$elePrec['ele_numero']."#ancre'><img class='flecheGauche' src='../../assets/logos/flecheGauche.png' alt='flecheGauche'></a>";
          }
 
          //Indice elements
@@ -190,9 +190,9 @@ require('requetes.php');
       }
    ?>
 
-   <?php require('footer.php'); ?>
+   <?php require('../footer.php'); ?>
 
-   <script type="text/javascript" src="../js/navBar.js"></script>
+   <script type="text/javascript" src="../../js/navBar.js"></script>
 
 </body>
 

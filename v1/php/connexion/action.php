@@ -1,22 +1,9 @@
 <?php
 //CONNEXION A LA BASE
-
-$mysqli = new mysqli("obiwan2.univ-brest.fr", "zphilipno", "j98pkj9m", "zfl2-zphilipno");
-if ($mysqli->connect_errno) {
-   echo "Error: Problème de connexion à la BDD \n";
-   echo "Errno: " . $mysqli->connect_errno . "\n";
-   echo "Error: " . $mysqli->connect_error . "\n";
-
-   exit();
-}
-
-if (!$mysqli->set_charset("utf8")) {
-   printf("Pb de chargement du jeu de car. utf8 : %s\n", $mysqli->error);
-   exit();
-}
+require('../connexionBDD.php');
 
 //INSCRIPTION
-if ($_GET['action']=='inscription') {
+
    $probleme=0;
    $pseudo=htmlspecialchars(addslashes($_POST['pseudo']));
    $mdp=htmlspecialchars(addslashes($_POST['mdp']));
@@ -62,7 +49,7 @@ if ($_GET['action']=='inscription') {
                }
                //Si tout marche :
                else{
-                  header("Location: connexion.php");
+                  header("Location: session.php");
                }
             }
          }
@@ -80,8 +67,8 @@ if ($_GET['action']=='inscription') {
 
       <head>
          <meta charset='utf-8'>
-         <link rel='stylesheet' href='../css/connexion.css' />
-         <link rel='stylesheet' href='../css/navBar.css' />
+         <link rel='stylesheet' href='../../css/connexion.css' />
+         <link rel='stylesheet' href='../../css/navBar.css' />
 
          <title>Focus</title>
       </head>
@@ -89,14 +76,14 @@ if ($_GET['action']=='inscription') {
       <body>
 
       ";
-       require('navBarConnexion.php');
+       require('../navBarConnexion.php');
       echo"
          <div class='utilisateur'>
-            <a href='connexion.php'><img src='../assets/logos/padlock_wo.png'></img>Connexion</a>
+            <a href='session.php'><img src='../../assets/logos/padlock_wo.png'></img>Connexion</a>
          </div>
 
          <section class='createCompte'>
-         <form action='action.php?action=inscription' method='post'>
+         <form action='action.php' method='post'>
             <h2>Créer un compte</h2>
             <div>
                <label for='pseudo'><B>Pseudo :</B><br/></label>
@@ -165,67 +152,14 @@ if ($_GET['action']=='inscription') {
       }
 
       echo "
-         <script type='text/javascript' src='js/checkPass.js'></script>
-         <script type='text/javascript' src='js/functionCreate.js'></script>
+         <script type='text/javascript' src='../../js/checkPass.js'></script>
+         <script type='text/javascript' src='../../js/functionCreate.js'></script>
       </body>
 
       </html>
 
       ";
    }
-}
-
-//CONNEXION
-elseif ($_GET['action']=='connexion') {
-   $reqCom = "SELECT com_pseudo, com_mdp, pro_validite FROM t_compte_com JOIN t_profil_pro USING(com_pseudo) WHERE com_pseudo = '$_POST[pseudo]'";
-   $resCom = $mysqli->query($reqCom);
-   $Com = $resCom->fetch_array(MYSQLI_ASSOC);
-
-   if (!$resCom) {
-      echo "Error: La requête a échoué \n";
-      echo "Query: " . $sql . "\n";
-      echo "Errno: " . $mysqli->errno . "\n";
-      echo "Error: " . $mysqli->error . "\n";
-      exit;
-   }
-
-   if (($Com['com_pseudo'] != $_POST['pseudo']) and ($Com['com_mdp'] != md5($_POST['mdp']))) {
-      include('connexion.php');
-
-      echo "<script>
-         document.getElementById('message3').style.color = 'rgb(210, 28, 28)';
-         document.getElementById('message3').innerHTML = 'Mauvais pseudo ou mot de passe';
-         document.getElementById('message3').style.fontSize = '0.8em';
-         </script>";
-   }
-   else if ($Com['pro_validite']=='D') {
-      include('connexion.php');
-
-      echo "<script>
-         document.getElementById('message3').style.color = 'rgb(210, 28, 28)';
-         document.getElementById('message3').innerHTML = 'La connexion a échoué, compte désactivé';
-         document.getElementById('message3').style.fontSize = '0.8em';
-         </script>";
-   }
-   else {
-      session_start();
-      $_SESSION['pseudo'] = $_POST['pseudo'];
-      include('connexion.php');
-
-      header("Location: profil.php");
-
-   }
-}
-
-//DECONNEXION
-elseif($_GET['action']=='deconnexion'){
-   session_start();
-   $_SESSION = array();
-   session_destroy();
-
-   header("Location: ../index.php");
-}
-
 
 $mysqli->close();
 ?>

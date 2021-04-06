@@ -23,7 +23,6 @@ footer{
    background-color: rgb(13, 50, 65);
    display: flex;
    justify-content: center;
-   position: absolute;
    bottom: 0;
 }
 

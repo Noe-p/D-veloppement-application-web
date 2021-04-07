@@ -2,7 +2,7 @@
 
 ## Informations
 
-Projet d'école qui a pour objectif de créer une application web disponible en ligne. Pour plus de détail sur l'application, le cahier des charges est disponible dans le répertoire "documents".  
+Projet d'école qui a pour objectif de créer un showroom disponible en ligne. Pour plus de détails, le cahier des charges est disponible dans le répertoire "documents".  
 La gestion de la base de données utilisé est MariaDB.  
 La partie front-end est réalisé sur mon temps personnel.  
 Le sujet choisi est la photographie.

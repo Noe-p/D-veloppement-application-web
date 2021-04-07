@@ -29,6 +29,12 @@ Valérie MARC
 
 ![](images/5.png)
 
+![](images/6.png)
+
+![](images/7.png)
+
+
+
 ![](bdd/modelEA.png)
 
 ## Contenu
@@ -41,7 +47,7 @@ Valérie MARC
 
 **gabarit :** Site sans PHP
 
-**v1 :** Version 1 du site
+**v1-v2 :** Différentes versions du site
 
 **images :** Quelques images du showroom
 

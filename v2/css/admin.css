@@ -85,7 +85,7 @@ header h2{
    cursor: pointer;
 }
 
-.button1.open, .button2.open, .button3.open  {
+.button.open {
    background-color: rgb(13, 50, 65);
    color: rgb(255, 249, 235);
    border-radius: 50px;
@@ -93,16 +93,33 @@ header h2{
 
 
 /*ADMINISTRATION*/
-h2{
+.admin h2{
    margin-bottom: 50px;
 }
 
 /*Profils*/
-.profils{
-   display: none;
+select {
+   color:rgb(51, 51, 51);
+   border: solid 1px rgb(51, 51, 51);
+   background-color: rgb(255, 249, 235);
+   border-radius: 8px;
+   padding: 5px 10px 5px 10px;
+   transition: all 0.3s;
+   margin-right: 10px;
 }
-.profils.open{
-   display: block;
+
+.inputPseudoModif{
+   position: relative;
+   left: 30%;
+   width:550px;
+}
+
+#message4{
+   color: rgb(210, 28, 28);
+   font-size: 0.8em;
+   position: relative;
+   left: 40%;
+   bottom: 7px;
 }
 table {
    border-collapse: collapse;
@@ -112,20 +129,13 @@ table {
    margin-top: 30px;
 }
 
+.scroll{
+   overflow: scroll;
+   height: 500px;
+}
 thead{
    background-color: rgb(51, 51, 51);
    color: rgb(255, 249, 235);
-}
-
-.inputPseudoModif{
-   position: relative;
-   left: 35%;
-}
-
-
-#pseudoActive:hover{
-   background-color: rgb(13, 50, 65);
-   box-shadow: none;
 }
 
 th,td{
@@ -140,7 +150,7 @@ th,td{
    background-color: rgba(51, 51, 51, 0.1);
 }
 
-#checkbox{
+.profils #checkbox{
    margin-left: 50%;
    transform: translateX(-50%);
 }
@@ -161,36 +171,38 @@ input:hover{
 }
 
 /*Actualités*/
-.actualite{
-   display: none;
-}
-.actualite.open{
-   display: block;
-}
+
 
 /*Sélections*/
-.selections{
-   display: none;
+.selections #message4{
+   left: 45%;
 }
-.selections.open{
-   display: block;
+.checkEle{
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   grid-gap: 10px;
+}
+
+.selections #checkbox:hover{
+   box-shadow: none;
+}
+
+.selections td{
+   border-left: solid 1px rgba(51, 51, 51, 0.5);
+   border-rigth: solid 1px rgba(51, 51, 51, 0.5);
+   min-height: 50px;
+}
+
+#element{
+   background-color: rgb(13, 50, 65);
+   box-shadow: none;
 }
 
 /*Eléments*/
-.elements{
-   display: none;
-}
-.elements.open{
-   display: block;
-}
+
 
 /*Liens*/
-.liens{
-   display: none;
-}
-.liens.open{
-   display: block;
-}
+
 
 @media all and (max-device-width:480px) {
 

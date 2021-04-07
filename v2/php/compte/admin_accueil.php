@@ -27,6 +27,7 @@ else{
 //Tous les compte utilisateur
 $reqAllCpt = "SELECT * FROM t_profil_pro";
 $resAllCpt = $mysqli->query($reqAllCpt);
+$resAllCpt2 = $mysqli->query($reqAllCpt);
 
 if(!$resAllCpt){
    echo "Error: La requête a echoué \n";
@@ -70,36 +71,45 @@ $mysqli->close();
    <?php
    if($_SESSION['statut']=='A'){
       echo "
-      <h2>Administration :</h2>
+      <h2 id='admin'>Administration :</h2>
 
       <div class='buttons'>
-         <a class='button1 open'>Profils</a>
-         <a class='button2'>Actualités</a>
-         <a class='button3'>Sélections</a>
-         <a class='button4'>Éléments</a>
-         <a class='button5'>Liens</a>
+         <a href='admin_accueil.php#admin' class='button open'>Profils</a>
+         <a href='admin_accueil.php#admin' class='button'>Actualités</a>
+         <a href='admin_selection.php#admin' class='button'>Sélections</a>
+         <a href='admin_accueil.php#admin' class='button'>Éléments</a>
+         <a href='admin_accueil.php#admin' class='button'>Liens</a>
       </div>
 
-      <section class='actualite create'>
-         <h3>Aucune actualité</h3>
-      </section>
-
-      <section class='selections create'>
-         <h3>Aucune sélection</h3>
-      </section>
-
-      <section class='elements create'>
-         <h3>Aucun élément</h3>
-      </section>
-
-      <section class='liens create'>
-         <h3>Aucun lien</h3>
-      </section>
-
-      <section class='profils create open'>
-         <form action='modif.php?input=text' method='post' class='inputPseudoModif'>
-            <td><input type='text' id='pseudoActive' name='pseudoActive' placeholder='Pseudo à activer' required></td>
-            <td><input type='submit' value='Modifier' id='submit'/></td>
+      <section class='profils'>
+         <span id='message4'>";
+         if(isset($_GET['error'])){
+            if(intval($_GET['error']) and !empty($_GET['error'])){
+               if($_GET['error']==3){
+                  echo "Le pseudo n'existe pas";
+               }
+               elseif($_GET['error']==1) {
+                  echo "Entrer un pseudo";
+               }
+               elseif($_GET['error']==2) {
+                  echo "La requête a échoué";
+               }
+               else{
+                  echo "Erreur non reconnue";
+               }
+            }
+            else{
+               echo "Erreur non reconnue";
+            }
+         }echo "</span>
+         <form action='comptes_action.php?input=liste' method='post' class='inputPseudoModif' required>
+            <select name='pseudoActive'>
+               <option value=''>Pseudo à activer/désaciver</option>";
+            while ($allCpt = $resAllCpt->fetch_assoc()) {
+               echo "<option value=".$allCpt['com_pseudo'].">".$allCpt['com_pseudo']."</option>";
+            }echo"
+            </select>
+            <input type='submit' value='Activer/Désactiver' id='submit'/>
          </form>
 
          <table>
@@ -117,7 +127,7 @@ $mysqli->close();
             </thead>
             <tbody>";
                   $i=0;
-                  while ($allCpt = $resAllCpt->fetch_assoc()) {
+                  while ($allCpt2 = $resAllCpt2->fetch_assoc()) {
 
                      //Test de parité pour l'aternance de couleurs des lignes du tableau
                      if(fmod($i,2)==0){
@@ -128,21 +138,21 @@ $mysqli->close();
                         echo "<tr class='lignePaire'>";
                         $i=$i+1;
                      }echo "
-                        <form action='modif.php?input=checkbox&loginDes=".$allCpt['com_pseudo']."' method='post'>
-                           <td>".$allCpt['com_pseudo']."</td>
-                           <td>".$allCpt['pro_nom']."</td>
-                           <td>".$allCpt['pro_prenom']."</td>
-                           <td>".$allCpt['pro_mail']."</td>
+                        <form action='comptes_action.php?input=checkbox&loginDes=".$allCpt2['com_pseudo']."' method='post'>
+                           <td>".$allCpt2['com_pseudo']."</td>
+                           <td>".$allCpt2['pro_nom']."</td>
+                           <td>".$allCpt2['pro_prenom']."</td>
+                           <td>".$allCpt2['pro_mail']."</td>
                            <td>";
-                           if($allCpt['pro_validite']=='A'){
+                           if($allCpt2['pro_validite']=='A'){
                               echo "<input type='checkbox' id='checkbox' name='checkbox[]' value='A' checked/>";
                            }
                            else{
                               echo "<input type='checkbox' id='checkbox' name='checkbox[]' value='A'";
                            }
                            echo "</td>
-                           <td>".$allCpt['pro_statut']."</td>
-                           <td>".$allCpt['pro_date']."</td>
+                           <td>".$allCpt2['pro_statut']."</td>
+                           <td>".$allCpt2['pro_date']."</td>
                            <td><input type='submit' value='Modifier' id='submit'/></td>
                         </form>
                      </tr>";
@@ -156,7 +166,6 @@ $mysqli->close();
 
    <?php require('../footer.php'); ?>
 
-   <script type="text/javascript" src="../../js/createElement.js"></script>
    <script type="text/javascript" src="../../js/navBar.js"></script>
 
 </body>

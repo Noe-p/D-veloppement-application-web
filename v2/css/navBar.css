@@ -1,0 +1,212 @@
+aside a, aside a:visited {
+   color: rgb(51, 51, 51);
+   text-decoration: none;
+}
+
+aside {
+   height: 30vh;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.navBar {
+   display: inline-flex;
+   width: 60%;
+   min-width:440px;
+   justify-content:center;
+   align-items: center;
+   border-bottom: solid 1px black;
+   border-top: solid 1px black;
+   z-index: 10;
+   background-color: rgb(255, 249, 235);
+   list-style-type: none;
+   padding: 4vh;
+   transition: width 0.5s;
+}
+
+.navBar.position {
+   position: fixed;
+   top: 0;
+   margin: 0;
+   width: 100%;
+   background-color: rgb(255, 249, 235);
+   border-bottom: none;
+   border-top: none;
+   box-shadow: 3px 3px 10px black;
+   padding: 15px 15px 18px 15px;
+}
+
+.navBar li {
+   text-align: center;
+   margin-right: 6vw;
+}
+
+.bouton, .bouton:visited {
+   border-radius: 25px;
+   padding: 5px 15px 9px 15px;
+   border: solid 1px rgb(13, 50, 65);
+   background-color: rgb(13, 50, 65);
+   color: rgb(255, 249, 235);
+}
+
+
+li a{
+   border: solid 1px rgb(255, 249, 235);
+   border-radius: 25px;
+   transition: all 0.5s;
+   padding: 5px 15px 9px 15px;
+}
+
+li:hover a{
+   border: solid 1px rgb(51, 51, 51);
+}
+
+.lock{
+   width: 15px;
+   margin-left: 5px;
+   position: relative;
+   top:2px;
+}
+.sous {
+   display: none;
+   grid-template-columns: repeat(3, 1fr);
+   grid-gap: 5px;
+   height: auto;
+   margin-top: 33px;
+   list-style-type: none;
+   justify-content: center;
+   padding:5px;
+   transform: translateX(-50%);
+   left: 50%;
+   border-bottom-left-radius: 10px;
+   border-bottom-right-radius: 10px;
+   position: absolute;
+   width: 55%;
+}
+
+.navBar.position .sous{
+   margin-top: 13px;
+}
+
+.menu:hover .sous {
+   display: grid;
+   opacity: 1;
+   animation: menu 0.7s;
+}
+
+@keyframes menu {
+   from{
+      grid-gap: 15px;
+      padding: 15px;
+      opacity: 0;
+   }
+}
+.sous::before {
+   display: block;
+   content: '';
+   position: absolute;
+   width: 100%;
+   height: 32px;
+   transform: translateY(-29px);
+}
+
+.navBar.position .sous::before{
+   height: 24px;
+   transform: translateY(-17px);
+}
+
+.sous li{
+   text-align: center;
+   height: auto;
+   width: auto;
+   margin-right: 0px;
+}
+
+.menu:hover .sous a{
+   background-color: rgb(51, 51, 51);
+   color:rgb(255, 249, 235);
+   border-radius: 0;
+   border:none;
+   display: block;
+   border: solid 1px rgb(51, 51, 51);
+
+}
+
+.menu:hover .sous a:hover{
+   background-color: rgba(255, 249, 235, 0.9);
+   color:rgb(51, 51, 51);
+   border: solid 1px rgba(0, 0, 0, 0.9);
+}
+.compte {
+   position: relative;
+   left: 15%;
+}
+
+.compte:hover .sous {
+   grid-template-columns: repeat(1, 1fr);
+}
+
+.compte .sous::before {
+   height: 40px;
+   transform: translateY(-40px);
+}
+
+@media all and (max-device-width:480px) {
+   aside {
+      height: 0vh;
+   }
+
+   .navBar {
+      position: fixed;
+      top: 0;
+      margin: 0;
+      width: 100%;
+      height: 60px;
+      background-color: rgb(255, 249, 235);
+      border-bottom: none;
+      border-top: none;
+      padding: 40px;
+      box-shadow: 8px 8px 20px black;
+   }
+
+   .navBar.position{
+      padding:40px;
+      box-shadow: 8px 8px 20px black;
+   }
+
+   .bouton, .bouton:visited{
+      border-radius: 50px;
+      padding: 15px 30px 19px 30px;
+   }
+   .navBar.position .sous{
+      margin-top: 45px;
+   }
+   .navBar a{
+      font-size: 2.2em;
+   }
+
+   .sous li{
+      margin: 5px;
+      width: 300px;
+   }
+
+   .compte{
+      left:6%;
+   }
+
+   .compte .sous li{
+      width: auto;
+   }
+
+   li:hover a{
+      border: solid 1px rgb(255, 249, 235);
+   }
+
+   .lock{
+      width: 30px;
+      margin-left: 13px;
+      top: 3px;
+   }
+}

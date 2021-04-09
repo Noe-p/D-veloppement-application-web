@@ -31,7 +31,6 @@ session_start();
                <?php
                if(isset($_SESSION['login'])){
                   echo "<li><a href='../compte/admin_accueil.php'>Profil</a></li>
-                  <li><a href='../ajout.php'>Ajouter</a></li>
                   <li><a href='../connexion/deconnexion.php'>Déconnexion</a></li>";
                } else{
                   echo "<li><a href='../connexion/inscription.php'>Inscription</a></li>

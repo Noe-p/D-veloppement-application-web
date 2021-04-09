@@ -57,11 +57,9 @@ else if($_GET['input']=='checkbox') {
          if(!$resModifVal){
             $error=3;
          }
-         else{
-            header("Location: admin_selection.php#admin");
-            exit();
-         }
       }
+      header("Location: admin_selection.php#admin");
+      exit();
    }
 }
 header("Location: admin_selection.php?error=".$error."#admin");

@@ -33,30 +33,30 @@ header {
    width: 100%;
    background-color: rgb(13, 50, 65);
    color: rgb(255, 249, 235);
-   display: flex;
-   justify-content: center;
-   padding: 50px 0 50px 0;
-   flex-direction: column;
+   display:inline-flex;
+   justify-content:space-around;
+   padding: 100px 0 100px 0;
    align-items: center;
    margin-bottom: 30px;
-   height: 50vh;
 }
 
 header h2{
-   margin-top: 0px;
+   margin-top: 30px;
    margin-bottom: 30px;
    color: rgb(255, 249, 235);
+   text-align: center;
 }
 
 .infosUser {
-   padding: 10px;
-   border: solid 1px rgb(255, 249, 235);
+   border-radius:10px;
    width: 500px;
+   border:solid 1px rgb(255, 249, 235);
 }
 
 .infosUser ul {
    list-style-type: none;
    margin-left: 0;
+   margin-bottom: 40px;
 }
 
 .infosUser li {
@@ -65,7 +65,7 @@ header h2{
 
 /*BOUTON*/
 .buttons{
-   margin-bottom: 30px;
+   margin: 30px;
 }
 
 .buttons a {
@@ -97,7 +97,27 @@ header h2{
    margin-bottom: 50px;
 }
 
+.manage{
+   display: inline-flex;
+   width: 70vw;
+   align-items: center;
+   justify-content: space-around;
+   margin: 30px;
+}
+
+.manage h3{
+   font-size: 1.3em;
+   margin-bottom: 0;
+   text-align: center;
+}
+
 /*Profils*/
+.nbInscrit{
+   display:inline-flex;
+   align-items: center;
+   justify-content:space-around;
+   width: 70vw;
+}
 select {
    color:rgb(51, 51, 51);
    border: solid 1px rgb(51, 51, 51);
@@ -106,12 +126,6 @@ select {
    padding: 5px 10px 5px 10px;
    transition: all 0.3s;
    margin-right: 10px;
-}
-
-.inputPseudoModif{
-   position: relative;
-   left: 30%;
-   width:550px;
 }
 
 #message4{
@@ -126,7 +140,9 @@ table {
    text-align: left;
    box-shadow: 2px 2px 10px rgb(51, 51, 51);
    margin-bottom: 50px;
-   margin-top: 30px;
+   margin: 30px;
+   min-width: 70vw;
+
 }
 
 .scroll{
@@ -164,13 +180,77 @@ input{
    transition: all 0.3s;
 }
 
+.submit{
+   opacity: 0;
+}
+.submit.open{
+   opacity: 1;
+}
+
 input:hover{
    cursor: pointer;
    background-color: rgb(210, 28, 28);
    box-shadow: 1px 1px 1px rgb(51, 51, 51);
 }
 
+
+
+
 /*Actualités*/
+.ajoutActu{
+   border-radius:10px;
+   border:solid 1px rgb(13, 50, 65);
+   text-align: center;
+}
+
+#message5{
+   position: block;
+   color: rgb(210, 28, 28);
+   font-size: 0.8em;
+}
+.ajoutActu form{
+   padding-bottom: 30px;
+   padding-left: 30px;
+   padding-right: 30px;
+}
+
+.ajoutActu input:hover{
+   background-color: rgb(13, 50, 65);
+   box-shadow: none;
+}
+
+.ajoutActu input, .ajoutActu textarea, .ajoutActu div{
+   margin-top: 10px;
+}
+
+.ajoutActu textarea{
+   color:rgb(255, 249, 235);
+   background-color: rgb(13, 50, 65);
+   border-radius: 8px;
+   padding: 5px 10px 5px 10px;
+}
+
+#ajout{
+   width: 100px;
+   transition: all 0.3s;
+}
+#ajout:hover{
+   background-color: rgb(128, 205, 79);
+   width: 110px;
+}
+
+
+.danger{
+   border-radius:10px;
+   border:solid 1px rgb(210, 28, 28);
+   text-align: center;
+}
+
+.danger form{
+   margin: 30px;
+}
+
+
 
 
 /*Sélections*/
@@ -194,10 +274,19 @@ input:hover{
 }
 
 #element{
-   background-color: rgb(13, 50, 65);
+   color:rgb(51, 51, 51);
+   border: solid 1px rgb(51, 51, 51);
+   background-color: rgb(255, 249, 235);
+   border-radius: 8px;
+   padding: 5px 10px 5px 10px;
+   transition: all 0.3s;
+   margin-right: 10px;
    box-shadow: none;
 }
 
+.inputPseudoModif{
+   text-align: center;
+}
 /*Eléments*/
 
 

@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION['login'])){
-   ("Location: ../connexion/session.php");
+   header("Location: ../connexion/session.php");
    exit();
 }
 
@@ -28,6 +28,8 @@ else{
 $reqAllCpt = "SELECT * FROM t_profil_pro";
 $resAllCpt = $mysqli->query($reqAllCpt);
 $resAllCpt2 = $mysqli->query($reqAllCpt);
+$nbCpt = $resAllCpt->num_rows;
+
 
 if(!$resAllCpt){
    echo "Error: La requête a echoué \n";
@@ -35,6 +37,22 @@ if(!$resAllCpt){
    echo "Error: " . $mysqli->error . "\n";
    exit();
 }
+
+//Nb compte actif
+$reqCptActif= "SELECT * FROM t_profil_pro WHERE pro_validite='A'";
+$resCptActif = $mysqli->query($reqCptActif);
+$nbCptActif = $resCptActif->num_rows;
+
+//Nb compte désactivé
+$reqCptDes= "SELECT * FROM t_profil_pro WHERE pro_validite='D'";
+$resCptDes = $mysqli->query($reqCptDes);
+$nbCptDes = $resCptDes->num_rows;
+
+//Nb compte Admin
+$reqCptAdmin= "SELECT * FROM t_profil_pro WHERE pro_statut='A'";
+$resCptAdmin = $mysqli->query($reqCptAdmin);
+$nbCptAdmin = $resCptAdmin->num_rows;
+
 $mysqli->close();
 ?>
 
@@ -54,8 +72,8 @@ $mysqli->close();
 
 
    <header>
-      <h2><?php echo $_SESSION['login'];?> :</h2>
       <article class='infosUser'>
+         <h2><?php echo $_SESSION['login'];?> :</h2>
          <ul>
             <li><B>Nom : </B><?php echo $infoUser['pro_nom'];?></li>
             <li><B>Pénom : </B><?php echo $infoUser['pro_prenom'];?></li>
@@ -66,6 +84,20 @@ $mysqli->close();
             <li><B>Membre depuis le : </B><?php echo $infoUser['pro_date'];?></li>
          </ul>
       </article>
+      <?php
+      if($infoUser['pro_statut']=='A'){
+         echo "
+         <article class='infosUser'>
+            <h2>Informations : </h2>
+            <ul>
+               <li><B>Inscrits : </B>".$nbCpt."</li>
+               <li><B>Comptes Administrateur : </B>".$nbCptAdmin."</li>
+               <li><B>Comptes activés : </B>".$nbCptActif."</li>
+               <li><B>Comptes désactivés : </B>".$nbCptDes."</li>
+            </ul>
+         </article>";
+      }
+      ?>
    </header>
 
    <?php
@@ -75,13 +107,14 @@ $mysqli->close();
 
       <div class='buttons'>
          <a href='admin_accueil.php#admin' class='button open'>Profils</a>
-         <a href='admin_accueil.php#admin' class='button'>Actualités</a>
+         <a href='admin_actualite.php#admin' class='button'>Actualités</a>
          <a href='admin_selection.php#admin' class='button'>Sélections</a>
          <a href='admin_accueil.php#admin' class='button'>Éléments</a>
          <a href='admin_accueil.php#admin' class='button'>Liens</a>
       </div>
 
       <section class='profils'>
+      
          <span id='message4'>";
          if(isset($_GET['error'])){
             if(intval($_GET['error']) and !empty($_GET['error'])){
@@ -102,15 +135,17 @@ $mysqli->close();
                echo "Erreur non reconnue";
             }
          }echo "</span>
-         <form action='comptes_action.php?input=liste' method='post' class='inputPseudoModif' required>
+
+         <form action='comptes_action.php?input=liste' method='post'  class='inputPseudoModif'  required>
             <select name='pseudoActive'>
                <option value=''>Pseudo à activer/désaciver</option>";
-            while ($allCpt = $resAllCpt->fetch_assoc()) {
-               echo "<option value=".$allCpt['com_pseudo'].">".$allCpt['com_pseudo']."</option>";
-            }echo"
+               while ($allCpt = $resAllCpt->fetch_assoc()) {
+                  echo "<option value=".$allCpt['com_pseudo'].">".$allCpt['com_pseudo']."</option>";
+               }echo"
             </select>
             <input type='submit' value='Activer/Désactiver' id='submit'/>
          </form>
+
 
          <table>
             <thead>

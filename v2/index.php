@@ -7,7 +7,8 @@ require('php/connexionBDD.php');
 
 //actualités
 $reqActu = "SELECT actu_titre, actu_texte, actu_date, com_pseudo
-            FROM t_actualite_actu;";
+            FROM t_actualite_actu
+            WHERE actu_etat='A';";
 $resActu = $mysqli->query($reqActu);
 
 if(!$resActu){
@@ -47,8 +48,7 @@ $mysqli->close();
                <?php
                if(isset($_SESSION['login'])){
                   echo "<li><a href='php/compte/admin_accueil.php'>Profil</a></li>
-                  <li><a href='php/ajout.php'>Ajouter</a></li>
-                  <li><a href='php/compte/deconnexion.php'>Déconnexion</a></li>";
+                  <li><a href='php/connexion/deconnexion.php'>Déconnexion</a></li>";
                } else{
                   echo "<li><a href='php/connexion/inscription.php'>Inscription</a></li>
                   <li><a href='php/connexion/session.php'>Connexion</a></li>";
@@ -63,7 +63,7 @@ $mysqli->close();
 
    <div class="utilisateur">
       <?php
-      if(!isset($_SESSION['pseudo'])){
+      if(!isset($_SESSION['login'])){
          echo "<a href='php/connexion/inscription.php'><img src='assets/logos/padlock_wo.png'></img>Inscription</a>";
       }
       ?>

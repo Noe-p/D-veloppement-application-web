@@ -3,7 +3,7 @@
 session_start();
 
 if(!isset($_SESSION['login'])){
-   ("Location: ../connexion/session.php");
+   header("Location: ../connexion/session.php");
    exit();
 }
 
@@ -47,6 +47,26 @@ if(!$resAllEle){
    echo "Error: " . $mysqli->error . "\n";
    exit();
 }
+//Nb Compte
+$reqAllCpt = "SELECT * FROM t_profil_pro";
+$resAllCpt = $mysqli->query($reqAllCpt);
+$nbCpt = $resAllCpt->num_rows;
+
+//Nb compte actif
+$reqCptActif= "SELECT * FROM t_profil_pro WHERE pro_validite='A'";
+$resCptActif = $mysqli->query($reqCptActif);
+$nbCptActif = $resCptActif->num_rows;
+
+//Nb compte désactivé
+$reqCptDes= "SELECT * FROM t_profil_pro WHERE pro_validite='D'";
+$resCptDes = $mysqli->query($reqCptDes);
+$nbCptDes = $resCptDes->num_rows;
+
+//Nb compte Admin
+$reqCptAdmin= "SELECT * FROM t_profil_pro WHERE pro_statut='A'";
+$resCptAdmin = $mysqli->query($reqCptAdmin);
+$nbCptAdmin = $resCptAdmin->num_rows;
+
 $mysqli->close();
 ?>
 
@@ -66,8 +86,8 @@ $mysqli->close();
 
 
    <header>
-      <h2><?php echo $_SESSION['login'];?> :</h2>
       <article class='infosUser'>
+         <h2><?php echo $_SESSION['login'];?> :</h2>
          <ul>
             <li><B>Nom : </B><?php echo $infoUser['pro_nom'];?></li>
             <li><B>Pénom : </B><?php echo $infoUser['pro_prenom'];?></li>
@@ -78,6 +98,20 @@ $mysqli->close();
             <li><B>Membre depuis le : </B><?php echo $infoUser['pro_date'];?></li>
          </ul>
       </article>
+      <?php
+      if($infoUser['pro_statut']=='A'){
+         echo "
+         <article class='infosUser'>
+            <h2>Informations : </h2>
+            <ul>
+               <li><B>Inscrits : </B>".$nbCpt."</li>
+               <li><B>Comptes Administrateur : </B>".$nbCptAdmin."</li>
+               <li><B>Comptes activés : </B>".$nbCptActif."</li>
+               <li><B>Comptes désactivés : </B>".$nbCptDes."</li>
+            </ul>
+         </article>";
+      }
+      ?>
    </header>
 
    <?php
@@ -87,13 +121,14 @@ $mysqli->close();
 
       <div class='buttons'>
       <a href='admin_accueil.php#admin' class='button'>Profils</a>
-      <a href='admin_accueil.php#admin' class='button'>Actualités</a>
+      <a href='admin_actualite.php#admin' class='button'>Actualités</a>
       <a href='admin_selection.php#admin' class='button open'>Sélections</a>
       <a href='admin_accueil.php#admin' class='button'>Éléments</a>
       <a href='admin_accueil.php#admin' class='button'>Liens</a>
       </div>
 
       <section class='selections'>
+
       <span id='message4'>";
       if(isset($_GET['error'])){
          if(intval($_GET['error']) and !empty($_GET['error'])){
@@ -124,6 +159,7 @@ $mysqli->close();
          <input type='text' id='element' name='element' required placeholder='Éléments'>
          <input type='submit' value='Enlever éléments' id='submit'/>
       </form>
+      
 
       <table>
          <thead>

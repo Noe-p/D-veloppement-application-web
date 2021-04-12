@@ -3,7 +3,6 @@
 require('../connexionBDD.php');
 
 //Input : text
-$error=-1;
 if($_GET['input']=='liste'){
    if(!empty($_POST['selection'])){
       if(!empty($_POST['element'])){
@@ -16,6 +15,7 @@ if($_GET['input']=='liste'){
          $resIdEle=$mysqli->query($reqIdEle);
 
          if(!$resIdEle or !$resIdEle->num_rows){
+            //L'éléments n'est pas dans la sélection
             $error=3;
          }
          else{
@@ -35,12 +35,16 @@ if($_GET['input']=='liste'){
          }
       }
       else {
+         //Entrer un éléments
          $error=2;
       }
    }
    else{
+      //Entrer une sélection
       $error=1;
    }
+   header("Location: admin_accueil.php?error=".$error."#admin");
+   exit();
 }
 
 //Input : checkbox
@@ -55,16 +59,21 @@ else if($_GET['input']=='checkbox') {
          $resModifVal = $mysqli->query($reqModifVal);
 
          if(!$resModifVal){
+            //LA requète a échoué
             $error=3;
          }
       }
       header("Location: admin_selection.php#admin");
       exit();
    }
+   header("Location: admin_selection.php?error=".$error."#admin");
 }
-header("Location: admin_selection.php?error=".$error."#admin");
 
-
+//S'il n'y a pas de $_GET
+else{
+   header("Location: admin_actualite.php#admin");
+   exit();
+}
 
 $mysqli->close();
 

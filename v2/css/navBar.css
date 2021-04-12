@@ -96,6 +96,16 @@ li:hover a{
    animation: menu 0.7s;
 }
 
+#deconnexion{
+   background-color: rgba(210, 28, 28, 0.9);
+   color: rgb(255, 249, 235);
+}
+
+#deconnexion:hover{
+   background-color: rgb(255, 249, 235);
+   color: rgba(210, 28, 28, 0.9);
+}
+
 @keyframes menu {
    from{
       grid-gap: 15px;

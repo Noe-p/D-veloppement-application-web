@@ -99,7 +99,7 @@ header h2{
 
 .manage{
    display: inline-flex;
-   width: 70vw;
+   width: 100%;
    align-items: center;
    justify-content: space-around;
    margin: 30px;
@@ -118,6 +118,17 @@ header h2{
    justify-content:space-around;
    width: 70vw;
 }
+
+.gereCompte{
+   border-radius:10px;
+   text-align: center;
+   box-shadow: 1px 1px 7px rgb(51, 51, 51);
+}
+
+.gereCompte form{
+   margin: 30px;
+   text-align: left;
+}
 select {
    color:rgb(51, 51, 51);
    border: solid 1px rgb(51, 51, 51);
@@ -128,13 +139,22 @@ select {
    margin-right: 10px;
 }
 
+.modifSatut{
+   display:flex;
+}
+
+.modifSatut div{
+   padding-left: 10px;
+}
+
+.modifSatut #submit{
+   margin-left: 20px;
+}
 #message4{
    color: rgb(210, 28, 28);
    font-size: 0.8em;
-   position: relative;
-   left: 40%;
-   bottom: 7px;
 }
+
 table {
    border-collapse: collapse;
    text-align: left;
@@ -199,8 +219,8 @@ input:hover{
 /*Actualités*/
 .ajoutActu{
    border-radius:10px;
-   border:solid 1px rgb(13, 50, 65);
    text-align: center;
+   box-shadow: 1px 1px 7px rgb(51, 51, 51);
 }
 
 #message5{
@@ -239,10 +259,15 @@ input:hover{
    width: 110px;
 }
 
+#ModifTitreActu{
+   background-color: rgb(255, 249, 235);
+   border:solid 1px rgb(13, 50, 65);
+   color:rgb(51, 51, 51);
+}
 
 .danger{
    border-radius:10px;
-   border:solid 1px rgb(210, 28, 28);
+   box-shadow: 1px 1px 7px rgb(51, 51, 51);
    text-align: center;
 }
 
@@ -254,6 +279,17 @@ input:hover{
 
 
 /*Sélections*/
+.gereSel{
+   border-radius:10px;
+   text-align: center;
+   box-shadow: 1px 1px 7px rgb(51, 51, 51);
+}
+
+.gereSel form{
+   margin: 30px;
+   text-align: left;
+}
+
 .selections #message4{
    left: 45%;
 }
@@ -273,7 +309,7 @@ input:hover{
    min-height: 50px;
 }
 
-#element{
+#element, #ajoutEleSel_ele{
    color:rgb(51, 51, 51);
    border: solid 1px rgb(51, 51, 51);
    background-color: rgb(255, 249, 235);

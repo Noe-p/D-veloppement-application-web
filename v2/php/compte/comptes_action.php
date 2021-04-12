@@ -3,7 +3,6 @@
 require('../connexionBDD.php');
 
 //Input : text
-$error=-1;
 if($_GET['input']=='liste'){
    if(!empty($_POST['pseudoActive'])){
       $pseudo=htmlspecialchars(addslashes($_POST['pseudoActive']));
@@ -29,9 +28,8 @@ if($_GET['input']=='liste'){
          }
 
          if(!$resModifVal){
+            //La requete à échoué
             $error=2;
-            header("Location: admin_accueil.php?error=".$error."#admin");
-            exit();
          }
          //Si tout marche
          else{
@@ -42,16 +40,14 @@ if($_GET['input']=='liste'){
       //Si le profil n'existe pas
       else{
          $error=3;
-         header("Location: admin_accueil.php?error=".$error."#admin");
-         exit();
       }
    }
    //Si l'input est vide
    else{
       $error=1;
-      header("Location: admin_accueil.php?error=".$error."#admin");
-      exit();
    }
+   header("Location: admin_accueil.php?error=".$error."#admin");
+   exit();
 }
 
 //Input : checkbox
@@ -62,9 +58,8 @@ elseif($_GET['input']=='checkbox') {
       $resModifVal = $mysqli->query($reqModifVal);
 
       if(!$resModifVal){
+         //Erreur requète
          $error=2;
-         header("Location: admin_accueil.php?error=".$error."#admin");
-         exit();
       }
       else{
          header("Location: admin_accueil.php#admin");
@@ -77,20 +72,111 @@ elseif($_GET['input']=='checkbox') {
 
       if(!$resModifVal){
          $error=2;
-         header("Location: admin_accueil.php?error=".$error."#admin");
-         exit();
       }
       else{
          header("Location: admin_accueil.php#admin");
          exit();
       }
    }
-}
-else{
-   header("Location: admin_accueil.php#admin");
+   header("Location: admin_accueil.php?error=".$error."#admin");
    exit();
 }
 
+//Modifier le statut
+elseif($_GET['input']=='modifStatut'){
+   if(!empty($_POST['modifStatut'])){
+      if(!empty($_POST['modifStatutA']) or !empty($_POST['modifStatutR'])){
+         if((empty($_POST['modifStatutA']) and !empty($_POST['modifStatutR'])) or (!empty($_POST['modifStatutA']) and empty($_POST['modifStatutR']))){
+            $pseudo=htmlspecialchars(addslashes($_POST['modifStatut']));
+
+            //On verifie que le profil existe
+            $reqPseudoExist="SELECT com_pseudo FROM t_profil_pro WHERE com_pseudo='$pseudo';";
+            $resPseudoExist = $mysqli->query($reqPseudoExist);
+
+            if($resPseudoExist->num_rows){
+               if(!empty($_POST['modifStatutA'])){
+                  $status='A';
+               }
+               elseif(!empty($_POST['modifStatutR'])) {
+                  $status='R';
+               }
+
+               $reqModifStatut="UPDATE t_profil_pro SET pro_statut = '$status' WHERE com_pseudo = '$pseudo';";
+               $resModifStatut = $mysqli->query($reqModifStatut);
+
+               if(!$resModifStatut){
+                  //La requete a échoué
+                  $error=2;
+               }
+               else{
+                  header("Location: admin_accueil.php#admin");
+                  exit();
+               }
+            }
+            else{
+               //Le profil n'existe pas
+               $error=3;
+            }
+         }
+         else{
+            //Plusieurs cases sont cochées
+            $error=4;
+         }
+      }
+      else{
+         //Aucune cases sont cochées
+         $error=5;
+      }
+   }
+   else{
+      //Pseudo vide
+      $error=1;
+   }
+   header("Location: admin_accueil.php?error=".$error."#admin");
+   exit();
+}
+
+//Supprimer compte
+elseif($_GET['input']=='suppCompte'){
+   if(!empty($_POST['suppCompte'])){
+      $pseudo=htmlspecialchars(addslashes($_POST['suppCompte']));
+
+      //On verifie que le profil existe
+      $reqPseudoExist="SELECT com_pseudo FROM t_profil_pro WHERE com_pseudo='$pseudo';";
+      $resPseudoExist = $mysqli->query($reqPseudoExist);
+
+      if($resPseudoExist->num_rows){
+         echo "On supprime le compte ???";
+
+         if(!$resSuppCompte){
+            //La requète a échoué
+            $error=2;
+         }
+         else{
+            header("Location: admin_accueil.php#admin");
+            exit();
+         }
+      }
+      else{
+         //Le profil n'existe pas
+         $error=3;
+      }
+   }
+   else{
+      //Pseudo vide
+      $error=1;
+   }
+   header("Location: admin_accueil.php?error=".$error."#admin");
+   exit();
+}
+
+
+
+//S'il n'y a pas de $_GET
+else{
+   header("Location: admin_actualite.php#admin");
+   exit();
+}
 
 $mysqli->close();
 ?>

@@ -2,7 +2,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['login'])){
+if((!isset($_SESSION['login'])) or ($_SESSION['statut']=='R')){
    header("Location: ../connexion/session.php");
    exit();
 }
@@ -29,6 +29,7 @@ $reqSel = "SELECT DISTINCT sel_numero, sel_intitule, sel_texteIntro, sel_date, c
            FROM t_selection_sel";
 $resSel = $mysqli->query($reqSel);
 $resSel2 = $mysqli->query($reqSel);
+$resSel3 = $mysqli->query($reqSel);
 
 if(!$resSel){
    echo "Error: La requête a echoué \n";
@@ -98,68 +99,83 @@ $mysqli->close();
             <li><B>Membre depuis le : </B><?php echo $infoUser['pro_date'];?></li>
          </ul>
       </article>
-      <?php
-      if($infoUser['pro_statut']=='A'){
-         echo "
-         <article class='infosUser'>
-            <h2>Informations : </h2>
-            <ul>
-               <li><B>Inscrits : </B>".$nbCpt."</li>
-               <li><B>Comptes Administrateur : </B>".$nbCptAdmin."</li>
-               <li><B>Comptes activés : </B>".$nbCptActif."</li>
-               <li><B>Comptes désactivés : </B>".$nbCptDes."</li>
-            </ul>
-         </article>";
-      }
-      ?>
+
+      <article class='infosUser'>
+         <h2>Informations : </h2>
+         <ul>
+            <li><B>Inscrits : </B><?php echo $nbCpt; ?></li>
+            <li><B>Comptes Administrateur : </B><?php echo $nbCptAdmin; ?></li>
+            <li><B>Comptes activés : </B><?php echo $nbCptActif; ?></li>
+            <li><B>Comptes désactivés : </B><?php echo $nbCptDes; ?></li>
+         </ul>
+      </article>
+
    </header>
 
-   <?php
-   if($_SESSION['statut']=='A'){
-      echo "
-      <h2 id='admin'>Administration :</h2>
+   <h2 id='admin'>Administration :</h2>
 
-      <div class='buttons'>
+   <div class='buttons'>
       <a href='admin_accueil.php#admin' class='button'>Profils</a>
       <a href='admin_actualite.php#admin' class='button'>Actualités</a>
       <a href='admin_selection.php#admin' class='button open'>Sélections</a>
       <a href='admin_accueil.php#admin' class='button'>Éléments</a>
       <a href='admin_accueil.php#admin' class='button'>Liens</a>
+   </div>
+
+   <section class='selections'>
+      <div class='manage'>
+         <div class='gereSel'>
+            <h3>Gérer les sélections :</h3>
+            <span id='message4'>
+            <?php
+               if(isset($_GET['error'])){
+                  if(intval($_GET['error']) and !empty($_GET['error'])){
+                     if($_GET['error']==3){
+                        echo "l'élément n'est pas dans la sélection";
+                     }
+                     elseif($_GET['error']==1) {
+                        echo "Entrer une sélection";
+                     }
+                     elseif($_GET['error']==2) {
+                        echo "Entrer un élément";
+                     }
+                     else{
+                        echo "Erreur non reconnue";
+                     }
+                  }
+                  else{
+                     echo "Erreur non reconnue";
+                  }
+               }
+            ?>
+            </span>
+            <form action='selection_action.php?input=liste' method='post' class='inputPseudoModif' required>
+               <select name='selection'>
+                  <option value=''>Sélection</option>
+                  <?php
+                     while ($sel2 = $resSel2->fetch_assoc()) {
+                        echo "<option value=".$sel2['sel_numero'].">".$sel2['sel_intitule']."</option>";
+                     }
+                  ?>
+               </select>
+               <input type='text' id='element' name='element' required placeholder='Éléments'>
+               <input type='submit' value='Enlever éléments' id='submit'/>
+            </form>
+
+            <form action='selection_action.php?input=ajouteleSel' method='post'>
+               <select name='ajoutEleSel_sel'>
+                  <option value=''>Sélection</option>
+                  <?php
+                     while ($sel3 = $resSel3->fetch_assoc()) {
+                        echo "<option value=".$sel3['sel_numero'].">".$sel3['sel_intitule']."</option>";
+                     }
+                  ?>
+               </select>
+               <input type='text' id='ajoutEleSel_ele' name='ajoutEleSel_ele' required placeholder='Éléments'>
+               <input type='submit' value='Ajouter éléments' id='submit'/>
+            </form>
+         </div>
       </div>
-
-      <section class='selections'>
-
-      <span id='message4'>";
-      if(isset($_GET['error'])){
-         if(intval($_GET['error']) and !empty($_GET['error'])){
-            if($_GET['error']==3){
-               echo "l'élément n'est pas dans la sélection";
-            }
-            elseif($_GET['error']==1) {
-               echo "Entrer une sélection";
-            }
-            elseif($_GET['error']==2) {
-               echo "Entrer un élément";
-            }
-            else{
-               echo "Erreur non reconnue";
-            }
-         }
-         else{
-            echo "Erreur non reconnue";
-         }
-      }echo "</span>
-      <form action='selection_action.php?input=liste' method='post' class='inputPseudoModif' required>
-         <select name='selection'>
-            <option value=''>Sélection</option>";
-         while ($sel2 = $resSel2->fetch_assoc()) {
-            echo "<option value=".$sel2['sel_numero'].">".$sel2['sel_intitule']."</option>";
-         }echo"
-         </select>
-         <input type='text' id='element' name='element' required placeholder='Éléments'>
-         <input type='submit' value='Enlever éléments' id='submit'/>
-      </form>
-      
 
       <table>
          <thead>
@@ -172,7 +188,8 @@ $mysqli->close();
                <th></th>
             </tr>
          </thead>
-         <tbody>";
+         <tbody>
+            <?php
                $i=0;
                while ($sel = $resSel->fetch_assoc()) {
                   //CONNEXION A LA BASE
@@ -226,13 +243,10 @@ $mysqli->close();
                      </form>
                   </tr>";
                }
-      echo "
+            ?>
          </tbody>
       </table>
-      </section>";
-
-   }
-   ?>
+   </section>
 
    <?php require('../footer.php'); ?>
 

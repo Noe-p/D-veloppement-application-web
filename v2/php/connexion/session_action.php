@@ -3,7 +3,7 @@
 require('../connexionBDD.php');
 
 //CONNEXION
-if ($_POST["pseudo"] && $_POST["mdp"]){
+if ($_POST["pseudo"] and $_POST["mdp"]){
    $pseudo=htmlspecialchars(addslashes($_POST['pseudo']));
    $mdp=htmlspecialchars(addslashes($_POST['mdp']));
 
@@ -14,7 +14,6 @@ if ($_POST["pseudo"] && $_POST["mdp"]){
               AND com_mdp=MD5('$mdp')";
    $resCom = $mysqli->query($reqCom);
    $nbCom = $resCom->num_rows;
-   echo $nbCom;
 
    if (!$resCom) {
       echo "Error: La requête a échoué \n";
@@ -27,12 +26,16 @@ if ($_POST["pseudo"] && $_POST["mdp"]){
       $com = $resCom->fetch_array(MYSQLI_ASSOC);
 
       //Si un compte existe
-      if($nbCom==1 && $com['pro_validite']=='A'){
+      if($nbCom==1 and $com['pro_validite']=='A' and $com['pro_statut']=='A'){
          session_start();
          $_SESSION['login'] = $pseudo;
          $_SESSION['statut'] = $com['pro_statut'];
 
          header("Location: ../compte/admin_accueil.php");
+         exit();
+      }
+      else if($nbCom==1 and $com['pro_validite']=='A' and $com['pro_statut']=='R'){
+         header("Location: session.php");
          exit();
       }
       else if ($com['pro_validite']=='D') {

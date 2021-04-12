@@ -2,7 +2,7 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['login'])){
+if((!isset($_SESSION['login'])) or ($_SESSION['statut']=='R')){
    header("Location: ../connexion/session.php");
    exit();
 }
@@ -89,40 +89,36 @@ $mysqli->close();
             <li><B>Membre depuis le : </B><?php echo $infoUser['pro_date'];?></li>
          </ul>
       </article>
-      <?php
-      if($infoUser['pro_statut']=='A'){
-         echo "
-         <article class='infosUser'>
-            <h2>Informations : </h2>
-            <ul>
-               <li><B>Inscrits : </B>".$nbCpt."</li>
-               <li><B>Comptes Administrateur : </B>".$nbCptAdmin."</li>
-               <li><B>Comptes activés : </B>".$nbCptActif."</li>
-               <li><B>Comptes désactivés : </B>".$nbCptDes."</li>
-            </ul>
-         </article>";
-      }
-      ?>
+      <article class='infosUser'>
+         <h2>Informations : </h2>
+         <ul>
+            <li><B>Inscrits : </B><?php echo $nbCpt; ?></li>
+            <li><B>Comptes Administrateur : </B><?php echo $nbCptAdmin; ?></li>
+            <li><B>Comptes activés : </B><?php echo $nbCptActif; ?></li>
+            <li><B>Comptes désactivés : </B><?php echo $nbCptDes; ?></li>
+         </ul>
+      </article>
+
+
+
    </header>
 
-   <?php
-   if($_SESSION['statut']=='A'){
-      echo "
-      <h2 id='admin'>Administration :</h2>
+   <h2 id='admin'>Administration :</h2>
 
-      <div class='buttons'>
+   <div class='buttons'>
       <a href='admin_accueil.php#admin' class='button'>Profils</a>
       <a href='admin_actualite.php#admin' class='button open'>Actualités</a>
       <a href='admin_selection.php#admin' class='button'>Sélections</a>
       <a href='admin_accueil.php#admin' class='button'>Éléments</a>
       <a href='admin_accueil.php#admin' class='button'>Liens</a>
-      </div>
+   </div>
 
-      <section class='profils'>
-         <div class='manage'>
-            <div class='ajoutActu'>
-               <h3>Ajouter une actualité : </h3>
-               <span id='message5'>";
+   <section class='profils'>
+      <div class='manage'>
+         <div class='ajoutActu'>
+            <h3>Ajouter une actualité : </h3>
+            <span id='message5'>
+            <?php
                if(isset($_GET['errorNewActu'])){
                   if(intval($_GET['errorNewActu']) and !empty($_GET['errorNewActu'])){
                      if($_GET['errorNewActu']==1){
@@ -132,25 +128,28 @@ $mysqli->close();
                   else{
                      echo "Erreur non reconnue";
                   }
-               }echo "</span>
-               <form action='actualite_action.php?input=newActu' method='post'>
-                  <div>
-                     <label for='newActu'>Titre :<br/></label>
-                     <input type='text' id='newActu' name='newActu' required >
-                  </div>
-                  <div>
-                     <label for='descriptionActu'>Description :<br/></label>
-                     <textarea rows='6' cols='32' id='descriptionActu' name='descriptionActu' maxlength='500' required></textarea>
-                  </div>
-                  <div>
-                     <input type='submit' value='Ajouter' id='ajout'/>
-                  </div>
-               </form>
-            </div>
+               }
+            ?>
+            </span>
+            <form action='actualite_action.php?input=newActu' method='post'>
+               <div>
+                  <label for='newActu'>Titre :<br/></label>
+                  <input type='text' id='newActu' name='newActu' required >
+               </div>
+               <div>
+                  <label for='descriptionActu'>Description :<br/></label>
+                  <textarea rows='6' cols='32' id='descriptionActu' name='descriptionActu' maxlength='500' required></textarea>
+               </div>
+               <div>
+                  <input type='submit' value='Ajouter' id='ajout'/>
+               </div>
+            </form>
+         </div>
 
-            <div class='danger'>
-               <h3>Gérer les actualités : </h3>
-               <span id='message5'>";
+         <div class='danger'>
+            <h3>Gérer les actualités : </h3>
+            <span id='message5'>
+            <?php
                if(isset($_GET['error'])){
                   if(intval($_GET['error']) and !empty($_GET['error'])){
                      if($_GET['error']==3){
@@ -169,76 +168,81 @@ $mysqli->close();
                   else{
                      echo "Erreur non reconnue";
                   }
-               }echo "</span>
+               }
+            ?>
+            </span>
 
-               <form action='actualite_action.php?input=liste' method='post'  class='inputPseudoModif'  required>
-                  <select name='actuActive'>
-                     <option value=''>Actualité à activer/désaciver</option>";
+            <form action='actualite_action.php?input=liste' method='post'  class='inputPseudoModif'  required>
+               <select name='actuActive'>
+                  <option value=''>Actualité à activer/désactiver</option>
+                  <?php
                      while ($allActu2 = $resAllActu2->fetch_assoc()) {
-                        echo "<option value=".$allActu2['actu_titre'].">".$allActu2['actu_titre']."</option>";
-                     }echo"
-                  </select>
-                  <input type='submit' value='Activer/Désactiver' id='submit'/>
-               </form>
+                        echo "<option value=".$allActu2['actu_numero'].">".$allActu2['actu_titre']."</option>";
+                     }
+                  ?>
+               </select>
+               <input type='submit' value='Activer/Désactiver' id='submit'/>
+            </form>
 
-               <form action='actualite_action.php?input=suppActu' method='post'  class='inputPseudoModif'  required>
-                  <select name='actuSupp'>
-                     <option value=''>Actualité à supprimer</option>";
+            <form action='actualite_action.php?input=suppActu' method='post'  class='inputPseudoModif'  required>
+               <select name='actuSupp'>
+                  <option value=''>Actualité à supprimer</option>
+                  <?php
                      while ($allActu3 = $resAllActu3->fetch_assoc()) {
                         echo "<option value=".$allActu3['actu_numero'].">".$allActu3['actu_titre']."</option>";
-                     }echo"
-                  </select>
-                  <input type='submit' value='Supprimer' id='submit'/>
-               </form>
-            </div>
+                     }
+                  ?>
+               </select>
+               <input type='submit' value='Supprimer' id='submit'/>
+            </form>
          </div>
+      </div>
 
-         <table>
-            <thead>
-               <tr>
-                  <th>Titre</th>
-                  <th>Date</th>
-                  <th>Actif</th>
-                  <th>Pseudo</th>
-                  <th></th>
-               </tr>
-            </thead>
-            <tbody>";
-               $i=0;
-               while ($allActu = $resAllActu->fetch_assoc()) {
+      <table>
+         <thead>
+            <tr>
+               <th>Titre</th>
+               <th>Date</th>
+               <th>Actif</th>
+               <th>Pseudo</th>
+               <th></th>
+            </tr>
+         </thead>
+         <tbody>
+            <?php
+            $i=0;
+            while ($allActu = $resAllActu->fetch_assoc()) {
 
-                  //Test de parité pour l'aternance de couleurs des lignes du tableau
-                  if(fmod($i,2)==0){
-                     echo "<tr>";
-                     $i=$i+1;
-                  }
-                  else{
-                     echo "<tr class='lignePaire'>";
-                     $i=$i+1;
-                  }echo "
-                     <form action='actualite_action.php?input=checkbox&actuDes=".$allActu['com_pseudo']."' method='post'>
-                        <td>".$allActu['actu_titre']."</td>
-                        <td>".$allActu['actu_date']."</td>
-                        <td>";
-                        if($allActu['actu_etat']=='A'){
-                           echo "<input type='checkbox' id='checkboxActu' name='checkbox[]' value='A' checked/>";
-                        }
-                        else{
-                           echo "<input type='checkbox' id='checkboxActu' name='checkbox[]' value='A'";
-                        }
-                        echo "</td>
-                        <td>".$allActu['com_pseudo']."</td>
-                        <td><input type='submit' value='Modifier' id='submit'/></td>
-                     </form>
-                  </tr>";
+               //Test de parité pour l'aternance de couleurs des lignes du tableau
+               if(fmod($i,2)==0){
+                  echo "<tr>";
+                  $i=$i+1;
                }
-               echo "
-            </tbody>
-         </table>
-      </section>";
-
-   }
-   ?>
+               else{
+                  echo "<tr class='lignePaire'>";
+                  $i=$i+1;
+               }echo "
+                  <form action='actualite_action.php?input=checkbox&actuDes=".$allActu['actu_numero']."' method='post'>
+                     <td>
+                        <input type='text' id='ModifTitreActu' name='ModifTitreActu' placeholder=".$allActu['actu_titre']." ></td>
+                     <td>".$allActu['actu_date']."</td>
+                     <td>";
+                     if($allActu['actu_etat']=='A'){
+                        echo "<input type='checkbox' id='checkboxActu' name='checkbox[]' value='A' checked/>";
+                     }
+                     else{
+                        echo "<input type='checkbox' id='checkboxActu' name='checkbox[]' value='A'";
+                     }
+                     echo "</td>
+                     <td>".$allActu['com_pseudo']."</td>
+                     <td><input type='submit' value='Modifier' id='submit'/></td>
+                  </form>
+               </tr>";
+            }
+            ?>
+         </tbody>
+      </table>
+   </section>
 
    <?php require('../footer.php'); ?>
 

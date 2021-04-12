@@ -47,9 +47,14 @@ $mysqli->close();
             <ul class="sous">
                <?php
                if(isset($_SESSION['login'])){
-                  echo "<li><a href='php/compte/admin_accueil.php'>Profil</a></li>
-                  <li><a href='php/connexion/deconnexion.php'>Déconnexion</a></li>";
-               } else{
+                  echo "<li><a href='php/compte/admin_accueil.php?'>Profil</a></li>
+                  <li><a href='php/compte/admin_actualite.php?#admin'>Actualités</a></li>
+                  <li><a href='php/compte/admin_selection.php?#admin'>Sélections</a></li>
+                  <li><a href='php/compte/admin_accueil.php?#admin'>Éléments</a></li>
+                  <li><a href='php/compte/admin_accueil.php?#admin'>Liens</a></li>
+                  <li><a id='deconnexion' href='php/connexion/deconnexion.php?#admin'>Déconnexion</a></li>";
+               }
+               else{
                   echo "<li><a href='php/connexion/inscription.php'>Inscription</a></li>
                   <li><a href='php/connexion/session.php'>Connexion</a></li>";
                }

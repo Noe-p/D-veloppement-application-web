@@ -4,7 +4,7 @@
 
 Projet d'école qui a pour objectif de créer un showroom disponible en ligne. Pour plus de détails, le cahier des charges est disponible dans le répertoire "documents".  
 La gestion de la base de données utilisé est MariaDB.  
-La partie front-end est réalisé sur mon temps personnel.  
+La partie front-end est réalisé sur mon temps personnel sans Frameworks ou Libraries.  
 Le sujet choisi est la photographie.
 
 **date de début :** 25/01/2021

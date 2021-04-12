@@ -108,6 +108,7 @@ session_start();
                      JOIN t_selection_sel USING(sel_numero)
                      WHERE sel_numero = $sel_id
                      AND ele_numero < $elt_id
+                     AND ele_etat='A'
                      ORDER BY ele_numero DESC
                      LIMIT 1";
       $resElePrec = $mysqli->query($reqElePrec);

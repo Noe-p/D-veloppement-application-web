@@ -183,7 +183,7 @@ $mysqli->close();
                      }
                   ?>
                </select>
-               <input type='text' id='ajoutEleSel_ele' name='ajoutEleSel_ele'  placeholder='Éléments'>
+               <input type='text' id='ajoutEleSel_ele' name='ajoutEleSel_ele'  placeholder='Éléments' required>
                <input type='submit' value='Ajouter éléments' id='submit'/>
             </form>
          </div>

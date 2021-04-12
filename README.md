@@ -33,9 +33,7 @@ Valérie MARC
 
 ![](images/7.png)
 
-
-
-![](bdd/modelEA.png)
+![](images/8.png)
 
 ## Contenu
 

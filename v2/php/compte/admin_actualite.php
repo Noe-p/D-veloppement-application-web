@@ -30,6 +30,8 @@ $reqAllActu = "SELECT DISTINCT *
 $resAllActu = $mysqli->query($reqAllActu);
 $resAllActu2 = $mysqli->query($reqAllActu);
 $resAllActu3 = $mysqli->query($reqAllActu);
+$resAllActu4 = $mysqli->query($reqAllActu);
+
 
 
 if(!$resAllActu){
@@ -124,6 +126,9 @@ $mysqli->close();
                      if($_GET['errorNewActu']==1){
                         echo "Entrer un titre et une description";
                      }
+                     else{
+                        echo "Erreur non reconnue";
+                     }
                   }
                   else{
                      echo "Erreur non reconnue";
@@ -146,8 +151,57 @@ $mysqli->close();
             </form>
          </div>
 
+         <div class="modifActu">
+            <h3>Modifier une actualité :</h3>
+            <span id='message5'>
+               <?php
+                  if(isset($_GET['errorModifActu'])){
+                     if(intval($_GET['errorModifActu']) and !empty($_GET['errorModifActu'])){
+                        if($_GET['errorModifActu']==2){
+                           echo "La requête a échoué";
+                        }
+                        else if($_GET['errorModifActu']==3){
+                           echo "Entrer un titre ou une description";
+                        }
+                        else if($_GET['errorModifActu']==4){
+                           echo "L'actualité n'existe pas";
+                        }
+                        else if($_GET['errorModifActu']==1){
+                           echo "Pas d'actualité sélectionnée";
+                        }
+                        else{
+                           echo "Erreur non reconnue";
+                        }
+                     }
+                     else{
+                        echo "Erreur non reconnue";
+                     }
+                  }
+               ?>
+            </span>
+            <form action='actualite_action.php?input=modifActu' method='post'  class='inputPseudoModif'  required>
+               <select name='modifActu'>
+                  <option value=''>Actualité à modifier</option>
+                  <?php
+                     while ($allActu4 = $resAllActu4->fetch_assoc()) {
+                        echo "<option value=".$allActu4['actu_numero'].">".$allActu4['actu_titre']."</option>";
+                     }
+                  ?>
+               </select>
+               <div>
+                  <label for='modifActuTitre'>Titre :<br/></label>
+                  <input type='text' id='modifActuTitre' name='modifActuTitre' >
+               </div>
+               <div>
+                  <label for='modifActuDesc'>Description :<br/></label>
+                  <textarea rows='6' cols='32' id='modifActuDesc' name='modifActuDesc' maxlength='500'></textarea>
+               </div>
+               <input type='submit' value='Modifier' id='buttonModifier'/>
+            </form>
+         </div>
+
          <div class='danger'>
-            <h3>Gérer les actualités : </h3>
+            <h3>Gérer les actualités :</h3>
             <span id='message5'>
             <?php
                if(isset($_GET['error'])){
@@ -193,7 +247,7 @@ $mysqli->close();
                      }
                   ?>
                </select>
-               <input type='submit' value='Supprimer' id='submit'/>
+               <input type='submit' value='Supprimer' id='supprimer'/>
             </form>
          </div>
       </div>
@@ -202,8 +256,9 @@ $mysqli->close();
          <thead>
             <tr>
                <th>Titre</th>
+               <th>Description</th>
                <th>Date</th>
-               <th>Actif</th>
+               <th>Activée</th>
                <th>Pseudo</th>
                <th></th>
             </tr>
@@ -212,7 +267,6 @@ $mysqli->close();
             <?php
             $i=0;
             while ($allActu = $resAllActu->fetch_assoc()) {
-
                //Test de parité pour l'aternance de couleurs des lignes du tableau
                if(fmod($i,2)==0){
                   echo "<tr>";
@@ -223,8 +277,8 @@ $mysqli->close();
                   $i=$i+1;
                }echo "
                   <form action='actualite_action.php?input=checkbox&actuDes=".$allActu['actu_numero']."' method='post'>
-                     <td>
-                        <input type='text' id='ModifTitreActu' name='ModifTitreActu' placeholder=".$allActu['actu_titre']." ></td>
+                     <td>".$allActu['actu_titre']."</td>
+                     <td>".$allActu['actu_texte']."</td>
                      <td>".$allActu['actu_date']."</td>
                      <td>";
                      if($allActu['actu_etat']=='A'){

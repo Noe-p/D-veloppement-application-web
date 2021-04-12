@@ -55,29 +55,6 @@ if($_GET['input']=='liste'){
 
 //Input : checkbox
 else if($_GET['input']=='checkbox') {
-
-   if(!empty($_POST['ModifTitreActu'])){
-      $modifTitreActu=htmlspecialchars(addslashes($_POST['ModifTitreActu']));
-      print($modifTitreActu);
-      //On verifie que l'actualité existe
-      $reqActuExist="SELECT actu_titre FROM t_actualite_actu WHERE actu_numero = '$_GET[actuDes]';";
-      $resActuExist = $mysqli->query($reqActuExist);
-
-      if($resActuExist->num_rows){
-         $reqModifTitre="UPDATE t_actualite_actu SET actu_titre = '$modifTitreActu' WHERE actu_numero = '$_GET[actuDes]';";
-         $resModifTitre = $mysqli->query($reqModifTitre);
-
-         if(!$resModifTitre){
-            //La requete a échoué
-            $error=2;
-         }
-      }
-      else{
-         //La requete n'existe pas
-         $error=3;
-      }
-   }
-
    //Si la checkbox est cochée, on active le compte
    if(!empty($_POST['checkbox'])){
       $reqModifVal="UPDATE t_actualite_actu SET actu_etat = 'A' WHERE actu_numero = '$_GET[actuDes]';";
@@ -136,6 +113,59 @@ else if($_GET['input']=='newActu') {
    }
 }
 
+
+//Modifer actualité
+else if($_GET['input']=='modifActu'){
+   if(!empty($_POST['modifActu'])){
+      $actu=htmlspecialchars(addslashes($_POST['modifActu']));
+
+      //On verifie que l'actualité existe
+      $reqActuExist="SELECT actu_titre FROM t_actualite_actu WHERE actu_numero = '$actu';";
+      $resActuExist = $mysqli->query($reqActuExist);
+
+      if($resActuExist->num_rows){
+         if(!empty($_POST['modifActuTitre']) or !empty($_POST['modifActuDesc'])){
+            if(!empty($_POST['modifActuTitre'])){
+               $titre=htmlspecialchars(addslashes($_POST['modifActuTitre']));
+
+               $reqModifTitre="UPDATE t_actualite_actu SET actu_titre = '$titre' WHERE actu_numero = '$actu';";
+               $resModifTitre = $mysqli->query($reqModifTitre);
+
+               if(!$resModifTitre){
+                  //La requete a échoué
+                  $error=2;
+               }
+            }
+            if(!empty($_POST['modifActuDesc'])){
+               $desc=htmlspecialchars(addslashes($_POST['modifActuDesc']));
+
+               $reqModifDesc="UPDATE t_actualite_actu SET actu_texte='$desc' WHERE actu_numero = '$actu';";
+               $resModifDesc = $mysqli->query($reqModifDesc);
+               if(!$resModifDesc){
+                  //La requete a échoué
+                  $error=2;
+               }
+            }
+            header("Location: admin_actualite.php#admin");
+            exit();
+         }
+         else{
+            //Entrer Un titre ou une description
+            $error=3;
+         }
+      }
+      else{
+         //L'actualité n'existe pas
+         $error=4;
+      }
+   }
+   else{
+      //Pas d'actualité sélectionné
+      $error=1;
+   }
+   header("Location: admin_actualite.php?errorModifActu=".$error."#admin");
+   exit();
+}
 
 
 //Supprimer actualite

@@ -130,14 +130,26 @@ $mysqli->close();
             <?php
                if(isset($_GET['error'])){
                   if(intval($_GET['error']) and !empty($_GET['error'])){
-                     if($_GET['error']==3){
+                     if($_GET['error']==1){
+                        echo "<p id='ok'>Modification effectuée</p>";
+                     }
+                     elseif($_GET['error']==3){
                         echo "l'élément n'est pas dans la sélection";
                      }
-                     elseif($_GET['error']==1) {
+                     elseif($_GET['error']==7) {
                         echo "Entrer une sélection";
                      }
                      elseif($_GET['error']==2) {
                         echo "Entrer un élément";
+                     }
+                     elseif($_GET['error']==4) {
+                        echo "La sélection n'existe pas";
+                     }
+                     elseif($_GET['error']==5) {
+                        echo "L'éléments n'existe pas";
+                     }
+                     elseif($_GET['error']==6) {
+                        echo "La requête a échoué";
                      }
                      else{
                         echo "Erreur non reconnue";
@@ -162,7 +174,7 @@ $mysqli->close();
                <input type='submit' value='Enlever éléments' id='submit'/>
             </form>
 
-            <form action='selection_action.php?input=ajouteleSel' method='post'>
+            <form action='selection_action.php?input=ajoutEleSel' method='post'>
                <select name='ajoutEleSel_sel'>
                   <option value=''>Sélection</option>
                   <?php
@@ -171,7 +183,7 @@ $mysqli->close();
                      }
                   ?>
                </select>
-               <input type='text' id='ajoutEleSel_ele' name='ajoutEleSel_ele' required placeholder='Éléments'>
+               <input type='text' id='ajoutEleSel_ele' name='ajoutEleSel_ele'  placeholder='Éléments'>
                <input type='submit' value='Ajouter éléments' id='submit'/>
             </form>
          </div>

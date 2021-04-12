@@ -183,7 +183,7 @@ $mysqli->close();
                   }
                   ?>
                </select>
-               <input type='submit' value='Supprimer' id='submit'/>
+               <input type='submit' value='Supprimer' id='supprimer'/>
             </form>
          </div>
       </div>

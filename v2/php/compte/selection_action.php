@@ -29,7 +29,7 @@ if($_GET['input']=='liste'){
                $error=3;
             }
             else{
-               header("Location: admin_selection.php#admin");
+               header("Location: admin_selection.php?error=1#admin");
                exit();
             }
          }
@@ -41,7 +41,7 @@ if($_GET['input']=='liste'){
    }
    else{
       //Entrer une sélection
-      $error=1;
+      $error=7;
    }
    header("Location: admin_accueil.php?error=".$error."#admin");
    exit();
@@ -67,6 +67,71 @@ else if($_GET['input']=='checkbox') {
       exit();
    }
    header("Location: admin_selection.php?error=".$error."#admin");
+   exit();
+}
+
+//Input : Ajouter un éléments dans une sélection
+else if($_GET['input']=='ajoutEleSel'){
+   if(!empty($_POST['ajoutEleSel_sel'])){
+      $sel=htmlspecialchars(addslashes($_POST['ajoutEleSel_sel']));
+
+      //On verifie que la sélection existe
+      $reqSelExist="SELECT sel_intitule FROM t_selection_sel WHERE sel_numero='$sel';";
+      $resSelExist = $mysqli->query($reqSelExist);
+
+      if($resSelExist->num_rows){
+         if(!empty($_POST['ajoutEleSel_ele'])){
+            $elt=htmlspecialchars(addslashes($_POST['ajoutEleSel_ele']));
+
+            //On verifie que la l'élément existe
+            $reqEleExist="SELECT ele_intitule FROM t_element_ele WHERE ele_intitule='$elt';";
+            $resEleExist = $mysqli->query($reqEleExist);
+
+            if($resEleExist->num_rows){
+               $reqIdEle="SELECT ele_numero FROM t_element_ele
+                          WHERE ele_intitule='$elt'";
+               $resIdEle=$mysqli->query($reqIdEle);
+
+               if($resIdEle){
+                  $IdEle = $resIdEle->fetch_array(MYSQLI_ASSOC);
+                  $reqAjoutEleSel="INSERT INTO tj_relie_rel (sel_numero, ele_numero) VALUES ('$sel', '$IdEle[ele_numero]');";
+                  $resAjoutEleSel=$mysqli->query($reqAjoutEleSel);
+
+                  if($resAjoutEleSel){
+                     header("Location: admin_selection.php?error=1#admin");
+                     exit();
+                  }
+                  else{
+                     //La requete à échoué
+                     $error=6;
+                  }
+               }
+               else{
+                  //La requète a échoué
+                  $error=6;
+               }
+            }
+            else{
+               //L'éléments n'existe pas
+               $error=5;
+            }
+         }
+         else{
+            //Entrer un élément
+            $error=2;
+         }
+      }
+      else{
+         //La sélection n'existe pas
+         $error=4;
+      }
+   }
+   else{
+      //Entrer une sélection
+      $error=7;
+   }
+   header("Location: admin_selection.php?error=".$error."#admin");
+   exit();
 }
 
 //S'il n'y a pas de $_GET

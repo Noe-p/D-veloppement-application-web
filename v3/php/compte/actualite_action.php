@@ -145,7 +145,7 @@ else if($_GET['input']=='modifActu'){
                   $reqModifTitre="UPDATE t_actualite_actu SET actu_titre = '$titre' WHERE actu_numero = '$actu';";
                   $resModifTitre = $mysqli->query($reqModifTitre);
 
-                  if($resModifTitre){
+                  if(!$resModifTitre){
                      //La requete a échoué
                      $error=2;
                   }
@@ -160,9 +160,9 @@ else if($_GET['input']=='modifActu'){
                      $error=2;
 
                   }
-                  header("Location: admin_actualite.php?errorModifActu=1#admin");
-                  exit();
                }
+               header("Location: admin_actualite.php?errorModifActu=1#admin");
+               exit();
             }
             else{
                //Entrer Un titre ou une description

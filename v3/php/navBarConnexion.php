@@ -15,7 +15,7 @@
                echo "<li><a href='../compte/admin_accueil.php?'>Profil</a></li>
                <li><a href='../compte/admin_actualite.php?#admin'>Actualités</a></li>
                <li><a href='../compte/admin_selection.php?#admin'>Sélections</a></li>
-               <li><a href='../compte/admin_accueil.php?#admin'>Éléments</a></li>
+               <li><a href='../compte/admin_element.php?#admin'>Éléments</a></li>
                <li><a href='../compte/admin_accueil.php?#admin'>Liens</a></li>
                <li><a id='deconnexion' href='../connexion/deconnexion.php?#admin'>Déconnexion</a></li>";
             } else{

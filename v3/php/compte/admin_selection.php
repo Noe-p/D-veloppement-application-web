@@ -157,10 +157,14 @@ $mysqli->close();
    <h2 id='admin'>Administration :</h2>
 
    <div class='buttons'>
-      <a href='admin_accueil.php#admin' class='button'>Profils</a>
+      <?php
+      if($_SESSION['statut']=='A'){
+         echo "<a href='admin_accueil.php#admin' class='button'>Profils</a>";
+      }
+      ?>
       <a href='admin_actualite.php#admin' class='button'>Actualités</a>
       <a href='admin_selection.php#admin' class='button open'>Sélections</a>
-      <a href='admin_accueil.php#admin' class='button'>Éléments</a>
+      <a href='admin_element.php#admin' class='button'>Éléments</a>
       <a href='admin_accueil.php#admin' class='button'>Liens</a>
    </div>
 

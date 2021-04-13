@@ -103,7 +103,7 @@ header h2{
    justify-content: space-around;
    margin-top: 30px;
    margin-bottom: 30px;
-   width: 80%;
+   width: 90%;
 }
 
 .manage h3{
@@ -259,7 +259,7 @@ input:hover{
    box-shadow: none;
 }
 
-.ajoutActu input, .ajoutActu textarea, .ajoutActu div
+.ajoutActu input, .ajoutActu textarea, .ajoutActu div,
 .modifActu input, .modifActu textarea, .modifActu div{
    margin-top: 10px;
 }
@@ -346,7 +346,10 @@ input:hover{
    width: auto;
 }
 /*Eléments*/
-
+#img, #modifImg{
+   background-color: rgb(255, 249, 235);
+   color:rgb(51, 51, 51);
+}
 
 /*Liens*/
 

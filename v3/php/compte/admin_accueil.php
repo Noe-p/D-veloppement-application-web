@@ -25,7 +25,8 @@ else{
 }
 
 //Tous les compte utilisateur
-$reqAllCpt = "SELECT * FROM t_profil_pro";
+$reqAllCpt = "SELECT * FROM t_profil_pro
+              ORDER BY pro_date DESC";
 $resAllCpt = $mysqli->query($reqAllCpt);
 $resAllCpt2 = $mysqli->query($reqAllCpt);
 $resAllCpt3 = $mysqli->query($reqAllCpt);
@@ -111,7 +112,7 @@ $mysqli->close();
       <a href='admin_accueil.php#admin' class='button open'>Profils</a>
       <a href='admin_actualite.php#admin' class='button'>Actualités</a>
       <a href='admin_selection.php#admin' class='button'>Sélections</a>
-      <a href='admin_accueil.php#admin' class='button'>Éléments</a>
+      <a href='admin_element.php#admin' class='button'>Éléments</a>
       <a href='admin_accueil.php#admin' class='button'>Liens</a>
    </div>
 

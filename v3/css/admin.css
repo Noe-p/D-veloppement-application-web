@@ -68,10 +68,19 @@ header h2{
    left: 50%;
    transform: translateX(-50%);
    margin-bottom: 30px;
+   color:rgb(51, 51, 51);
+   border: None;
+   background-color: rgb(255, 249, 235);
+   border-radius: 8px;
+   padding: 5px 10px 5px 10px;
+   transition: all 0.3s;
+   width: 100px;
 }
 
 #modifUser:hover{
    cursor: pointer;
+   background-color: rgb(210, 138, 28);
+   width: 110px;
 }
 /*BOUTON*/
 .buttons{

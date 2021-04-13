@@ -2,11 +2,15 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['login']) or $_SESSION['statut']=='R'){
+if(!isset($_SESSION['login'])){
    header("Location: ../connexion/session.php");
    exit();
 }
 
+if($_SESSION['statut']=='R'){
+   header("Location: admin_actualite.php");
+   exit();
+}
 //CONNEXION A LA BASE
 require('../connexionBDD.php');
 

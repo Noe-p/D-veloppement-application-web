@@ -26,20 +26,12 @@ if ($_POST["pseudo"] and $_POST["mdp"]){
       $com = $resCom->fetch_array(MYSQLI_ASSOC);
 
       //Si un compte existe
-      if($nbCom==1 and $com['pro_validite']=='A' and $com['pro_statut']=='A'){
+      if($nbCom==1 and $com['pro_validite']=='A'){
          session_start();
          $_SESSION['login'] = $pseudo;
          $_SESSION['statut'] = $com['pro_statut'];
 
          header("Location: ../compte/admin_accueil.php");
-         exit();
-      }
-      else if ($nbCom==1 and $com['pro_validite']=='A' and $com['pro_statut']=='R'){
-         session_start();
-         $_SESSION['login'] = $pseudo;
-         $_SESSION['statut'] = $com['pro_statut'];
-
-         header("Location: ../compte/admin_actualite.php");
          exit();
       }
       else if ($com['pro_validite']=='D') {

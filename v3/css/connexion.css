@@ -23,7 +23,15 @@ body {
    position: relative;
 
 }
+/*MODIF INFO USER*/
+.mdp_confirm{
+   margin-top: 50px;
+}
 
+.modifInfo{
+   display:flex;
+
+}
 /*UTILISATEUR*/
 .utilisateur {
    display: inline-flex;
@@ -151,7 +159,6 @@ input:hover{
 .connexion a:hover{
    text-decoration:underline;
 }
-
 /*CREATE COMPTE*/
 
 .createCompte {

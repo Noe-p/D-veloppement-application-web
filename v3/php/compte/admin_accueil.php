@@ -92,6 +92,7 @@ $mysqli->close();
                                        else{echo "Responsable";}?></li>
             <li><B>Membre depuis le : </B><?php echo $infoUser['pro_date'];?></li>
          </ul>
+         <a href="admin_modifUser.php"><button type="button" id="modifUser" name="button">Modifier</button></a>
       </article>
 
       <article class='infosUser'>

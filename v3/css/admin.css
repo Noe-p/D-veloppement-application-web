@@ -63,6 +63,16 @@ header h2{
    margin: 10px;
 }
 
+#modifUser{
+   position: relative;
+   left: 50%;
+   transform: translateX(-50%);
+   margin-bottom: 30px;
+}
+
+#modifUser:hover{
+   cursor: pointer;
+}
 /*BOUTON*/
 .buttons{
    margin: 30px;

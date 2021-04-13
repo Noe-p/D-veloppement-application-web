@@ -1,0 +1,231 @@
+@font-face {
+   font-family: 'Kiwi_Maru';
+   src: url("fonts/Kiwi_Maru/KiwiMaru-Regular.ttf");
+}
+
+html {
+   scroll-behavior: smooth;
+   margin: 0
+}
+
+p, a, a:visited {
+   text-decoration: none;
+   font-size: 1em;
+   color: rgb(255, 249, 235);
+}
+
+body {
+   margin: 0;
+   padding: 0;
+   font-family: "Kiwi_Maru";
+   background-color: rgb(255, 249, 235);
+   color: rgb(255, 249, 235);
+   position: relative;
+
+}
+
+/*UTILISATEUR*/
+.utilisateur {
+   display: inline-flex;
+   position: absolute;
+   top: 30vh;
+   right: 0;
+}
+
+.utilisateur img {
+   width: 20px;
+   margin-right: 10px;
+
+}
+
+.utilisateur a {
+   margin: 10px;
+   display: flex;
+   align-items: center;
+   padding: 10px;
+   border: solid 2px rgba(0, 0, 0, 0);
+   transition: all 0.5s;
+   color: rgb(255, 249, 235);
+}
+
+.utilisateur a:hover {
+   border: solid 2px rgb(255, 249, 235);
+
+}
+
+.connexion {
+   padding: 100px 0px 100px 0px;
+   height: auto;
+   width: 100%;
+   background-color: rgb(13, 50, 65);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.connexion a:visited {
+   color : rgb(255, 249, 235);
+
+}
+
+/*CONNEXION*/
+form{
+   border: solid 2px rgb(255, 249, 235);
+   border-radius: 20px;
+   width: 500px;
+   display: flex;
+   flex-direction: column;
+}
+
+form h2{
+   font-size: 2em;
+   margin: 0;
+   text-align: center;
+   border-top-left-radius: 20px;
+   border-top-right-radius: 20px;
+   padding:5px;
+   margin-bottom: 15px;
+}
+
+form div{
+   margin-bottom: 10px;
+   width: 100%;
+   text-align: center;
+}
+
+input{
+   border-radius: 7px;
+   height: 26px;
+   border: solid 1px white;
+   background-color: rgb(13, 50, 65);
+   color: white;
+   font-size: 1em;
+   padding-left: 5px;
+   transition: all 0.2s;
+   margin-top: 5px;
+}
+input:hover{
+   border: solid 1px rgba(28, 98, 129, 1);
+}
+
+.buttonConnexion{
+   background-color: white;
+   color: rgb(51, 51, 51);
+   height: 35px;
+   width: 180px;
+   cursor: pointer;
+   transition: all 0.2s;
+}
+.buttonConnexion:hover{
+   width: 190px;
+}
+
+
+#message, #message2{
+   position: absolute;
+   transform: translate(10px,5px);
+}
+
+#message3{
+   transform: translateX(24%);
+}
+
+.buttonConnexion{
+   margin-top: 30px;
+   position: relative;
+}
+
+}
+.connexion a{
+   margin-top: 5px;
+   transition: all 0.5s;
+}
+
+.connexion a:hover{
+   text-decoration:underline;
+}
+
+/*CREATE COMPTE*/
+
+.createCompte {
+   padding: 80px 0px 80px 0px;
+   width: 100%;
+   background-color: rgb(13, 50, 65);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   height: 500px;
+}
+
+
+@media all and (max-device-width:480px) {
+
+   p, a, a:visited, label{
+      font-size: 1.8em;
+   }
+
+   section p{
+      margin-top: 50%;
+      font-size: 2.5em;
+
+   }
+
+   form h2{
+      font-size: 4em;
+   }
+
+   form div{
+      margin-bottom: 50px;
+   }
+
+   input{
+      width: 350px;
+      height: 40px;
+      font-size: 1.8em;
+      border-radius: 10px;
+   }
+
+   .buttonConnexion{
+      width: 300px;
+      height: 50px;
+   }
+   body{
+      background-color: rgb(13, 50, 65);
+   }
+
+   .utilisateur {
+      display: none;
+   }
+
+   .connexion.open {
+      position: absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+   }
+
+   .createCompte form{
+      margin-top: 60vh;
+      width:80%;
+   }
+
+   .connexion form{
+      margin-top:28vh;
+      width:80%;
+   }
+
+
+   .createCompte.open {
+      position: absolute;
+      left:50%;
+      top:50%;
+      transform: translate(-50%,-50%);
+   }
+
+   .createCompte.open form{
+      height: auto;
+   }
+
+
+}

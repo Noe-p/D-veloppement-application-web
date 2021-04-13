@@ -69,7 +69,7 @@ $mysqli->close();
    <div class="utilisateur">
       <?php
       if(!isset($_SESSION['login'])){
-         echo "<a href='php/connexion/inscription.php'><img src='assets/logos/padlock_wo.png'></img>Inscription</a>";
+         echo "<a href='php/connexion/session.php'><img src='assets/logos/padlock_wo.png'></img>Connexion</a>";
       }
       ?>
       <a href="#contact"><img src="assets/logos/information.png"></img>Contact</a>

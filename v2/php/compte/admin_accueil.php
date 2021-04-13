@@ -2,7 +2,7 @@
 <?php
 session_start();
 
-if((!isset($_SESSION['login'])) or ($_SESSION['statut']=='R')){
+if(!isset($_SESSION['login']) or $_SESSION['statut']=='R'){
    header("Location: ../connexion/session.php");
    exit();
 }
@@ -55,6 +55,12 @@ $reqCptAdmin= "SELECT * FROM t_profil_pro WHERE pro_statut='A'";
 $resCptAdmin = $mysqli->query($reqCptAdmin);
 $nbCptAdmin = $resCptAdmin->num_rows;
 
+if(!$resAllCpt or !$resCptDes or ! $resCptActif or !$resCptAdmin){
+   echo "Error: La requête a echoué \n";
+   echo "Errno: " . $mysqli->errno . "\n";
+   echo "Error: " . $mysqli->error . "\n";
+   exit();
+}
 $mysqli->close();
 ?>
 
@@ -86,6 +92,7 @@ $mysqli->close();
             <li><B>Membre depuis le : </B><?php echo $infoUser['pro_date'];?></li>
          </ul>
       </article>
+
       <article class='infosUser'>
          <h2>Informations : </h2>
          <ul>
@@ -95,7 +102,6 @@ $mysqli->close();
             <li><B>Comptes désactivés : </B><?php echo $nbCptDes; ?></li>
          </ul>
       </article>
-
 
    </header>
 
@@ -117,20 +123,26 @@ $mysqli->close();
             <?php
             if(isset($_GET['error'])){
                if(intval($_GET['error']) and !empty($_GET['error'])){
-                  if($_GET['error']==3){
+                  if($_GET['error']==1){
+                     echo "<p id='ok'>Modification effectuée</p>";
+                  }
+                  elseif($_GET['error']==3) {
                      echo "Le pseudo n'existe pas";
                   }
-                  elseif($_GET['error']==1) {
+                  elseif($_GET['error']==4) {
                      echo "Entrer un pseudo";
                   }
                   elseif($_GET['error']==2) {
                      echo "La requête a échoué";
                   }
-                  elseif($_GET['error']==4) {
+                  elseif($_GET['error']==6) {
                      echo "Cocher une seule case";
                   }
                   elseif($_GET['error']==5) {
                      echo "Cocher une case";
+                  }
+                  elseif($_GET['error']==7) {
+                     echo "Option prochainement disponible";
                   }
                   else{
                      echo "Erreur non reconnue";
@@ -139,7 +151,8 @@ $mysqli->close();
                else{
                   echo "Erreur non reconnue";
                }
-            }?>
+            }
+            ?>
             </span>
 
             <form action='comptes_action.php?input=liste' method='post'  class='inputPseudoModif'>
@@ -152,38 +165,6 @@ $mysqli->close();
                   ?>
                </select>
                <input type='submit' value='Activer/Désactiver' id='submit'/>
-            </form>
-
-            <form action='comptes_action.php?input=modifStatut' method='post'  class='modifSatut'>
-               <select name='modifStatut'>
-                  <option value=''>Pseudo</option>
-                  <?php
-                  while ($allCpt4 = $resAllCpt4->fetch_assoc()) {
-                     echo "<option value=".$allCpt4['com_pseudo'].">".$allCpt4['com_pseudo']."</option>";
-                  }
-                  ?>
-               </select>
-               <div>
-                 <input type='checkbox' id='modifStatutA' name='modifStatutA'>
-                 <label for='modifStatutA'>A</label>
-               </div>
-               <div>
-                 <input type='checkbox' id='modifStatutR' name='modifStatutR'>
-                 <label for='modifStatutR'>R</label>
-               </div>
-               <input type='submit' value='Modifier' id='submit'/>
-            </form>
-
-            <form action='comptes_action.php?input=suppCompte' method='post'  class='inputPseudoModif'>
-               <select name='suppCompte'>
-                  <option value=''>Compte à supprimer</option>
-                  <?php
-                  while ($allCpt3 = $resAllCpt3->fetch_assoc()) {
-                     echo "<option value=".$allCpt3['com_pseudo'].">".$allCpt3['com_pseudo']."</option>";
-                  }
-                  ?>
-               </select>
-               <input type='submit' value='Supprimer' id='supprimer'/>
             </form>
          </div>
       </div>
@@ -237,7 +218,7 @@ $mysqli->close();
             ?>
          </tbody>
       </table>
-   </section>"
+   </section>
 
 
    <?php require('../footer.php'); ?>

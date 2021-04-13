@@ -2,7 +2,7 @@
 <?php
 session_start();
 
-if((!isset($_SESSION['login'])) or ($_SESSION['statut']=='R')){
+if(!isset($_SESSION['login'])){
    header("Location: ../connexion/session.php");
    exit();
 }
@@ -60,6 +60,12 @@ $reqCptAdmin= "SELECT * FROM t_profil_pro WHERE pro_statut='A'";
 $resCptAdmin = $mysqli->query($reqCptAdmin);
 $nbCptAdmin = $resCptAdmin->num_rows;
 
+if(!$resAllCpt or !$resCptDes or ! $resCptActif or !$resCptAdmin){
+   echo "Error: La requête a echoué \n";
+   echo "Errno: " . $mysqli->errno . "\n";
+   echo "Error: " . $mysqli->error . "\n";
+   exit();
+}
 $mysqli->close();
 ?>
 
@@ -91,15 +97,22 @@ $mysqli->close();
             <li><B>Membre depuis le : </B><?php echo $infoUser['pro_date'];?></li>
          </ul>
       </article>
-      <article class='infosUser'>
-         <h2>Informations : </h2>
-         <ul>
-            <li><B>Inscrits : </B><?php echo $nbCpt; ?></li>
-            <li><B>Comptes Administrateur : </B><?php echo $nbCptAdmin; ?></li>
-            <li><B>Comptes activés : </B><?php echo $nbCptActif; ?></li>
-            <li><B>Comptes désactivés : </B><?php echo $nbCptDes; ?></li>
-         </ul>
-      </article>
+
+      <?php
+      if($_SESSION['statut']=='A'){
+         echo "
+            <article class='infosUser'>
+               <h2>Informations : </h2>
+               <ul>
+                  <li><B>Inscrits : </B>".$nbCpt."</li>
+                  <li><B>Comptes Administrateur : </B>".$nbCptAdmin."</li>
+                  <li><B>Comptes activés : </B>".$nbCptActif."</li>
+                  <li><B>Comptes désactivés : </B>".$nbCptDes."</li>
+               </ul>
+            </article>
+         ";
+      }
+      ?>
 
 
 
@@ -108,7 +121,11 @@ $mysqli->close();
    <h2 id='admin'>Administration :</h2>
 
    <div class='buttons'>
-      <a href='admin_accueil.php#admin' class='button'>Profils</a>
+      <?php
+      if($_SESSION['statut']=='A'){
+         echo "<a href='admin_accueil.php#admin' class='button'>Profils</a>";
+      }
+      ?>
       <a href='admin_actualite.php#admin' class='button open'>Actualités</a>
       <a href='admin_selection.php#admin' class='button'>Sélections</a>
       <a href='admin_accueil.php#admin' class='button'>Éléments</a>
@@ -124,6 +141,12 @@ $mysqli->close();
                if(isset($_GET['errorNewActu'])){
                   if(intval($_GET['errorNewActu']) and !empty($_GET['errorNewActu'])){
                      if($_GET['errorNewActu']==1){
+                        echo "<p id='ok'>Actualité ajoutée</p>";
+                     }
+                     else if($_GET['errorNewActu']==2){
+                        echo "La requête à échoué";
+                     }
+                     else if($_GET['errorNewActu']==3){
                         echo "Entrer un titre et une description";
                      }
                      else{
@@ -151,69 +174,26 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class="modifActu">
-            <h3>Modifier une actualité :</h3>
-            <span id='message5'>
-               <?php
-                  if(isset($_GET['errorModifActu'])){
-                     if(intval($_GET['errorModifActu']) and !empty($_GET['errorModifActu'])){
-                        if($_GET['errorModifActu']==2){
-                           echo "La requête a échoué";
-                        }
-                        else if($_GET['errorModifActu']==3){
-                           echo "Entrer un titre ou une description";
-                        }
-                        else if($_GET['errorModifActu']==4){
-                           echo "L'actualité n'existe pas";
-                        }
-                        else if($_GET['errorModifActu']==1){
-                           echo "Pas d'actualité sélectionnée";
-                        }
-                        else{
-                           echo "Erreur non reconnue";
-                        }
-                     }
-                     else{
-                        echo "Erreur non reconnue";
-                     }
-                  }
-               ?>
-            </span>
-            <form action='actualite_action.php?input=modifActu' method='post'  class='inputPseudoModif'  required>
-               <select name='modifActu'>
-                  <option value=''>Actualité à modifier</option>
-                  <?php
-                     while ($allActu4 = $resAllActu4->fetch_assoc()) {
-                        echo "<option value=".$allActu4['actu_numero'].">".$allActu4['actu_titre']."</option>";
-                     }
-                  ?>
-               </select>
-               <div>
-                  <label for='modifActuTitre'>Titre :<br/></label>
-                  <input type='text' id='modifActuTitre' name='modifActuTitre' >
-               </div>
-               <div>
-                  <label for='modifActuDesc'>Description :<br/></label>
-                  <textarea rows='6' cols='32' id='modifActuDesc' name='modifActuDesc' maxlength='500'></textarea>
-               </div>
-               <input type='submit' value='Modifier' id='buttonModifier'/>
-            </form>
-         </div>
-
          <div class='danger'>
             <h3>Gérer les actualités :</h3>
             <span id='message5'>
             <?php
                if(isset($_GET['error'])){
                   if(intval($_GET['error']) and !empty($_GET['error'])){
-                     if($_GET['error']==3){
+                     if($_GET['error']==1){
+                        echo "<p id='ok'>Modification effectuée</p>";
+                     }
+                     else if($_GET['error']==3){
                         echo "L'actualité' n'existe pas";
                      }
-                     elseif($_GET['error']==1) {
+                     elseif($_GET['error']==4) {
                         echo "Entrer une actualité";
                      }
                      elseif($_GET['error']==2) {
                         echo "La requête a échoué";
+                     }
+                     elseif($_GET['error']==5) {
+                        echo "<p id='ok'>Actualité supprimée</p>";
                      }
                      else{
                         echo "Erreur non reconnue";
@@ -236,18 +216,6 @@ $mysqli->close();
                   ?>
                </select>
                <input type='submit' value='Activer/Désactiver' id='submit'/>
-            </form>
-
-            <form action='actualite_action.php?input=suppActu' method='post'  class='inputPseudoModif'  required>
-               <select name='actuSupp'>
-                  <option value=''>Actualité à supprimer</option>
-                  <?php
-                     while ($allActu3 = $resAllActu3->fetch_assoc()) {
-                        echo "<option value=".$allActu3['actu_numero'].">".$allActu3['actu_titre']."</option>";
-                     }
-                  ?>
-               </select>
-               <input type='submit' value='Supprimer' id='supprimer'/>
             </form>
          </div>
       </div>

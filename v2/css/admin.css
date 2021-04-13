@@ -336,6 +336,15 @@ input:hover{
 .inputPseudoModif{
    text-align: center;
 }
+
+#ajoutEleSel{
+   width: auto;
+}
+
+#ajoutEleSel:hover{
+   background-color: rgb(128, 205, 79);
+   width: auto;
+}
 /*Eléments*/
 
 

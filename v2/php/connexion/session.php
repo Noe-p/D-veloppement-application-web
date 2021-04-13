@@ -18,7 +18,7 @@ session_start();
    <?php require('../navBarConnexion.php'); ?>
 
    <div class="utilisateur">
-      <a href="session.php"><img src="../../assets/logos/padlock_wo.png"></img>Connexion</a>
+      <a href='inscription.php'><img src='../../assets/logos/padlock_wo.png'></img>Inscription</a>
    </div>
 
    <section class="connexion">

@@ -300,7 +300,7 @@ $mysqli->close();
             </form>
             <?php
             if(isset($_GET['sel'])){
-               echo "<form action='action/selection_action.php?input=modifSel&sel=".$sel."' method='post'>";
+               echo "<form action='action/selection_action.php?input=modifSel&sel=".$_GET['sel']."' method='post'>";
                $val=1;
             }
             else{

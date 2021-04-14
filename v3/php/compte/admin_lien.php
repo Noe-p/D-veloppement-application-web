@@ -180,7 +180,7 @@ $mysqli->close();
                if(isset($_GET['errorNewLien'])){
                   if(intval($_GET['errorNewLien']) and !empty($_GET['errorNewLien'])){
                      if($_GET['errorNewLien']==1){
-                        echo "<p id='ok'>Lienalité ajoutée</p>";
+                        echo "<p id='ok'>Lien ajoutée</p>";
                      }
                      else if($_GET['errorNewLien']==2){
                         echo "La requête à échoué";
@@ -275,7 +275,7 @@ $mysqli->close();
             </form>
             <?php
             if(isset($_GET['lie'])){
-               echo "<form action='action/lien_action.php?input=modifLien&lie=".$lie."' method='post'>";
+               echo "<form action='action/lien_action.php?input=modifLien&lie=".$_GET['lie']."' method='post'>";
                $val=1;
             }
             else{
@@ -318,7 +318,7 @@ $mysqli->close();
                         echo "La requête a échoué";
                      }
                      elseif($_GET['error']==5) {
-                        echo "<p id='ok'>Lien supprimée</p>";
+                        echo "<p id='ok'>Lien supprimé</p>";
                      }
                      else{
                         echo "Erreur non reconnue";

@@ -396,5 +396,17 @@ input:hover{
 }
 
 @media all and (max-device-width:480px) {
+   header{
+      margin-top: 300px;
+      flex-direction: column;
+   }
 
+   p{
+
+   }
+
+   .infosUser{
+      width: 90vw;
+      margin: 30px;
+   }
 }

@@ -310,7 +310,7 @@ $mysqli->close();
                   <option value=''>Compte à supprimer</option>
                   <?
                   while ($allCpt3 = $resAllCpt3->fetch_assoc()) {
-                     echo "<option value=".$allCpt3['com_pseudo'].">".$allCpt3['com_pseudo']."</option>";
+                     echo "<option value='".$allCpt3['com_pseudo']."'>".$allCpt3['com_pseudo']."</option>";
                   }
                   ?>
                </select>

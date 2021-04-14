@@ -288,7 +288,7 @@ $mysqli->close();
             </form>
             <?php
             if(isset($_GET['ele'])){
-               echo "<form action='action/element_action.php?input=modifEle&ele=".$ele."' method='post'>";
+               echo "<form action='action/element_action.php?input=modifEle&ele=".$_GET['ele']."' method='post'>";
                $val=1;
             }
             else{

@@ -26,7 +26,7 @@ if($_GET['input']=='activSel'){
                $resModifVal = $mysqli->query($reqModifVal);
 
                if($resModifVal){
-                  header("Location: ../../admin_selection.php?error=1#admin");
+                  header("Location: ../admin_selection.php?error=1#admin");
                   exit();
                }
                else{
@@ -59,38 +59,27 @@ if($_GET['input']=='activSel'){
 
 //Input : checkbox
 else if($_GET['input']=='checkbox') {
-   $sel=htmlspecialchars(addslashes($_POST['ajoutEleSel_sel']));
+   if(empty($_POST['checkbox'])){
+      header("Location: ../admin_selection.php#admin");
+      exit();
+   }
+   else{
+      foreach($_POST['checkbox'] as $check){
+         $reqModifVal="DELETE FROM tj_relie_rel WHERE ele_numero='$check';";
+         $resModifVal = $mysqli->query($reqModifVal);
 
-   //On verifie que la sélection existe
-   $reqSelExist="SELECT sel_intitule FROM t_selection_sel WHERE sel_numero='$sel';";
-   $resSelExist = $mysqli->query($reqSelExist);
-
-   if($resSelExist){
-      if($resSelExist->num_rows){
-         if(!empty($_POST['element'])){
-            if(empty($_POST['checkbox'])){
-               header("Location: ../admin_selection.php#admin");
-               exit();
-            }
-            else{
-               foreach($_POST['checkbox'] as $check){
-                  $reqModifVal="DELETE FROM tj_relie_rel WHERE ele_numero='$check';";
-                  $resModifVal = $mysqli->query($reqModifVal);
-
-                  if(!$resModifVal){
-                     //LA requète a échoué
-                     $error=3;
-                  }
-               }
-               header("Location: ../admin_selection.php#admin");
-               exit();
-            }
-            header("Location: ../admin_selection.php?error=".$error."#admin");
-            exit();
+         if(!$resModifVal){
+            //LA requète a échoué
+            $error=3;
          }
       }
+      header("Location: ../admin_selection.php#admin");
+      exit();
    }
+   header("Location: ../admin_selection.php?error=".$error."#admin");
+   exit();
 }
+
 
 //Input : Ajouter un éléments dans une sélection
 else if($_GET['input']=='ajoutEleSel'){
@@ -211,8 +200,8 @@ elseif($_GET['input']=='id') {
 
 //Modifer sélection
 else if($_GET['input']=='modifSel'){
-   if(!empty($_GET['ele'])){
-      $sel=htmlspecialchars(addslashes($_GET['ele']));
+   if(!empty($_GET['sel'])){
+      $sel=htmlspecialchars(addslashes($_GET['sel']));
 
       //On verifie que la sélection existe
       $reqSelExist="SELECT sel_intitule FROM t_selection_sel WHERE sel_numero = '$sel';";
@@ -317,7 +306,7 @@ else if($_GET['input']=='suppSel'){
 
 //S'il n'y a pas de $_GET
 else{
-   header("Location: admin_actualite.php#admin");
+   header("Location: ../admin_selection.php#admin");
    exit();
 }
 

@@ -68,45 +68,36 @@ if($_GET['input']=='liste'){
 
 //Input : checkbox
 else if($_GET['input']=='checkbox') {
-   $actu=htmlspecialchars(addslashes($_POST['actuDes']));
+   //Si la checkbox est cochée, on active le compte
+   if(!empty($_POST['checkbox'])){
+      $reqModifVal="UPDATE t_actualite_actu SET actu_etat = 'A' WHERE actu_numero = '$_GET[actuDes]';";
+      $resModifVal = $mysqli->query($reqModifVal);
 
-   //On verifie que l'actualité existe
-   $reqActuExist="SELECT actu_titre FROM t_actualite_actu WHERE actu_numero='$actu';";
-   $resActuExist = $mysqli->query($reqActuExist);
-
-   if($resActuExist){
-      if($resActuExist->num_rows){
-         //Si la checkbox est cochée, on active le compte
-         if(!empty($_POST['checkbox'])){
-            $reqModifVal="UPDATE t_actualite_actu SET actu_etat = 'A' WHERE actu_numero = '$actu';";
-            $resModifVal = $mysqli->query($reqModifVal);
-
-            if(!$resModifVal){
-               //LA requete a echoue
-               $error=2;
-            }
-            else{
-               header("Location: ../admin_actualite.php#admin");
-               exit();
-            }
-         }
-         else{
-            $reqModifVal="UPDATE t_actualite_actu SET actu_etat = 'D' WHERE actu_numero = '$actu';";
-            $resModifVal = $mysqli->query($reqModifVal);
-
-            if(!$resModifVal){
-               //LA requete a echoue
-               $error=2;
-            }
-            else{
-               header("Location: ../admin_actualite.php#admin");
-               exit();
-            }
-         }
-         header("Location: ../admin_actualite.php?error=".$error."#admin");
+      if(!$resModifVal){
+         //LA requete a echoue
+         $error=2;
+      }
+      else{
+         header("Location: ../admin_actualite.php#admin");
          exit();
       }
    }
+   else{
+      $reqModifVal="UPDATE t_actualite_actu SET actu_etat = 'D' WHERE actu_numero = '$_GET[actuDes]';";
+      $resModifVal = $mysqli->query($reqModifVal);
+
+      if(!$resModifVal){
+         //LA requete a echoue
+         $error=2;
+      }
+      else{
+         header("Location: ../admin_actualite.php#admin");
+         exit();
+      }
+   }
+   header("Location: ../admin_actualite.php?error=".$error."#admin");
+   exit();
+
 }
 
 

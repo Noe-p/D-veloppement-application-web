@@ -7,13 +7,15 @@ require('../../connexionBDD.php');
 //Input : text
 if($_GET['input']=='activSel'){
    if(!empty($_POST['selection'])){
+      $sel=htmlspecialchars(addslashes($_POST['selection']));
+
       //On verifie que la sélection existe
       $reqSelExist="SELECT sel_intitule FROM t_selection_sel WHERE sel_numero='$sel';";
       $resSelExist = $mysqli->query($reqSelExist);
 
       if($resSelExist){
          if(!empty($_POST['element'])){
-            //On verifie que la sélection existe
+            //On verifie que l'élément' existe
             $reqEleExist="SELECT sel_intitule FROM t_selection_sel WHERE sel_numero='$sel';";
             $resEleExist = $mysqli->query($reqEleExist);
 
@@ -57,25 +59,37 @@ if($_GET['input']=='activSel'){
 
 //Input : checkbox
 else if($_GET['input']=='checkbox') {
-   if(empty($_POST['checkbox'])){
-      header("Location: ../admin_selection.php#admin");
-      exit();
-   }
-   else{
-      foreach($_POST['checkbox'] as $check){
-         $reqModifVal="DELETE FROM tj_relie_rel WHERE ele_numero='$check';";
-         $resModifVal = $mysqli->query($reqModifVal);
+   $sel=htmlspecialchars(addslashes($_POST['ajoutEleSel_sel']));
 
-         if(!$resModifVal){
-            //LA requète a échoué
-            $error=3;
+   //On verifie que la sélection existe
+   $reqSelExist="SELECT sel_intitule FROM t_selection_sel WHERE sel_numero='$sel';";
+   $resSelExist = $mysqli->query($reqSelExist);
+
+   if($resSelExist){
+      if($resSelExist->num_rows){
+         if(!empty($_POST['element'])){
+            if(empty($_POST['checkbox'])){
+               header("Location: ../admin_selection.php#admin");
+               exit();
+            }
+            else{
+               foreach($_POST['checkbox'] as $check){
+                  $reqModifVal="DELETE FROM tj_relie_rel WHERE ele_numero='$check';";
+                  $resModifVal = $mysqli->query($reqModifVal);
+
+                  if(!$resModifVal){
+                     //LA requète a échoué
+                     $error=3;
+                  }
+               }
+               header("Location: ../admin_selection.php#admin");
+               exit();
+            }
+            header("Location: ../admin_selection.php?error=".$error."#admin");
+            exit();
          }
       }
-      header("Location: ../admin_selection.php#admin");
-      exit();
    }
-   header("Location: ../admin_selection.php?error=".$error."#admin");
-   exit();
 }
 
 //Input : Ajouter un éléments dans une sélection
@@ -143,7 +157,7 @@ else if($_GET['input']=='ajoutEleSel'){
    exit();
 }
 
-//Ajout Élément
+//Ajout Sélection
 else if($_GET['input']=='newSel') {
    if(!empty($_POST['newSel']) and !empty($_POST['descSel'])){
       $titre=htmlspecialchars(addslashes($_POST['newSel']));
@@ -169,10 +183,36 @@ else if($_GET['input']=='newSel') {
    exit();
 }
 
+//Verif Sélection
+elseif($_GET['input']=='id') {
+   $sel=htmlspecialchars(addslashes($_POST['modifSel']));
+
+   //On verifie que la sélection existe
+   $reqSelExist="SELECT sel_intitule FROM t_selection_sel WHERE sel_numero='$sel';";
+   $resSelExist = $mysqli->query($reqSelExist);
+
+   if($resSelExist){
+      if($resSelExist->num_rows){
+         header("Location: ../admin_selection.php?sel=".$sel."#admin");
+         exit();
+      }
+      else{
+         //La sélection n'existe pas
+         $error=4;
+      }
+   }
+   else{
+      //La requête à echoué
+      $error=2;
+   }
+   header("Location: ../admin_selection.php?errorModifSel=".$error."#admin");
+   exit();
+}
+
 //Modifer sélection
 else if($_GET['input']=='modifSel'){
-   if(!empty($_POST['modifSel'])){
-      $sel=htmlspecialchars(addslashes($_POST['modifSel']));
+   if(!empty($_GET['ele'])){
+      $sel=htmlspecialchars(addslashes($_GET['ele']));
 
       //On verifie que la sélection existe
       $reqSelExist="SELECT sel_intitule FROM t_selection_sel WHERE sel_numero = '$sel';";

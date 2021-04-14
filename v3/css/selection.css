@@ -25,6 +25,21 @@ body {
    position: relative;
 }
 
+/*Lien*/
+.imgLien{
+   width: 30px;
+   margin-top: 30px;
+   max-width:0;
+   min-width:0;
+}
+#lienImg{
+   font-style: italic;
+   transition: all 0.2s;
+}
+#lienImg:hover{
+   color: rgb(48, 130, 164);
+}
+
 /*Sélection*/
 table {
    border-collapse: collapse;
@@ -171,13 +186,6 @@ section{
 }
 .flecheDroite{
    right: 5.2%;
-}
-
-.flecheDroite:hover, .flecheGauche:hover{
-   width: 107px;
-}
-.flecheDroite:hover{
-   right: 4.5%;
 }
 
 .emptySel{

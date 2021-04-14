@@ -68,35 +68,45 @@ if($_GET['input']=='liste'){
 
 //Input : checkbox
 else if($_GET['input']=='checkbox') {
-   //Si la checkbox est cochée, on active le compte
-   if(!empty($_POST['checkbox'])){
-      $reqModifVal="UPDATE t_actualite_actu SET actu_etat = 'A' WHERE actu_numero = '$_GET[actuDes]';";
-      $resModifVal = $mysqli->query($reqModifVal);
+   $actu=htmlspecialchars(addslashes($_POST['actuDes']));
 
-      if(!$resModifVal){
-         //LA requete a echoue
-         $error=2;
-      }
-      else{
-         header("Location: ../admin_actualite.php#admin");
+   //On verifie que l'actualité existe
+   $reqActuExist="SELECT actu_titre FROM t_actualite_actu WHERE actu_numero='$actu';";
+   $resActuExist = $mysqli->query($reqActuExist);
+
+   if($resActuExist){
+      if($resActuExist->num_rows){
+         //Si la checkbox est cochée, on active le compte
+         if(!empty($_POST['checkbox'])){
+            $reqModifVal="UPDATE t_actualite_actu SET actu_etat = 'A' WHERE actu_numero = '$actu';";
+            $resModifVal = $mysqli->query($reqModifVal);
+
+            if(!$resModifVal){
+               //LA requete a echoue
+               $error=2;
+            }
+            else{
+               header("Location: ../admin_actualite.php#admin");
+               exit();
+            }
+         }
+         else{
+            $reqModifVal="UPDATE t_actualite_actu SET actu_etat = 'D' WHERE actu_numero = '$actu';";
+            $resModifVal = $mysqli->query($reqModifVal);
+
+            if(!$resModifVal){
+               //LA requete a echoue
+               $error=2;
+            }
+            else{
+               header("Location: ../admin_actualite.php#admin");
+               exit();
+            }
+         }
+         header("Location: ../admin_actualite.php?error=".$error."#admin");
          exit();
       }
    }
-   else{
-      $reqModifVal="UPDATE t_actualite_actu SET actu_etat = 'D' WHERE actu_numero = '$_GET[actuDes]';";
-      $resModifVal = $mysqli->query($reqModifVal);
-
-      if(!$resModifVal){
-         //LA requete a echoue
-         $error=2;
-      }
-      else{
-         header("Location: ../admin_actualite.php#admin");
-         exit();
-      }
-   }
-   header("Location: ../admin_actualite.php?error=".$error."#admin");
-   exit();
 }
 
 
@@ -126,11 +136,36 @@ else if($_GET['input']=='newActu') {
    exit();
 }
 
+//Verif Actualité
+elseif($_GET['input']=='id') {
+   $actu=htmlspecialchars(addslashes($_POST['modifActu']));
+
+   //On verifie que l'actualité existe
+   $reqActuExist="SELECT actu_titre FROM t_actualite_actu WHERE actu_numero='$actu';";
+   $resActuExist = $mysqli->query($reqActuExist);
+
+   if($resActuExist){
+      if($resActuExist->num_rows){
+         header("Location: ../admin_actualite.php?actu=".$actu."#admin");
+         exit();
+      }
+      else{
+         //L'actu' n'existe pas
+         $error=4;
+      }
+   }
+   else{
+      //La requête à echoué
+      $error=2;
+   }
+   header("Location: ../admin_actualite.php?errorModifActu=".$error."#admin");
+   exit();
+}
 
 //Modifer actualité
 else if($_GET['input']=='modifActu'){
-   if(!empty($_POST['modifActu'])){
-      $actu=htmlspecialchars(addslashes($_POST['modifActu']));
+   if(!empty($_GET['actu'])){
+      $actu=htmlspecialchars(addslashes($_GET['actu']));
 
       //On verifie que l'actualité existe
       $reqActuExist="SELECT actu_titre FROM t_actualite_actu WHERE actu_numero = '$actu';";

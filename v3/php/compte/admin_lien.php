@@ -24,51 +24,52 @@ else{
    $infoUser = $resInfoUser->fetch_array(MYSQLI_ASSOC);
 }
 
-//Information élément
-if(isset($_GET['ele'])){
-   $ele=htmlspecialchars(addslashes($_GET['ele']));
+//Information Lien
+if(isset($_GET['lie'])){
+   $lie=htmlspecialchars(addslashes($_GET['lie']));
 
-   //On verifie que l'élé existe
-   $reqEleExist="SELECT ele_intitule FROM t_element_ele WHERE ele_numero='$ele';";
-   $resEleExist = $mysqli->query($reqEleExist);
+   //On verifie que l'actualité existe
+   $reqLienExist="SELECT lie_titre FROM t_lien_lie WHERE lie_numero='$lie';";
+   $resLienExist = $mysqli->query($reqLienExist);
 
-   if($resEleExist){
-      if($resEleExist->num_rows){
-         $reqInfoEle = "SELECT ele_intitule, ele_descriptif FROM t_element_ele WHERE ele_numero = '$ele'";
-         $resInfoEle = $mysqli->query($reqInfoEle);
+   if($resLienExist){
+      if($resLienExist->num_rows){
+         $reqInfoLien = "SELECT lie_titre, lie_url, lie_auteur FROM t_lien_lie WHERE lie_numero = '$lie'";
+         $resInfoLien = $mysqli->query($reqInfoLien);
 
-         if(!$resInfoEle){
+         if(!$resInfoLien){
             echo "Error: La requête a echoué \n";
             echo "Errno: " . $mysqli->errno . "\n";
             echo "Error: " . $mysqli->error . "\n";
             exit();
          }
          else{
-            $infoEle = $resInfoEle->fetch_array(MYSQLI_ASSOC);
+            $infoLien = $resInfoLien->fetch_array(MYSQLI_ASSOC);
          }
       }
       else{
-         header("Location: admin_element.php?errorModifEle=4#admin");
+         header("Location: admin_lien.php?errorModifLien=4#admin");
          exit();
       }
    }
    else{
-      header("Location: admin_element.php?errorModifEle=2#admin");
+      header("Location: admin_lien.php?errorModifLien=2#admin");
       exit();
    }
 }
 
+// Tous les liens
+$reqAllLien = "SELECT DISTINCT lie_numero, lie_titre, lie_url, lie_auteur, lie_date, ele_numero
+               FROM t_lien_lie
+               ORDER BY lie_date DESC";
+$resAllLien = $mysqli->query($reqAllLien);
+$resAllLien2 = $mysqli->query($reqAllLien);
+$resAllLien3 = $mysqli->query($reqAllLien);
+$resAllLien4 = $mysqli->query($reqAllLien);
 
-//Tous les éléments
-$reqAllEle = "SELECT DISTINCT ele_intitule, ele_date, ele_date, ele_etat, ele_fichierImage, ele_numero, ele_descriptif FROM t_element_ele
-           JOIN tj_relie_rel USING(ele_numero)
-           JOIN t_selection_sel USING(sel_numero)
-           ORDER BY ele_date DESC;";
+$reqAllEle = "SELECT DISTINCT ele_intitule, ele_numero
+              FROM t_element_ele";
 $resAllEle = $mysqli->query($reqAllEle);
-$resAllEle2 = $mysqli->query($reqAllEle);
-$resAllEle3 = $mysqli->query($reqAllEle);
-$resAllEle3 = $mysqli->query($reqAllEle);
-$resAllEle4 = $mysqli->query($reqAllEle);
 
 
 if(!$resAllEle){
@@ -77,20 +78,6 @@ if(!$resAllEle){
    echo "Error: " . $mysqli->error . "\n";
    exit();
 }
-
-//Toutes les Sélections
-$reqSel = "SELECT DISTINCT sel_numero, sel_intitule, sel_texteIntro, sel_date, com_pseudo
-           FROM t_selection_sel";
-$resSel = $mysqli->query($reqSel);
-
-if(!$resSel){
-   echo "Error: La requête a echoué \n";
-   echo "Errno: " . $mysqli->errno . "\n";
-   echo "Error: " . $mysqli->error . "\n";
-   exit();
-}
-
-
 //Nb Compte
 $reqAllCpt = "SELECT * FROM t_profil_pro";
 $resAllCpt = $mysqli->query($reqAllCpt);
@@ -180,26 +167,26 @@ $mysqli->close();
       ?>
       <a href='admin_actualite.php#admin' class='button'>Actualités</a>
       <a href='admin_selection.php#admin' class='button'>Sélections</a>
-      <a href='admin_element.php#admin' class='button open'>Éléments</a>
-      <a href='admin_lien.php#admin' class='button'>Liens</a>
+      <a href='admin_element.php#admin' class='button'>Éléments</a>
+      <a href='admin_lien.php#admin' class='button open'>Liens</a>
    </div>
 
    <section class='profils'>
       <div class='manage'>
          <div class='ajoutActu'>
-            <h3>Ajouter un Élément : </h3>
+            <h3>Ajouter un lien : </h3>
             <span id='message5'>
             <?php
-               if(isset($_GET['errorNewEle'])){
-                  if(intval($_GET['errorNewEle']) and !empty($_GET['errorNewEle'])){
-                     if($_GET['errorNewEle']==1){
-                        echo "<p id='ok'>Élément ajouté</p>";
+               if(isset($_GET['errorNewLien'])){
+                  if(intval($_GET['errorNewLien']) and !empty($_GET['errorNewLien'])){
+                     if($_GET['errorNewLien']==1){
+                        echo "<p id='ok'>Lienalité ajoutée</p>";
                      }
-                     else if($_GET['errorNewEle']==2){
+                     else if($_GET['errorNewLien']==2){
                         echo "La requête à échoué";
                      }
-                     else if($_GET['errorNewEle']==3){
-                        echo "Entrer une sélection, un titre, une description et une image";
+                     else if($_GET['errorNewLien']==3){
+                        echo "Entrer un titre et une description";
                      }
                      else{
                         echo "Erreur non reconnue";
@@ -211,26 +198,26 @@ $mysqli->close();
                }
             ?>
             </span>
-            <form action='action/element_action.php?input=newEle' method='post'>
-               <select name='allSel'>
-                  <option value=''>Choisir une sélection</option>
+            <form action='action/lien_action.php?input=newLien' method='post'>
+               <select name='allEle'>
+                  <option value=''>Choisir un élément</option>
                   <?php
-                     while ($sel = $resSel->fetch_assoc()) {
-                        echo "<option value=".$sel['sel_numero'].">".$sel['sel_intitule']."</option>";
+                     while ($ele = $resAllEle->fetch_assoc()) {
+                        echo "<option value=".$ele['ele_numero'].">".$ele['ele_intitule']."</option>";
                      }
                   ?>
                </select>
                <div>
-                  <label for='newEle'>Titre :<br/></label>
-                  <input type='text' id='newEle' name='newEle' required >
+                  <label for='newLien'>Titre :<br/></label>
+                  <input type='text' id='newLien' name='newLien' required >
                </div>
                <div>
-                  <label for='descEle'>Description :<br/></label>
-                  <textarea rows='6' cols='32' id='descEle' name='descEle' maxlength='500' required></textarea>
+                  <label for='url'>URL :<br/></label>
+                  <input type='text' id='url' name='url' required >
                </div>
                <div>
-                  <label for="img">Choisir une image :<br/></label>
-                  <input type="file" id="img" name="img" accept="image/png, image/jpeg">
+                  <label for='auteur'>Auteur:<br/></label>
+                  <input type='text' id='auteur' name='auteur' required >
                </div>
                <div>
                   <input type='submit' value='Ajouter' id='ajout'/>
@@ -238,26 +225,26 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class='modifActu'>
-            <h3>Modifier un élément :</h3>
+         <div class="modifActu">
+            <h3>Modifier un lien :</h3>
             <span id='message5'>
                <?php
-                  if(isset($_GET['errorModifEle'])){
-                     if(intval($_GET['errorModifEle']) and !empty($_GET['errorModifEle'])){
-                        if($_GET['errorModifEle']==1){
-                           echo "<p id='ok'>Élément modifié</p>";
+                  if(isset($_GET['errorModifLien'])){
+                     if(intval($_GET['errorModifLien']) and !empty($_GET['errorModifLien'])){
+                        if($_GET['errorModifLien']==1){
+                           echo "<p id='ok'>Lien modifié</p>";
                         }
-                        else if($_GET['errorModifEle']==2){
+                        else if($_GET['errorModifLien']==2){
                            echo "La requête a échoué";
                         }
-                        else if($_GET['errorModifEle']==3){
-                           echo "Entrer un titre, une description ou une photo";
+                        else if($_GET['errorModifLien']==3){
+                           echo "Entrer un titre, un url ou un auteur";
                         }
-                        else if($_GET['errorModifEle']==4){
-                           echo "L'élément n'existe pas";
+                        else if($_GET['errorModifLien']==4){
+                           echo "Le lien n'existe pas";
                         }
-                        else if($_GET['errorModifEle']==5){
-                           echo "Pas d'élément sélectionné";
+                        else if($_GET['errorModifLien']==5){
+                           echo "Pas de lien sélectionné";
                         }
                         else{
                            echo "Erreur non reconnue";
@@ -269,51 +256,51 @@ $mysqli->close();
                   }
                ?>
             </span>
-            <form action='action/element_action.php?input=id' method='post' id='selectModif'>
-               <select name='modifEle'>
+            <form action='action/lien_action.php?input=id' method='post' id='selectModif'>
+               <select name='modifLien'>
                   <?php
-                     if(isset($_GET['ele'])){
-                        echo "<option value=''>".$infoEle['ele_intitule']."</option>";
+                     if(isset($_GET['lie'])){
+                        echo "<option value=''>".$infoLien['lie_titre']."</option>";
                      }
                      else{
-                        echo "<option value=''>Élément à modifier</option>";
+                        echo "<option value=''>Lien à modifier</option>";
                      }
 
-                     while ($allEle2 = $resAllEle2->fetch_assoc()) {
-                        echo "<option value=".$allEle2['ele_numero'].">".$allEle2['ele_intitule']."</option>";
+                     while ($allLien4 = $resAllLien4->fetch_assoc()) {
+                        echo "<option value=".$allLien4['lie_numero'].">".$allLien4['lie_titre']."</option>";
                      }
                   ?>
                </select>
                <input type='submit' value='Valider' id='buttonValider'/>
             </form>
             <?php
-            if(isset($_GET['ele'])){
-               echo "<form action='action/element_action.php?input=modifEle&ele=".$ele."' method='post'>";
+            if(isset($_GET['lie'])){
+               echo "<form action='action/lien_action.php?input=modifLien&lie=".$lie."' method='post'>";
                $val=1;
             }
             else{
-               echo "<form action='action/element_action.php?input=modifEle' method='post'>";
+               echo "<form action='action/lien_action.php?input=modifLien' method='post'>";
                $val=0;
             }
             ?>
                <div>
-                  <label for='modifEleTitre'>Titre :<br/></label>
-                  <input type='text' id='modifEleTitre' name='modifEleTitre' <?php if($val)echo "placeholder='".$infoEle['ele_intitule']."'"; ?> >
+                  <label for='modifLienTitre'>Titre :<br/></label>
+                  <input type='text' id='modifLienTitre' name='modifLienTitre' <?php if($val)echo "placeholder='".$infoLien['lie_titre']."'"; ?> >
                </div>
                <div>
-                  <label for='modifEleDesc'>Description :<br/></label>
-                  <textarea rows='6' cols='32' id='modifEleDesc' name='modifEleDesc' maxlength='500' <?php if($val)echo "placeholder='".htmlspecialchars($infoEle['ele_descriptif'], ENT_QUOTES, 'UTF-8')."'"; ?>></textarea>
+                  <label for='modifLienUrl'>URL :<br/></label>
+                  <input type='text' id='modifLienUrl' name='modifLienUrl' <?php if($val)echo "placeholder='".$infoLien['lie_url']."'"; ?> >
                </div>
                <div>
-                  <label for="modifImg">Choisir une image :<br/></label>
-                  <input type="file" id="modifImg" name="modifImg" accept="image/png, image/jpeg">
+                  <label for='modifLienAuteur'>Auteur :<br/></label>
+                  <input type='text' id='modifLienAuteur' name='modifLienAuteur' <?php if($val)echo "placeholder='".$infoLien['lie_auteur']."'"; ?> >
                </div>
                <input type='submit' value='Modifier' id='buttonModifier'/>
             </form>
          </div>
 
          <div class='danger'>
-            <h3>Gérer les éléments :</h3>
+            <h3>Supprimer les liens :</h3>
             <span id='message5'>
             <?php
                if(isset($_GET['error'])){
@@ -322,16 +309,16 @@ $mysqli->close();
                         echo "<p id='ok'>Modification effectuée</p>";
                      }
                      else if($_GET['error']==3){
-                        echo "L'élément n'existe pas";
+                        echo "Le lien n'existe pas";
                      }
                      elseif($_GET['error']==4) {
-                        echo "Entrer un élément";
+                        echo "Entrer un lien";
                      }
                      elseif($_GET['error']==2) {
                         echo "La requête a échoué";
                      }
                      elseif($_GET['error']==5) {
-                        echo "<p id='ok'>Élément supprimée</p>";
+                        echo "<p id='ok'>Lien supprimée</p>";
                      }
                      else{
                         echo "Erreur non reconnue";
@@ -344,24 +331,12 @@ $mysqli->close();
             ?>
             </span>
 
-            <form action='action/element_action.php?input=activeEle' method='post'  class='inputPseudoModif'  required>
-               <select name='eleActive'>
-                  <option value=''>Élément à activer/désactiver</option>
+            <form action='action/lien_action.php?input=suppLien' method='post'  class='inputPseudoModif'  required>
+               <select name='lieSupp'>
+                  <option value=''>Lien à supprimer</option>
                   <?php
-                     while ($allEle3 = $resAllEle3->fetch_assoc()) {
-                        echo "<option value=".$allEle3['ele_numero'].">".$allEle3['ele_intitule']."</option>";
-                     }
-                  ?>
-               </select>
-               <input type='submit' value='Activer/Désactiver' id='submit'/>
-            </form>
-
-            <form action='action/element_action.php?input=suppEle' method='post'  class='inputPseudoModif'  required>
-               <select name='eleSupp'>
-                  <option value=''>Élément à supprimer</option>
-                  <?php
-                     while ($allEle4 = $resAllEle4->fetch_assoc()) {
-                        echo "<option value=".$allEle4['ele_numero'].">".$allEle4['ele_intitule']."</option>";
+                     while ($allLien3 = $resAllLien3->fetch_assoc()) {
+                        echo "<option value=".$allLien3['lie_numero'].">".$allLien3['lie_titre']."</option>";
                      }
                   ?>
                </select>
@@ -374,17 +349,35 @@ $mysqli->close();
          <thead>
             <tr>
                <th>Titre</th>
-               <th>Description</th>
+               <th>URL</th>
+               <th>Auteur</th>
                <th>Date</th>
-               <th>Activé</th>
-               <th>Image</th>
-               <th></th>
+               <th>Élément</th>
             </tr>
          </thead>
          <tbody>
             <?php
             $i=0;
-            while ($allEle = $resAllEle->fetch_assoc()) {
+            while ($allLien = $resAllLien->fetch_assoc()) {
+               //CONNEXION A LA BASE
+               require('../connexionBDD.php');
+
+               $reqEle2="SELECT ele_intitule, ele_numero FROM t_element_ele
+                        WHERE ele_numero='$allLien[ele_numero]';";
+               $resEle2=$mysqli->query($reqEle2);
+
+               if(!$resEle2){
+                  echo "Error: La requête a echoué \n";
+                  echo "Errno: " . $mysqli->errno . "\n";
+                  echo "Error: " . $mysqli->error . "\n";
+                  exit();
+               }
+               else{
+                  $ele2 = $resEle2->fetch_array(MYSQLI_ASSOC);
+               }
+
+               $mysqli->close();
+
                //Test de parité pour l'aternance de couleurs des lignes du tableau
                if(fmod($i,2)==0){
                   echo "<tr>";
@@ -394,21 +387,11 @@ $mysqli->close();
                   echo "<tr class='lignePaire'>";
                   $i=$i+1;
                }echo "
-                  <form action='action/element_action.php?input=checkboxEleDes&eleDes=".$allEle['ele_numero']."' method='post'>
-                     <td>".$allEle['ele_intitule']."</td>
-                     <td>".$allEle['ele_descriptif']."</td>
-                     <td>".$allEle['ele_date']."</td>
-                     <td>";
-                     if($allEle['ele_etat']=='A'){
-                        echo "<input type='checkbox' id='checkboxEle' name='checkbox[]' value='A' checked/>";
-                     }
-                     else{
-                        echo "<input type='checkbox' id='checkboxEle' name='checkbox[]' value='A'";
-                     }
-                     echo "</td>
-                     <td>".$allEle['ele_fichierImage']."</td>
-                     <td><input type='submit' value='Modifier' id='submit'/></td>
-                  </form>
+                     <td>".$allLien['lie_titre']."</td>
+                     <td id='urlTab'>".$allLien['lie_url']."</td>
+                     <td>".$allLien['lie_auteur']."</td>
+                     <td>".$allLien['lie_date']."</td>
+                     <td>".$ele2['ele_intitule']."</td>
                </tr>";
             }
             ?>

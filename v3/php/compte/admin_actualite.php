@@ -24,6 +24,40 @@ else{
    $infoUser = $resInfoUser->fetch_array(MYSQLI_ASSOC);
 }
 
+//Information Actualité
+if(isset($_GET['actu'])){
+   $actu=htmlspecialchars(addslashes($_GET['actu']));
+
+   //On verifie que l'actualité existe
+   $reqActuExist="SELECT actu_titre FROM t_actualite_actu WHERE actu_numero='$actu';";
+   $resActuExist = $mysqli->query($reqActuExist);
+
+   if($resActuExist){
+      if($resActuExist->num_rows){
+         $reqInfoActu = "SELECT actu_titre, actu_texte FROM t_actualite_actu WHERE actu_numero = '$actu'";
+         $resInfoActu = $mysqli->query($reqInfoActu);
+
+         if(!$resInfoActu){
+            echo "Error: La requête a echoué \n";
+            echo "Errno: " . $mysqli->errno . "\n";
+            echo "Error: " . $mysqli->error . "\n";
+            exit();
+         }
+         else{
+            $infoActu = $resInfoActu->fetch_array(MYSQLI_ASSOC);
+         }
+      }
+      else{
+         header("Location: admin_actualite.php?errorModifActu=4#admin");
+         exit();
+      }
+   }
+   else{
+      header("Location: admin_actualite.php?errorModifActu=2#admin");
+      exit();
+   }
+}
+
 // Toutes les Actualités:
 $reqAllActu = "SELECT DISTINCT *
                FROM t_actualite_actu
@@ -131,7 +165,7 @@ $mysqli->close();
       <a href='admin_actualite.php#admin' class='button open'>Actualités</a>
       <a href='admin_selection.php#admin' class='button'>Sélections</a>
       <a href='admin_element.php#admin' class='button'>Éléments</a>
-      <a href='admin_accueil.php#admin' class='button'>Liens</a>
+      <a href='admin_lien.php#admin' class='button'>Liens</a>
    </div>
 
    <section class='profils'>
@@ -182,7 +216,7 @@ $mysqli->close();
                <?php
                   if(isset($_GET['errorModifActu'])){
                      if(intval($_GET['errorModifActu']) and !empty($_GET['errorModifActu'])){
-                        if($_GET['errorNewActu']==1){
+                        if($_GET['errorModifActu']==1){
                            echo "<p id='ok'>Actualité modifiée</p>";
                         }
                         else if($_GET['errorModifActu']==2){
@@ -207,22 +241,40 @@ $mysqli->close();
                   }
                ?>
             </span>
-            <form action='action/actualite_action.php?input=modifActu' method='post'  class='inputPseudoModif'  required>
+            <form action='action/actualite_action.php?input=id' method='post' id='selectModif'>
                <select name='modifActu'>
-                  <option value=''>Actualité à modifier</option>
                   <?php
+                     if(isset($_GET['actu'])){
+                        echo "<option value=''>".$infoActu['actu_titre']."</option>";
+                     }
+                     else{
+                        echo "<option value=''>Actualité à modifier</option>";
+                     }
+
                      while ($allActu4 = $resAllActu4->fetch_assoc()) {
                         echo "<option value=".$allActu4['actu_numero'].">".$allActu4['actu_titre']."</option>";
                      }
                   ?>
                </select>
+               <input type='submit' value='Valider' id='buttonValider'/>
+            </form>
+            <?php
+            if(isset($_GET['actu'])){
+               echo "<form action='action/actualite_action.php?input=modifActu&actu=".$actu."' method='post'>";
+               $val=1;
+            }
+            else{
+               echo "<form action='action/actualite_action.php?input=modifActu' method='post'>";
+               $val=0;
+            }
+            ?>
                <div>
                   <label for='modifActuTitre'>Titre :<br/></label>
-                  <input type='text' id='modifActuTitre' name='modifActuTitre' >
+                  <input type='text' id='modifActuTitre' name='modifActuTitre' <?php if($val)echo "placeholder='".$infoActu['actu_titre']."'"; ?> >
                </div>
                <div>
                   <label for='modifActuDesc'>Description :<br/></label>
-                  <textarea rows='6' cols='32' id='modifActuDesc' name='modifActuDesc' maxlength='500'></textarea>
+                  <textarea rows='6' cols='32' id='modifActuDesc' name='modifActuDesc' maxlength='500' <?php if($val)echo "placeholder='".htmlspecialchars($infoActu['actu_texte'], ENT_QUOTES, 'UTF-8')."'"; ?>></textarea>
                </div>
                <input type='submit' value='Modifier' id='buttonModifier'/>
             </form>

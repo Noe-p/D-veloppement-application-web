@@ -73,14 +73,13 @@ header h2{
    background-color: rgb(255, 249, 235);
    border-radius: 8px;
    padding: 5px 10px 5px 10px;
-   transition: all 0.3s;
+   transition: all 0.2s;
    width: 100px;
 }
 
 #modifUser:hover{
    cursor: pointer;
-   background-color: rgb(210, 138, 28);
-   width: 110px;
+   width: 107px;
 }
 /*BOUTON*/
 .buttons{
@@ -126,6 +125,10 @@ header h2{
    flex-wrap: wrap;
 }
 
+.managePro{
+   width: 60%;
+}
+
 .manage div{
    margin:10px;
 }
@@ -136,6 +139,10 @@ header h2{
    text-align: center;
 }
 
+#selectModif{
+   padding-bottom: 0;
+   margin-top: 0;
+}
 .ajoutActu, .modifActu, .danger, .gereCompte, .gereSel{
    border-radius:10px;
    text-align: center;
@@ -179,6 +186,7 @@ select {
 
 .modifSatut{
    display:flex;
+   align-items: center;
 }
 
 .modifSatut div{
@@ -216,6 +224,8 @@ th,td{
    width: auto;
    text-align: left;
    position: relative;
+   max-width:700px;
+   overflow: hidden;
 }
 
 
@@ -255,8 +265,6 @@ input:hover{
 #supprimer:hover{
    background-color: rgb(210, 28, 28);
 }
-
-
 
 
 /*Actualités*/
@@ -314,6 +322,10 @@ input:hover{
 #buttonModifier:hover{
    background-color: rgb(210, 138, 28);
    width: 110px;
+}
+
+#buttonValider:hover{
+   background-color: rgb(128, 205, 79);
 }
 
 
@@ -378,7 +390,10 @@ input:hover{
 }
 
 /*Liens*/
-
+#urlTab{
+   max-width: 500px;
+   overflow: hidden;
+}
 
 @media all and (max-device-width:480px) {
 

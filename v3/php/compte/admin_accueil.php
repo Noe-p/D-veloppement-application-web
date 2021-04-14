@@ -28,13 +28,49 @@ else{
    $infoUser = $resInfoUser->fetch_array(MYSQLI_ASSOC);
 }
 
+//Information Profil
+if(isset($_GET['pseudo'])){
+   $pseudo=htmlspecialchars(addslashes($_GET['pseudo']));
+
+   //On verifie que le profil existe
+   $reqPseudoExist="SELECT com_pseudo FROM t_profil_pro WHERE com_pseudo='$pseudo';";
+   $resPseudoExist = $mysqli->query($reqPseudoExist);
+
+   if($resPseudoExist){
+      if($resPseudoExist->num_rows){
+         $reqInfoPro = "SELECT pro_nom, pro_prenom, pro_mail FROM t_profil_pro WHERE com_pseudo = '$pseudo'";
+         $resInfoPro = $mysqli->query($reqInfoPro);
+
+         if(!$resInfoPro){
+            echo "Error: La requête a echoué \n";
+            echo "Errno: " . $mysqli->errno . "\n";
+            echo "Error: " . $mysqli->error . "\n";
+            exit();
+         }
+         else{
+            $infoPro = $resInfoPro->fetch_array(MYSQLI_ASSOC);
+         }
+      }
+      else{
+         header("Location: admin_accueil.php?errorModifPro=4#admin");
+         exit();
+      }
+   }
+   else{
+      header("Location: admin_accueil.php?errorModifPro=2#admin");
+      exit();
+   }
+}
+
 //Tous les compte utilisateur
 $reqAllCpt = "SELECT * FROM t_profil_pro
+              WHERE com_pseudo != '$_SESSION[login]'
               ORDER BY pro_date DESC";
 $resAllCpt = $mysqli->query($reqAllCpt);
 $resAllCpt2 = $mysqli->query($reqAllCpt);
 $resAllCpt3 = $mysqli->query($reqAllCpt);
 $resAllCpt4 = $mysqli->query($reqAllCpt);
+$resAllCpt5 = $mysqli->query($reqAllCpt);
 $nbCpt = $resAllCpt->num_rows;
 
 
@@ -118,19 +154,95 @@ $mysqli->close();
       <a href='admin_actualite.php#admin' class='button'>Actualités</a>
       <a href='admin_selection.php#admin' class='button'>Sélections</a>
       <a href='admin_element.php#admin' class='button'>Éléments</a>
-      <a href='admin_accueil.php#admin' class='button'>Liens</a>
+      <a href='admin_lien.php#admin' class='button'>Liens</a>
    </div>
-
    <section class='profils'>
-      <div class='manage'>
+      <div class='manage managePro'>
+         <div class='modifActu'>
+            <h3>Modifier un profil :</h3>
+            <span id='message5'>
+               <?php
+                  if(isset($_GET['errorModifPro'])){
+                     if(intval($_GET['errorModifPro']) and !empty($_GET['errorModifPro'])){
+                        if($_GET['errorModifPro']==1){
+                           echo "<p id='ok'>Profil modifié</p>";
+                        }
+                        else if($_GET['errorModifPro']==2){
+                           echo "La requête a échoué";
+                        }
+                        else if($_GET['errorModifPro']==3){
+                           echo "Entrer un nom, un prénom ou un mail";
+                        }
+                        else if($_GET['errorModifPro']==4){
+                           echo "Le profil n'existe pas";
+                        }
+                        else if($_GET['errorModifPro']==5){
+                           echo "Pas de profil sélectionné";
+                        }
+                        else{
+                           echo "Erreur non reconnue";
+                        }
+                     }
+                     else{
+                        echo "Erreur non reconnue";
+                     }
+                  }
+               ?>
+            </span>
+            <form action='action/comptes_action.php?input=id' method='post'  id='selectModif'>
+               <select name='modifPro'>
+                  <?php
+                     if(isset($_GET['pseudo'])){
+                        echo "<option value=''>".$pseudo."</option>";
+                     }
+                     else{
+                        echo "<option value=''>Profil à modifier</option>";
+                     }
+
+                     while ($allCpt5 = $resAllCpt5->fetch_assoc()) {
+                        echo "<option value=".$allCpt5['com_pseudo'].">".$allCpt5['com_pseudo']."</option>";
+                     }
+                  ?>
+               </select>
+               <input type='submit' value='Valider' id='buttonValider'/>
+            </form>
+            <?php
+            if(isset($_GET['pseudo'])){
+               echo "<form action='action/comptes_action.php?input=modifPro&pseudo=".$pseudo."' method='post'>";
+               $val=1;
+            }
+            else{
+               echo "<form action='action/comptes_action.php?input=modifPro' method='post'>";
+               $val=0;
+            }
+            ?>
+               <div>
+                  <label for='modifNom'>Nom :<br/></label>
+                  <input type='text' id='modifNom' name='modifNom' <?php if($val)echo "placeholder='".$infoPro['pro_nom']."'"; ?>>
+               </div>
+               <div>
+                  <label for='modifPrenom'>Prénom:<br/></label>
+                  <input type='text' id='modifPrenom' name='modifPrenom' <?php if($val)echo "placeholder='".$infoPro['pro_prenom']."'"; ?>>
+               </div>
+               <div>
+                  <label for='modifMail'>Mail :<br/></label>
+                  <input type='text' id='modifMail' name='modifMail' <?php if($val)echo "placeholder='".$infoPro['pro_mail']."'"; ?>>
+               </div>
+               <input type='submit' value='Modifier' id='buttonModifier'/>
+            </form>
+         </div>
+
          <div class='gereCompte'>
-            <h3>Gérer les comptes :</h3>
+            <h3>Gérer les profils :</h3>
             <span id='message4'>
             <?php
             if(isset($_GET['error'])){
                if(intval($_GET['error']) and !empty($_GET['error'])){
                   if($_GET['error']==1){
                      echo "<p id='ok'>Modification effectuée</p>";
+                  }
+                  elseif($_GET['error']==8) {
+                     echo "<p id='ok'>Compte supprimé</p>";
                   }
                   elseif($_GET['error']==3) {
                      echo "Le pseudo n'existe pas";
@@ -148,7 +260,7 @@ $mysqli->close();
                      echo "Cocher une case";
                   }
                   elseif($_GET['error']==7) {
-                     echo "Option prochainement disponible";
+                     echo "Les sélections doivent être vides";
                   }
                   else{
                      echo "Erreur non reconnue";
@@ -202,7 +314,7 @@ $mysqli->close();
                   }
                   ?>
                </select>
-               <input type='submit' value='Supprimer' id='supprimer'/>
+               <input type='submit' value='Supprimer un compte' id='supprimer' class="suppCompte"/>
             </form>
          </div>
       </div>

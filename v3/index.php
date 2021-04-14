@@ -51,7 +51,7 @@ $mysqli->close();
                   <li><a href='php/compte/admin_actualite.php?#admin'>Actualités</a></li>
                   <li><a href='php/compte/admin_selection.php?#admin'>Sélections</a></li>
                   <li><a href='php/compte/admin_element.php?#admin'>Éléments</a></li>
-                  <li><a href='php/compte/admin_accueil.php?#admin'>Liens</a></li>
+                  <li><a href='php/compte/admin_lien.php?#admin'>Liens</a></li>
                   <li><a id='deconnexion' href='php/connexion/deconnexion.php?#admin'>Déconnexion</a></li>";
                }
                else{

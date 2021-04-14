@@ -47,11 +47,6 @@ $mysqli->close();
          <form action="action/modifUser_action.php?input=info" method="post">
             <h2>Modifier le compte</h2>
             <div>
-               <label for="pseudo"><B>Pseudo :</B><br/></label>
-               <?php echo "<input type='text' id='pseudo' name='pseudo' placeholder='".$_SESSION['login']."'>";?>
-               <span id='message2'></span>
-            </div>
-            <div>
                <label for="nom"><B>Nom :</B><br/></label>
                <?php echo "<input type='text' id='nom' name='nom' placeholder='".$infoUser['pro_nom']."'>";?>
             </div>

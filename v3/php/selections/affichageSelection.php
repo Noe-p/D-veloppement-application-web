@@ -34,7 +34,7 @@ session_start();
                   <li><a href='../compte/admin_actualite.php?#admin'>Actualités</a></li>
                   <li><a href='../compte/admin_selection.php?#admin'>Sélections</a></li>
                   <li><a href='../compte/admin_element.php?#admin'>Éléments</a></li>
-                  <li><a href='../compte/admin_accueil.php?#admin'>Liens</a></li>
+                  <li><a href='../compte/admin_lien.php?#admin'>Liens</a></li>
                   <li><a id='deconnexion' href='../connexion/deconnexion.php?#admin'>Déconnexion</a></li>";
                }
                else{
@@ -79,6 +79,20 @@ session_start();
       else{
          $ele = $resEle->fetch_array(MYSQLI_ASSOC);
          if($ele['ele_etat']=='D'){$nbEle=0;$error=1;}
+      }
+
+      //Liens
+      $reqLien = "SELECT lie_titre, lie_url, lie_auteur, lie_date
+                  FROM t_lien_lie
+                  WHERE ele_numero=$elt_id";
+      $resLien = $mysqli->query($reqLien);
+      $nbLien = $resLien->num_rows;
+
+      if(!$resLien){
+         echo "Error: La requête a echoué \n";
+         echo "Errno: " . $mysqli->errno . "\n";
+         echo "Error: " . $mysqli->error . "\n";
+         exit();
       }
 
       //Element suivant :
@@ -156,7 +170,13 @@ session_start();
                   </div>
                   <img src='../../assets/img/".$ele['ele_fichierImage']."' alt='img1'>
                   <p>".$ele['ele_descriptif']."</p>
-                  <p>".$ele['ele_date']."</p>
+                  <p>".$ele['ele_date']."</p>";
+                  if($nbLien!=0){
+                     while ($lien = $resLien->fetch_assoc()) {
+                        echo "<p><a id='lienImg' href='".$lien['lie_url']."'>".$lien['lie_titre']." : ".$lien['lie_auteur']." le ".$lien['lie_date']."</a></p>";
+                     }
+                  }
+                  echo "
                </article>
             </section>";
       }

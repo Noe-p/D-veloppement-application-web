@@ -68,35 +68,45 @@ if($_GET['input']=='activeEle'){
 
 //Input : checkbox
 else if($_GET['input']=='checkboxEleDes') {
-   //Si la checkbox est cochée, on active le compte
-   if(!empty($_POST['checkbox'])){
-      $reqModifVal="UPDATE t_element_ele SET ele_etat = 'A' WHERE ele_numero = '$_GET[eleDes]';";
-      $resModifVal = $mysqli->query($reqModifVal);
+   $ele=htmlspecialchars(addslashes($_GET['eleDes']));
 
-      if(!$resModifVal){
-         //LA requete a echoue
-         $error=2;
-      }
-      else{
-         header("Location: ../admin_element.php#admin");
+   //On verifie que l'élé existe
+   $reqEleExist="SELECT ele_intitule FROM t_element_ele WHERE ele_numero='$ele';";
+   $resEleExist = $mysqli->query($reqEleExist);
+
+   if($resEleExist){
+      if($resEleExist->num_rows){
+         //Si la checkbox est cochée, on active le compte
+         if(!empty($_POST['checkbox'])){
+            $reqModifVal="UPDATE t_element_ele SET ele_etat = 'A' WHERE ele_numero = '$ele';";
+            $resModifVal = $mysqli->query($reqModifVal);
+
+            if(!$resModifVal){
+               //LA requete a echoue
+               $error=2;
+            }
+            else{
+               header("Location: ../admin_element.php#admin");
+               exit();
+            }
+         }
+         else{
+            $reqModifVal="UPDATE t_element_ele SET ele_etat = 'D' WHERE ele_numero = '$ele';";
+            $resModifVal = $mysqli->query($reqModifVal);
+
+            if(!$resModifVal){
+               //LA requete a echoue
+               $error=2;
+            }
+            else{
+               header("Location: ../admin_element.php#admin");
+               exit();
+            }
+         }
+         header("Location: ../admin_element.php?error=".$error."#admin");
          exit();
       }
    }
-   else{
-      $reqModifVal="UPDATE t_element_ele SET ele_etat = 'D' WHERE ele_numero = '$_GET[eleDes]';";
-      $resModifVal = $mysqli->query($reqModifVal);
-
-      if(!$resModifVal){
-         //LA requete a echoue
-         $error=2;
-      }
-      else{
-         header("Location: ../admin_element.php#admin");
-         exit();
-      }
-   }
-   header("Location: ../admin_element.php?error=".$error."#admin");
-   exit();
 }
 
 
@@ -130,11 +140,36 @@ else if($_GET['input']=='newEle') {
    exit();
 }
 
+//Verif élément
+elseif($_GET['input']=='id') {
+   $ele=htmlspecialchars(addslashes($_POST['modifEle']));
+
+   $reqEleExist="SELECT ele_intitule FROM t_element_ele WHERE ele_numero='$ele';";
+   $resEleExist = $mysqli->query($reqEleExist);
+
+   if($resEleExist){
+      if($resEleExist->num_rows){
+         header("Location: ../admin_element.php?ele=".$ele."#admin");
+         exit();
+      }
+      else{
+         //L'actu' n'existe pas
+         $error=4;
+      }
+   }
+   else{
+      //La requête à echoué
+      $error=2;
+   }
+   header("Location: ../admin_element.php?errorModifEle=".$error."#admin");
+   exit();
+}
+
 
 //Modifer élément
 else if($_GET['input']=='modifEle'){
-   if(!empty($_POST['modifEle'])){
-      $ele=htmlspecialchars(addslashes($_POST['modifEle']));
+   if(!empty($_GET['ele'])){
+      $ele=htmlspecialchars(addslashes($_GET['ele']));
 
       //On verifie que l'élément existe
       $reqEleExist="SELECT ele_intitule FROM t_element_ele WHERE ele_numero = '$ele';";

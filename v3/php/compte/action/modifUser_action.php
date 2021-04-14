@@ -15,36 +15,6 @@ if($_GET['input']=='info'){
       $resVerifMdp = $mysqli->query($reqVerifMdp);
       if($resVerifMdp){
          if($resVerifMdp->num_rows){
-            if(!empty($_POST['pseudo'])){
-               $pseudo=htmlspecialchars(addslashes($_POST['pseudo']));
-
-               //verification si le compte existe déjà
-               $reqUser = "SELECT com_pseudo FROM t_compte_com WHERE com_pseudo = '$pseudo'";
-               $resUser = $mysqli->query($reqUser);
-
-               if($resUser){
-                  if($resUser->num_rows == 0){
-                     $reqModif="UPDATE t_compte_com SET com_pseudo ='$pseudo'
-                                WHERE com_pseudo = '$_SESSION[login]';";
-                     $resModif=$mysqli->query($reqModif);
-
-                     if(!$resModif){
-                        echo $pseudo;
-                        //La requete à échoué
-                        $probleme=2;
-                     }
-                  }
-                  else{
-                     //Pseudo existe déjà
-                     $probleme=1;
-                  }
-               }
-               else{
-                  echo "1";
-                  //La requête à échoué
-                  $probleme=2;
-               }
-            }
             if(!empty($_POST['nom'])){
                $nom=htmlspecialchars(addslashes($_POST['nom']));
 
@@ -139,10 +109,7 @@ if($_GET['input']=='info'){
                   <h2>Modifier le compte</h2>
                   <span id='message4'>
                   ";
-                  if($probleme==1){
-                     echo "Le pseudo existe déjà";
-                  }
-                  elseif($probleme==2){
+                  if($probleme==2){
                      echo "La requête à échoué";
                   }
                   elseif($probleme==3){
@@ -150,10 +117,6 @@ if($_GET['input']=='info'){
                   }
                   echo"
                   </span>
-                  <div>
-                     <label for='pseudo'><B>Pseudo :</B><br/></label>
-                     <input type='text' id='pseudo' name='pseudo' placeholder='".$_SESSION['login']."'>
-                  </div>
                   <div>
                      <label for='nom'><B>Nom :</B><br/></label>
                      <input type='text' id='nom' name='nom' placeholder='".$infoUser['pro_nom']."'>

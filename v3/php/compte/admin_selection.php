@@ -24,6 +24,40 @@ else{
    $infoUser = $resInfoUser->fetch_array(MYSQLI_ASSOC);
 }
 
+//Information sélection
+if(isset($_GET['sel'])){
+   $sel=htmlspecialchars(addslashes($_GET['sel']));
+
+   //On verifie que la sélection existe
+   $reqSelExist="SELECT sel_intitule FROM t_selection_sel WHERE sel_numero='$sel';";
+   $resSelExist = $mysqli->query($reqSelExist);
+
+   if($resSelExist){
+      if($resSelExist->num_rows){
+         $reqInfoSel = "SELECT sel_intitule, sel_texteIntro FROM t_selection_sel WHERE sel_numero = '$sel'";
+         $resInfoSel = $mysqli->query($reqInfoSel);
+
+         if(!$resInfoSel){
+            echo "Error: La requête a echoué \n";
+            echo "Errno: " . $mysqli->errno . "\n";
+            echo "Error: " . $mysqli->error . "\n";
+            exit();
+         }
+         else{
+            $infoSel = $resInfoSel->fetch_array(MYSQLI_ASSOC);
+         }
+      }
+      else{
+         header("Location: admin_selection.php?errorModifSel=4#admin");
+         exit();
+      }
+   }
+   else{
+      header("Location: admin_selection.php?errorModifSel=2#admin");
+      exit();
+   }
+}
+
 //Sélections
 $reqSel = "SELECT DISTINCT sel_numero, sel_intitule, sel_texteIntro, sel_date, com_pseudo
            FROM t_selection_sel";
@@ -170,7 +204,7 @@ $mysqli->close();
       <a href='admin_actualite.php#admin' class='button'>Actualités</a>
       <a href='admin_selection.php#admin' class='button open'>Sélections</a>
       <a href='admin_element.php#admin' class='button'>Éléments</a>
-      <a href='admin_accueil.php#admin' class='button'>Liens</a>
+      <a href='admin_lien.php#admin' class='button'>Liens</a>
    </div>
 
    <section class='selections'>
@@ -247,22 +281,40 @@ $mysqli->close();
                   }
                ?>
             </span>
-            <form action='action/selection_action.php?input=modifSel' method='post'  class='inputPseudoModif'  required>
+            <form action='action/selection_action.php?input=id' method='post'  id='selectModif'>
                <select name='modifSel'>
-                  <option value=''>Sélection à modifier</option>
                   <?php
+                     if(isset($_GET['sel'])){
+                        echo "<option value=''>".$infoSel['sel_intitule']."</option>";
+                     }
+                     else{
+                        echo "<option value=''>Sélection à modifier</option>";
+                     }
+
                      while ($sel5 = $resSel5->fetch_assoc()) {
                         echo "<option value=".$sel5['sel_numero'].">".$sel5['sel_intitule']."</option>";
                      }
                   ?>
                </select>
+               <input type='submit' value='Valider' id='buttonValider'/>
+            </form>
+            <?php
+            if(isset($_GET['sel'])){
+               echo "<form action='action/selection_action.php?input=modifSel&sel=".$sel."' method='post'>";
+               $val=1;
+            }
+            else{
+               echo "<form action='action/selection_action.php?input=modifSel' method='post'>";
+               $val=0;
+            }
+            ?>
                <div>
                   <label for='modifSelTitre'>Titre :<br/></label>
-                  <input type='text' id='modifSelTitre' name='modifSelTitre' >
+                  <input type='text' id='modifSelTitre' name='modifSelTitre' <?php if($val)echo "placeholder='".$infoSel['sel_intitule']."'"; ?> >
                </div>
                <div>
                   <label for='modifSelDesc'>Description :<br/></label>
-                  <textarea rows='6' cols='32' id='modifSelDesc' name='modifSelDesc' maxlength='500'></textarea>
+                  <textarea rows='6' cols='32' id='modifSelDesc' name='modifSelDesc' maxlength='500' <?php if($val)echo "placeholder='".htmlspecialchars($infoSel['sel_texteIntro'], ENT_QUOTES, 'UTF-8')."'"; ?>></textarea>
                </div>
                <input type='submit' value='Modifier' id='buttonModifier'/>
             </form>

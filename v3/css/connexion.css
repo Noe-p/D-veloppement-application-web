@@ -14,6 +14,8 @@ p, a, a:visited {
    color: rgb(255, 249, 235);
 }
 
+input:focus, textarea:focus, select:focus { outline:0 !important; }
+
 body {
    margin: 0;
    padding: 0;

@@ -2,7 +2,7 @@
 session_start();
 
 //CONNEXION A LA BASE
-require('../connexionBDD.php');
+require('../../connexionBDD.php');
 
 if($_GET['input']=='info'){
    $probleme=0;
@@ -11,7 +11,7 @@ if($_GET['input']=='info'){
 
       $reqVerifMdp = "SELECT com_pseudo FROM t_compte_com
                       WHERE com_pseudo = '$_SESSION[login]'
-                      AND com_mdp=MD5('$mdp')";
+                      AND com_mdp=MD5('$mdp');";
       $resVerifMdp = $mysqli->query($reqVerifMdp);
       if($resVerifMdp){
          if($resVerifMdp->num_rows){
@@ -22,19 +22,27 @@ if($_GET['input']=='info'){
                $reqUser = "SELECT com_pseudo FROM t_compte_com WHERE com_pseudo = '$pseudo'";
                $resUser = $mysqli->query($reqUser);
 
-               if($resUser->num_rows == 1){
-                  //Pseudo existe déjà
-                  $probleme=1;
+               if($resUser){
+                  if($resUser->num_rows == 0){
+                     $reqModif="UPDATE t_compte_com SET com_pseudo ='$pseudo'
+                                WHERE com_pseudo = '$_SESSION[login]';";
+                     $resModif=$mysqli->query($reqModif);
+
+                     if(!$resModif){
+                        echo $pseudo;
+                        //La requete à échoué
+                        $probleme=2;
+                     }
+                  }
+                  else{
+                     //Pseudo existe déjà
+                     $probleme=1;
+                  }
                }
                else{
-                  $reqModif="UPDATE t_compte_com SET com_pseudo ='$pseudo'
-                             WHERE com_pseudo = '$_SESSION[login]';";
-                  $resModif=$mysqli->query($reqModif);
-
-                  if(!$resModif){
-                     //La requete à échoué
-                     $probleme=2;
-                  }
+                  echo "1";
+                  //La requête à échoué
+                  $probleme=2;
                }
             }
             if(!empty($_POST['nom'])){
@@ -49,7 +57,6 @@ if($_GET['input']=='info'){
                   $probleme=2;
                }
             }
-
             if(!empty($_POST['prenom'])){
                $prenom=htmlspecialchars(addslashes($_POST['prenom']));
 
@@ -62,7 +69,6 @@ if($_GET['input']=='info'){
                   $probleme=2;
                }
             }
-
             if(!empty($_POST['email'])){
                $email=htmlspecialchars(addslashes($_POST['email']));
 
@@ -91,9 +97,8 @@ if($_GET['input']=='info'){
       $probleme=2;
    }
 
-
    if($probleme==0){
-      header("Location: admin_accueil.php");
+      header("Location: ../admin_accueil.php");
       exit();
    }
    else{
@@ -116,9 +121,9 @@ if($_GET['input']=='info'){
 
       <head>
          <meta charset='utf-8'>
-         <link rel='stylesheet' href='../../css/connexion.css' />
-         <link rel='stylesheet' href='../../css/navBar.css' />
-         <link rel='stylesheet' href='../../css/footer.css' />
+         <link rel='stylesheet' href='../../../css/connexion.css' />
+         <link rel='stylesheet' href='../../../css/navBar.css' />
+         <link rel='stylesheet' href='../../../css/footer.css' />
 
 
          <title>Focus</title>
@@ -126,7 +131,7 @@ if($_GET['input']=='info'){
 
       <body>
 
-         ";require('../navBarConnexion.php'); echo"
+         ";require('../../navBarConnexion.php'); echo"
 
          <div class='modifInfo'>
             <section class='modifCompte createCompte'>
@@ -222,7 +227,7 @@ if($_GET['input']=='info'){
          </div>
 
 
-         <script type='text/javascript' src='../../js/navBar.js'></script>
+         <script type='text/javascript' src='../../../js/navBar.js'></script>
       </body>
 
       </html>
@@ -252,7 +257,7 @@ elseif($_GET['input']=='mdp'){
                $resModif=$mysqli->query($reqModif);
 
                if($resModif){
-                  header("Location: ../connexion/session.php");
+                  header("Location: ../../connexion/session.php");
                   exit();
                }
                else{
@@ -279,7 +284,7 @@ elseif($_GET['input']=='mdp'){
       //entrer un mot de passe pour Confirmer
       $error=1;
    }
-   header("Location: admin_modifUser.php?error=".$error."");
+   header("Location: ../admin_modifUser.php?error=".$error."");
    exit();
 }
 

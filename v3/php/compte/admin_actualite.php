@@ -161,7 +161,7 @@ $mysqli->close();
                }
             ?>
             </span>
-            <form action='actualite_action.php?input=newActu' method='post'>
+            <form action='action/actualite_action.php?input=newActu' method='post'>
                <div>
                   <label for='newActu'>Titre :<br/></label>
                   <input type='text' id='newActu' name='newActu' required >
@@ -207,7 +207,7 @@ $mysqli->close();
                   }
                ?>
             </span>
-            <form action='actualite_action.php?input=modifActu' method='post'  class='inputPseudoModif'  required>
+            <form action='action/actualite_action.php?input=modifActu' method='post'  class='inputPseudoModif'  required>
                <select name='modifActu'>
                   <option value=''>Actualité à modifier</option>
                   <?php
@@ -260,7 +260,7 @@ $mysqli->close();
             ?>
             </span>
 
-            <form action='actualite_action.php?input=liste' method='post'  class='inputPseudoModif'  required>
+            <form action='action/actualite_action.php?input=liste' method='post'  class='inputPseudoModif'  required>
                <select name='actuActive'>
                   <option value=''>Actualité à activer/désactiver</option>
                   <?php
@@ -272,7 +272,7 @@ $mysqli->close();
                <input type='submit' value='Activer/Désactiver' id='submit'/>
             </form>
 
-            <form action='actualite_action.php?input=suppActu' method='post'  class='inputPseudoModif'  required>
+            <form action='action/actualite_action.php?input=suppActu' method='post'  class='inputPseudoModif'  required>
                <select name='actuSupp'>
                   <option value=''>Actualité à supprimer</option>
                   <?php
@@ -310,7 +310,7 @@ $mysqli->close();
                   echo "<tr class='lignePaire'>";
                   $i=$i+1;
                }echo "
-                  <form action='actualite_action.php?input=checkbox&actuDes=".$allActu['actu_numero']."' method='post'>
+                  <form action='action/actualite_action.php?input=checkbox&actuDes=".$allActu['actu_numero']."' method='post'>
                      <td>".$allActu['actu_titre']."</td>
                      <td>".$allActu['actu_texte']."</td>
                      <td>".$allActu['actu_date']."</td>

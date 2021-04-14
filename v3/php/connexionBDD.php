@@ -1,5 +1,6 @@
 <?php
 $mysqli = new mysqli("obiwan2.univ-brest.fr", "zphilipno", "j98pkj9m", "zfl2-zphilipno");
+//$mysqli = new mysqli("localhost", "root", "", "showRoom");
 if ($mysqli->connect_errno) {
    echo "Error: Problème de connexion à la BDD \n";
    echo "Errno: " . $mysqli->connect_errno . "\n";

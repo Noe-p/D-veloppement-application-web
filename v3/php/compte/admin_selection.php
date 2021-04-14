@@ -30,6 +30,10 @@ $reqSel = "SELECT DISTINCT sel_numero, sel_intitule, sel_texteIntro, sel_date, c
 $resSel = $mysqli->query($reqSel);
 $resSel2 = $mysqli->query($reqSel);
 $resSel3 = $mysqli->query($reqSel);
+$resSel4 = $mysqli->query($reqSel);
+$resSel5 = $mysqli->query($reqSel);
+
+
 
 if(!$resSel){
    echo "Error: La requête a echoué \n";
@@ -171,6 +175,99 @@ $mysqli->close();
 
    <section class='selections'>
       <div class='manage'>
+
+         <div class='ajoutActu'>
+            <h3>Ajouter une sélection : </h3>
+            <span id='message5'>
+            <?php
+               if(isset($_GET['errorNewSel'])){
+                  if(intval($_GET['errorNewSel']) and !empty($_GET['errorNewSel'])){
+                     if($_GET['errorNewSel']==1){
+                        echo "<p id='ok'>Sélection ajoutée</p>";
+                     }
+                     else if($_GET['errorNewSel']==2){
+                        echo "La requête à échoué";
+                     }
+                     else if($_GET['errorNewSel']==3){
+                        echo "Entrer un titre et une description";
+                     }
+                     else{
+                        echo "Erreur non reconnue";
+                     }
+                  }
+                  else{
+                     echo "Erreur non reconnue";
+                  }
+               }
+            ?>
+            </span>
+            <form action='action/selection_action.php?input=newSel' method='post'>
+               <div>
+                  <label for='newSel'>Titre :<br/></label>
+                  <input type='text' id='newSel' name='newSel' required >
+               </div>
+               <div>
+                  <label for='descSel'>Description :<br/></label>
+                  <textarea rows='6' cols='32' id='descSel' name='descSel' maxlength='500' required></textarea>
+               </div>
+               <div>
+                  <input type='submit' value='Ajouter' id='ajout'/>
+               </div>
+            </form>
+         </div>
+
+         <div class='modifActu'>
+            <h3>Modifier une sélection :</h3>
+            <span id='message5'>
+               <?php
+                  if(isset($_GET['errorModifSel'])){
+                     if(intval($_GET['errorModifSel']) and !empty($_GET['errorModifSel'])){
+                        if($_GET['errorModifSel']==1){
+                           echo "<p id='ok'>Sélection modifiée</p>";
+                        }
+                        else if($_GET['errorModifSel']==2){
+                           echo "La requête a échoué";
+                        }
+                        else if($_GET['errorModifSel']==3){
+                           echo "Entrer un titre ou une description";
+                        }
+                        else if($_GET['errorModifSel']==4){
+                           echo "La sélection n'existe pas";
+                        }
+                        else if($_GET['errorModifSel']==5){
+                           echo "Pas de sélection sélectionnée";
+                        }
+                        else{
+                           echo "Erreur non reconnue";
+                        }
+                     }
+                     else{
+                        echo "Erreur non reconnue";
+                     }
+                  }
+               ?>
+            </span>
+            <form action='action/selection_action.php?input=modifSel' method='post'  class='inputPseudoModif'  required>
+               <select name='modifSel'>
+                  <option value=''>Sélection à modifier</option>
+                  <?php
+                     while ($sel5 = $resSel5->fetch_assoc()) {
+                        echo "<option value=".$sel5['sel_numero'].">".$sel5['sel_intitule']."</option>";
+                     }
+                  ?>
+               </select>
+               <div>
+                  <label for='modifSelTitre'>Titre :<br/></label>
+                  <input type='text' id='modifSelTitre' name='modifSelTitre' >
+               </div>
+               <div>
+                  <label for='modifSelDesc'>Description :<br/></label>
+                  <textarea rows='6' cols='32' id='modifSelDesc' name='modifSelDesc' maxlength='500'></textarea>
+               </div>
+               <input type='submit' value='Modifier' id='buttonModifier'/>
+            </form>
+         </div>
+
          <div class='gereSel'>
             <h3>Gérer les sélections :</h3>
             <span id='message4'>
@@ -201,6 +298,9 @@ $mysqli->close();
                      elseif($_GET['error']==6) {
                         echo "La requête a échoué";
                      }
+                     elseif($_GET['error']==9) {
+                        echo "<p id='ok'>La sélection à été supprimée</p>";
+                     }
                      else{
                         echo "Erreur non reconnue";
                      }
@@ -211,7 +311,7 @@ $mysqli->close();
                }
             ?>
             </span>
-            <form action='selection_action.php?input=liste' method='post' class='inputPseudoModif' required>
+            <form action='action/selection_action.php?input=activSel' method='post' class='inputPseudoModif' required>
                <select name='selection'>
                   <?php
                   if(isset($_GET['sel'])){
@@ -223,13 +323,13 @@ $mysqli->close();
                      echo "<option value=''>Choisir une sélection</option>";
                   }
                   while ($sel2 = $resSel2->fetch_assoc()) {
-                     echo "<option value=".$sel2['sel_numero']." onclick=\"window.location.href = 'admin_selection.php?sel=".$sel2['sel_numero']."#admin';\">".$sel2['sel_intitule']."</option>";
+                     echo "<option value='".$sel2['sel_numero']."' onclick=\"window.location.href='admin_selection.php?sel=".$sel2['sel_numero']."#admin';\">".$sel2['sel_intitule']."</option>";
                   }
                   ?>
                </select>
 
                <select name='element'>
-                  <option value=''>Choisir un élément</option>
+                  <option value=''>Choisir un élément à enlever</option>
                   <?php
                   if(isset($_GET['sel'])){
                      if(intval($_GET['sel']) and !empty($_GET['sel'])){
@@ -248,7 +348,7 @@ $mysqli->close();
                <input type='submit' value='Enlever éléments' id='submit'/>
             </form>
 
-            <form action='selection_action.php?input=ajoutEleSel' method='post'>
+            <form action='action/selection_action.php?input=ajoutEleSel' method='post'>
                <select name='ajoutEleSel_sel'>
                   <option value=''>Choisir une sélection</option>
                   <?php
@@ -258,7 +358,7 @@ $mysqli->close();
                   ?>
                </select>
                <select name='ajoutEleSel_ele'>
-                  <option value=''>Choisir un élément</option>
+                  <option value=''>Choisir un élément à ajouter</option>
                   <?php
                   while ($allEle3 = $resAllEle3->fetch_assoc()) {
                      echo "<option value=".$allEle3['ele_numero'].">".$allEle3['ele_intitule']."</option>";
@@ -266,6 +366,18 @@ $mysqli->close();
                   ?>
                </select>
                <input type='submit' value='Ajouter éléments' id='ajoutEleSel'/>
+            </form>
+
+            <form action='action/selection_action.php?input=suppSel' method='post'>
+               <select name='suppSel_sel'>
+                  <option value=''>Choisir une sélection à supprimer</option>
+                  <?php
+                     while ($sel4 = $resSel4->fetch_assoc()) {
+                        echo "<option value=".$sel4['sel_numero'].">".$sel4['sel_intitule']."</option>";
+                     }
+                  ?>
+               </select>
+               <input type='submit' value='Supprimer sélection' id='supprimer'/>
             </form>
          </div>
       </div>
@@ -311,7 +423,7 @@ $mysqli->close();
                      echo "<tr class='lignePaire'>";
                      $i=$i+1;
                   }echo "
-                     <form action='selection_action.php?input=checkbox' method='post'>
+                     <form action='action/selection_action.php?input=checkbox' method='post'>
                         <td>".$sel['sel_intitule']."</td>
                         <td>".$sel['sel_date']."</td>
                         <td>".$sel['com_pseudo']."</td>

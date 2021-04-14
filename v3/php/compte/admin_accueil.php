@@ -161,7 +161,7 @@ $mysqli->close();
             ?>
             </span>
 
-            <form action='comptes_action.php?input=liste' method='post'  class='inputPseudoModif'>
+            <form action='action/comptes_action.php?input=liste' method='post'  class='inputPseudoModif'>
                <select name='pseudoActive'>
                   <option value=''>Compte à activer/désactiver</option>
                   <?php
@@ -173,7 +173,7 @@ $mysqli->close();
                <input type='submit' value='Activer/Désactiver' id='submit'/>
             </form>
 
-            <form action='comptes_action.php?input=modifStatut' method='post'  class='modifSatut'>
+            <form action='action/comptes_action.php?input=modifStatut' method='post'  class='modifSatut'>
                <select name='modifStatut'>
                   <option value=''>Choisir un compte</option>
                   <?php
@@ -193,7 +193,7 @@ $mysqli->close();
                <input type='submit' value='Modifier' id='submit'/>
             </form>
 
-            <form action='comptes_action.php?input=suppCompte' method='post'  class='inputPseudoModif'>
+            <form action='action/comptes_action.php?input=suppCompte' method='post'  class='inputPseudoModif'>
                <select name='suppCompte'>
                   <option value=''>Compte à supprimer</option>
                   <?
@@ -234,7 +234,7 @@ $mysqli->close();
                      echo "<tr class='lignePaire'>";
                      $i=$i+1;
                   }echo "
-                     <form action='comptes_action.php?input=checkbox&loginDes=".$allCpt2['com_pseudo']."' method='post'>
+                     <form action='action/comptes_action.php?input=checkbox&loginDes=".$allCpt2['com_pseudo']."' method='post'>
                         <td>".$allCpt2['com_pseudo']."</td>
                         <td>".$allCpt2['pro_nom']."</td>
                         <td>".$allCpt2['pro_prenom']."</td>

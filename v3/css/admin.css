@@ -122,7 +122,12 @@ header h2{
    justify-content: space-around;
    margin-top: 30px;
    margin-bottom: 30px;
-   width: 90%;
+   width: 95%;
+   flex-wrap: wrap;
+}
+
+.manage div{
+   margin:10px;
 }
 
 .manage h3{
@@ -231,6 +236,8 @@ input{
    padding: 5px 10px 5px 10px;
    transition: all 0.3s;
 }
+
+input:focus, textarea:focus, select:focus { outline:0 !important; }
 
 .submit{
    opacity: 0;

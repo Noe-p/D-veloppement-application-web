@@ -44,7 +44,7 @@ $mysqli->close();
 
    <div class="modifInfo">
       <section class="modifCompte createCompte">
-         <form action="modifUser_action.php?input=info" method="post">
+         <form action="action/modifUser_action.php?input=info" method="post">
             <h2>Modifier le compte</h2>
             <div>
                <label for="pseudo"><B>Pseudo :</B><br/></label>
@@ -74,7 +74,7 @@ $mysqli->close();
       </section>
 
       <section class="modifMdp createCompte">
-         <form action="modifUser_action.php?input=mdp" method="post">
+         <form action="action/modifUser_action.php?input=mdp" method="post">
             <h2>Modifier le mot de passe</h2>
             <span id='message4'>
             <?php

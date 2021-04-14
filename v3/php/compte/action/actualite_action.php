@@ -2,7 +2,7 @@
 session_start();
 
 //CONNEXION A LA BASE
-require('../connexionBDD.php');
+require('../../connexionBDD.php');
 
 //Input : text
 if($_GET['input']=='liste'){
@@ -35,7 +35,7 @@ if($_GET['input']=='liste'){
                //Si le compte est désactivé on l'active
                if($resModifVal){
                   //Si tout marche
-                  header("Location: admin_actualite.php?error=1#admin");
+                  header("Location: ../admin_actualite.php?error=1#admin");
                   exit();
                }
                else{
@@ -62,7 +62,7 @@ if($_GET['input']=='liste'){
    else{
       $error=4;
    }
-   header("Location: admin_actualite.php?error=".$error."#admin");
+   header("Location: ../admin_actualite.php?error=".$error."#admin");
    exit();
 }
 
@@ -78,7 +78,7 @@ else if($_GET['input']=='checkbox') {
          $error=2;
       }
       else{
-         header("Location: admin_actualite.php#admin");
+         header("Location: ../admin_actualite.php#admin");
          exit();
       }
    }
@@ -91,11 +91,11 @@ else if($_GET['input']=='checkbox') {
          $error=2;
       }
       else{
-         header("Location: admin_actualite.php#admin");
+         header("Location: ../admin_actualite.php#admin");
          exit();
       }
    }
-   header("Location: admin_actualite.php?error=".$error."#admin");
+   header("Location: ../admin_actualite.php?error=".$error."#admin");
    exit();
 }
 
@@ -110,7 +110,7 @@ else if($_GET['input']=='newActu') {
                    VALUES ('$titre', '$desc', CURDATE(), 'D', '$_SESSION[login]');";
       $resNewActu = $mysqli->query($reqNewActu);
       if($resNewActu){
-         header("Location: admin_actualite.php?errorNewActu=1#admin");
+         header("Location: ../admin_actualite.php?errorNewActu=1#admin");
          exit();
       }
       else{
@@ -122,7 +122,7 @@ else if($_GET['input']=='newActu') {
       //Entrer un titre et une description
       $error=3;
    }
-   header("Location: admin_actualite.php?errorNewActu=1#admin");
+   header("Location: ../admin_actualite.php?errorNewActu=1#admin");
    exit();
 }
 
@@ -161,7 +161,7 @@ else if($_GET['input']=='modifActu'){
 
                   }
                }
-               header("Location: admin_actualite.php?errorModifActu=1#admin");
+               header("Location: ../admin_actualite.php?errorModifActu=1#admin");
                exit();
             }
             else{
@@ -183,7 +183,7 @@ else if($_GET['input']=='modifActu'){
       //Pas d'actualité sélectionné
       $error=5;
    }
-   header("Location: admin_actualite.php?errorModifActu=".$error."#admin");
+   header("Location: ../admin_actualite.php?errorModifActu=".$error."#admin");
    exit();
 }
 
@@ -203,7 +203,7 @@ else if($_GET['input']=='suppActu'){
             $resSuppActu=$mysqli->query($reqSuppActu);
 
             if($resSuppActu){
-               header("Location: admin_actualite.php?error=5;#admin");
+               header("Location: ../admin_actualite.php?error=5;#admin");
                exit();
             }
             //Si tout marche
@@ -226,14 +226,14 @@ else if($_GET['input']=='suppActu'){
    else{
       $error=4;
    }
-   header("Location: admin_actualite.php?error=".$error."#admin");
+   header("Location: ../admin_actualite.php?error=".$error."#admin");
    exit();
 }
 
 
 //S'il n'y a pas de $_GET
 else{
-   header("Location: admin_actualite.php#admin");
+   header("Location: ../admin_actualite.php#admin");
    exit();
 }
 

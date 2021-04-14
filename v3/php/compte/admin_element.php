@@ -176,7 +176,7 @@ $mysqli->close();
                }
             ?>
             </span>
-            <form action='element_action.php?input=newEle' method='post'>
+            <form action='action/element_action.php?input=newEle' method='post'>
                <select name='allSel'>
                   <option value=''>Choisir une sélection</option>
                   <?php
@@ -234,7 +234,7 @@ $mysqli->close();
                   }
                ?>
             </span>
-            <form action='element_action.php?input=modifEle' method='post'  class='inputPseudoModif'  required>
+            <form action='action/element_action.php?input=modifEle' method='post'  class='inputPseudoModif'  required>
                <select name='modifEle'>
                   <option value=''>Élément à modifier</option>
                   <?php
@@ -291,7 +291,7 @@ $mysqli->close();
             ?>
             </span>
 
-            <form action='element_action.php?input=activeEle' method='post'  class='inputPseudoModif'  required>
+            <form action='action/element_action.php?input=activeEle' method='post'  class='inputPseudoModif'  required>
                <select name='eleActive'>
                   <option value=''>Élément à activer/désactiver</option>
                   <?php
@@ -303,7 +303,7 @@ $mysqli->close();
                <input type='submit' value='Activer/Désactiver' id='submit'/>
             </form>
 
-            <form action='element_action.php?input=suppEle' method='post'  class='inputPseudoModif'  required>
+            <form action='action/element_action.php?input=suppEle' method='post'  class='inputPseudoModif'  required>
                <select name='eleSupp'>
                   <option value=''>Élément à supprimer</option>
                   <?php
@@ -341,7 +341,7 @@ $mysqli->close();
                   echo "<tr class='lignePaire'>";
                   $i=$i+1;
                }echo "
-                  <form action='element_action.php?input=checkboxEleDes&eleDes=".$allEle['ele_numero']."' method='post'>
+                  <form action='action/element_action.php?input=checkboxEleDes&eleDes=".$allEle['ele_numero']."' method='post'>
                      <td>".$allEle['ele_intitule']."</td>
                      <td>".$allEle['ele_descriptif']."</td>
                      <td>".$allEle['ele_date']."</td>

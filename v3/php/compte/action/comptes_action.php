@@ -1,6 +1,6 @@
 <?php
 //CONNEXION A LA BASE
-require('../connexionBDD.php');
+require('../../connexionBDD.php');
 
 //Input : text
 if($_GET['input']=='liste'){
@@ -26,7 +26,7 @@ if($_GET['input']=='liste'){
                   $resModifVal = $mysqli->query($reqModifVal);
 
                   if($resModifVal){
-                     header("Location: admin_accueil.php?error=1#admin");
+                     header("Location: ../admin_accueil.php?error=1#admin");
                      exit();
                   }else{
                      $error=2;
@@ -37,7 +37,7 @@ if($_GET['input']=='liste'){
                   $resModifVal = $mysqli->query($reqModifVal);
 
                   if($resModifVal){
-                     header("Location: admin_accueil.php?error=1#admin");
+                     header("Location: ../admin_accueil.php?error=1#admin");
                      exit();
                   }else{
                      $error=2;
@@ -63,7 +63,7 @@ if($_GET['input']=='liste'){
    else{
       $error=4;
    }
-   header("Location: admin_accueil.php?error=".$error."#admin");
+   header("Location: ../admin_accueil.php?error=".$error."#admin");
    exit();
 }
 
@@ -75,7 +75,7 @@ elseif($_GET['input']=='checkbox') {
       $resModifVal = $mysqli->query($reqModifVal);
 
       if($resModifVal){
-         header("Location: admin_accueil.php#admin");
+         header("Location: ../admin_accueil.php#admin");
          exit();
       }
       else{
@@ -91,11 +91,11 @@ elseif($_GET['input']=='checkbox') {
          $error=2;
       }
       else{
-         header("Location: admin_accueil.php#admin");
+         header("Location: ../admin_accueil.php#admin");
          exit();
       }
    }
-   header("Location: admin_accueil.php?error=".$error."#admin");
+   header("Location: ../admin_accueil.php?error=".$error."#admin");
    exit();
 }
 
@@ -122,7 +122,7 @@ elseif($_GET['input']=='modifStatut'){
                $resModifStatut = $mysqli->query($reqModifStatut);
 
                if($resModifStatut){
-                  header("Location: admin_accueil.php?error=1#admin");
+                  header("Location: ../admin_accueil.php?error=1#admin");
                   exit();
                }
                else{
@@ -149,7 +149,7 @@ elseif($_GET['input']=='modifStatut'){
       //Pseudo vide
       $error=4;
    }
-   header("Location: admin_accueil.php?error=".$error."#admin");
+   header("Location: ../admin_accueil.php?error=".$error."#admin");
    exit();
 }
 
@@ -170,7 +170,7 @@ elseif($_GET['input']=='suppCompte'){
             $error=7;
          }
          else{
-            header("Location: admin_accueil.php#admin");
+            header("Location: ../admin_accueil.php#admin");
             exit();
          }
       }
@@ -183,7 +183,7 @@ elseif($_GET['input']=='suppCompte'){
       //Pseudo vide
       $error=1;
    }
-   header("Location: admin_accueil.php?error=".$error."#admin");
+   header("Location: ../admin_accueil.php?error=".$error."#admin");
    exit();
 }
 
@@ -191,7 +191,7 @@ elseif($_GET['input']=='suppCompte'){
 
 //S'il n'y a pas de $_GET
 else{
-   header("Location: admin_actualite.php#admin");
+   header("Location: ../admin_accueil.php#admin");
    exit();
 }
 

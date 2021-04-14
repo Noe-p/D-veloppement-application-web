@@ -2,7 +2,7 @@
 session_start();
 
 //CONNEXION A LA BASE
-require('../connexionBDD.php');
+require('../../connexionBDD.php');
 
 //Input : text
 if($_GET['input']=='activeEle'){
@@ -35,7 +35,7 @@ if($_GET['input']=='activeEle'){
                //Si l'élément est désactivé on l'active
                if($resModifVal){
                   //Si tout marche
-                  header("Location: admin_element.php?error=1#admin");
+                  header("Location: ../admin_element.php?error=1#admin");
                   exit();
                }
                else{
@@ -62,7 +62,7 @@ if($_GET['input']=='activeEle'){
    else{
       $error=4;
    }
-   header("Location: admin_element.php?error=".$error."#admin");
+   header("Location: ../admin_element.php?error=".$error."#admin");
    exit();
 }
 
@@ -78,7 +78,7 @@ else if($_GET['input']=='checkboxEleDes') {
          $error=2;
       }
       else{
-         header("Location: admin_element.php#admin");
+         header("Location: ../admin_element.php#admin");
          exit();
       }
    }
@@ -91,11 +91,11 @@ else if($_GET['input']=='checkboxEleDes') {
          $error=2;
       }
       else{
-         header("Location: admin_element.php#admin");
+         header("Location: ../admin_element.php#admin");
          exit();
       }
    }
-   header("Location: admin_element.php?error=".$error."#admin");
+   header("Location: ../admin_element.php?error=".$error."#admin");
    exit();
 }
 
@@ -114,7 +114,7 @@ else if($_GET['input']=='newEle') {
                   INSERT INTO tj_relie_rel (sel_numero, ele_numero) VALUES ($sel, @id_ele);";
       $resNewEle = $mysqli->multi_query($reqNewEle);
       if($resNewEle){
-         header("Location: admin_element.php?errorNewEle=1#admin");
+         header("Location: ../admin_element.php?errorNewEle=1#admin");
          exit();
       }
       else{
@@ -126,7 +126,7 @@ else if($_GET['input']=='newEle') {
       //Entrer un titre et une description
       $error=3;
    }
-   header("Location: admin_element.php?errorNewEle=".$error."#admin");
+   header("Location: ../admin_element.php?errorNewEle=".$error."#admin");
    exit();
 }
 
@@ -174,7 +174,7 @@ else if($_GET['input']=='modifEle'){
                      $error=2;
                   }
                }
-               header("Location: admin_element.php?errorModifEle=1#admin");
+               header("Location: ../admin_element.php?errorModifEle=1#admin");
                exit();
             }
             else{
@@ -196,7 +196,7 @@ else if($_GET['input']=='modifEle'){
       //Pas d'élément sélectionné
       $error=5;
    }
-   header("Location: admin_element.php?errorModifEle=".$error."#admin");
+   header("Location: ../admin_element.php?errorModifEle=".$error."#admin");
    exit();
 }
 
@@ -221,7 +221,7 @@ else if($_GET['input']=='suppEle'){
             $resSuppEle=$mysqli->multi_query($reqSuppEle);
 
             if($resSuppEle){
-               header("Location: admin_element.php?error=5;#admin");
+               header("Location: ../admin_element.php?error=5;#admin");
                exit();
             }
             //Si tout marche
@@ -244,14 +244,14 @@ else if($_GET['input']=='suppEle'){
    else{
       $error=4;
    }
-   header("Location: admin_element.php?error=".$error."#admin");
+   header("Location: ../admin_element.php?error=".$error."#admin");
    exit();
 }
 
 
 //S'il n'y a pas de $_GET
 else{
-   header("Location: admin_element.php#admin");
+   header("Location: ../admin_element.php#admin");
    exit();
 }
 

@@ -173,7 +173,10 @@ $mysqli->close();
 
    <section class='profils'>
       <div class='manage'>
-         <div class='ajoutActu'>
+
+         <!--AJOUTER LIEN-->
+
+         <div>
             <h3>Ajouter un lien : </h3>
             <span id='message5'>
             <?php
@@ -186,7 +189,7 @@ $mysqli->close();
                         echo "La requête à échoué";
                      }
                      else if($_GET['errorNewLien']==3){
-                        echo "Entrer un titre et une description";
+                        echo "Entrer un élément, un titre, une description et un auteur";
                      }
                      else{
                         echo "Erreur non reconnue";
@@ -225,7 +228,9 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class="modifActu">
+         <!--MODIFIER LIEN-->
+
+         <div>
             <h3>Modifier un lien :</h3>
             <span id='message5'>
                <?php
@@ -257,7 +262,7 @@ $mysqli->close();
                ?>
             </span>
             <form action='action/lien_action.php?input=id' method='post' id='selectModif'>
-               <select name='modifLien'>
+               <select name='modifLien' onchange='valideButton();'>
                   <?php
                      if(isset($_GET['lie'])){
                         echo "<option value=''>".$infoLien['lie_titre']."</option>";
@@ -299,7 +304,9 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class='danger'>
+         <!--SUPPRMER LIEN-->
+
+         <div>
             <h3>Supprimer les liens :</h3>
             <span id='message5'>
             <?php
@@ -401,6 +408,7 @@ $mysqli->close();
 
    <?php require('../footer.php'); ?>
 
+   <script type="text/javascript" src="../../js/valideButton.js"></script>
    <script type="text/javascript" src="../../js/navBar.js"></script>
 
 </body>

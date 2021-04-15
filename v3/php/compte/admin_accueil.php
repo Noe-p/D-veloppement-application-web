@@ -6,7 +6,7 @@ if(!isset($_SESSION['login'])){
    header("Location: ../connexion/session.php");
    exit();
 }
-
+//Si c'est un responsable on le revois vers admin_actualite
 if($_SESSION['statut']=='R'){
    header("Location: admin_actualite.php");
    exit();
@@ -80,6 +80,10 @@ if(!$resAllCpt){
    echo "Error: " . $mysqli->error . "\n";
    exit();
 }
+//Nb Compte
+$reqCpt2= "SELECT * FROM t_profil_pro;";
+$resCpt2 = $mysqli->query($reqCpt2);
+$nbCpt2 = $resCpt2->num_rows;
 
 //Nb compte actif
 $reqCptActif= "SELECT * FROM t_profil_pro WHERE pro_validite='A'";
@@ -138,7 +142,7 @@ $mysqli->close();
       <article class='infosUser'>
          <h2>Informations : </h2>
          <ul>
-            <li><B>Inscrits : </B><?php echo $nbCpt; ?></li>
+            <li><B>Inscrits : </B><?php echo $nbCpt2; ?></li>
             <li><B>Comptes Administrateur : </B><?php echo $nbCptAdmin; ?></li>
             <li><B>Comptes activés : </B><?php echo $nbCptActif; ?></li>
             <li><B>Comptes désactivés : </B><?php echo $nbCptDes; ?></li>
@@ -158,7 +162,10 @@ $mysqli->close();
    </div>
    <section class='profils'>
       <div class='manage managePro'>
-         <div class='modifActu'>
+
+         <!--MODIFIER UN PROFIL-->
+
+         <div>
             <h3>Modifier un profil :</h3>
             <span id='message5'>
                <?php
@@ -190,7 +197,7 @@ $mysqli->close();
                ?>
             </span>
             <form action='action/comptes_action.php?input=id' method='post'  id='selectModif'>
-               <select name='modifPro'>
+               <select name='modifPro' onchange='valideButton();'>
                   <?php
                      if(isset($_GET['pseudo'])){
                         echo "<option value=''>".$pseudo."</option>";
@@ -232,7 +239,9 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class='gereCompte'>
+         <!--GERER LES COMPTES-->
+
+         <div>
             <h3>Gérer les profils :</h3>
             <span id='message4'>
             <?php
@@ -273,6 +282,7 @@ $mysqli->close();
             ?>
             </span>
 
+            <!--Activer les comptes-->
             <form action='action/comptes_action.php?input=liste' method='post'  class='inputPseudoModif'>
                <select name='pseudoActive'>
                   <option value=''>Compte à activer/désactiver</option>
@@ -285,6 +295,7 @@ $mysqli->close();
                <input type='submit' value='Activer/Désactiver' id='submit'/>
             </form>
 
+            <!--Modifier le statut-->
             <form action='action/comptes_action.php?input=modifStatut' method='post'  class='modifSatut'>
                <select name='modifStatut'>
                   <option value=''>Choisir un compte</option>
@@ -305,6 +316,7 @@ $mysqli->close();
                <input type='submit' value='Modifier' id='submit'/>
             </form>
 
+            <!--Supprimer compte-->
             <form action='action/comptes_action.php?input=suppCompte' method='post'  class='inputPseudoModif'>
                <select name='suppCompte'>
                   <option value=''>Compte à supprimer</option>
@@ -373,6 +385,7 @@ $mysqli->close();
 
    <?php require('../footer.php'); ?>
 
+   <script type="text/javascript" src="../../js/valideButton.js"></script>
    <script type="text/javascript" src="../../js/navBar.js"></script>
 
 </body>

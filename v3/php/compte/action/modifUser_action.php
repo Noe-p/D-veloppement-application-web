@@ -1,9 +1,22 @@
 <?php
+//GERE LES ACTION DES MODIFICATION COMPTES :
+// - Modifier les information (nom, prenom, mail)
+// - Modifier le mot de passe
+// Les erreurs sont affichées dans modifInfoUser_action.php pourles infos
+// Les erreurs sont renvoyées par url pour le mot de passe
+
 session_start();
+
+if(!isset($_SESSION['login'])){
+   header("Location: ../connexion/session.php");
+   exit();
+}
 
 //CONNEXION A LA BASE
 require('../../connexionBDD.php');
 
+
+//Modifier les informations
 if($_GET['input']=='info'){
    $probleme=0;
    if(!empty($_POST['mdp_valide'])){
@@ -251,6 +264,11 @@ elseif($_GET['input']=='mdp'){
    exit();
 }
 
+//S'il n'y a pas de $_GET
+else{
+   header("Location: ../admin_accueil.php#admin");
+   exit();
+}
 
 $mysqli->close();
 ?>

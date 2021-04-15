@@ -170,7 +170,10 @@ $mysqli->close();
 
    <section class='profils'>
       <div class='manage'>
-         <div class='ajoutActu'>
+
+         <!--AJOUTER UNE ACTUALITE-->
+
+         <div>
             <h3>Ajouter une actualité : </h3>
             <span id='message5'>
             <?php
@@ -210,7 +213,9 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class="modifActu">
+         <!--MODIFIER UNE ACTUALITE-->
+
+         <div>
             <h3>Modifier une actualité :</h3>
             <span id='message5'>
                <?php
@@ -242,7 +247,7 @@ $mysqli->close();
                ?>
             </span>
             <form action='action/actualite_action.php?input=id' method='post' id='selectModif'>
-               <select name='modifActu'>
+               <select name='modifActu' onchange='valideButton();'>
                   <?php
                      if(isset($_GET['actu'])){
                         echo "<option value=''>".$infoActu['actu_titre']."</option>";
@@ -280,7 +285,9 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class='danger'>
+         <!--GERE LES ACTUALITES-->
+
+         <div>
             <h3>Gérer les actualités :</h3>
             <span id='message5'>
             <?php
@@ -312,6 +319,7 @@ $mysqli->close();
             ?>
             </span>
 
+            <!--Désactiver actualités-->
             <form action='action/actualite_action.php?input=liste' method='post'  class='inputPseudoModif'  required>
                <select name='actuActive'>
                   <option value=''>Actualité à activer/désactiver</option>
@@ -324,6 +332,7 @@ $mysqli->close();
                <input type='submit' value='Activer/Désactiver' id='submit'/>
             </form>
 
+            <!--Supprimer actualité-->
             <form action='action/actualite_action.php?input=suppActu' method='post'  class='inputPseudoModif'  required>
                <select name='actuSupp'>
                   <option value=''>Actualité à supprimer</option>
@@ -386,6 +395,7 @@ $mysqli->close();
 
    <?php require('../footer.php'); ?>
 
+   <script type="text/javascript" src="../../js/valideButton.js"></script>
    <script type="text/javascript" src="../../js/navBar.js"></script>
 
 </body>

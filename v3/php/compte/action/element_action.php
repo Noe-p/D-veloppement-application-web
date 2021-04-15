@@ -1,10 +1,23 @@
 <?php
+//GERE LES ACTION DES ELEMENTS :
+// - Ajouter élément
+// - Modifier un élément
+// - Désactiver/Activer élément (Avec checkbox, Avec Sélect)
+// - Supprimer élément
+// Les erreurs sont renvoyées par url
+
 session_start();
+
+if(!isset($_SESSION['login'])){
+   header("Location: ../connexion/session.php");
+   exit();
+}
 
 //CONNEXION A LA BASE
 require('../../connexionBDD.php');
 
-//Input : text
+
+//Select : Désactive/active actualite
 if($_GET['input']=='activeEle'){
    if(!empty($_POST['eleActive'])){
       $ele=htmlspecialchars(addslashes($_POST['eleActive']));
@@ -66,7 +79,7 @@ if($_GET['input']=='activeEle'){
    exit();
 }
 
-//Input : checkbox
+//Tableau : active et désactive actualités
 else if($_GET['input']=='checkboxEleDes') {
    $ele=htmlspecialchars(addslashes($_GET['eleDes']));
 
@@ -140,7 +153,7 @@ else if($_GET['input']=='newEle') {
    exit();
 }
 
-//Verif élément
+//Verif élément (Sert à renvoyer en url l'id d'un élément)
 elseif($_GET['input']=='id') {
    $ele=htmlspecialchars(addslashes($_POST['modifEle']));
 

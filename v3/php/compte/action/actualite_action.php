@@ -1,10 +1,24 @@
 <?php
+//GERE LES ACTION DES ACTUALITES :
+// - Ajouter actualité
+// - Modifier une actualité
+// - Désactiver/Activer actualité (Avec checkbox, Avec Sélect)
+// - Supprimer actualité
+// Les erreurs sont renvoyées par url
+
 session_start();
+
+if(!isset($_SESSION['login'])){
+   header("Location: ../connexion/session.php");
+   exit();
+}
 
 //CONNEXION A LA BASE
 require('../../connexionBDD.php');
 
-//Input : text
+
+
+//Select : Désactive/active actualite
 if($_GET['input']=='liste'){
    if(!empty($_POST['actuActive'])){
       $actu=htmlspecialchars(addslashes($_POST['actuActive']));
@@ -66,7 +80,7 @@ if($_GET['input']=='liste'){
    exit();
 }
 
-//Input : checkbox
+//Tableau : active et désactive actualités
 else if($_GET['input']=='checkbox') {
    //Si la checkbox est cochée, on active le compte
    if(!empty($_POST['checkbox'])){
@@ -123,11 +137,11 @@ else if($_GET['input']=='newActu') {
       //Entrer un titre et une description
       $error=3;
    }
-   header("Location: ../admin_actualite.php?errorNewActu=1#admin");
+   header("Location: ../admin_actualite.php?errorNewActu=".$error."#admin");
    exit();
 }
 
-//Verif Actualité
+//Verif Actualité (Sert à renvoyer en url l'id d'une actualité)
 elseif($_GET['input']=='id') {
    $actu=htmlspecialchars(addslashes($_POST['modifActu']));
 

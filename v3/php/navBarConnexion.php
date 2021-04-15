@@ -12,7 +12,10 @@
          <ul class="sous">
             <?php
             if(isset($_SESSION['login'])){
-               echo "<li><a href='../compte/admin_accueil.php?'>Profil</a></li>
+               if($_SESSION['statut']=='A'){
+                  echo "<li><a href='../compte/admin_accueil.php?'>Profil</a></li>";
+               }
+               echo"
                <li><a href='../compte/admin_actualite.php?#admin'>Actualités</a></li>
                <li><a href='../compte/admin_selection.php?#admin'>Sélections</a></li>
                <li><a href='../compte/admin_element.php?#admin'>Éléments</a></li>

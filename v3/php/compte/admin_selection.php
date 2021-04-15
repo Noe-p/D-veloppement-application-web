@@ -67,8 +67,6 @@ $resSel3 = $mysqli->query($reqSel);
 $resSel4 = $mysqli->query($reqSel);
 $resSel5 = $mysqli->query($reqSel);
 
-
-
 if(!$resSel){
    echo "Error: La requête a echoué \n";
    echo "Errno: " . $mysqli->errno . "\n";
@@ -111,8 +109,7 @@ if(isset($_GET['sel'])){
       $reqEleSel = "SELECT DISTINCT ele_numero, ele_intitule
                     FROM t_element_ele
                     JOIN tj_relie_rel USING(ele_numero)
-                    WHERE sel_numero='$sel'
-                    AND ele_etat='A'";
+                    WHERE sel_numero='$sel'";
       $resEleSel = $mysqli->query($reqEleSel);
    }
 }
@@ -210,7 +207,9 @@ $mysqli->close();
    <section class='selections'>
       <div class='manage'>
 
-         <div class='ajoutActu'>
+         <!--AJOUTER UNE SELECTION -->
+
+         <div>
             <h3>Ajouter une sélection : </h3>
             <span id='message5'>
             <?php
@@ -250,7 +249,9 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class='modifActu'>
+         <!--MODIFIER UNE SELECTION -->
+
+         <div>
             <h3>Modifier une sélection :</h3>
             <span id='message5'>
                <?php
@@ -282,7 +283,7 @@ $mysqli->close();
                ?>
             </span>
             <form action='action/selection_action.php?input=id' method='post'  id='selectModif'>
-               <select name='modifSel'>
+               <select name='modifSel' onchange='valideButton();'>
                   <?php
                      if(isset($_GET['sel'])){
                         echo "<option value=''>".$infoSel['sel_intitule']."</option>";
@@ -320,7 +321,9 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class='gereSel'>
+         <!--GERER LES SELECTION-->
+
+         <div>
             <h3>Gérer les sélections :</h3>
             <span id='message4'>
             <?php
@@ -363,6 +366,8 @@ $mysqli->close();
                }
             ?>
             </span>
+
+            <!--Enlever élément -->
             <form action='action/selection_action.php?input=activSel' method='post' class='inputPseudoModif' required>
                <select name='selection'>
                   <?php
@@ -400,6 +405,7 @@ $mysqli->close();
                <input type='submit' value='Enlever éléments' id='submit'/>
             </form>
 
+            <!--Ajouter élément -->
             <form action='action/selection_action.php?input=ajoutEleSel' method='post'>
                <select name='ajoutEleSel_sel'>
                   <option value=''>Choisir une sélection</option>
@@ -420,6 +426,7 @@ $mysqli->close();
                <input type='submit' value='Ajouter éléments' id='ajoutEleSel'/>
             </form>
 
+            <!--Supprimer élément -->
             <form action='action/selection_action.php?input=suppSel' method='post'>
                <select name='suppSel_sel'>
                   <option value=''>Choisir une sélection à supprimer</option>
@@ -440,8 +447,8 @@ $mysqli->close();
                <th>Titre</th>
                <th>Date</th>
                <th>Pseudo</th>
-               <th>Élements activés</th>
-               <th>Élements désactivés</th>
+               <th>Élement activé</th>
+               <th>Élement désactivé</th>
                <th></th>
             </tr>
          </thead>
@@ -506,6 +513,7 @@ $mysqli->close();
 
    <?php require('../footer.php'); ?>
 
+   <script type="text/javascript" src="../../js/valideButton.js"></script>
    <script type="text/javascript" src="../../js/navBar.js"></script>
 
 </body>

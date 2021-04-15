@@ -39,7 +39,7 @@ if ($_POST["pseudo"] and $_POST["mdp"]){
 
          echo "<script>
             document.getElementById('message3').style.color = 'rgb(210, 28, 28)';
-            document.getElementById('message3').innerHTML = 'La connexion a échoué, compte désactivé';
+            document.getElementById('message3').innerHTML = 'Votre compte est désactiver ou en attente d\'acceptation';
             document.getElementById('message3').style.fontSize = '0.8em';
             </script>";
       }

@@ -1,10 +1,23 @@
 <?php
+//GERE LES ACTION DES COMPTES :
+// - Modifier un profil
+// - Désactiver/Activer actualité (Avec checkbox, Avec Sélect)
+// - Modifier le statut
+//- Supprimer actualité
+// Les erreurs sont renvoyées par url
+
 session_start();
+
+if(!isset($_SESSION['login'])){
+   header("Location: ../connexion/session.php");
+   exit();
+}
 
 //CONNEXION A LA BASE
 require('../../connexionBDD.php');
 
-//Input : text
+
+//Select : Désactive/active compte
 if($_GET['input']=='liste'){
    if(!empty($_POST['pseudoActive'])){
       $pseudo=htmlspecialchars(addslashes($_POST['pseudoActive']));
@@ -69,7 +82,7 @@ if($_GET['input']=='liste'){
    exit();
 }
 
-//Verif pseudo
+//Verif pseudo (Sert à renvoyer en url l'id d'un pseudo)
 elseif($_GET['input']=='id') {
    $pseudo=htmlspecialchars(addslashes($_POST['modifPro']));
 
@@ -95,7 +108,7 @@ elseif($_GET['input']=='id') {
    exit();
 }
 
-//Input : checkbox
+//Tableau : active et désactive compte
 elseif($_GET['input']=='checkbox') {
    $pseudo=htmlspecialchars(addslashes($_GET['loginDes']));
 
@@ -279,7 +292,8 @@ elseif($_GET['input']=='suppCompte'){
             $reqSuppCompte="DELETE FROM t_selection_sel WHERE com_pseudo = '$pseudo';
                            DELETE FROM t_actualite_actu WHERE com_pseudo = '$pseudo';
                            DELETE FROM t_presentation_pre WHERE com_pseudo = '$pseudo';
-                           DELETE FROM t_profil_pro WHERE com_pseudo = '$pseudo';";
+                           DELETE FROM t_profil_pro WHERE com_pseudo = '$pseudo';
+                           DELETE FROM t_compte_com WHERE com_pseudo = '$pseudo';";
             $resSuppCompte = $mysqli->multi_query($reqSuppCompte);
 
             if($resSuppCompte){

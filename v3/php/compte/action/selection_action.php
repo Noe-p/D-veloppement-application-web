@@ -1,10 +1,24 @@
 <?php
+//GERE LES ACTION DES SELECTION :
+// - Ajouter une sélection
+// - Modifier une sélection
+// - Enlerver élement (Avec checkbox, Avec Sélect)
+// - Ajouter élément
+// Les erreurs sont renvoyées par url
+
 session_start();
+
+if(!isset($_SESSION['login'])){
+   header("Location: ../connexion/session.php");
+   exit();
+}
 
 //CONNEXION A LA BASE
 require('../../connexionBDD.php');
 
-//Input : text
+
+
+//Select : Enleve éléments
 if($_GET['input']=='activSel'){
    if(!empty($_POST['selection'])){
       $sel=htmlspecialchars(addslashes($_POST['selection']));
@@ -57,7 +71,7 @@ if($_GET['input']=='activSel'){
    exit();
 }
 
-//Input : checkbox
+//Checkbox : Enleve élément
 else if($_GET['input']=='checkbox') {
    if(empty($_POST['checkbox'])){
       header("Location: ../admin_selection.php#admin");
@@ -172,7 +186,7 @@ else if($_GET['input']=='newSel') {
    exit();
 }
 
-//Verif Sélection
+//Verif sélection (Sert à renvoyer en url l'id d'une sélection)
 elseif($_GET['input']=='id') {
    $sel=htmlspecialchars(addslashes($_POST['modifSel']));
 

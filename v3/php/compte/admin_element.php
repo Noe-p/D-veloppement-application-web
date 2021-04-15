@@ -186,7 +186,10 @@ $mysqli->close();
 
    <section class='profils'>
       <div class='manage'>
-         <div class='ajoutActu'>
+
+         <!--AJOUTER ELEMENT-->
+
+         <div>
             <h3>Ajouter un Élément : </h3>
             <span id='message5'>
             <?php
@@ -238,7 +241,9 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class='modifActu'>
+         <!--MODIFIER ELEMENT-->
+
+         <div>
             <h3>Modifier un élément :</h3>
             <span id='message5'>
                <?php
@@ -270,7 +275,7 @@ $mysqli->close();
                ?>
             </span>
             <form action='action/element_action.php?input=id' method='post' id='selectModif'>
-               <select name='modifEle'>
+               <select name='modifEle' onchange='valideButton();'>
                   <?php
                      if(isset($_GET['ele'])){
                         echo "<option value=''>".$infoEle['ele_intitule']."</option>";
@@ -312,7 +317,9 @@ $mysqli->close();
             </form>
          </div>
 
-         <div class='danger'>
+         <!--GERER ELEMENTS-->
+
+         <div>
             <h3>Gérer les éléments :</h3>
             <span id='message5'>
             <?php
@@ -344,6 +351,7 @@ $mysqli->close();
             ?>
             </span>
 
+            <!--Désactiver éléments-->
             <form action='action/element_action.php?input=activeEle' method='post'  class='inputPseudoModif'  required>
                <select name='eleActive'>
                   <option value=''>Élément à activer/désactiver</option>
@@ -356,6 +364,7 @@ $mysqli->close();
                <input type='submit' value='Activer/Désactiver' id='submit'/>
             </form>
 
+            <!--Supprimer éléments-->
             <form action='action/element_action.php?input=suppEle' method='post'  class='inputPseudoModif'  required>
                <select name='eleSupp'>
                   <option value=''>Élément à supprimer</option>
@@ -378,6 +387,7 @@ $mysqli->close();
                <th>Date</th>
                <th>Activé</th>
                <th>Image</th>
+               <th>Nombre de lien associé</th>
                <th></th>
             </tr>
          </thead>
@@ -385,6 +395,26 @@ $mysqli->close();
             <?php
             $i=0;
             while ($allEle = $resAllEle->fetch_assoc()) {
+               //CONNEXION A LA BASE
+               require('../connexionBDD.php');
+
+               //Nb d'actualités
+               $reqNbLie = "SELECT lie_numero FROM t_lien_lie
+                            WHERE ele_numero = '$allEle[ele_numero]';";
+               $resNbLie = $mysqli->query($reqNbLie);
+
+               if(!$resNbLie){
+                  echo "Error: La requête a echoué \n";
+                  echo "Errno: " . $mysqli->errno . "\n";
+                  echo "Error: " . $mysqli->error . "\n";
+                  exit();
+               }
+               else{
+                  $nbLie=$resNbLie->num_rows;
+               }
+               $mysqli->close();
+
+
                //Test de parité pour l'aternance de couleurs des lignes du tableau
                if(fmod($i,2)==0){
                   echo "<tr>";
@@ -407,6 +437,7 @@ $mysqli->close();
                      }
                      echo "</td>
                      <td>".$allEle['ele_fichierImage']."</td>
+                     <td class='tabNbLien'>".$nbLie."</td>
                      <td><input type='submit' value='Modifier' id='submit'/></td>
                   </form>
                </tr>";
@@ -418,6 +449,7 @@ $mysqli->close();
 
    <?php require('../footer.php'); ?>
 
+   <script type="text/javascript" src="../../js/valideButton.js"></script>
    <script type="text/javascript" src="../../js/navBar.js"></script>
 
 </body>

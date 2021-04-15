@@ -143,16 +143,43 @@ header h2{
    padding-bottom: 0;
    margin-top: 0;
 }
-.ajoutActu, .modifActu, .danger, .gereCompte, .gereSel{
+
+.manage > div h3{
+   margin-bottom: 30px;
+}
+
+.manage > div{
    border-radius:10px;
    text-align: center;
    box-shadow: 1px 1px 7px rgb(51, 51, 51);
    transition: all 0.2s;
 }
 
-.ajoutActu:hover, .modifActu:hover, .danger:hover
-, .gereCompte:hover, .gereSel:hover{
+.manage > div:hover{
    box-shadow: 1px 1px 10px rgb(51, 51, 51);
+}
+
+.manage > div form{
+   padding-bottom: 30px;
+   padding-left: 30px;
+   padding-right: 30px;
+   margin-top: 10px;
+}
+
+.manage > div input:hover{
+   background-color: rgb(13, 50, 65);
+   box-shadow: none;
+}
+
+.manage > div input, .manage > div textarea, .manage > div div{
+   margin-top: 10px;
+}
+
+.manage > div textarea{
+   color:rgb(255, 249, 235);
+   background-color: rgb(13, 50, 65);
+   border-radius: 8px;
+   padding: 5px 10px 5px 10px;
 }
 
 /*Profils*/
@@ -170,10 +197,6 @@ header h2{
    width: 70vw;
 }
 
-.gereCompte form{
-   margin: 30px;
-   text-align: left;
-}
 select {
    color:rgb(51, 51, 51);
    border: solid 1px rgb(51, 51, 51);
@@ -269,10 +292,6 @@ input:hover{
 
 /*Actualités*/
 
-.modifActu h3, .ajoutActu h3{
-   margin-bottom: 30px;
-}
-
 #message5{
    color: rgb(210, 28, 28);
    font-size: 0.8em;
@@ -280,29 +299,6 @@ input:hover{
 
 #ok{
    color: rgb(128, 205, 79);
-}
-.ajoutActu form, .modifActu form{
-   padding-bottom: 30px;
-   padding-left: 30px;
-   padding-right: 30px;
-   margin-top: 10px;
-}
-
-.ajoutActu input:hover, .modifActu input:hover{
-   background-color: rgb(13, 50, 65);
-   box-shadow: none;
-}
-
-.ajoutActu input, .ajoutActu textarea, .ajoutActu div,
-.modifActu input, .modifActu textarea, .modifActu div{
-   margin-top: 10px;
-}
-
-.ajoutActu textarea, .modifActu textarea{
-   color:rgb(255, 249, 235);
-   background-color: rgb(13, 50, 65);
-   border-radius: 8px;
-   padding: 5px 10px 5px 10px;
 }
 
 #ajout{
@@ -324,22 +320,7 @@ input:hover{
    width: 110px;
 }
 
-#buttonValider:hover{
-   background-color: rgb(128, 205, 79);
-}
-
-
-.danger form{
-   margin: 30px;
-}
-
-
 /*Sélections*/
-
-.gereSel form{
-   margin: 30px;
-   text-align: left;
-}
 
 .selections #message4{
    left: 45%;
@@ -389,6 +370,10 @@ input:hover{
    color:rgb(51, 51, 51);
 }
 
+.tabNbLien{
+   width: 60px;
+   text-align: center;
+}
 /*Liens*/
 #urlTab{
    max-width: 500px;

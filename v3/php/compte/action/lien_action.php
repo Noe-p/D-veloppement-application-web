@@ -1,5 +1,16 @@
 <?php
+//GERE LES ACTION DES LIENS :
+// - Ajouter un lien
+// - Modifier un lien
+// - Supprimer lien
+// Les erreurs sont renvoyées par url
+
 session_start();
+
+if(!isset($_SESSION['login'])){
+   header("Location: ../connexion/session.php");
+   exit();
+}
 
 //CONNEXION A LA BASE
 require('../../connexionBDD.php');
@@ -29,11 +40,11 @@ if($_GET['input']=='newLien') {
       //Entrer un titre, un url, un auteur et un élément
       $error=3;
    }
-   header("Location: ../admin_lien.php?errorNewLien=1#admin");
+   header("Location: ../admin_lien.php?errorNewLien=".$error."#admin");
    exit();
 }
 
-//Verif lien
+//Verif lien (Sert à renvoyer en url l'id d'un lien)
 elseif($_GET['input']=='id') {
    $lie=htmlspecialchars(addslashes($_POST['modifLien']));
 
@@ -175,7 +186,7 @@ else if($_GET['input']=='suppLien'){
 
 //S'il n'y a pas de $_GET
 else{
-   header("Location: ../admin_element.php#admin");
+   header("Location: ../admin_lien.php#admin");
    exit();
 }
 

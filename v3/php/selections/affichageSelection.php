@@ -30,7 +30,10 @@ session_start();
             <ul class="sous">
                <?php
                if(isset($_SESSION['login'])){
-                  echo "<li><a href='../compte/admin_accueil.php?'>Profil</a></li>
+                  if($_SESSION['statut']=='A'){
+                     echo "<li><a href='../compte/admin_accueil.php?'>Profil</a></li>";
+                  }
+                  echo"
                   <li><a href='../compte/admin_actualite.php?#admin'>Actualités</a></li>
                   <li><a href='../compte/admin_selection.php?#admin'>Sélections</a></li>
                   <li><a href='../compte/admin_element.php?#admin'>Éléments</a></li>
@@ -165,7 +168,6 @@ session_start();
             <section>
                <article class='imgUser'>
                   <div class='headerPublic'>
-                     <a href='#'>".$ele['com_pseudo']."</a>
                      <h3>".$ele['ele_intitule']."</h3>
                   </div>
                   <img src='../../assets/img/".$ele['ele_fichierImage']."' alt='img1'>
@@ -173,7 +175,7 @@ session_start();
                   <p>".$ele['ele_date']."</p>";
                   if($nbLien!=0){
                      while ($lien = $resLien->fetch_assoc()) {
-                        echo "<p><a id='lienImg' href='".$lien['lie_url']."'>".$lien['lie_titre']." : ".$lien['lie_auteur']." le ".$lien['lie_date']."</a></p>";
+                        echo "<p><img class='logoLien' src='../../assets/logos/lien.png' alt='imgLien'><a id='lienImg' href='".$lien['lie_url']."'>".$lien['lie_titre']." : ".$lien['lie_auteur']." le ".$lien['lie_date']."</a></p>";
                      }
                   }
                   echo "

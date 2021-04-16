@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le :  ven. 02 avr. 2021 à 09:27
+-- Généré le :  ven. 16 avr. 2021 à 10:19
 -- Version du serveur :  10.3.9-MariaDB
 -- Version de PHP :  7.2.9
 
@@ -39,37 +39,33 @@ CREATE TABLE `tj_relie_rel` (
 
 INSERT INTO `tj_relie_rel` (`sel_numero`, `ele_numero`) VALUES
 (1, 1),
-(1, 2),
 (1, 3),
-(1, 4),
 (1, 5),
 (1, 6),
 (1, 12),
 (1, 19),
 (1, 22),
-(1, 85),
-(1, 86),
-(1, 87),
-(1, 88),
 (2, 3),
-(2, 4),
 (2, 5),
 (2, 6),
 (2, 7),
-(3, 2),
+(2, 92),
 (3, 3),
-(3, 4),
 (3, 5),
 (3, 6),
 (3, 7),
 (3, 12),
 (3, 19),
 (3, 22),
-(3, 85),
-(3, 86),
-(3, 87),
-(3, 88),
-(4, 1);
+(4, 1),
+(4, 92),
+(6, 93),
+(6, 94),
+(11, 1),
+(19, 113),
+(19, 114),
+(19, 115),
+(19, 116);
 
 -- --------------------------------------------------------
 
@@ -91,9 +87,11 @@ CREATE TABLE `t_actualite_actu` (
 --
 
 INSERT INTO `t_actualite_actu` (`actu_numero`, `actu_titre`, `actu_texte`, `actu_date`, `actu_etat`, `com_pseudo`) VALUES
-(2, 'Sortie Photo', 'J\'organise une sortie photo dans les rues de Brest', '2021-02-01', 'A', 'Claire'),
 (3, 'Exposition', 'Nous organisons une exposition Au marché de st Martin', '2021-02-01', 'A', 'Martin29'),
-(4, 'Portait', 'Recherche d\'un model pour un portait dans les alentour de Brest', '2021-02-01', 'A', 'Jojo');
+(4, 'Portait', 'Recherche d\'un modèle pour un portrait dans les alentours de Brest', '2021-02-01', 'A', 'Jojo'),
+(5, 'Cours', 'J\'organise des cours de photograpie le 10/05/2021 à Brest', '2021-04-06', 'A', 'Clem'),
+(13, 'Sortie photo', 'J\'organise une sortie photo dans les rue de Brest ce week-end', '2021-04-09', 'A', 'Clem'),
+(26, 'Informations', 'Bonjour, je suis nouveau sur ce showRoom et j\'aimerai me renseigner sur les appareils photos hybrides.', '2021-04-15', 'D', 'Nono');
 
 -- --------------------------------------------------------
 
@@ -116,7 +114,12 @@ INSERT INTO `t_compte_com` (`com_pseudo`, `com_mdp`) VALUES
 ('gestionnaire1', '388d4ca7d89f912a8fe96b04fb3d8e22'),
 ('Jojo', '75232da3f3a8b16fbcd30fae1c8cc561'),
 ('Martin29', '101081cdde29d4b27b50a6b41c26c723'),
-('Roro', '0f0f8433b45219ef88675af6f6802327');
+('Mumu', '77f2c853da3918c2e12ec2404e16b119'),
+('noel', '8bb9260e4d670bd2269224ac2286e1ac'),
+('Nono', '18e00cfdb927b86bc34f22ca1647f47b'),
+('OSS117', '4de222d9cddcb74b9656eb41ad08c74c'),
+('Roro', '0f0f8433b45219ef88675af6f6802327'),
+('tri_32', 'b919d239f40c22143b3e0998cfcb6e53');
 
 -- --------------------------------------------------------
 
@@ -138,20 +141,31 @@ CREATE TABLE `t_element_ele` (
 --
 
 INSERT INTO `t_element_ele` (`ele_numero`, `ele_intitule`, `ele_descriptif`, `ele_date`, `ele_fichierImage`, `ele_etat`) VALUES
-(1, 'Stangala', 'Photo prise dans la forêt du Stangala près de Quimper', '2021-01-27', 'img29.jpg', 'A'),
+(1, 'Stangala', 'Photo prise dans la forêt du Stangala près de Quimper', '2021-01-27', 'img29.jpg', 'D'),
 (2, 'Grues de Brest', 'Voici deux grues du port de commerce de Brest', '2021-01-27', 'img2.jpg', 'A'),
-(3, 'Sortie photo', 'Petite sortie photo dans les alentour de Brest', '2021-02-01', 'img3.jpg', 'A'),
-(4, 'Phare du Portzic', 'Lors d\'une balade au phare du portzic', '2021-02-01', 'img4.jpg', 'A'),
+(3, 'Sortie photo', 'Petite sortie photo aux alentours de Brest', '2021-02-01', 'img3.jpg', 'A'),
+(4, 'Phare du Portzic', 'Lors d\'une balade au phare du portzic', '2021-02-01', 'img4.jpg', 'D'),
 (5, 'Phare du Portzic 2', 'Lors d\'une balade au phare du portzic', '2021-03-04', 'img5.jpg', 'A'),
-(6, 'Phare du Portzic 3', 'Lors d\'une balade au phare du portzicexte', '2021-03-04', 'img6.jpg', 'A'),
-(7, 'Josiane', 'Premier portait ', '2021-02-08', 'img7.jpg', 'D'),
+(6, 'Phare du Portzic 3', 'Lors d\'une balade au phare du portzic', '2021-03-04', 'img6.jpg', 'A'),
+(7, 'Josiane', 'Premier portait ', '2021-02-08', 'img7.jpg', 'A'),
 (12, 'Brest', 'Pont de Brest', '2021-02-01', 'img8.jpg', 'A'),
-(19, 'Prison ', 'Photo de la prison abandonné au Capucin', '2021-02-07', 'img9.jpg', 'A'),
+(19, 'Prison ', 'Photo de la prison abandonnée aux Capucins', '2021-02-07', 'img9.jpg', 'A'),
 (22, 'Bateau ', 'Bateau dans le port de Brest', '2021-02-08', 'img22.jpg', 'A'),
-(85, 'Stair', 'Sortie photo près des Capucin à Brest', '2021-02-11', 'img10.jpg', 'D'),
+(85, 'Stair', 'Sortie photo près des Capucins à Brest', '2021-02-11', 'img10.jpg', 'D'),
 (86, 'Usine', 'Photo des usines de Brest', '2021-03-01', 'img11.jpg', 'A'),
 (87, 'Brest', 'Photo du port de commerce de Brest', '2021-03-01', 'img12.jpg', 'A'),
-(88, 'Les Capucins', 'Photo des Capucins à Brest', '2021-03-01', 'img15.jpg', 'A');
+(88, 'Les Capucins', 'Photo des Capucins à Brest', '2021-03-01', 'img15.jpg', 'A'),
+(92, 'newTitre2', 'newTexte', '2021-04-06', 'img28.jpg', 'A'),
+(93, 'Couché de soleil', 'Coucher de soleil à Brest', '2021-04-06', 'img23.jpg', 'A'),
+(94, 'Immeuble', 'Cartier de Brest lors d\'un choucher de soleil', '2021-04-06', 'img27.jpg', 'A'),
+(95, 'newTitre', 'newTexte', '2021-04-13', 'newImg.jpg', 'A'),
+(101, 'qrsdg', 'sdgv', '2021-04-13', 'img10.jpg', 'D'),
+(102, 'dgr', 'qdsgf', '2021-04-13', 'img12.jpg', 'D'),
+(113, 'Baklava', 'Spécialité Turque ', '2021-04-15', 'tur1.jpg', 'A'),
+(114, 'Lac', 'Lors d\'une randonné autour d\'un lac', '2021-04-15', 'tur3.jpg', 'A'),
+(115, 'Camping Sauvage', 'Camping sauvage sur les bords de la mer noire', '2021-04-15', 'tur4.jpg', 'A'),
+(116, 'La Cappadoce', 'Randonnée en Cappadoce', '2021-04-15', 'tur5.jpg', 'A'),
+(118, 'ghfj', 'gyfhjnf', '2021-04-16', 'img6.jpg', 'A');
 
 -- --------------------------------------------------------
 
@@ -167,6 +181,18 @@ CREATE TABLE `t_lien_lie` (
   `lie_date` date NOT NULL,
   `ele_numero` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `t_lien_lie`
+--
+
+INSERT INTO `t_lien_lie` (`lie_numero`, `lie_titre`, `lie_url`, `lie_auteur`, `lie_date`, `ele_numero`) VALUES
+(6, 'Usine', 'https://www.instagram.com/p/CMFVqKZgY9dp9oPXGbVXl7rFYxpmHMFI3mLKZw0/', 'Noé', '2021-04-14', 86),
+(7, 'Brest', 'https://www.instagram.com/p/CMFVqKZgY9dp9oPXGbVXl7rFYxpmHMFI3mLKZw0/', 'Noé', '2021-04-14', 87),
+(8, 'Stangala', 'https://www.instagram.com/p/CMFVqKZgY9dp9oPXGbVXl7rFYxpmHMFI3mLKZw0/', 'Noé', '2021-04-14', 1),
+(9, 'Abeille', 'https://www.instagram.com/p/CJ_nutOgpep2dGHkaMe4AKPQLrOMvANkNTyc9A0/', 'Noé', '2021-04-14', 22),
+(11, 'Grues', 'https://www.instagram.com/p/CJ391FJgJebyyyIbacvKiR37s6keorAp2_mtHg0/', 'Noé', '2021-04-14', 2),
+(16, 'Manger', 'https://www.instagram.com/p/B1pEbHiAwNnxaGEVExQWv_UpKH3uhl3PGn4nJU0/', 'Noé', '2021-04-15', 113);
 
 -- --------------------------------------------------------
 
@@ -214,11 +240,16 @@ CREATE TABLE `t_profil_pro` (
 
 INSERT INTO `t_profil_pro` (`pro_nom`, `pro_prenom`, `pro_mail`, `pro_validite`, `pro_statut`, `pro_date`, `com_pseudo`) VALUES
 ('PHILIPPE', 'Claire', 'clairephilippe@gmail.com', 'A', 'R', '2021-02-03', 'Claire'),
-('Philippe', 'Clémentine', 'clem@gmail.com', 'A', 'R', '2021-03-04', 'Clem'),
-('Philippe', 'Noé', 'noephilippe29@gmail.com', 'A', 'A', '2021-01-27', 'gestionnaire1'),
+('Philippe', 'Clémentine', 'clementine@gmail.com', 'A', 'A', '2021-03-04', 'Clem'),
+('Marc', 'Valérie', 'Valerie.Marc@univ-brest.fr', 'A', 'A', '2021-01-27', 'gestionnaire1'),
 ('Philippe', 'Joris', 'jojmail@gmail.com', 'A', 'R', '2021-01-27', 'Jojo'),
 ('Le Floch', 'Martin', 'martin.lefloch@gmail.com', 'A', 'R', '2021-01-27', 'Martin29'),
-('Tirilly', 'Romain', 'romain.Tirilly@gmail.com', 'A', 'R', '2021-01-27', 'Roro');
+('Nicolas', 'Muriel', 'muriel@gmail.com', 'A', 'R', '2021-04-15', 'Mumu'),
+('Flantier', 'Noël', 'noel@gmail.com', 'A', 'R', '2021-04-15', 'noel'),
+('Philippe', 'Noé', 'noephilippe29@gmail.com', 'A', 'A', '2021-04-15', 'Nono'),
+('Bonisseur De La Bath', 'Hubert', 'hubert@gmail.com', 'A', 'R', '2021-04-15', 'OSS117'),
+('Tirilly', 'Romain', 'romain.Tirilly@gmail.com', 'A', 'R', '2021-01-27', 'Roro'),
+('De La  Fondu', 'Arthur', 'tristan@gmail.com', 'D', 'R', '2021-04-15', 'tri_32');
 
 -- --------------------------------------------------------
 
@@ -243,7 +274,9 @@ INSERT INTO `t_selection_sel` (`sel_numero`, `sel_intitule`, `sel_texteIntro`, `
 (2, 'Portait', 'Toutes les photos de portait', '2021-02-01', 'Claire'),
 (3, 'Brest', 'Toutes les photos de Brest', '2021-02-01', 'Roro'),
 (4, 'Quimper', 'Toutes les photos de Quimper', '2021-02-01', 'Martin29'),
-(5, 'Monochrome', 'Photos monochrome', '2021-03-29', 'Roro');
+(6, 'Couché de soleil', 'Toutes les photos de coucher de soleil', '2021-04-06', 'Clem'),
+(11, 'Monochrome', 'Toutes les photos en monochromes', '2021-04-14', 'Clem'),
+(19, 'Voyage en Turquie ', 'Quelques photos d\'un voyage en Turquie.', '2021-04-15', 'Nono');
 
 --
 -- Index pour les tables déchargées
@@ -310,19 +343,19 @@ ALTER TABLE `t_selection_sel`
 -- AUTO_INCREMENT pour la table `t_actualite_actu`
 --
 ALTER TABLE `t_actualite_actu`
-  MODIFY `actu_numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `actu_numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `t_element_ele`
 --
 ALTER TABLE `t_element_ele`
-  MODIFY `ele_numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `ele_numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT pour la table `t_lien_lie`
 --
 ALTER TABLE `t_lien_lie`
-  MODIFY `lie_numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `lie_numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT pour la table `t_presentation_pre`
@@ -334,7 +367,7 @@ ALTER TABLE `t_presentation_pre`
 -- AUTO_INCREMENT pour la table `t_selection_sel`
 --
 ALTER TABLE `t_selection_sel`
-  MODIFY `sel_numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `sel_numero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Contraintes pour les tables déchargées

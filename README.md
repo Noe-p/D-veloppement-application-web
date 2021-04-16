@@ -35,17 +35,17 @@ Valérie MARC
 
 ![](images/8.png)
 
+![](images/9.png)
+
+![](images/10.png)
+
 ## Contenu
 
-**documents :** Contient les documents du projet
+**documents :** Cahier des charges
 
 **bdd :** Création de la base de données et des requêtes pour le showroom
 
-**focus :** Test personnel de PHP
-
-**gabarit :** Site sans PHP
-
-**v1-v2 :** Différentes versions du site
+**v1-v2-v3 :** Différentes versions du showroom
 
 **images :** Quelques images du showroom
 

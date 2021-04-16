@@ -269,7 +269,7 @@ $mysqli->close();
                      echo "Cocher une case";
                   }
                   elseif($_GET['error']==7) {
-                     echo "Les sélections doivent être vides";
+                     echo "Il y a des éléments dans une sélection de ce compte";
                   }
                   else{
                      echo "Erreur non reconnue";
@@ -320,7 +320,7 @@ $mysqli->close();
             <form action='action/comptes_action.php?input=suppCompte' method='post'  class='inputPseudoModif'>
                <select name='suppCompte'>
                   <option value=''>Compte à supprimer</option>
-                  <?
+                  <?php
                   while ($allCpt3 = $resAllCpt3->fetch_assoc()) {
                      echo "<option value='".$allCpt3['com_pseudo']."'>".$allCpt3['com_pseudo']."</option>";
                   }

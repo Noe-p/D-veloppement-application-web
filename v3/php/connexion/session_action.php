@@ -1,4 +1,6 @@
 <?php
+//Connexion du compte à l'espace admin
+
 //CONNEXION A LA BASE
 require('../connexionBDD.php');
 

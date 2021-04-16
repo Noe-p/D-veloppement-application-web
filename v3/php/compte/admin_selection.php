@@ -489,7 +489,7 @@ $mysqli->close();
                         <td class='checkEle'>";
                         while ($eleSel = $resEleSel->fetch_assoc()) {
                            if($eleSel['ele_etat']=='A'){
-                              echo "<div><input type='checkbox' id='checkbox' value=".$eleSel['ele_numero']." name='checkbox[]'/>
+                              echo "<div><input type='checkbox' id='checkbox' value='".$eleSel['ele_numero']."' name='checkbox[]'/>
                                     <label for='checkbox'>".$eleSel['ele_intitule']."</label></div>";
                            }
                         }
@@ -497,7 +497,7 @@ $mysqli->close();
                         <td>";
                         while ($eleSel2 = $resEleSel2->fetch_assoc()) {
                            if($eleSel2['ele_etat']=='D'){
-                              echo "<div><input type='checkbox' id='checkbox' name='checkbox[]' />
+                              echo "<div><input type='checkbox' id='checkbox' value='".$eleSel2['ele_numero']."' name='checkbox[]' />
                                     <label for='checkbox'>".$eleSel2['ele_intitule']."</label></div>";
                            }
                         }

@@ -31,13 +31,13 @@ Valérie MARC
 
 ![](images/6.png)
 
-![](images/7.png)
+![](images/7.jpg)
 
-![](images/8.png)
+![](images/8.jpg)
 
-![](images/9.png)
+![](images/9.jpg)
 
-![](images/10.png)
+![](images/10.jpg)
 
 ## Contenu
 

@@ -2,6 +2,7 @@
 <?php
 session_start();
 
+//On vérfie que l'utilisateur est bien connecté
 if(!isset($_SESSION['login'])){
    header("Location: ../connexion/session.php");
    exit();
@@ -233,7 +234,7 @@ $mysqli->close();
                </div>
                <div>
                   <label for='modifMail'>Mail :<br/></label>
-                  <input type='text' id='modifMail' name='modifMail' <?php if($val)echo "placeholder='".$infoPro['pro_mail']."'"; ?>>
+                  <input type='email' id='modifMail' name='modifMail' <?php if($val)echo "placeholder='".$infoPro['pro_mail']."'"; ?>>
                </div>
                <input type='submit' value='Modifier' id='buttonModifier'/>
             </form>

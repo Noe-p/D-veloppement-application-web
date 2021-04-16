@@ -73,25 +73,35 @@ if($_GET['input']=='activSel'){
 
 //Checkbox : Enleve élément
 else if($_GET['input']=='checkbox') {
-   if(empty($_POST['checkbox'])){
-      header("Location: ../admin_selection.php#admin");
-      exit();
-   }
-   else{
-      foreach($_POST['checkbox'] as $check){
-         $reqModifVal="DELETE FROM tj_relie_rel WHERE ele_numero='$check';";
-         $resModifVal = $mysqli->query($reqModifVal);
+   if(!empty($_GET['sel'])){
+      $sel=htmlspecialchars(addslashes($_GET['sel']));
 
-         if(!$resModifVal){
-            //LA requète a échoué
-            $error=3;
+      //On verifie que la sélection existe
+      $reqSelExist="SELECT sel_intitule FROM t_selection_sel WHERE sel_numero='$sel';";
+      $resSelExist = $mysqli->query($reqSelExist);
+
+      if($resSelExist){
+         if(empty($_POST['checkbox'])){
+            header("Location: ../admin_selection.php#admin");
+            exit();
          }
+         else{
+            foreach($_POST['checkbox'] as $check){
+               $reqModifVal="DELETE FROM tj_relie_rel WHERE ele_numero='$check' AND sel_numero='$sel';";
+               $resModifVal = $mysqli->query($reqModifVal);
+
+               if(!$resModifVal){
+                  //LA requète a échoué
+                  $error=3;
+               }
+            }
+            header("Location: ../admin_selection.php#admin");
+            exit();
+         }
+         header("Location: ../admin_selection.php?error=".$error."#admin");
+         exit();
       }
-      header("Location: ../admin_selection.php#admin");
-      exit();
    }
-   header("Location: ../admin_selection.php?error=".$error."#admin");
-   exit();
 }
 
 

@@ -482,7 +482,7 @@ $mysqli->close();
                      echo "<tr class='lignePaire'>";
                      $i=$i+1;
                   }echo "
-                     <form action='action/selection_action.php?input=checkbox' method='post'>
+                     <form action='action/selection_action.php?input=checkbox&sel=".$sel['sel_numero']."' method='post'>
                         <td>".$sel['sel_intitule']."</td>
                         <td>".$sel['sel_date']."</td>
                         <td>".$sel['com_pseudo']."</td>
